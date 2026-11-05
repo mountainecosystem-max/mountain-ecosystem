@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react'
 import type { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Compass, Users, Briefcase, Home, Search, ArrowUpRight, HelpCircle, User } from 'lucide-react'
+import {
+  Menu,
+  X,
+  Home,
+  User,
+  Calendar,
+  MountainSnow,
+  PhoneCall,
+  Mail,
+  Search
+} from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import { useAdminAuth } from '../../context/AdminAuthContext'
 
@@ -9,9 +19,15 @@ interface NavbarProps {
   onOpenJoinModal?: () => void
   onOpenSearch?: () => void
   onOpenAuthModal?: () => void
+  onOpenBookCottage?: () => void
 }
 
-export const Navbar: FC<NavbarProps> = ({ onOpenJoinModal, onOpenSearch, onOpenAuthModal }) => {
+export const Navbar: FC<NavbarProps> = ({
+  onOpenJoinModal,
+  onOpenSearch,
+  onOpenAuthModal,
+  onOpenBookCottage
+}) => {
   const { currentUser, profile, logout } = useAdminAuth()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -34,89 +50,146 @@ export const Navbar: FC<NavbarProps> = ({ onOpenJoinModal, onOpenSearch, onOpenA
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
-  // Exact navigation links as specified
   const navLinks = [
-    { name: 'Destinations', href: '#destinations', icon: Compass },
-    { name: 'Community Ledger', href: '#community', icon: Users },
-    { name: 'Mountain Jobs', href: '#jobs', icon: Briefcase },
-    { name: 'Residential Leases', href: '#homestays', icon: Home },
-    { name: 'FAQs', href: '#faqs', icon: HelpCircle },
+    { name: 'Cottages & Suites', href: '#homestays' },
+    { name: 'Experiences', href: '#experiences' },
+    { name: 'Tea & Dining', href: '#dining' },
+    { name: 'The Philosophy', href: '#philosophy' },
+    { name: 'Mountain Jobs', href: '#jobs' },
+    { name: 'Community Ledger', href: '#community' },
+    { name: 'FAQs', href: '#faqs' }
   ]
 
+  const handleBookClick = () => {
+    if (onOpenBookCottage) {
+      onOpenBookCottage()
+    } else {
+      const el = document.getElementById('homestays')
+      el?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-[#0B2516]/95 backdrop-blur-md border-b border-[#1F4E34]/50 py-3 shadow-[0_8px_32px_-8px_rgba(6,24,14,0.6)]'
-          : 'bg-gradient-to-b from-[#0B2516]/90 via-[#0B2516]/40 to-transparent py-4 sm:py-5 border-b border-white/10'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-        <div className="flex items-center justify-between">
-          {/* Configurable Brand Logo */}
+    <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      {/* 1. Top Announcement & Concierge Strip (Awara Style with Tea Garden Palette) */}
+      <div className="bg-[#05170D] text-[#D8E8D5] text-[11px] sm:text-xs py-1.5 px-3 sm:px-6 border-b border-[#143D24]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-2">
+          {/* Elevation & Climate Info */}
+          <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
+            <span className="flex items-center gap-1.5 text-[#A5C896] font-medium font-mono">
+              <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
+              <span>Elevation 6,850 ft • 14°C Crisp Mountain Air • Darjeeling & Takdah Ridges</span>
+            </span>
+            <span className="hidden md:inline text-white/20">|</span>
+            <a
+              href="tel:+919830029272"
+              className="hover:text-white hidden lg:flex items-center gap-1 transition text-white/80"
+            >
+              <PhoneCall className="w-3 h-3 text-[#D96B27]" />
+              <span>Host Helpline: +91 98300 MOUNTAIN</span>
+            </a>
+            <span className="hidden lg:inline text-white/20">|</span>
+            <a
+              href={`mailto:${BRAND_CONFIG.supportEmail}`}
+              className="hover:text-white hidden xl:flex items-center gap-1 transition text-white/80"
+            >
+              <Mail className="w-3 h-3 text-[#A5C896]" />
+              <span>{BRAND_CONFIG.supportEmail}</span>
+            </a>
+          </div>
+
+          {/* Direct Host Booking Guarantee & Quick Links */}
+          <div className="flex items-center gap-3">
+            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[10px] sm:text-[11px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
+              <span>Direct Host Booking • Zero Platform Fees</span>
+            </span>
+
+            <a
+              href="#homestays"
+              className="text-[#E7EFE3] hover:text-[#C6E8A3] underline text-[11px] hidden sm:flex items-center gap-1 font-medium transition ml-1"
+            >
+              <Calendar className="w-3 h-3" />
+              <span>Explore Stays</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Primary Navigation Bar */}
+      <header
+        className={`w-full transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#0A2316]/98 backdrop-blur-md shadow-xl border-b border-[#1C4E33] py-2.5'
+            : 'bg-[#0A2316]/90 backdrop-blur-sm border-b border-[#1A452D] py-3'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
+          {/* Brand Logo & Editorial Title */}
           <a
             href="#"
-            className="group flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FDFBF7]"
+            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none"
             aria-label={`${BRAND_CONFIG.name} Homepage`}
           >
-            <img
-              src={BRAND_CONFIG.logo.horizontal}
-              alt={BRAND_CONFIG.logo.alt}
-              className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02] filter drop-shadow-sm brightness-105"
-            />
+            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#06180E] text-[#A5C896] rounded-xl flex items-center justify-center shadow-md border border-[#1F4E34] group-hover:scale-105 transition-transform duration-200">
+              <Home className="w-5 h-5 sm:w-6 sm:h-6 text-[#A5C896]" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white uppercase">
+                  {BRAND_CONFIG.name.split(' ')[0]}
+                </span>
+                <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#D96B27] uppercase">
+                  {BRAND_CONFIG.name.split(' ').slice(1).join(' ') || 'SANCTUARIES'}
+                </span>
+              </div>
+              <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#A5C896]/90 font-mono -mt-1 font-semibold truncate max-w-[210px] sm:max-w-none">
+                Himalayan Pine Chalets & Eco-Living
+              </p>
+            </div>
           </a>
 
-          {/* Elegant Sans-Serif Navigation Links: Editorial Micro-Interactions */}
-          <nav className="hidden md:flex items-center gap-8 lg:gap-10" aria-label="Main Navigation">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold text-[#E7EFE3]" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="editorial-nav-link focus:outline-none focus-visible:ring-1 focus-visible:ring-[#FDFBF7]/50"
+                className="hover:text-[#C6E8A3] transition-colors py-1 relative group tracking-wider uppercase font-mono text-[11px]"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#8FA777] transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
           </nav>
 
-          {/* Header Actions: Search, Sign In, & Independent Floating Cream 'Join Fellowship' Pill */}
-          <div className="hidden md:flex items-center gap-3 lg:gap-4">
+          {/* Action CTAs & Auth Controls */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Search Trigger */}
             <button
               onClick={onOpenSearch}
               type="button"
-              className="w-8 h-8 flex items-center justify-center text-[#E7EFE3]/80 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 focus:outline-none"
+              className="p-2 text-[#E7EFE3]/80 hover:text-white hover:bg-white/10 rounded-full transition-colors hidden sm:inline-flex"
               aria-label="Search Ecosystem"
               title="Search"
             >
-              <Search className="w-3.5 h-3.5" />
+              <Search className="w-4 h-4" />
             </button>
 
+            {/* User Auth Status */}
             {currentUser ? (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 {profile ? (
                   <Link
                     to="/admin/destinations"
-                    className="editorial-nav-link text-xs font-mono text-[#8FA777] hover:text-white"
+                    className="text-xs font-mono text-[#8FA777] hover:text-white px-2 py-1 rounded bg-[#123D26] border border-[#1F4E34]"
                   >
-                    Staff Console
+                    Admin Staff
                   </Link>
                 ) : (
-                  <div className="flex items-center gap-2">
-                    {currentUser.user_metadata?.avatar_url ? (
-                      <img
-                        src={currentUser.user_metadata.avatar_url}
-                        alt="Profile"
-                        className="w-5 h-5 rounded-full object-cover border border-[#8FA777]"
-                      />
-                    ) : (
-                      <span className="w-5 h-5 rounded-full bg-[#123D2D] border border-[#8FA777]/50 flex items-center justify-center text-[10px] font-mono text-[#8FA777]">
-                        {currentUser.email?.charAt(0).toUpperCase()}
-                      </span>
-                    )}
-                    <span
-                      className="text-[11px] font-mono text-[#8FA777] hidden lg:inline max-w-[120px] truncate"
-                      title={currentUser.email}
-                    >
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#123D26] border border-[#1F4E34] text-xs font-mono text-[#A5C896]">
+                    <span className="w-2 h-2 rounded-full bg-[#34D399]" />
+                    <span className="max-w-[100px] truncate">
                       {currentUser.user_metadata?.full_name?.split(' ')[0] || currentUser.email?.split('@')[0]}
                     </span>
                   </div>
@@ -124,24 +197,24 @@ export const Navbar: FC<NavbarProps> = ({ onOpenJoinModal, onOpenSearch, onOpenA
                 <button
                   onClick={() => logout()}
                   type="button"
-                  className="editorial-nav-link text-[11px] font-mono text-white/50 hover:text-white"
+                  className="text-[11px] font-mono text-white/60 hover:text-white transition"
                 >
                   Sign Out
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => onOpenAuthModal?.()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 text-white text-xs font-sans rounded-full border border-white/20 transition-all active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/15 transition active:scale-95 font-medium"
                 >
                   <User className="w-3.5 h-3.5 text-[#8FA777]" />
-                  <span>Sign In</span>
+                  <span className="hidden sm:inline">Sign In</span>
                 </button>
                 <Link
                   to="/admin/login"
-                  className="editorial-nav-link text-[11px] font-mono text-white/40 hover:text-white"
+                  className="text-[10px] font-mono text-white/40 hover:text-white hidden md:inline transition"
                   title="Staff Portal (Restricted to Administrators)"
                 >
                   Staff
@@ -149,130 +222,79 @@ export const Navbar: FC<NavbarProps> = ({ onOpenJoinModal, onOpenSearch, onOpenA
               </div>
             )}
 
-            {/* Independent Floating Pill CTA Button: Sharp Solid Cream (#FDFBF7) & Stark Dark Green (#0B2516) */}
+            {/* High-Impact Awara-Style Booking CTA Pill (Warm Amber Hearth Accent) */}
             <button
-              onClick={onOpenJoinModal}
+              onClick={handleBookClick}
               type="button"
-              className="h-8 inline-flex items-center justify-center gap-1.5 text-[11px] font-sans font-semibold tracking-[0.14em] uppercase bg-[#FDFBF7] text-[#0B2516] hover:bg-white px-4.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300 ease-out active:scale-[0.98] border border-[#FDFBF7] shrink-0"
+              className="inline-flex items-center gap-2 bg-[#D96B27] hover:bg-[#B85418] text-white text-xs md:text-sm font-bold uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform active:scale-95"
             >
-              <span>Join Fellowship</span>
-              <ArrowUpRight className="w-3 h-3 text-[#0B2516]" />
+              <Calendar className="w-4 h-4 text-white" />
+              <span>Book Cottage</span>
             </button>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
-            <button
-              onClick={onOpenSearch}
-              type="button"
-              className="w-8 h-8 flex items-center justify-center text-[#E7EFE3] hover:text-white"
-              aria-label="Search"
-            >
-              <Search className="w-4 h-4" />
-            </button>
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="w-8 h-8 flex items-center justify-center text-[#E7EFE3] hover:text-white focus:outline-none"
-              aria-expanded={mobileMenuOpen}
+              className="p-2 text-white hover:text-[#C6E8A3] focus:outline-none lg:hidden rounded-lg hover:bg-white/10"
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div
-          className="fixed inset-0 top-[62px] bg-[#0B2516]/95 backdrop-blur-md z-40 md:hidden"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <div
-            className="bg-[#0B2516] border-b border-[#1F4E34] px-6 py-8"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <nav className="flex flex-col gap-4">
-              {navLinks.map((link) => {
-                const Icon = link.icon
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-3 text-base font-sans text-[#E7EFE3] hover:text-white py-2.5 border-b border-[#1F4E34]/40"
-                  >
-                    <Icon className="w-4 h-4 text-[#8FA777]" />
-                    <span>{link.name}</span>
-                  </a>
-                )
-              })}
-
-              <div className="pt-4 flex flex-col gap-3">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    onOpenJoinModal?.()
-                  }}
-                  type="button"
-                  className="w-full text-center text-xs uppercase tracking-wider font-sans font-semibold bg-[#FDFBF7] text-[#0B2516] py-3 rounded-full"
-                >
-                  Join Fellowship
-                </button>
-                {currentUser ? (
-                  <div className="flex flex-col gap-2 pt-2">
-                    {profile ? (
-                      <Link
-                        to="/admin/destinations"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="w-full text-center text-xs uppercase tracking-wider font-sans text-white py-2.5 bg-[#1F4E34] border border-[#8FA777]/40 rounded-full block"
-                      >
-                        Staff Console
-                      </Link>
-                    ) : (
-                      <div className="text-center text-[11px] font-mono text-[#8FA777] py-1 truncate">
-                        Signed in: {currentUser.email}
-                      </div>
-                    )}
-                    <button
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        logout()
-                      }}
-                      type="button"
-                      className="w-full text-center text-xs uppercase tracking-wider font-mono text-white/60 hover:text-white py-2 border border-white/10 rounded-full"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-2 pt-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setMobileMenuOpen(false)
-                        onOpenAuthModal?.()
-                      }}
-                      className="w-full flex items-center justify-center gap-2 text-xs uppercase tracking-wider font-sans text-white py-2.5 bg-white/10 border border-white/20 rounded-full"
-                    >
-                      <User className="w-4 h-4 text-[#8FA777]" />
-                      <span>Sign In / Register</span>
-                    </button>
-                    <Link
-                      to="/admin/login"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="w-full text-center text-xs uppercase tracking-wider font-mono text-white/50 py-2 border border-white/10 rounded-full block"
-                    >
-                      Staff Portal
-                    </Link>
-                  </div>
-                )}
+        {/* Mobile Dropdown Drawer */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-[#071F13] text-white border-t border-[#1C4E33] px-5 py-5 space-y-3.5 shadow-2xl animate-fade-in-scale">
+            <div className="p-3 bg-[#0A2617] rounded-xl border border-[#1F4E34] mb-3">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#A5C896]">
+                <MountainSnow className="w-4 h-4 text-[#D96B27]" />
+                <span className="font-semibold">Elevation 6,850 ft • 14°C Crisp Air</span>
               </div>
+              <p className="text-[11px] text-white/70 mt-1">
+                Handcrafted pine chalets & tea garden sanctuaries in Darjeeling & Takdah.
+              </p>
+            </div>
+
+            <nav className="space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 px-3 text-sm font-mono tracking-wider text-[#E7EFE3] hover:text-[#C6E8A3] hover:bg-white/5 rounded-lg transition"
+                >
+                  {link.name}
+                </a>
+              ))}
             </nav>
+
+            <div className="pt-3 border-t border-[#1F4E34] space-y-2.5">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  handleBookClick()
+                }}
+                className="w-full text-center flex items-center justify-center gap-2 bg-[#D96B27] hover:bg-[#B85418] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
+              >
+                <Calendar className="w-4 h-4" />
+                <span>Check Cottage Availability</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  onOpenJoinModal?.()
+                }}
+                className="w-full text-center block bg-white/10 hover:bg-white/15 text-white font-mono py-2 rounded-xl text-xs uppercase tracking-wider border border-white/20"
+              >
+                Join Stewardship Fellowship
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </header>
+        )}
+      </header>
+    </div>
   )
 }

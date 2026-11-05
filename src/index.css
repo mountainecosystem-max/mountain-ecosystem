@@ -35,10 +35,20 @@
 
   --color-terracotta: #C47755;
   --color-terracotta-dark: #a95f3e;
+  --color-amber-hearth: #D96B27;
+  --color-tea-leaf: #164E2D;
+  --color-tea-garden: #0F3320;
+  --color-tea-bud: #8FA777;
 
   /* Typography */
+  --font-display: "Oswald", "Plus Jakarta Sans", system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", "Newsreader", "Playfair Display", Georgia, serif;
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }
 
 :root {

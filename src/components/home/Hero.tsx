@@ -1,260 +1,264 @@
 import { useState } from 'react'
 import type { FC, FormEvent } from 'react'
-import { ArrowRight, MapPin, Search, Calendar, Compass } from 'lucide-react'
-import { BRAND_CONFIG } from '../../config/branding'
+import {
+  CalendarPlus,
+  CalendarMinus,
+  BedDouble,
+  Users,
+  ArrowRight,
+  Mountain,
+  Sprout,
+  Star,
+  SunMedium,
+  CheckCircle2,
+  Wifi,
+  Flame,
+  Compass
+} from 'lucide-react'
 
 interface HeroProps {
   onSearch: (destination: string, category: string) => void
-  onExploreClick: () => void
-  onJoinClick: () => void
+  onExploreClick?: () => void
+  onJoinClick?: () => void
 }
 
-export const Hero: FC<HeroProps> = ({ onSearch, onExploreClick, onJoinClick }) => {
-  const [selectedRegion, setSelectedRegion] = useState('All Regions')
-  const [selectedIntent, setSelectedIntent] = useState('All Experiences')
+export const Hero: FC<HeroProps> = ({ onSearch, onExploreClick: _onExploreClick, onJoinClick: _onJoinClick }) => {
+  // Set default dates: check-in tomorrow, check-out in 3 days
+  const today = new Date()
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const defaultCheckout = new Date(today)
+  defaultCheckout.setDate(defaultCheckout.getDate() + 4)
 
-  const regions = [
-    'All Regions',
-    'Darjeeling Tea Belt',
-    'Kalimpong Green Ridge',
-    'Sikkim Forest Valleys',
-    'Dooars Sal Canopy'
-  ]
+  const formatDate = (d: Date) => d.toISOString().split('T')[0]
 
-  const intents = [
-    'All Experiences',
-    'Residential Leases (1–12 Mos)',
-    'Mountain Jobs & Residencies',
-    'Architectural & Material Ledger',
-    'Ground Price Dispatches',
-    'Tea Cooperative Stays'
-  ]
+  const [checkIn, setCheckIn] = useState<string>(formatDate(tomorrow))
+  const [checkOut, setCheckOut] = useState<string>(formatDate(defaultCheckout))
+  const [cottageType, setCottageType] = useState('ALL')
+  const [guests, setGuests] = useState('2')
 
   const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault()
-    onSearch(selectedRegion, selectedIntent)
+    // Scroll smoothly to the homestays section and trigger search callback
+    const el = document.getElementById('homestays')
+    el?.scrollIntoView({ behavior: 'smooth' })
+    onSearch(cottageType, `${guests} Guests`)
   }
 
   return (
-    <section className="relative w-full min-h-[85vh] lg:min-h-[88vh] flex flex-col justify-between overflow-hidden bg-[#0B2516] text-white pt-32 sm:pt-38 pb-16 lg:pb-20">
-      {/* 1. Breathtaking High-Resolution Panoramic Hero Photograph */}
-      {/* Misty emerald green tea terraces in Darjeeling with traditional stone monastery stupa on ridgeline */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <img
-          src="/hero-darjeeling.jpg"
-          onError={(e) => {
-            // Fallback to high-res misty tea garden panorama if local file load fails
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=90'
-          }}
-          alt="Breathtaking panoramic view of misty emerald-green tea terraces in Darjeeling with a stone monastery stupa on a cedar ridge"
-          className="w-full h-full object-cover object-center animate-hero-drift brightness-110 contrast-105 saturate-115"
-          loading="eager"
-          fetchPriority="high"
-        />
+    <div className="relative">
+      {/* 1. Main Hero Section */}
+      <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center justify-center pt-32 sm:pt-36 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-[#071F13] overflow-hidden text-white">
+        {/* High-Resolution Mountain & Emerald Tea Garden Panorama */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src="/hero-darjeeling.jpg"
+            onError={(e) => {
+              e.currentTarget.src =
+                'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2200&q=90'
+            }}
+            alt="Misty emerald green tea terraces in Darjeeling with traditional stone monastery stupa on ridgeline"
+            className="w-full h-full object-cover object-center animate-hero-drift brightness-105 contrast-105 saturate-110"
+            loading="eager"
+            fetchPriority="high"
+          />
 
-        {/* Luminous emerald atmosphere: Lightened to allow natural mountain sunshine and tea foliage to pop vibrantly */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              linear-gradient(
-                115deg,
-                rgba(5, 22, 13, 0.76) 0%,
-                rgba(7, 28, 17, 0.60) 25%,
-                rgba(11, 38, 23, 0.40) 48%,
-                rgba(14, 46, 28, 0.18) 72%,
-                rgba(14, 46, 28, 0.0) 90%
-              ),
-              linear-gradient(
-                180deg,
-                rgba(4, 18, 10, 0.50) 0%,
-                rgba(6, 24, 14, 0.15) 30%,
-                rgba(8, 28, 16, 0.02) 55%,
-                rgba(6, 22, 13, 0.25) 80%,
-                rgba(4, 16, 9, 0.65) 100%
-              )
-            `
-          }}
-        />
+          {/* Lush Tea Garden Atmosphere Gradient: Deep forest green to transparent emerald */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: `
+                linear-gradient(180deg, 
+                  rgba(5, 23, 13, 0.75) 0%, 
+                  rgba(7, 28, 16, 0.45) 35%, 
+                  rgba(10, 35, 22, 0.65) 75%, 
+                  rgba(5, 20, 11, 0.95) 100%
+                )
+              `
+            }}
+          />
 
-        {/* Soft atmospheric radial glow focused on text zone */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `
-              radial-gradient(
-                ellipse 85% 65% at 20% 40%,
-                rgba(4, 16, 9, 0.28) 0%,
-                rgba(6, 22, 13, 0.10) 45%,
-                transparent 80%
-              )
-            `
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full flex-1 flex flex-col justify-between">
-        {/* Centerpiece: Lead directly with the core punch */}
-        <div className="max-w-4xl my-auto py-4 sm:py-6 lg:py-8">
-          {/* Subtle Editorial Kicker */}
-          <div className="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.24em] text-[#C6E8A3] mb-4 sm:mb-5 drop-shadow-[0_1px_4px_rgba(2,10,5,0.8)] animate-float-slow">
-            <Compass className="w-3.5 h-3.5 text-[#B2DC86]" />
-            <span>{BRAND_CONFIG.name.toUpperCase()} • {BRAND_CONFIG.tagline.toUpperCase()}</span>
-          </div>
-
-          {/* 1. Core punch: Serif Headline (Dropped by exactly 25% on mobile to 36px/text-4xl to prevent single-word wrapping) */}
-          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[88px] leading-[1.04] sm:leading-[0.98] lg:leading-[0.96] tracking-[-0.02em] font-normal text-white drop-shadow-[0_4px_24px_rgba(2,10,5,0.85)]">
-            Closer to the mountains.
-            <span className="block italic font-light text-[#D5EBBF] mt-2 sm:mt-3 drop-shadow-[0_2px_16px_rgba(2,10,5,0.7)]">
-              Closer to the people.
-            </span>
-          </h1>
-
-          {/* Descriptive Narrative */}
-          <div className="mt-6 sm:mt-8 max-w-2xl">
-            <p className="text-base sm:text-lg md:text-xl text-white/95 font-light leading-relaxed font-sans drop-shadow-[0_2px_10px_rgba(2,10,5,0.7)]">
-              Discover trusted mountain experiences, local opportunities, and places worth calling home across the emerald tea terraces and cedar ridges of Darjeeling, Kalimpong, Sikkim, and the Dooars.
-            </p>
-
-            {/* 2. Anchor with the data: Crisp vertical 2x2 grid on < 768px, horizontal stamp on md+ */}
-            <div className="mt-6 sm:mt-7 pt-4 sm:pt-5 border-t border-white/20">
-              {/* Mobile (< 768px): Crisp 2x2 Grid */}
-              <div className="grid grid-cols-2 gap-x-3 gap-y-2.5 md:hidden text-[10px] font-mono tracking-[0.16em] text-[#E7EFE3]/80 uppercase drop-shadow-[0_1px_6px_rgba(2,10,5,0.7)]">
-                <div className="flex items-center gap-2 border-r border-white/10 pr-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] shrink-0" />
-                  <span className="font-semibold text-[#F8F6F0] truncate">27°04'10" N • 88°16'05" E</span>
-                </div>
-                <div className="flex items-center gap-2 pl-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] shrink-0" />
-                  <span className="text-[#8FA777] font-medium">ELEVATION: 2,042M</span>
-                </div>
-                <div className="flex items-center gap-2 border-r border-white/10 pr-2 pt-2 border-t border-white/10">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0" />
-                  <span className="text-[#E7EFE3]/90 truncate">DARJEELING TEA BELT</span>
-                </div>
-                <div className="flex items-center gap-2 pl-1 pt-2 border-t border-white/10">
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0" />
-                  <span className="text-[#E7EFE3]/70 truncate">{BRAND_CONFIG.region.toUpperCase()}</span>
-                </div>
-              </div>
-
-              {/* Desktop & Tablet (>= 768px): Refined Horizontal Stamp */}
-              <div className="hidden md:flex items-center justify-between text-[10px] font-mono tracking-[0.22em] text-[#E7EFE3]/80 uppercase drop-shadow-[0_1px_6px_rgba(2,10,5,0.7)]">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777]" />
-                  <span className="font-semibold text-[#F8F6F0]">27°04'10" N • 88°16'05" E</span>
-                  <span className="text-white/30">•</span>
-                  <span className="text-[#8FA777]">ELEVATION: 2,042M</span>
-                </div>
-
-                <div className="flex items-center gap-4 text-[#E7EFE3]/70">
-                  <span>DARJEELING TEA BELT</span>
-                  <span className="text-white/30">•</span>
-                  <span>{BRAND_CONFIG.region.toUpperCase()}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Scannable Feature Highlights with Fine-Line Borders */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 mt-3 border-t border-white/10 text-xs font-mono text-[#E7EFE3]/85 drop-shadow-[0_1px_6px_rgba(2,10,5,0.6)]">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777]" />
-                <span>1–12 Month Leases</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777]" />
-                <span>100 Mbps Optic Fiber</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777]" />
-                <span>Direct Village Pacts</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Editorial CTAs */}
-          <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-            <button
-              onClick={onExploreClick}
-              type="button"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#F8F6F0] text-[#0B2516] hover:bg-white text-xs uppercase tracking-[0.2em] font-sans font-semibold rounded-none shadow-xl transition-all duration-200 active:scale-[0.99] border border-[#F8F6F0]"
-            >
-              <span>Explore Destinations</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#0B2516]" />
-            </button>
-
-            <button
-              onClick={onJoinClick}
-              type="button"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-white/5 hover:bg-white/15 backdrop-blur-md text-[#E7EFE3] hover:text-white text-xs uppercase tracking-[0.2em] font-mono font-medium rounded-none border border-white/20 transition-colors"
-            >
-              <span>Join Fellowship</span>
-            </button>
-          </div>
+          {/* Radial depth glow for readable typography */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 90% 65% at 50% 40%, rgba(3, 14, 8, 0.4) 0%, transparent 80%)'
+            }}
+          />
         </div>
 
-        {/* Luminous Concierge Search Bar: Crisp Glassmorphism, Brighter Borders, High Contrast */}
-        <div className="w-full mt-8 sm:mt-12">
-          <div className="bg-[#0E331F]/90 backdrop-blur-md border border-[#3E7D58]/60 rounded-none p-4 sm:p-5 shadow-[0_20px_50px_rgba(4,18,10,0.5)] text-[#E7EFE3]">
-            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-0 md:divide-x md:divide-white/20 items-center">
-              {/* Territory Selector */}
-              <div className="md:col-span-4 px-3 sm:px-4 py-2">
-                <label htmlFor="hero-region" className="block text-[9px] font-mono uppercase tracking-[0.24em] text-[#B5DC96] mb-1 font-semibold">
-                  Himalayan Territory
+        {/* Content Container */}
+        <div className="max-w-6xl mx-auto w-full text-center relative z-10 flex flex-col items-center">
+          {/* Mountain Territory Badge (Awara Style) */}
+          <div className="inline-flex items-center gap-2 bg-[#092617]/90 border border-[#2D6B48]/80 text-[#C6E8A3] text-[11px] sm:text-xs font-mono font-semibold px-4 py-1.5 rounded-full mb-6 backdrop-blur-md shadow-lg animate-float-slow">
+            <Compass className="w-3.5 h-3.5 text-[#D96B27]" />
+            <span>TAKDAH, MIRIK & DARJEELING RIDGES • EASTERN HIMALAYAS</span>
+          </div>
+
+          {/* High-Impact Main Headline (Awara Display Typography) */}
+          <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white max-w-5xl mx-auto leading-[1.04] drop-shadow-lg">
+            WAKE UP <span className="text-[#A5C896]">ABOVE THE CLOUDS.</span> <br />
+            YOUR TEA GARDEN & <span className="text-[#D96B27]">MOUNTAIN SANCTUARY.</span>
+          </h1>
+
+          {/* Clear Core Motto Subtitle */}
+          <p className="mt-5 text-[#E7EFE3] text-sm sm:text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed drop-shadow">
+            Handcrafted fragrant pine chalets, Swedish river-stone fireplaces, organic single-estate teas, and 180° Kanchenjunga panoramas at 6,850 ft. Direct host bookings with zero middleman commissions.
+          </p>
+
+          {/* 2. Signature Floating Availability Search Bar (From Awara Homestays) */}
+          <div className="mt-8 sm:mt-10 w-full max-w-5xl bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl border border-stone-200/90 text-left text-stone-900 transition-all hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)]">
+            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4 items-end">
+              {/* Check-In Date */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5 flex items-center gap-1 font-mono">
+                  <CalendarPlus className="w-3.5 h-3.5 text-[#164E2D]" />
+                  <span>Check-In</span>
                 </label>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#A8CC92] flex-shrink-0" />
-                  <select
-                    id="hero-region"
-                    value={selectedRegion}
-                    onChange={(e) => setSelectedRegion(e.target.value)}
-                    className="w-full bg-transparent text-sm font-serif text-white focus:outline-none cursor-pointer"
-                  >
-                    {regions.map((reg) => (
-                      <option key={reg} value={reg} className="bg-[#0E331F] text-white">
-                        {reg}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <input
+                  type="date"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                  required
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-stone-900 focus:outline-none focus:border-[#164E2D] focus:ring-1 focus:ring-[#164E2D]"
+                />
               </div>
 
-              {/* Purpose Selector */}
-              <div className="md:col-span-5 px-3 sm:px-4 py-2">
-                <label htmlFor="hero-intent" className="block text-[9px] font-mono uppercase tracking-[0.24em] text-[#B5DC96] mb-1 font-semibold">
-                  What are you seeking?
+              {/* Check-Out Date */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5 flex items-center gap-1 font-mono">
+                  <CalendarMinus className="w-3.5 h-3.5 text-[#164E2D]" />
+                  <span>Check-Out</span>
                 </label>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4 text-[#A8CC92] flex-shrink-0" />
-                  <select
-                    id="hero-intent"
-                    value={selectedIntent}
-                    onChange={(e) => setSelectedIntent(e.target.value)}
-                    className="w-full bg-transparent text-sm font-serif text-white focus:outline-none cursor-pointer"
-                  >
-                    {intents.map((item) => (
-                      <option key={item} value={item} className="bg-[#0E331F] text-white">
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <input
+                  type="date"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                  required
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-stone-900 focus:outline-none focus:border-[#164E2D] focus:ring-1 focus:ring-[#164E2D]"
+                />
               </div>
 
-              {/* Submit Action */}
-              <div className="md:col-span-3 px-3 sm:px-4 py-1">
+              {/* Cottage Style / Ridge */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5 flex items-center gap-1 font-mono">
+                  <BedDouble className="w-3.5 h-3.5 text-[#164E2D]" />
+                  <span>Cottage Style</span>
+                </label>
+                <select
+                  value={cottageType}
+                  onChange={(e) => setCottageType(e.target.value)}
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold text-stone-900 focus:outline-none focus:border-[#164E2D] cursor-pointer"
+                >
+                  <option value="ALL">All Mountain Cottages</option>
+                  <option value="Cedar Wood Chalet">The Cedar Wood Chalet</option>
+                  <option value="Glasshouse Star Attic">Glasshouse Star Attic Suite</option>
+                  <option value="Pine Mist Family Villa">Pine Mist Family Villa</option>
+                  <option value="Heritage Planter Suite">1924 Planter Heritage Suite</option>
+                  <option value="Valley Nest Cabin">Valley Nest Cabin</option>
+                  <option value="Kanchenjunga Penthouse Loft">Kanchenjunga Loft</option>
+                </select>
+              </div>
+
+              {/* Guests */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5 flex items-center gap-1 font-mono">
+                  <Users className="w-3.5 h-3.5 text-[#164E2D]" />
+                  <span>Guests</span>
+                </label>
+                <select
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  className="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold text-stone-900 focus:outline-none focus:border-[#164E2D] cursor-pointer"
+                >
+                  <option value="1">1 Solo Traveler</option>
+                  <option value="2">2 Guests (Couple / Friends)</option>
+                  <option value="3">3 Guests (With Daybed)</option>
+                  <option value="4">4 Guests (Family)</option>
+                  <option value="6">5–6 Guests (Full Cottage)</option>
+                </select>
+              </div>
+
+              {/* Search CTA Button */}
+              <div>
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2.5 bg-white hover:bg-[#F3EFE6] text-[#0A241A] text-xs uppercase tracking-[0.2em] font-sans font-bold py-3.5 px-4 rounded-none transition-all duration-200 shadow-md active:scale-[0.99] border border-white"
+                  className="w-full bg-[#164E2D] hover:bg-[#0E331F] text-white font-bold uppercase tracking-wider text-xs sm:text-sm py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 group active:scale-95"
                 >
-                  <Search className="w-3.5 h-3.5 text-[#0A241A]" />
-                  <span>Discover</span>
+                  <span>Find Stays</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </form>
+
+            {/* Trust Guarantee Indicators Underneath Search */}
+            <div className="mt-3.5 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between text-xs text-stone-600 gap-2 font-mono">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#164E2D]" />
+                <span>100% Farm Breakfast & Single Estate Tea Included</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Wifi className="w-3.5 h-3.5 text-[#164E2D]" />
+                <span>High-Speed Fiber Internet for Workations</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Flame className="w-3.5 h-3.5 text-[#D96B27]" />
+                <span>Complimentary Evening Firewood & Bonfire Hearth</span>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* 3. Four-Metric Trust & Statistics Strip (Direct from Awara) */}
+      <section className="bg-[#FAF7EE] border-y border-[#CBDAC4] py-6 sm:py-8 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {/* Stat 1 */}
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-[#0A2316] text-[#A5C896] flex items-center justify-center mb-2 shadow-sm">
+              <Mountain className="w-5 h-5 text-[#A5C896]" />
+            </div>
+            <p className="font-display text-2xl sm:text-3xl font-bold text-[#0A2316]">6,850 FT</p>
+            <p className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-stone-600 font-mono">
+              Himalayan Ridge Elevation
+            </p>
+          </div>
+
+          {/* Stat 2 */}
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-[#0A2316] text-[#A5C896] flex items-center justify-center mb-2 shadow-sm">
+              <Sprout className="w-5 h-5 text-[#34D399]" />
+            </div>
+            <p className="font-display text-2xl sm:text-3xl font-bold text-[#0A2316]">100% ORGANIC</p>
+            <p className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-stone-600 font-mono">
+              Farm-To-Table Kitchen & Teas
+            </p>
+          </div>
+
+          {/* Stat 3 */}
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-[#0A2316] text-[#A5C896] flex items-center justify-center mb-2 shadow-sm">
+              <Star className="w-5 h-5 fill-[#EAB308] text-[#EAB308]" />
+            </div>
+            <p className="font-display text-2xl sm:text-3xl font-bold text-[#0A2316]">4.97 ★</p>
+            <p className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-stone-600 font-mono">
+              Rated by 1,400+ Guests
+            </p>
+          </div>
+
+          {/* Stat 4 */}
+          <div className="flex flex-col items-center">
+            <div className="w-11 h-11 rounded-full bg-[#0A2316] text-[#A5C896] flex items-center justify-center mb-2 shadow-sm">
+              <SunMedium className="w-5 h-5 text-[#D96B27]" />
+            </div>
+            <p className="font-display text-2xl sm:text-3xl font-bold text-[#0A2316]">180° PANORAMA</p>
+            <p className="text-[11px] sm:text-xs uppercase tracking-wider font-semibold text-stone-600 font-mono">
+              Kanchenjunga Peak Views
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
