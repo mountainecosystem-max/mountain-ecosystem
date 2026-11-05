@@ -89,6 +89,8 @@ export interface Homestay {
   region: string
   location: string
   elevation: string
+  listingType?: 'lease' | 'sale'
+  salePrice?: string
   monthlyRate: string
   securityDeposit: string
   minLeaseTerm: string

@@ -92,34 +92,31 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
   }
 
   return (
-    <section id="community" className="py-20 lg:py-28 bg-[#E8EFE3] border-t border-[#CBDAC4]">
+    <section id="community" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-[#285A40]/20 gap-6">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-3">
-              <Leaf className="w-4 h-4 text-[#285A40]" />
-              <span className="text-[11px] uppercase tracking-[0.2em] font-mono font-semibold text-[#285A40]">
-                COMMUNITY ARCHIVES & LEDGER • 02
-              </span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#123D2D] font-normal tracking-tight">
-              Real experiences. Real people.
-              <span className="block italic text-[#285A40] mt-1">Lush mountain reality.</span>
+        {/* Section Header: Community Experiences */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-[#CBDAC4] gap-6">
+          <div className="max-w-3xl">
+            <span className="text-[#164E2D] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
+              <Compass className="w-4 h-4 text-[#D96B27]" />
+              <span>COMMUNITY EXPERIENCES & ARCHIVES</span>
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A2316] uppercase leading-tight">
+              COMMUNITY EXPERIENCES & FIELD STORIES
             </h2>
-            <p className="mt-4 text-base text-[#576159] leading-relaxed font-light">
-              An unvarnished ledger from tea pluckers, alpine guides, local transport unions, and sabbatical creators living in harmony with the Eastern Himalayan hillsides.
+            <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
+              Real experiences, mountain journals, trail notes, and verified ground price reports posted directly by locals, workers, and travelers living across the Eastern Himalayas.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 self-start md:self-end shrink-0">
             <button
               onClick={onWriteDispatch}
               type="button"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#123D2D] text-[#E8EFE3] text-xs uppercase tracking-wider font-semibold rounded-sm hover:bg-[#0A241A] transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 bg-[#164E2D] hover:bg-[#0A2316] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition active:scale-95"
             >
-              <span>Submit Ground Dispatch</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#91A77B]" />
+              <span>+ Share Your Experience</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#A5C896]" />
             </button>
           </div>
         </div>

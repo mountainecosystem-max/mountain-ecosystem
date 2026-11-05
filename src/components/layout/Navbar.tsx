@@ -4,29 +4,26 @@ import { Link } from 'react-router-dom'
 import {
   Menu,
   X,
-  Home,
-  User,
-  Calendar,
   MountainSnow,
   PhoneCall,
   Mail,
-  Search
+  User,
+  PlusCircle,
+  Home,
+  Briefcase,
+  MessageSquare
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import { useAdminAuth } from '../../context/AdminAuthContext'
 
 interface NavbarProps {
-  onOpenJoinModal?: () => void
-  onOpenSearch?: () => void
+  onOpenJoinModal?: (role?: 'traveller' | 'host' | 'seeker' | 'employer') => void
   onOpenAuthModal?: () => void
-  onOpenBookCottage?: () => void
 }
 
 export const Navbar: FC<NavbarProps> = ({
   onOpenJoinModal,
-  onOpenSearch,
-  onOpenAuthModal,
-  onOpenBookCottage
+  onOpenAuthModal
 }) => {
   const { currentUser, profile, logout } = useAdminAuth()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -50,35 +47,23 @@ export const Navbar: FC<NavbarProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
+  // Strictly the 3 core SaaS modules + FAQs
   const navLinks = [
-    { name: 'Cottages & Suites', href: '#homestays' },
-    { name: 'Experiences', href: '#experiences' },
-    { name: 'Tea & Dining', href: '#dining' },
-    { name: 'The Philosophy', href: '#philosophy' },
-    { name: 'Mountain Jobs', href: '#jobs' },
-    { name: 'Community Ledger', href: '#community' },
-    { name: 'FAQs', href: '#faqs' }
+    { name: 'Property Lease & Sale', href: '#properties', icon: Home },
+    { name: 'Mountain Jobs', href: '#jobs', icon: Briefcase },
+    { name: 'Community Experiences', href: '#community', icon: MessageSquare },
+    { name: 'FAQs', href: '#faqs', icon: undefined }
   ]
-
-  const handleBookClick = () => {
-    if (onOpenBookCottage) {
-      onOpenBookCottage()
-    } else {
-      const el = document.getElementById('homestays')
-      el?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* 1. Top Announcement & Concierge Strip (Awara Style with Tea Garden Palette) */}
+      {/* 1. Top Announcement Bar */}
       <div className="bg-[#05170D] text-[#D8E8D5] text-[11px] sm:text-xs py-1.5 px-3 sm:px-6 border-b border-[#143D24]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-2">
-          {/* Elevation & Climate Info */}
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
             <span className="flex items-center gap-1.5 text-[#A5C896] font-medium font-mono">
               <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
-              <span>Elevation 6,850 ft • 14°C Crisp Mountain Air • Darjeeling & Takdah Ridges</span>
+              <span>Elevation 2,042m • Eastern Himalayas (Darjeeling & Sikkim)</span>
             </span>
             <span className="hidden md:inline text-white/20">|</span>
             <a
@@ -86,7 +71,7 @@ export const Navbar: FC<NavbarProps> = ({
               className="hover:text-white hidden lg:flex items-center gap-1 transition text-white/80"
             >
               <PhoneCall className="w-3 h-3 text-[#D96B27]" />
-              <span>Host Helpline: +91 98300 MOUNTAIN</span>
+              <span>Helpline: +91 98300 MOUNTAIN</span>
             </a>
             <span className="hidden lg:inline text-white/20">|</span>
             <a
@@ -98,20 +83,11 @@ export const Navbar: FC<NavbarProps> = ({
             </a>
           </div>
 
-          {/* Direct Host Booking Guarantee & Quick Links */}
           <div className="flex items-center gap-3">
-            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[10px] sm:text-[11px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-xs">
+            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[10px] sm:text-[11px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
-              <span>Direct Host Booking • Zero Platform Fees</span>
+              <span>Verified Mountain Exchange</span>
             </span>
-
-            <a
-              href="#homestays"
-              className="text-[#E7EFE3] hover:text-[#C6E8A3] underline text-[11px] hidden sm:flex items-center gap-1 font-medium transition ml-1"
-            >
-              <Calendar className="w-3 h-3" />
-              <span>Explore Stays</span>
-            </a>
           </div>
         </div>
       </div>
@@ -125,32 +101,21 @@ export const Navbar: FC<NavbarProps> = ({
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
-          {/* Brand Logo & Editorial Title */}
+          {/* Brand Logo */}
           <a
             href="#"
-            className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none"
+            className="flex items-center gap-3 group focus:outline-none"
             aria-label={`${BRAND_CONFIG.name} Homepage`}
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[#06180E] text-[#A5C896] rounded-xl flex items-center justify-center shadow-md border border-[#1F4E34] group-hover:scale-105 transition-transform duration-200">
-              <Home className="w-5 h-5 sm:w-6 sm:h-6 text-[#A5C896]" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white uppercase">
-                  {BRAND_CONFIG.name.split(' ')[0]}
-                </span>
-                <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#D96B27] uppercase">
-                  {BRAND_CONFIG.name.split(' ').slice(1).join(' ') || 'SANCTUARIES'}
-                </span>
-              </div>
-              <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-[#A5C896]/90 font-mono -mt-1 font-semibold truncate max-w-[210px] sm:max-w-none">
-                Himalayan Pine Chalets & Eco-Living
-              </p>
-            </div>
+            <img
+              src={BRAND_CONFIG.logo.horizontal}
+              alt={BRAND_CONFIG.logo.alt}
+              className="h-10 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-105 brightness-105"
+            />
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-xs font-semibold text-[#E7EFE3]" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold text-[#E7EFE3]" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -165,17 +130,6 @@ export const Navbar: FC<NavbarProps> = ({
 
           {/* Action CTAs & Auth Controls */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Search Trigger */}
-            <button
-              onClick={onOpenSearch}
-              type="button"
-              className="p-2 text-[#E7EFE3]/80 hover:text-white hover:bg-white/10 rounded-full transition-colors hidden sm:inline-flex"
-              aria-label="Search Ecosystem"
-              title="Search"
-            >
-              <Search className="w-4 h-4" />
-            </button>
-
             {/* User Auth Status */}
             {currentUser ? (
               <div className="flex items-center gap-2">
@@ -222,14 +176,14 @@ export const Navbar: FC<NavbarProps> = ({
               </div>
             )}
 
-            {/* High-Impact Awara-Style Booking CTA Pill (Warm Amber Hearth Accent) */}
+            {/* Quick Action Button: Post Listing */}
             <button
-              onClick={handleBookClick}
+              onClick={() => onOpenJoinModal?.('host')}
               type="button"
-              className="inline-flex items-center gap-2 bg-[#D96B27] hover:bg-[#B85418] text-white text-xs md:text-sm font-bold uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform active:scale-95"
+              className="inline-flex items-center gap-1.5 bg-[#164E2D] hover:bg-[#0E331F] text-white text-xs md:text-sm font-bold uppercase tracking-wider px-4 sm:px-5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform active:scale-95 border border-[#34D399]/30"
             >
-              <Calendar className="w-4 h-4 text-white" />
-              <span>Book Cottage</span>
+              <PlusCircle className="w-4 h-4 text-[#A5C896]" />
+              <span>Post Listing</span>
             </button>
 
             {/* Mobile Hamburger Toggle */}
@@ -246,18 +200,8 @@ export const Navbar: FC<NavbarProps> = ({
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#071F13] text-white border-t border-[#1C4E33] px-5 py-5 space-y-3.5 shadow-2xl animate-fade-in-scale">
-            <div className="p-3 bg-[#0A2617] rounded-xl border border-[#1F4E34] mb-3">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#A5C896]">
-                <MountainSnow className="w-4 h-4 text-[#D96B27]" />
-                <span className="font-semibold">Elevation 6,850 ft • 14°C Crisp Air</span>
-              </div>
-              <p className="text-[11px] text-white/70 mt-1">
-                Handcrafted pine chalets & tea garden sanctuaries in Darjeeling & Takdah.
-              </p>
-            </div>
-
-            <nav className="space-y-2">
+          <div className="lg:hidden bg-[#071F13] text-white border-t border-[#1C4E33] px-5 py-5 space-y-3 shadow-2xl animate-fade-in-scale">
+            <nav className="space-y-1.5">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -270,26 +214,16 @@ export const Navbar: FC<NavbarProps> = ({
               ))}
             </nav>
 
-            <div className="pt-3 border-t border-[#1F4E34] space-y-2.5">
+            <div className="pt-3 border-t border-[#1F4E34] space-y-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false)
-                  handleBookClick()
+                  onOpenJoinModal?.('host')
                 }}
-                className="w-full text-center flex items-center justify-center gap-2 bg-[#D96B27] hover:bg-[#B85418] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
+                className="w-full text-center flex items-center justify-center gap-2 bg-[#164E2D] hover:bg-[#0E331F] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
               >
-                <Calendar className="w-4 h-4" />
-                <span>Check Cottage Availability</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false)
-                  onOpenJoinModal?.()
-                }}
-                className="w-full text-center block bg-white/10 hover:bg-white/15 text-white font-mono py-2 rounded-xl text-xs uppercase tracking-wider border border-white/20"
-              >
-                Join Stewardship Fellowship
+                <PlusCircle className="w-4 h-4 text-[#A5C896]" />
+                <span>Post Listing (Property / Job)</span>
               </button>
             </div>
           </div>

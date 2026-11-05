@@ -4,25 +4,17 @@ import { useLocation } from 'react-router-dom'
 import { CheckCircle2, X } from 'lucide-react'
 import { Navbar } from '../layout/Navbar'
 import { Hero } from './Hero'
+import { SaaSModuleNavigator } from './SaaSModuleNavigator'
+import type { SaaSModuleTab } from './SaaSModuleNavigator'
 import { HomestayMarketplace } from './HomestayMarketplace'
-import { MountainPhilosophy } from './MountainPhilosophy'
-import { MountainExperiences } from './MountainExperiences'
-import { FarmDiningSection } from './FarmDiningSection'
-import { PromosOffersSection } from './PromosOffersSection'
-import { DestinationStories } from './DestinationStories'
-import { CommunityDispatches } from './CommunityDispatches'
 import { MountainJobs } from './MountainJobs'
-import { ArchitecturalLedger } from './ArchitecturalLedger'
-import { GuestReviewsSection } from './GuestReviewsSection'
+import { CommunityDispatches } from './CommunityDispatches'
 import { FAQSection } from './FAQSection'
-import { CommunityCTA } from './CommunityCTA'
 import { Footer } from '../layout/Footer'
-import { MobileStickyBookingBar } from '../common/MobileStickyBookingBar'
 
 import { JobDetailModal } from '../modals/JobDetailModal'
 import { HomestayDetailModal } from '../modals/HomestayDetailModal'
 import { StoryDetailModal } from '../modals/StoryDetailModal'
-import { ArchitecturalSpecimenModal } from '../modals/ArchitecturalSpecimenModal'
 import { JoinCommunityModal } from '../modals/JoinCommunityModal'
 import { CreateDispatchModal } from '../modals/CreateDispatchModal'
 import { PublicAuthModal } from '../modals/PublicAuthModal'
@@ -32,12 +24,13 @@ import { CookieConsentBanner } from '../common/CookieConsentBanner'
 import { RidgeConciergeChatbot } from '../chat/RidgeConciergeChatbot'
 
 import { useEcosystemData } from '../../hooks/useEcosystemData'
-import type { Destination, Dispatch, Job, Homestay, ArchitecturalSpecimen } from '../../types'
+import type { Destination, Dispatch, Job, Homestay } from '../../types'
 import { setPageTitle } from '../../config/branding'
 
 export const PublicHomePage: FC = () => {
   const location = useLocation()
   const [welcomeToast, setWelcomeToast] = useState<{ show: boolean; email?: string } | null>(null)
+  const [activeTab, setActiveTab] = useState<SaaSModuleTab>('all')
 
   useEffect(() => {
     setPageTitle()
@@ -60,7 +53,6 @@ export const PublicHomePage: FC = () => {
     homestays,
     jobs,
     dispatches,
-    specimens,
     priceIndices,
     isLoading,
     errors,
@@ -72,152 +64,110 @@ export const PublicHomePage: FC = () => {
   const [selectedHomestay, setSelectedHomestay] = useState<Homestay | null>(null)
   const [selectedDestination, setSelectedDestination] = useState<Destination | null>(null)
   const [selectedDispatch, setSelectedDispatch] = useState<Dispatch | null>(null)
-  const [selectedSpecimen, setSelectedSpecimen] = useState<ArchitecturalSpecimen | null>(null)
   const [joinModalOpen, setJoinModalOpen] = useState(false)
-  const [joinRole, setJoinRole] = useState<'traveller' | 'host' | 'seeker' | 'employer'>('traveller')
+  const [joinRole, setJoinRole] = useState<'traveller' | 'host' | 'seeker' | 'employer'>('host')
   const [dispatchModalOpen, setDispatchModalOpen] = useState(false)
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
   const [cookiesModalOpen, setCookiesModalOpen] = useState(false)
 
-  // Search handler from Hero Floating Search Panel
-  const handleHeroSearch = (_cottageType: string, _guestCount: string) => {
-    const el = document.getElementById('homestays')
-    el?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const handleOpenJoin = (role: 'traveller' | 'host' | 'seeker' | 'employer' = 'traveller') => {
+  const handleOpenJoin = (role: 'traveller' | 'host' | 'seeker' | 'employer' = 'host') => {
     setJoinRole(role)
     setJoinModalOpen(true)
   }
 
+  const handleTabChange = (tab: SaaSModuleTab) => {
+    setActiveTab(tab)
+    if (tab === 'properties') {
+      document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' })
+    } else if (tab === 'jobs') {
+      document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })
+    } else if (tab === 'community') {
+      document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7EE] text-[#1E2621] font-sans selection:bg-[#164E2D]/20 selection:text-[#0A2316]">
-      {/* Refined Navigation Bar with Top Weather & Concierge Bar */}
+      {/* SaaS App Header */}
       <Navbar
-        onOpenJoinModal={() => handleOpenJoin('traveller')}
+        onOpenJoinModal={handleOpenJoin}
         onOpenAuthModal={() => setAuthModalOpen(true)}
-        onOpenSearch={() => {
-          const el = document.getElementById('destinations')
-          el?.scrollIntoView({ behavior: 'smooth' })
-        }}
-        onOpenBookCottage={() => {
-          const el = document.getElementById('homestays')
-          el?.scrollIntoView({ behavior: 'smooth' })
-        }}
       />
 
-      {/* Main Content Sections */}
+      {/* Main SaaS Platform View */}
       <main className="flex-1">
-        {/* 1. Hero Section with Floating Search Panel & 4 Trust Stats */}
+        {/* 1. SaaS Hero with Platform Mission & Direct Action Cards */}
         <Hero
-          onSearch={handleHeroSearch}
-          onExploreClick={() => {
-            const el = document.getElementById('homestays')
-            el?.scrollIntoView({ behavior: 'smooth' })
-          }}
-          onJoinClick={() => handleOpenJoin('traveller')}
-        />
-
-        {/* 2. Featured Cottages & Alpine Suites (Immediate Core Conversion Focus) */}
-        <HomestayMarketplace
-          homestays={homestays}
-          isLoading={isLoading}
-          error={errors.homestays}
-          onRetry={refetchAll}
-          onSelectHomestay={(stay) => setSelectedHomestay(stay)}
-          onListHomestayClick={() => handleOpenJoin('host')}
-        />
-
-        {/* 3. Mountain Sanctuary Philosophy (Asymmetric Editorial Cluster) */}
-        <MountainPhilosophy
-          onExploreCottages={() => {
-            const el = document.getElementById('homestays')
-            el?.scrollIntoView({ behavior: 'smooth' })
+          onSelectTab={handleTabChange}
+          onOpenCreateDispatch={() => setDispatchModalOpen(true)}
+          onOpenPostJob={() => handleOpenJoin('employer')}
+          onOpenListProperty={() => handleOpenJoin('host')}
+          counts={{
+            properties: homestays.length,
+            jobs: jobs.length,
+            dispatches: dispatches.length
           }}
         />
 
-        {/* 4. Curated Mountain Experiences & Tea Garden Activities */}
-        <MountainExperiences
-          onBookCottage={() => {
-            const el = document.getElementById('homestays')
-            el?.scrollIntoView({ behavior: 'smooth' })
+        {/* 2. Exact Pill-Shaped Module Navigator (Matches User's Reference) */}
+        <SaaSModuleNavigator
+          activeTab={activeTab}
+          onSelectTab={handleTabChange}
+          counts={{
+            properties: homestays.length,
+            jobs: jobs.length,
+            dispatches: dispatches.length
           }}
         />
 
-        {/* 5. Farm-To-Table Dining Section (Wood-Fired Hearth & Estate Teas) */}
-        <FarmDiningSection />
+        {/* 3. The 3 Core SaaS Sections */}
 
-        {/* 6. Seasonal Privileges & Sabbatical Voucher Codes */}
-        <PromosOffersSection />
+        {/* Section 1: Property Lease & Sale */}
+        {(activeTab === 'all' || activeTab === 'properties') && (
+          <HomestayMarketplace
+            homestays={homestays}
+            isLoading={isLoading}
+            error={errors.homestays}
+            onRetry={refetchAll}
+            onSelectHomestay={(stay) => setSelectedHomestay(stay)}
+            onListHomestayClick={() => handleOpenJoin('host')}
+          />
+        )}
 
-        {/* 7. Destination Stories & Territorial Exploration */}
-        <DestinationStories
-          destinations={destinations}
-          isLoading={isLoading}
-          error={errors.destinations}
-          onRetry={refetchAll}
-          onSelectDestination={(dest) => setSelectedDestination(dest)}
-        />
+        {/* Section 2: Mountain Jobs */}
+        {(activeTab === 'all' || activeTab === 'jobs') && (
+          <MountainJobs
+            jobs={jobs}
+            isLoading={isLoading}
+            error={errors.jobs}
+            onRetry={refetchAll}
+            onSelectJob={(job) => setSelectedJob(job)}
+            onPostJobClick={() => handleOpenJoin('employer')}
+          />
+        )}
 
-        {/* 8. Mountain Jobs & Paid Residencies Exchange */}
-        <MountainJobs
-          jobs={jobs}
-          isLoading={isLoading}
-          error={errors.jobs}
-          onRetry={refetchAll}
-          onSelectJob={(job) => setSelectedJob(job)}
-          onPostJobClick={() => handleOpenJoin('employer')}
-        />
+        {/* Section 3: Community Experiences */}
+        {(activeTab === 'all' || activeTab === 'community') && (
+          <CommunityDispatches
+            dispatches={dispatches}
+            priceIndices={priceIndices}
+            isLoading={isLoading}
+            error={errors.dispatches}
+            onRetry={refetchAll}
+            onSelectDispatch={(disp) => setSelectedDispatch(disp)}
+            onWriteDispatch={() => setDispatchModalOpen(true)}
+          />
+        )}
 
-        {/* 9. Himalayan Architectural & Material Ledger */}
-        <ArchitecturalLedger
-          specimens={specimens}
-          isLoading={isLoading}
-          error={errors.specimens}
-          onRetry={refetchAll}
-          onSelectSpecimen={(specimen) => setSelectedSpecimen(specimen)}
-          onExploreStays={() => {
-            const el = document.getElementById('homestays')
-            el?.scrollIntoView({ behavior: 'smooth' })
-          }}
-        />
-
-        {/* 10. Community Ledger & Fair Price Dispatches */}
-        <CommunityDispatches
-          dispatches={dispatches}
-          priceIndices={priceIndices}
-          isLoading={isLoading}
-          error={errors.dispatches}
-          onRetry={refetchAll}
-          onSelectDispatch={(disp) => setSelectedDispatch(disp)}
-          onWriteDispatch={() => setDispatchModalOpen(true)}
-        />
-
-        {/* 11. Guest Reviews & Sabbatical Testimonials */}
-        <GuestReviewsSection />
-
-        {/* 12. Frequently Asked Questions (Inquiry Ledger) */}
+        {/* Supporting FAQ Section */}
         <FAQSection />
-
-        {/* 13. Closing Community CTA */}
-        <CommunityCTA
-          onJoinClick={(role) => handleOpenJoin(role || 'traveller')}
-        />
       </main>
 
-      {/* Editorial Footer */}
+      {/* Clean SaaS Footer */}
       <Footer
         onOpenPrivacy={() => setPrivacyModalOpen(true)}
         onOpenCookies={() => setCookiesModalOpen(true)}
-      />
-
-      {/* Floating Thumb-Friendly Mobile Booking Bar */}
-      <MobileStickyBookingBar
-        onBookClick={() => {
-          const el = document.getElementById('homestays')
-          el?.scrollIntoView({ behavior: 'smooth' })
-        }}
       />
 
       {/* Interactive Modals */}
@@ -237,15 +187,6 @@ export const PublicHomePage: FC = () => {
         onClose={() => {
           setSelectedDestination(null)
           setSelectedDispatch(null)
-        }}
-      />
-
-      <ArchitecturalSpecimenModal
-        specimen={selectedSpecimen}
-        onClose={() => setSelectedSpecimen(null)}
-        onExploreStays={() => {
-          const el = document.getElementById('homestays')
-          el?.scrollIntoView({ behavior: 'smooth' })
         }}
       />
 
