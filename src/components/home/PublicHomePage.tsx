@@ -100,8 +100,6 @@ export const PublicHomePage: FC = () => {
       document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })
     } else if (tab === 'community') {
       document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })
-    } else if (tab === 'ethics') {
-      document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' })
     }
   }
 

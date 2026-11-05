@@ -29,7 +29,7 @@ export const Hero: FC<HeroProps> = ({
   counts
 }) => {
   return (
-    <section className="relative w-full pt-32 sm:pt-36 lg:pt-40 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 bg-[#071F13] text-white overflow-hidden border-b border-[#143D24]">
+    <section className="relative w-full pt-36 sm:pt-40 lg:pt-44 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 bg-[#071F13] text-white overflow-hidden border-b border-[#143D24]">
       {/* High-Resolution Mountain & Emerald Tea Garden Atmosphere */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img

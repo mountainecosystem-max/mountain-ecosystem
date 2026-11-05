@@ -1,7 +1,7 @@
 import type { FC } from 'react'
-import { Sparkles, Home, Briefcase, FileText, ShieldCheck } from 'lucide-react'
+import { Sparkles, Home, Briefcase, MessageSquare } from 'lucide-react'
 
-export type SaaSModuleTab = 'all' | 'stays' | 'jobs' | 'community' | 'ethics'
+export type SaaSModuleTab = 'all' | 'stays' | 'jobs' | 'community'
 
 interface SaaSModuleNavigatorProps {
   activeTab: SaaSModuleTab
@@ -20,7 +20,7 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
     },
     {
       id: 'stays' as SaaSModuleTab,
-      label: 'Stays & Leases',
+      label: 'Property Lease & Sale',
       icon: Home
     },
     {
@@ -30,18 +30,13 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
     },
     {
       id: 'community' as SaaSModuleTab,
-      label: 'Community Ledger',
-      icon: FileText
-    },
-    {
-      id: 'ethics' as SaaSModuleTab,
-      label: 'Ecology & Ethics',
-      icon: ShieldCheck
+      label: 'Community Experiences',
+      icon: MessageSquare
     }
   ]
 
   return (
-    <div className="w-full py-3 sm:py-3.5 px-3 sm:px-6 sticky top-[70px] sm:top-[74px] z-30 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] shadow-xs transition-all">
+    <div className="w-full py-3 sm:py-3.5 px-3 sm:px-6 sticky top-[76px] sm:top-[80px] z-30 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] shadow-xs transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none py-1">
         {tabs.map((tab) => {
           const Icon = tab.icon

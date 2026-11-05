@@ -48,10 +48,9 @@ export const Navbar: FC<NavbarProps> = ({
 
   // Strictly the core SaaS modules matching navigation pills + FAQs
   const navLinks = [
-    { name: 'Stays & Leases', href: '#stays', icon: Home },
+    { name: 'Property Lease & Sale', href: '#stays', icon: Home },
     { name: 'Mountain Jobs', href: '#jobs', icon: Briefcase },
-    { name: 'Community Ledger', href: '#community', icon: MessageSquare },
-    { name: 'FAQs', href: '#faqs', icon: undefined }
+    { name: 'Community Experiences', href: '#community', icon: MessageSquare }
   ]
 
   return (

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
-import { ChevronDown, HelpCircle, Compass, Home, Briefcase, FileText, ShieldCheck, Sparkles } from 'lucide-react'
+import { ChevronDown, HelpCircle, Compass, Home, Briefcase, FileText, Sparkles } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 
 interface FAQItem {
@@ -77,10 +77,9 @@ export const FAQSection: FC = () => {
 
   const categories = [
     { key: 'all', label: 'All Inquiries', icon: Sparkles },
-    { key: 'stays', label: 'Stays & Leases', icon: Home },
+    { key: 'stays', label: 'Property Lease & Sale', icon: Home },
     { key: 'jobs', label: 'Mountain Jobs', icon: Briefcase },
-    { key: 'community', label: 'Community Ledger', icon: FileText },
-    { key: 'ethics', label: 'Ecology & Ethics', icon: ShieldCheck }
+    { key: 'community', label: 'Community Experiences', icon: FileText }
   ]
 
   return (
