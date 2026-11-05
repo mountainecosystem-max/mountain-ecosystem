@@ -1,0 +1,20 @@
+# Mountain Ecosystem
+> A dedicated Pan-India SaaS platform for mountain properties (for lease and sale), mountain jobs with accommodation, and community field experiences across Himachal Pradesh, Uttarakhand, Ladakh, Jammu & Kashmir, Sikkim, Bengal Hills, and the Nilgiris.
+
+## Core Platform Modules
+- [Property Lease & Sale]: Verified stone cottages, cedar chalets, and mountain parcels with full verified addresses, monthly lease terms (1–12 months), and outright purchase terms with clear titles.
+- [Mountain Jobs & Recruitment]: Employment exchange where mountain employers post openings with dignified wages, free mountain lodging, and organic meals.
+- [Community Experiences & Price Index]: Verified ground transit benchmarks (shared Bolero and Sumo fares, bus rates, porter daily wage caps) and trail weather advisories.
+- [Anaya AI Concierge]: Grounded AI assistant offering instant answers regarding property leases, job openings, transport rates, and ecological guidelines across all Indian mountain states.
+
+## Geographic Coverage
+- Himachal Pradesh: Manali, Parvati Valley, Spiti, Tirthan Valley, Dharamshala, Kullu
+- Uttarakhand: Mukteshwar, Chopta, Mussoorie, Almora, Kumaon, Garhwal
+- Ladakh & Kashmir: Leh, Nubra Valley, Gulmarg, Pahalgam, Zanskar
+- Sikkim & Northeast: Gangtok, Yuksom, Dzongu, Tawang, Shillong
+- Bengal Hills: Darjeeling, Kalimpong, Kurseong, Takdah
+- Nilgiris & Western Ghats: Ooty, Kotagiri, Kodaikanal, Coorg, Munnar
+
+## Official Contact
+- Platform Support Email: mountainecosystem@gmail.com
+- Built with love by Tessimo (https://tessimo.in)

@@ -23,6 +23,7 @@ import { PublicAuthModal } from '../modals/PublicAuthModal'
 import { PrivacyPolicyModal } from '../modals/PrivacyPolicyModal'
 import { CookiePolicyModal } from '../modals/CookiePolicyModal'
 import { CookieConsentBanner } from '../common/CookieConsentBanner'
+import { StartupAnimation } from '../common/StartupAnimation'
 import { RidgeConciergeChatbot } from '../chat/RidgeConciergeChatbot'
 
 import { useEcosystemData } from '../../hooks/useEcosystemData'
@@ -106,6 +107,9 @@ export const PublicHomePage: FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF7EE] text-[#1E2621] font-sans selection:bg-[#164E2D]/20 selection:text-[#0A2316]">
+      {/* 0. Cinematic Launch Startup Animation */}
+      <StartupAnimation />
+
       {/* SaaS App Header */}
       <Navbar
         onOpenJoinModal={handleOpenJoin}

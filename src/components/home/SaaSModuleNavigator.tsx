@@ -41,7 +41,7 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
   ]
 
   return (
-    <div className="w-full py-3.5 px-4 sm:px-6 sticky top-[68px] z-30 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] shadow-xs transition-all">
+    <div className="w-full py-3 sm:py-3.5 px-3 sm:px-6 sticky top-[70px] sm:top-[74px] z-30 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] shadow-xs transition-all">
       <div className="max-w-7xl mx-auto flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none py-1">
         {tabs.map((tab) => {
           const Icon = tab.icon

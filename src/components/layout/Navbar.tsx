@@ -56,26 +56,26 @@ export const Navbar: FC<NavbarProps> = ({
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* 1. Top Announcement Bar */}
-      <div className="bg-[#05170D] text-[#D8E8D5] text-[11px] sm:text-xs py-1.5 px-3 sm:px-6 border-b border-[#143D24]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1 sm:gap-2">
-          <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
-            <span className="flex items-center gap-1.5 text-[#A5C896] font-medium font-mono">
+      {/* 1. Top Announcement Bar (Single Compact Row on Mobile, Zero Stacking) */}
+      <div className="bg-[#05170D] text-[#D8E8D5] text-[11px] sm:text-xs py-1 px-3 sm:px-6 border-b border-[#143D24]">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 truncate">
+            <span className="hidden md:flex items-center gap-1.5 text-[#A5C896] font-medium font-mono text-[11px]">
               <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
               <span>Pan-India Mountain Digital Infrastructure • Elevation 800m – 4,500m</span>
             </span>
-            <span className="hidden sm:inline text-white/20">|</span>
+            <span className="hidden md:inline text-white/20">|</span>
             <a
               href={`mailto:${BRAND_CONFIG.supportEmail}`}
-              className="hover:text-white flex items-center gap-1.5 transition text-[#D8E8D5] font-mono text-[11px]"
+              className="hover:text-white flex items-center gap-1.5 transition text-[#D8E8D5] font-mono text-[10px] sm:text-[11px]"
             >
-              <Mail className="w-3.5 h-3.5 text-[#34D399]" />
+              <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#34D399]" />
               <span>{BRAND_CONFIG.supportEmail}</span>
             </a>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[10px] sm:text-[11px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1.5 shadow-xs font-mono">
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[9px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
               <span>Verified Mountain Exchange</span>
             </span>
@@ -87,8 +87,8 @@ export const Navbar: FC<NavbarProps> = ({
       <header
         className={`w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0A2316]/98 backdrop-blur-md shadow-xl border-b border-[#1C4E33] py-2.5'
-            : 'bg-[#0A2316]/90 backdrop-blur-sm border-b border-[#1A452D] py-3'
+            ? 'bg-[#0A2316]/98 backdrop-blur-md shadow-xl border-b border-[#1C4E33] py-2'
+            : 'bg-[#0A2316]/95 backdrop-blur-sm border-b border-[#1A452D] py-2 sm:py-2.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">

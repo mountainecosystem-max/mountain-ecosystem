@@ -29,7 +29,7 @@ export const Hero: FC<HeroProps> = ({
   counts
 }) => {
   return (
-    <section className="relative w-full pt-28 sm:pt-32 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 bg-[#071F13] text-white overflow-hidden border-b border-[#143D24]">
+    <section className="relative w-full pt-32 sm:pt-36 lg:pt-40 pb-10 sm:pb-14 px-4 sm:px-6 lg:px-8 bg-[#071F13] text-white overflow-hidden border-b border-[#143D24]">
       {/* High-Resolution Mountain & Emerald Tea Garden Atmosphere */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
@@ -73,13 +73,13 @@ export const Hero: FC<HeroProps> = ({
 
       <div className="max-w-6xl mx-auto w-full relative z-10 text-center flex flex-col items-center">
         {/* SaaS Platform Kicker Badge */}
-        <div className="inline-flex items-center gap-2 bg-[#092617]/90 border border-[#2D6B48]/80 text-[#C6E8A3] text-[10px] sm:text-xs font-mono font-semibold px-4 py-1.5 rounded-full mb-5 backdrop-blur-md shadow-lg animate-float-slow">
+        <div className="inline-flex items-center gap-2 bg-[#092617]/90 border border-[#2D6B48]/80 text-[#C6E8A3] text-[10px] sm:text-xs font-mono font-semibold px-3.5 py-1.5 rounded-full mb-3 sm:mb-5 mt-1 sm:mt-0 backdrop-blur-md shadow-lg animate-float-slow">
           <Compass className="w-3.5 h-3.5 text-[#34D399]" />
           <span>ALL-INDIA MOUNTAIN DIGITAL EXCHANGE • PAN-INDIA MOUNTAINS</span>
         </div>
 
         {/* Main Motto Headline */}
-        <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold uppercase tracking-tight text-white max-w-4xl mx-auto leading-[1.02] drop-shadow-md">
+        <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-tight text-white max-w-4xl mx-auto leading-[1.06] drop-shadow-md">
           COMMUNITY EXPERIENCES. <br />
           <span className="text-[#A5C896]">MOUNTAIN JOBS. PROPERTIES FOR LEASE & SALE.</span>
         </h1>
