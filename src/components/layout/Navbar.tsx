@@ -62,7 +62,7 @@ export const Navbar: FC<NavbarProps> = ({
           <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
             <span className="flex items-center gap-1.5 text-[#A5C896] font-medium font-mono">
               <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
-              <span>Elevation 2,042m • Eastern Himalayas (Darjeeling & Sikkim)</span>
+              <span>Pan-India Mountain Digital Infrastructure • Elevation 800m – 4,500m</span>
             </span>
             <span className="hidden sm:inline text-white/20">|</span>
             <a

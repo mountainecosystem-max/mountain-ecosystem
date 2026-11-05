@@ -37,6 +37,7 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
 }) => {
   const activePriceIndices = priceIndices
   const [activeFilter, setActiveFilter] = useState<string>('all')
+  const [selectedRegion, setSelectedRegion] = useState<string>('all')
   const [upvotes, setUpvotes] = useState<Record<string, number>>(
     dispatches.reduce((acc, d) => ({ ...acc, [d.id]: d.helpfulCount }), {})
   )
@@ -52,15 +53,31 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
   const filterTabs = [
     { label: 'All Dispatches', value: 'all' },
     { label: 'Verified Price Reports', value: 'price_report' },
-    { label: 'Tea Estate Journals', value: 'traveller_story' },
-    { label: 'Indigenous Host Stories', value: 'host_story' },
-    { label: 'Trail & Forest Advisory', value: 'trail_note' },
+    { label: 'Field & Travel Journals', value: 'traveller_story' },
+    { label: 'Host & Local Community Stories', value: 'host_story' },
+    { label: 'Trail & Weather Advisory', value: 'trail_note' },
   ]
 
-  const filtered =
-    activeFilter === 'all'
-      ? dispatches
-      : dispatches.filter((d) => d.type === activeFilter)
+  const regions = [
+    { id: 'all', label: 'All Indian Mountains' },
+    { id: 'Himachal', label: 'Himachal Pradesh' },
+    { id: 'Uttarakhand', label: 'Uttarakhand' },
+    { id: 'Ladakh', label: 'Ladakh & Kashmir' },
+    { id: 'Sikkim', label: 'Sikkim & Northeast' },
+    { id: 'Bengal', label: 'Bengal Hills' },
+    { id: 'Nilgiris', label: 'Nilgiris & Western Ghats' }
+  ]
+
+  const filtered = dispatches.filter((d) => {
+    const matchesType = activeFilter === 'all' || d.type === activeFilter
+    const matchesRegion =
+      selectedRegion === 'all'
+        ? true
+        : d.location.toLowerCase().includes(selectedRegion.toLowerCase()) ||
+          d.title.toLowerCase().includes(selectedRegion.toLowerCase()) ||
+          d.excerpt.toLowerCase().includes(selectedRegion.toLowerCase())
+    return matchesType && matchesRegion
+  })
 
   const getTypeBadge = (type: DispatchType) => {
     switch (type) {
@@ -105,7 +122,7 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
               COMMUNITY EXPERIENCES & FIELD STORIES
             </h2>
             <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
-              Real experiences, mountain journals, trail notes, and verified ground price reports posted directly by locals, workers, and travelers living across the Eastern Himalayas.
+              Real experiences, mountain journals, trail notes, and verified ground price reports posted directly by locals, workers, and travelers living across all Indian mountain regions.
             </p>
           </div>
 
@@ -212,31 +229,55 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
           </div>
         </div>
 
-        {/* Filter Navigation */}
-        <div className="flex items-center justify-between pb-6 border-b border-[#285A40]/15 mb-8 overflow-x-auto gap-4 scrollbar-none">
-          <div className="flex items-center gap-2">
-            <Filter className="w-3.5 h-3.5 text-[#285A40] hidden sm:block" />
-            <div className="flex items-center gap-1.5">
-              {filterTabs.map((tab) => (
-                <button
-                  key={tab.value}
-                  onClick={() => setActiveFilter(tab.value)}
-                  type="button"
-                  className={`px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase rounded-sm transition-all whitespace-nowrap ${
-                    activeFilter === tab.value
-                      ? 'bg-[#123D2D] text-[#E8EFE3] font-semibold'
-                      : 'text-[#123D2D]/70 hover:text-[#123D2D] hover:bg-white/60'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+        {/* Region & Type Dual Filter Bar */}
+        <div className="space-y-3 pb-6 border-b border-[#285A40]/15 mb-8">
+          {/* Pan-India Region Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
+              Region:
+            </span>
+            {regions.map((reg) => (
+              <button
+                key={reg.id}
+                onClick={() => setSelectedRegion(reg.id)}
+                type="button"
+                className={`px-3 py-1 text-xs font-mono rounded-full transition-all whitespace-nowrap ${
+                  selectedRegion === reg.id
+                    ? 'bg-[#164E2D] text-white font-bold shadow-xs'
+                    : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                }`}
+              >
+                {reg.label}
+              </button>
+            ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-[#285A40]">
-            <span className="w-2 h-2 rounded-full bg-[#285A40]" />
-            <span>Updated Daily by Mountain Stewards</span>
+          {/* Type Filter Navigation */}
+          <div className="flex items-center justify-between overflow-x-auto gap-4 scrollbar-none pt-1">
+            <div className="flex items-center gap-2">
+              <Filter className="w-3.5 h-3.5 text-[#285A40] hidden sm:block" />
+              <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+                {filterTabs.map((tab) => (
+                  <button
+                    key={tab.value}
+                    onClick={() => setActiveFilter(tab.value)}
+                    type="button"
+                    className={`px-3.5 py-1.5 text-xs font-mono tracking-wider uppercase rounded-sm transition-all whitespace-nowrap ${
+                      activeFilter === tab.value
+                        ? 'bg-[#123D2D] text-[#E8EFE3] font-semibold'
+                        : 'text-[#123D2D]/70 hover:text-[#123D2D] hover:bg-white/60'
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-2 text-xs font-mono text-[#285A40] shrink-0">
+              <span className="w-2 h-2 rounded-full bg-[#285A40]" />
+              <span>Pan-India Mountain Contributor Network</span>
+            </div>
           </div>
         </div>
 

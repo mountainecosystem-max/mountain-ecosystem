@@ -17,6 +17,8 @@ import { HomestayDetailModal } from '../modals/HomestayDetailModal'
 import { StoryDetailModal } from '../modals/StoryDetailModal'
 import { JoinCommunityModal } from '../modals/JoinCommunityModal'
 import { CreateDispatchModal } from '../modals/CreateDispatchModal'
+import { CreatePropertyModal } from '../modals/CreatePropertyModal'
+import { CreateJobModal } from '../modals/CreateJobModal'
 import { PublicAuthModal } from '../modals/PublicAuthModal'
 import { PrivacyPolicyModal } from '../modals/PrivacyPolicyModal'
 import { CookiePolicyModal } from '../modals/CookiePolicyModal'
@@ -67,13 +69,26 @@ export const PublicHomePage: FC = () => {
   const [joinModalOpen, setJoinModalOpen] = useState(false)
   const [joinRole, setJoinRole] = useState<'traveller' | 'host' | 'seeker' | 'employer'>('host')
   const [dispatchModalOpen, setDispatchModalOpen] = useState(false)
+  const [propertyModalOpen, setPropertyModalOpen] = useState(false)
+  const [jobModalOpen, setJobModalOpen] = useState(false)
+  const [customHomestays, setCustomHomestays] = useState<Homestay[]>([])
+  const [customJobs, setCustomJobs] = useState<Job[]>([])
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
   const [cookiesModalOpen, setCookiesModalOpen] = useState(false)
 
+  const allHomestays = [...customHomestays, ...homestays]
+  const allJobs = [...customJobs, ...jobs]
+
   const handleOpenJoin = (role: 'traveller' | 'host' | 'seeker' | 'employer' = 'host') => {
-    setJoinRole(role)
-    setJoinModalOpen(true)
+    if (role === 'host') {
+      setPropertyModalOpen(true)
+    } else if (role === 'employer') {
+      setJobModalOpen(true)
+    } else {
+      setJoinRole(role)
+      setJoinModalOpen(true)
+    }
   }
 
   const handleTabChange = (tab: SaaSModuleTab) => {
@@ -103,11 +118,11 @@ export const PublicHomePage: FC = () => {
         <Hero
           onSelectTab={handleTabChange}
           onOpenCreateDispatch={() => setDispatchModalOpen(true)}
-          onOpenPostJob={() => handleOpenJoin('employer')}
-          onOpenListProperty={() => handleOpenJoin('host')}
+          onOpenPostJob={() => setJobModalOpen(true)}
+          onOpenListProperty={() => setPropertyModalOpen(true)}
           counts={{
-            properties: homestays.length,
-            jobs: jobs.length,
+            properties: allHomestays.length,
+            jobs: allJobs.length,
             dispatches: dispatches.length
           }}
         />
@@ -123,24 +138,24 @@ export const PublicHomePage: FC = () => {
         {/* Section 1: Stays & Leases (Property Lease & Sale) */}
         {(activeTab === 'all' || activeTab === 'stays') && (
           <HomestayMarketplace
-            homestays={homestays}
+            homestays={allHomestays}
             isLoading={isLoading}
             error={errors.homestays}
             onRetry={refetchAll}
             onSelectHomestay={(stay) => setSelectedHomestay(stay)}
-            onListHomestayClick={() => handleOpenJoin('host')}
+            onListHomestayClick={() => setPropertyModalOpen(true)}
           />
         )}
 
         {/* Section 2: Mountain Jobs */}
         {(activeTab === 'all' || activeTab === 'jobs') && (
           <MountainJobs
-            jobs={jobs}
+            jobs={allJobs}
             isLoading={isLoading}
             error={errors.jobs}
             onRetry={refetchAll}
             onSelectJob={(job) => setSelectedJob(job)}
-            onPostJobClick={() => handleOpenJoin('employer')}
+            onPostJobClick={() => setJobModalOpen(true)}
           />
         )}
 
@@ -193,6 +208,25 @@ export const PublicHomePage: FC = () => {
           onClose={() => setJoinModalOpen(false)}
         />
       )}
+
+      {/* Dedicated Pan-India Mountain Modals with Full Address Details */}
+      <CreatePropertyModal
+        isOpen={propertyModalOpen}
+        onClose={() => setPropertyModalOpen(false)}
+        onSuccess={(newProp) => {
+          setCustomHomestays((prev) => [newProp, ...prev])
+          refetchAll()
+        }}
+      />
+
+      <CreateJobModal
+        isOpen={jobModalOpen}
+        onClose={() => setJobModalOpen(false)}
+        onSuccess={(newJob) => {
+          setCustomJobs((prev) => [newJob, ...prev])
+          refetchAll()
+        }}
+      />
 
       <CreateDispatchModal
         isOpen={dispatchModalOpen}

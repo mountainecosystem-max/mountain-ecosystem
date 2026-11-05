@@ -157,17 +157,33 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
             </div>
 
             <div className="bg-[#FAF8F3] border border-[#202622]/15 p-4 rounded-sm text-left sm:text-right flex-shrink-0">
-              <div className="flex items-baseline gap-1 sm:justify-end">
-                <span className="font-serif text-2xl font-bold text-[#183C32]">
-                  {homestay.monthlyRate}
-                </span>
-                <span className="text-xs font-mono text-[#202622]/60">/ month</span>
-              </div>
-              <div className="text-[11px] font-mono text-[#C47755] mt-1 font-semibold">
-                Security Deposit: {homestay.securityDeposit} (Refundable)
-              </div>
+              {homestay.listingType === 'sale' && homestay.salePrice ? (
+                <>
+                  <div className="flex items-baseline gap-1 sm:justify-end">
+                    <span className="font-serif text-2xl font-bold text-[#183C32]">
+                      {homestay.salePrice}
+                    </span>
+                    <span className="text-xs font-mono text-[#D96B27] font-bold">🏷️ Outright Sale</span>
+                  </div>
+                  <div className="text-[11px] font-mono text-[#C47755] mt-1 font-semibold">
+                    Verified Land Registry / Clear Title
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-baseline gap-1 sm:justify-end">
+                    <span className="font-serif text-2xl font-bold text-[#183C32]">
+                      {homestay.monthlyRate}
+                    </span>
+                    <span className="text-xs font-mono text-[#202622]/60">/ month</span>
+                  </div>
+                  <div className="text-[11px] font-mono text-[#C47755] mt-1 font-semibold">
+                    Security Deposit: {homestay.securityDeposit} (Refundable)
+                  </div>
+                </>
+              )}
               <div className="text-[10px] font-mono text-[#202622]/60 mt-0.5">
-                Minimum Commitment: {homestay.minLeaseTerm}
+                Commitment: {homestay.minLeaseTerm}
               </div>
             </div>
           </div>

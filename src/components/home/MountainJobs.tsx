@@ -30,6 +30,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
   onRetry
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all')
+  const [selectedRegion, setSelectedRegion] = useState<string>('all')
 
   const categories = [
     { label: 'All Openings', value: 'all' },
@@ -39,10 +40,25 @@ export const MountainJobs: FC<MountainJobsProps> = ({
     { label: 'Digital & Remote', value: 'Digital & Remote' },
   ]
 
-  const filteredJobs =
-    activeCategory === 'all'
-      ? jobs
-      : jobs.filter((j) => j.category === activeCategory)
+  const regions = [
+    { id: 'all', label: 'All Mountains' },
+    { id: 'Himachal', label: 'Himachal Pradesh' },
+    { id: 'Uttarakhand', label: 'Uttarakhand' },
+    { id: 'Ladakh', label: 'Ladakh & Kashmir' },
+    { id: 'Sikkim', label: 'Sikkim & Northeast' },
+    { id: 'Bengal', label: 'Bengal Hills' },
+    { id: 'Nilgiris', label: 'Nilgiris & Western Ghats' }
+  ]
+
+  const filteredJobs = jobs.filter((j) => {
+    const matchesCategory = activeCategory === 'all' || j.category === activeCategory
+    const matchesRegion =
+      selectedRegion === 'all'
+        ? true
+        : j.region.toLowerCase().includes(selectedRegion.toLowerCase()) ||
+          j.location.toLowerCase().includes(selectedRegion.toLowerCase())
+    return matchesCategory && matchesRegion
+  })
 
   return (
     <section id="jobs" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
@@ -58,7 +74,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
               MOUNTAIN JOBS & RECRUITMENT
             </h2>
             <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
-              Anyone can post jobs to hire mountain talent, and anyone can browse and apply to join positions across the tea ridges of Darjeeling, Kalimpong, and Sikkim.
+              Anyone can post jobs to hire mountain talent, and anyone can browse and apply to join positions across all Indian mountain ranges—Himachal Pradesh, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Western Ghats.
             </p>
           </div>
 
@@ -74,29 +90,53 @@ export const MountainJobs: FC<MountainJobsProps> = ({
           </div>
         </div>
 
-        {/* Category Filters */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-8 gap-4 border-b border-[#CBDAC4]/70">
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-            <Filter className="w-3.5 h-3.5 text-[#164E2D] mr-1 flex-shrink-0 hidden sm:inline" />
-            {categories.map((cat) => (
+        {/* Region & Category Dual Filter Bar */}
+        <div className="space-y-3 pb-6 mb-8 border-b border-[#CBDAC4]/70">
+          {/* Pan-India Region Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
+              Region:
+            </span>
+            {regions.map((reg) => (
               <button
-                key={cat.value}
-                onClick={() => setActiveCategory(cat.value)}
+                key={reg.id}
+                onClick={() => setSelectedRegion(reg.id)}
                 type="button"
-                className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap ${
-                  activeCategory === cat.value
-                    ? 'bg-[#0B2516] text-white font-bold shadow-xs'
-                    : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                className={`px-3 py-1 text-xs font-mono rounded-full transition-all whitespace-nowrap ${
+                  selectedRegion === reg.id
+                    ? 'bg-[#164E2D] text-white font-bold shadow-xs'
+                    : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
                 }`}
               >
-                {cat.label}
+                {reg.label}
               </button>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-[#164E2D]">
-            <ShieldCheck className="w-4 h-4 text-[#164E2D]" />
-            <span>Verified Dignified Wages • Lodging & Food Included</span>
+          {/* Role Category Pills */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+              <Filter className="w-3.5 h-3.5 text-[#164E2D] mr-1 flex-shrink-0 hidden sm:inline" />
+              {categories.map((cat) => (
+                <button
+                  key={cat.value}
+                  onClick={() => setActiveCategory(cat.value)}
+                  type="button"
+                  className={`px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap ${
+                    activeCategory === cat.value
+                      ? 'bg-[#0B2516] text-white font-bold shadow-xs'
+                      : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-2 text-xs font-mono text-[#164E2D]">
+              <ShieldCheck className="w-4 h-4 text-[#164E2D]" />
+              <span>Verified Dignified Wages • Lodging & Food Included</span>
+            </div>
           </div>
         </div>
 

@@ -37,11 +37,13 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
   const [selectedRegion, setSelectedRegion] = useState<string>('all')
 
   const regions = [
-    { id: 'all', label: 'All Regions' },
-    { id: 'Darjeeling', label: 'Darjeeling Hills' },
-    { id: 'Kalimpong', label: 'Kalimpong Heights' },
-    { id: 'Sikkim', label: 'Sikkim Valleys' },
-    { id: 'Dooars', label: 'Dooars Foothills' }
+    { id: 'all', label: 'All Indian Mountains' },
+    { id: 'Himachal', label: 'Himachal Pradesh' },
+    { id: 'Uttarakhand', label: 'Uttarakhand' },
+    { id: 'Ladakh', label: 'Ladakh & Kashmir' },
+    { id: 'Sikkim', label: 'Sikkim & Northeast' },
+    { id: 'Bengal', label: 'Bengal Hills' },
+    { id: 'Nilgiris', label: 'Nilgiris & Western Ghats' }
   ]
 
   // Filter homestays by Lease vs Sale and Region
@@ -58,7 +60,8 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
     const matchesRegion =
       selectedRegion === 'all'
         ? true
-        : stay.region.toLowerCase().includes(selectedRegion.toLowerCase())
+        : stay.region.toLowerCase().includes(selectedRegion.toLowerCase()) ||
+          stay.location.toLowerCase().includes(selectedRegion.toLowerCase())
 
     return matchesType && matchesRegion
   })
@@ -71,13 +74,13 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
           <div className="max-w-3xl">
             <span className="text-[#164E2D] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
               <Building2 className="w-4 h-4 text-[#D96B27]" />
-              <span>PROPERTY EXCHANGE • LEASE & SALE</span>
+              <span>PAN-INDIA PROPERTY EXCHANGE • LEASE & SALE</span>
             </span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A2316] uppercase leading-tight">
               MOUNTAIN PROPERTIES FOR LEASE & SALE
             </h2>
             <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
-              Verified stone cottages, cedar chalets, and tea estate parcels in the Eastern Himalayas. Post your property for long-term lease or outright sale, or acquire directly with verified land covenants.
+              Verified stone cottages, cedar chalets, and mountain parcels across all Indian mountain ranges—Himachal Pradesh, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Western Ghats. Post your property for lease or sale with complete verified address details.
             </p>
           </div>
 

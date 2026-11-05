@@ -48,12 +48,12 @@ export interface BrandingConfig {
 export const BRAND_CONFIG: BrandingConfig = {
   name: 'Mountain Ecosystem',
   shortName: 'Mountain',
-  tagline: 'Explore • Work • Belong',
-  subTagline: 'Closer to the mountains. Closer to the people.',
-  region: 'Eastern Himalaya',
-  headquarters: 'Headquartered on the Ridge • 2,042m • Darjeeling',
+  tagline: 'Explore • Work • Belong across All Indian Mountain Ranges',
+  subTagline: 'Pan-India Mountain SaaS for Properties, Jobs & Community Experiences.',
+  region: 'Pan-India Mountain Ranges',
+  headquarters: 'Connecting Mountain Communities Across India • 800m to 4,500m',
   missionStatement:
-    'A distinctive digital infrastructure for the Eastern Himalayas. Connecting respectful travellers, indigenous host families, ethical mountain employers, and regenerative stewards across the lush green tea ridges of West Bengal and Sikkim.',
+    'A unified digital SaaS platform for all mountain regions of India. Connecting travellers, property owners, ethical mountain employers, and high-altitude communities across Himachal Pradesh, Uttarakhand, Ladakh, Jammu & Kashmir, Sikkim, the Northeast, Bengal Hills, and the Western Ghats.',
   supportEmail: 'mountainecosystem@gmail.com',
   copyrightYear: new Date().getFullYear(),
   logo: {
@@ -63,11 +63,11 @@ export const BRAND_CONFIG: BrandingConfig = {
     alt: 'Mountain Ecosystem • Explore • Work • Belong'
   },
   meta: {
-    defaultTitle: 'Mountain Ecosystem — Closer to the mountains. Closer to the people.',
+    defaultTitle: 'Mountain Ecosystem — Pan-India Mountain Properties, Jobs & Community',
     titleTemplate: '%s | Mountain Ecosystem',
     adminTitle: 'Mountain Ecosystem | Staff Management Console',
     description:
-      'A distinctive digital infrastructure for the Eastern Himalayas. Connecting respectful travellers, indigenous host families, ethical mountain employers, and regenerative stewards.'
+      'A unified digital SaaS platform for all mountain regions of India: discover community experiences, verified mountain jobs, and properties for lease or sale across Himachal, Uttarakhand, Ladakh, Kashmir, Sikkim, Northeast, Bengal Hills, and the Western Ghats.'
   }
 }
 

@@ -7,7 +7,6 @@ import {
   ArrowRight,
   PlusCircle
 } from 'lucide-react'
-import { BRAND_CONFIG } from '../../config/branding'
 import type { SaaSModuleTab } from './SaaSModuleNavigator'
 
 interface HeroProps {
@@ -76,7 +75,7 @@ export const Hero: FC<HeroProps> = ({
         {/* SaaS Platform Kicker Badge */}
         <div className="inline-flex items-center gap-2 bg-[#092617]/90 border border-[#2D6B48]/80 text-[#C6E8A3] text-[10px] sm:text-xs font-mono font-semibold px-4 py-1.5 rounded-full mb-5 backdrop-blur-md shadow-lg animate-float-slow">
           <Compass className="w-3.5 h-3.5 text-[#34D399]" />
-          <span>{BRAND_CONFIG.name.toUpperCase()} • 3 CORE ECOSYSTEM MODULES</span>
+          <span>ALL-INDIA MOUNTAIN DIGITAL EXCHANGE • PAN-INDIA MOUNTAINS</span>
         </div>
 
         {/* Main Motto Headline */}
@@ -87,7 +86,7 @@ export const Hero: FC<HeroProps> = ({
 
         {/* Concise Platform Purpose */}
         <p className="mt-4 sm:mt-5 text-[#E7EFE3] text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed drop-shadow">
-          A dedicated SaaS platform for the Eastern Himalayas: post and discover genuine mountain experiences, post vacancies and hire for mountain jobs, and list or acquire properties for lease or sale.
+          A dedicated SaaS platform for all mountain regions of India: post and discover genuine mountain experiences, post vacancies and hire for mountain jobs, and list or acquire properties for lease or sale across Himachal, Uttarakhand, Ladakh, Kashmir, Sikkim, Northeast, Bengal Hills, and the Western Ghats.
         </p>
 
         {/* 3 Core Interactive SaaS Cards (Properties, Jobs, Community) */}
@@ -100,14 +99,14 @@ export const Hero: FC<HeroProps> = ({
                   <Home className="w-5 h-5 text-[#A5C896]" />
                 </div>
                 <span className="text-[10px] font-mono bg-[#164E2D] text-[#C6E8A3] px-2.5 py-0.5 rounded-full font-semibold">
-                  {counts?.properties || 4} Available
+                  {counts?.properties || 6} Available
                 </span>
               </div>
               <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors">
                 Properties (Lease & Sale)
               </h3>
               <p className="text-xs text-[#D8E8D5]/80 font-light mt-1.5 leading-relaxed">
-                Post your stone cottage or mountain land for long-term lease or outright sale. Inquire and buy directly.
+                Post your stone cottage, wooden chalet, or mountain land across India for long-term lease or outright sale with complete address details.
               </p>
             </div>
 

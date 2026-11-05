@@ -185,6 +185,58 @@ export const DEV_PREVIEW_DISPATCHES: Dispatch[] = [
         { month: 'Feb', rate: 85 }
       ]
     }
+  },
+  {
+    id: 'disp-5',
+    type: 'price_report',
+    title: 'Manali to Atal Tunnel & Kaza (Spiti) Shared Transit Index',
+    excerpt: 'Verified ground benchmarks for Kullu–Manali shared 4x4 Boleros, local HRTC mountain buses, and baggage caps across Atal Tunnel.',
+    fullContent:
+      'Standard shared taxi fares from Manali Private Bus Stand to Kaza via Atal Tunnel and Losar have stabilized for the season. A seat in a 4x4 Bolero Camper is ₹1,200 per passenger. Local HRTC mountain bus tickets are ₹450 (departing 5:30 AM). For local runs from Mall Road to Old Manali or Vashisht, auto fares are union-capped at ₹120 to ₹150.',
+    location: 'Manali ⇄ Spiti Valley, Himachal Pradesh',
+    date: 'Feb 4, 2026',
+    readTime: '4 min read',
+    author: {
+      name: 'Rohan Sharma',
+      role: 'Spiti Route Coordinator',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+      communityBadge: 'Verified Route Dispatcher'
+    },
+    verified: true,
+    helpfulCount: 142,
+    priceData: {
+      item: 'Manali ⇄ Kaza (Spiti) 4x4 Transit',
+      sharedRate: '₹1,200 / seat',
+      privateRate: '₹9,500 / 4x4',
+      fairPriceNote: 'Book at the Manali Union Taxi counter near Mall Road. Insist on 4x4 with certified snow chains.',
+      lastUpdated: 'Feb 2026',
+      stabilityScore: 97.5,
+      history: [
+        { month: 'Nov', rate: 1200 },
+        { month: 'Dec', rate: 1400 },
+        { month: 'Jan', rate: 1350 },
+        { month: 'Feb', rate: 1200 }
+      ]
+    }
+  },
+  {
+    id: 'disp-6',
+    type: 'trail_note',
+    title: 'Chopta to Tungnath & Chandrashila Winter Snow Advisory',
+    excerpt: 'Current snow conditions, microspikes requirement, and tea stall availability along the Garhwal ridge.',
+    fullContent:
+      'Trail snow starts 1 km past the Chopta forest gate. Hard-packed ice in early mornings makes microspikes or crampons essential between Tungnath temple (3,680m) and the Chandrashila summit (4,000m). Dhabas at the base provide hot chai and maggi, but all upper temple shops are closed for winter. Carry insulated water bottles as water pipes along the trail freeze overnight.',
+    location: 'Chopta & Tungnath Ridge, Uttarakhand',
+    date: 'Feb 5, 2026',
+    readTime: '3 min read',
+    author: {
+      name: 'Anjali Rawat',
+      role: 'Garhwal Mountain Naturalist',
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
+      communityBadge: 'Wilderness Guide Guild'
+    },
+    verified: true,
+    helpfulCount: 188
   }
 ]
 
@@ -287,6 +339,97 @@ export const DEV_PREVIEW_JOBS: Job[] = [
       `Opportunity to publish findings in ${BRAND_CONFIG.name} community ledger`
     ],
     postedDate: 'Feb 1, 2026'
+  },
+  {
+    id: 'job-4',
+    title: 'Boutique Riverside Eco-Lodge Lead',
+    employer: 'Tirthan Valley River Sanctuary',
+    employerBadge: 'Himalayan Sustainable Lodge',
+    location: 'Gushaini, Tirthan Valley, Kullu District',
+    region: 'Himachal Pradesh',
+    type: 'Full-time',
+    salary: '₹40,000 – ₹55,000 / month',
+    housingIncluded: true,
+    category: 'Hospitality & Estates',
+    description:
+      'Manage day-to-day hospitality, trout fishing permits, and organic community kitchens across a riverside wooden eco-lodge at the gateway to the Great Himalayan National Park.',
+    responsibilities: [
+      'Oversee guest check-ins, river expeditions, and forest dining experiences',
+      'Coordinate with indigenous Kulluvi village staff and local guides',
+      'Manage winter snow insulation, firewood storage, and solar backup',
+      'Curate evening fireside storytelling and stargazing sessions'
+    ],
+    requirements: [
+      '2+ years in wilderness lodge management or mountain homestay operations',
+      'Fluency in Hindi and English; gentle and grounded communication style',
+      'Comfort with mountain winters and trout river conservation ethics'
+    ],
+    benefits: [
+      'Independent riverside wooden cabin with private kitchenette',
+      'All meals provided from organic valley gardens',
+      'High-speed optical fiber internet and trekking allowances'
+    ],
+    postedDate: 'Feb 4, 2026'
+  },
+  {
+    id: 'job-5',
+    title: 'High-Altitude Agro-Forestry & Seed Steward',
+    employer: 'Kumaon Highlands Regenerative Farm',
+    employerBadge: 'Community Seed Bank',
+    location: 'Mukteshwar Ridge, Nainital District',
+    region: 'Uttarakhand',
+    type: 'Full-time',
+    salary: '₹35,000 – ₹48,000 / month',
+    housingIncluded: true,
+    category: 'Agriculture & Craft',
+    description:
+      'Steward 15 acres of heritage apple, pear, and walnut orchards while propagating indigenous mountain millets (Mandua, Jhangora) and organizing seasonal community harvests.',
+    responsibilities: [
+      'Lead organic pruning, bio-composting, and spring water catchment maintenance',
+      'Coordinate seed exchange programs with 20+ surrounding Kumaoni village women',
+      'Supervise processing of artisanal apple cider and wild apricot jams'
+    ],
+    requirements: [
+      'Degree or equivalent field experience in agro-ecology or horticulture',
+      'Stamina for hillside walking and respect for Himalayan mountain traditions',
+      'Working knowledge of Hindi'
+    ],
+    benefits: [
+      'Restored stone cottage overlooking Nanda Devi snow peaks',
+      'Farm pantry access and seasonal profit-sharing bonus',
+      'Medical insurance and winter leave allowance'
+    ],
+    postedDate: 'Feb 3, 2026'
+  },
+  {
+    id: 'job-6',
+    title: 'Solar Microgrid & Remote Operations Steward',
+    employer: 'Ladakh High-Altitude Living Lab',
+    employerBadge: 'Solar Innovation Pioneer',
+    location: 'Upper Leh & Nubra Valley',
+    region: 'Ladakh & Kashmir',
+    type: 'Full-time',
+    salary: '₹50,000 – ₹65,000 / month',
+    housingIncluded: true,
+    category: 'Digital & Remote',
+    description:
+      'Manage passive solar building systems, satellite communications, and battery banks for off-grid winter residencies at 3,500m elevation.',
+    responsibilities: [
+      'Monitor and optimize Trombe-wall solar heating and lithium battery arrays',
+      'Support remote sabbatical engineers with satellite internet continuity',
+      'Deliver community training on sub-zero water plumbing protection'
+    ],
+    requirements: [
+      'Electrical, renewable energy, or mechanical engineering background',
+      'Acclimatization to high-altitude cold (sub-zero temperatures in winter)',
+      'Problem-solving mindset and collaborative team spirit'
+    ],
+    benefits: [
+      'Centrally solar-heated loft in Leh with mountain panorama',
+      'All winter rations and high-altitude thermal gear provided',
+      'Generous research and development project stipend'
+    ],
+    postedDate: 'Feb 5, 2026'
   }
 ]
 
@@ -294,9 +437,10 @@ export const DEV_PREVIEW_HOMESTAYS: Homestay[] = [
   {
     id: 'stay-1',
     name: 'The Cedar & Slate Ridge Cottage',
-    region: 'Darjeeling Hills',
-    location: 'Takdah Cantonment Pine Forest, Darjeeling',
+    region: 'Bengal Hills',
+    location: 'Takdah Cantonment Pine Forest, Darjeeling, West Bengal (1,850m)',
     elevation: '1,850 m',
+    listingType: 'lease',
     monthlyRate: '₹32,000',
     securityDeposit: '₹32,000',
     minLeaseTerm: '1–6 Months',
@@ -334,9 +478,10 @@ export const DEV_PREVIEW_HOMESTAYS: Homestay[] = [
   {
     id: 'stay-2',
     name: 'Kanchenjunga Vista Heritage Loft',
-    region: 'West Sikkim',
-    location: 'Yuksom Historic Valley, West Sikkim',
+    region: 'Sikkim & Northeast',
+    location: 'Yuksom Historic Valley, West Sikkim (1,780m)',
     elevation: '1,780 m',
+    listingType: 'lease',
     monthlyRate: '₹28,000',
     securityDeposit: '₹28,000',
     minLeaseTerm: '1–12 Months',
@@ -370,6 +515,168 @@ export const DEV_PREVIEW_HOMESTAYS: Homestay[] = [
     ],
     features: ['100% Organic Village Setting', 'Snowpeak Sunrise Overlook', 'Monastery Ridge Proximity', 'Quiet Sabbatical Ready'],
     utilitiesIncluded: ['Optic Fiber Internet', 'Electricity with Solar Battery', 'Pure Spring Water', 'Weekly Linen Laundry']
+  },
+  {
+    id: 'stay-3',
+    name: 'Old Manali Apple Orchard Stone Chalet',
+    region: 'Himachal Pradesh',
+    location: 'Upper Village Lane, Old Manali, Kullu District, Himachal Pradesh (2,050m)',
+    elevation: '2,050 m',
+    listingType: 'lease',
+    monthlyRate: '₹35,000',
+    securityDeposit: '₹35,000',
+    minLeaseTerm: '1–12 Months',
+    leaseStatus: 'Immediate Lease Available',
+    furnishing: 'Kath-Kuni Timber & River Stone',
+    rating: 4.97,
+    reviewsCount: 31,
+    host: {
+      name: 'Virender & Sunita Thakur',
+      role: 'Heritage Apple Orchard Stewards',
+      yearsHosting: 5,
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+    },
+    roomType: 'Traditional Kath-Kuni Independent Chalet',
+    wifi: '150 Mbps High-Speed Fiber Optic',
+    capacity: '1–4 Residents • 2 Bedrooms • Solarium Kitchen',
+    images: [
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85'
+    ],
+    description:
+      'Authentic vernacular Himachali Kath-Kuni architecture built with alternating layers of chiseled river stone and Deodar cedar wood. Surrounded by sweet blossom apple orchards with panoramic views of Rohtang peaks and the Beas river gorge. Features double-glazed study windows, wood fireplace, and 150 Mbps fiber.',
+    amenities: [
+      '150 Mbps High-Speed Fiber Optic with Inverter Backup',
+      'Authentic Deodar Fireplace with seasoned oak wood',
+      'Panoramic Apple Orchard terrace facing Pir Panjal snowpeaks',
+      'Fully equipped induction and gas kitchen with brass pots',
+      'Direct vehicle access up to private parking area'
+    ],
+    features: ['Kath-Kuni Architecture', 'Apple Orchard Setting', 'Pir Panjal View', 'High-Speed Broadband'],
+    utilitiesIncluded: ['150 Mbps Fiber Internet', 'Spring Water Supply', 'Firewood Quota', 'Covered Parking']
+  },
+  {
+    id: 'stay-4',
+    name: 'Mukteshwar Kumaon Ridge Stone Croft',
+    region: 'Uttarakhand',
+    location: 'Chauli Ki Jali Ridge, Mukteshwar, Nainital District, Uttarakhand (2,171m)',
+    elevation: '2,171 m',
+    listingType: 'sale',
+    salePrice: '₹1.45 Cr',
+    monthlyRate: '₹38,000',
+    securityDeposit: '₹38,000',
+    minLeaseTerm: 'For Outright Sale / Long Lease',
+    leaseStatus: 'Clear Title • Ready for Immediate Transfer',
+    furnishing: 'Handcrafted Pinewood & Brass',
+    rating: 4.95,
+    reviewsCount: 19,
+    host: {
+      name: 'Aditya & Neha Joshi',
+      role: 'Heritage Restorers & Architects',
+      yearsHosting: 4,
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80'
+    },
+    roomType: '3-Bedroom Standalone Stone Estate on 12 Nali Plot',
+    wifi: '100 Mbps Dedicated Optical Fiber',
+    capacity: 'Family or Sabbatical Residence • 3 Bedrooms • 3 Bathrooms',
+    images: [
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85'
+    ],
+    description:
+      'A majestic mountain estate carved from dressed Kumaoni slate and pine wood on a ridge overlooking 300km of the Great Himalayan range—including Trishul, Nanda Devi, and Panchachuli peaks. Includes 12 Nali (approx 26,000 sq ft) of private terraced land with mature apricot trees and complete registry paperwork.',
+    amenities: [
+      'Unobstructed 300-km view of Nanda Devi and Trishul snow peaks',
+      '12 Nali clear-title freehold mountain plot with stone boundary',
+      'Rainwater harvesting cistern (30,000 Litres) + government water connection',
+      'Dual stone fireplaces and high-thermal-efficiency masonry',
+      'Drive-in motorable road to compound entrance'
+    ],
+    features: ['For Sale (Clear Title)', 'Panoramic Nanda Devi View', 'Organic Fruit Trees', 'Freehold Mountain Land'],
+    utilitiesIncluded: ['Water Connection', 'Optical Fiber Line', 'Electricity Meter', 'Motorable Road Access']
+  },
+  {
+    id: 'stay-5',
+    name: 'Nubra Valley Apricot Homestead & Solar Loft',
+    region: 'Ladakh & Kashmir',
+    location: 'Upper Village, Hunder, Nubra Valley, Ladakh (3,048m)',
+    elevation: '3,048 m',
+    listingType: 'lease',
+    monthlyRate: '₹26,000',
+    securityDeposit: '₹26,000',
+    minLeaseTerm: '1–6 Months',
+    leaseStatus: 'Available for Season (Apr–Nov)',
+    furnishing: 'Warm Ladakhi Wool & Solar Heated',
+    rating: 4.99,
+    reviewsCount: 27,
+    host: {
+      name: 'Stanzin & Diskit Dolma',
+      role: 'Indigenous Agro-Pastoralists',
+      yearsHosting: 7,
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
+    },
+    roomType: 'Passive Solar Straw-Clay Upper Loft',
+    wifi: '60 Mbps Satellite Internet Backup',
+    capacity: '1–2 Sabbatical Residents • 1 Master Loft • Sun Room',
+    images: [
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85'
+    ],
+    description:
+      'High-altitude sanctuary sheltered by wild apricot and seabuckthorn trees between the Karakoram and Ladakh ranges. Built with thick sun-dried mud bricks and double-glazed southern solarium windows that naturally heat the interior using zero electricity during cold nights.',
+    amenities: [
+      'Passive solar architectural heating maintaining 20°C indoors',
+      'Unlimited fresh organic apricots, walnuts, and glacier spring water',
+      'Quiet research desk with panoramic desert-mountain views',
+      'Private modern compost dry toilet and solar heated shower',
+      'Night sky astronomy terrace with zero light pollution'
+    ],
+    features: ['Passive Solar Design', 'Dark Sky Stargazing', 'Glacial Spring Water', 'Pure Himalayan Isolation'],
+    utilitiesIncluded: ['Solar Electricity', 'Glacier Spring Water', 'High-Speed Internet', 'Fresh Apricot Supply']
+  },
+  {
+    id: 'stay-6',
+    name: 'Kotagiri Tea Planter Heritage Croft',
+    region: 'Nilgiris & Western Ghats',
+    location: 'St. Catherine Falls Road, Kotagiri, Nilgiris District, Tamil Nadu (1,793m)',
+    elevation: '1,793 m',
+    listingType: 'sale',
+    salePrice: '₹2.10 Cr',
+    monthlyRate: '₹42,000',
+    securityDeposit: '₹42,000',
+    minLeaseTerm: 'For Outright Sale / Lease',
+    leaseStatus: 'Clear Patta Title • Ready for Sale',
+    furnishing: 'Rosewood & British Stone Masonry',
+    rating: 4.94,
+    reviewsCount: 23,
+    host: {
+      name: 'Ravi & Geetha Kurup',
+      role: 'Biodynamic Tea Planters',
+      yearsHosting: 9,
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
+    },
+    roomType: '4-Bedroom Stone Bungalow on 1.2 Acre Tea Estate',
+    wifi: '100 Mbps Fiber Broadband',
+    capacity: 'Full Estate Residence • 4 Bedrooms • Billiards Solarium',
+    images: [
+      'https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85',
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=85'
+    ],
+    description:
+      'Constructed in 1928 with hand-chiseled blue granite and rosewood rafter ceilings, nestled amidst rolling emerald tea terraces and shola forest patches. Includes 1.2 acres of certified organic clonal tea, producing 800kg of premium orthodox leaf annually.',
+    amenities: [
+      '1.2 Acres of clear-title freehold organic tea plantation',
+      'Natural perennial spring with dedicated gravity reservoir',
+      'Working fireplace in master suite and grand living room',
+      'Panoramic view of Coimbatore plains and Catherine valley waterfalls',
+      'Dedicated motorable asphalt road up to estate portico'
+    ],
+    features: ['For Sale (Clear Patta)', '1.2 Acre Tea Land', 'Granite Masonry', 'Waterfall Valley Overlook'],
+    utilitiesIncluded: ['Spring Water Rights', 'High-Speed Fiber Line', '3-Phase Power', 'Road Access']
   }
 ]
 

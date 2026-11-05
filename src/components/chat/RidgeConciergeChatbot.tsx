@@ -51,7 +51,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
   const initialGreeting: ChatMessage = {
     id: 'msg-1',
     sender: 'steward',
-    text: `Tashi Delek! I am Sathi, your ${BRAND_CONFIG.name} AI Concierge. I can help you find mountain properties for lease or sale, check live transport fares, browse and apply for mountain jobs, or guide you through community experiences. How may I assist your Himalayan journey today?`,
+    text: `Namaste & Tashi Delek! I am Sathi, your ${BRAND_CONFIG.name} AI Concierge. I can help you find mountain properties for lease or sale across India (Himachal, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Western Ghats), check live transit fares, browse and apply for mountain jobs, or guide you through community experiences. How may I assist your mountain journey today?`,
     timestamp: 'Just now'
   }
 
