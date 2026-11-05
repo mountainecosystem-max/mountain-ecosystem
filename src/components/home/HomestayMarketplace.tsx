@@ -64,7 +64,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
   })
 
   return (
-    <section id="properties" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
+    <section id="stays" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Properties for Lease & Sale */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-[#CBDAC4] gap-6">

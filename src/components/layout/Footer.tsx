@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Compass, ArrowUp, Leaf } from 'lucide-react'
+import { Compass, ArrowUp, Leaf, Mail } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 
 interface FooterProps {
@@ -174,29 +174,41 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
                 </a>
               </li>
               <li>
-                <a href="#ethics" className="hover:text-white hover:underline transition-colors">
-                  Ecological Non-Extraction
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${BRAND_CONFIG.supportEmail}`} className="hover:text-white hover:underline transition-colors">
-                  Ridge Postal Bureau
+                <a
+                  href={`mailto:${BRAND_CONFIG.supportEmail}`}
+                  className="hover:text-white hover:underline transition-colors flex items-center gap-1.5 text-[#34D399]"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>{BRAND_CONFIG.supportEmail}</span>
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar: Copyright & Ecological Pledge */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#E8EFE3]/60">
+        {/* Bottom Bar: Copyright & Tessimo Watermark */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#E8EFE3]/70">
           <div>
-            © {BRAND_CONFIG.copyrightYear} {BRAND_CONFIG.name}. Dedicated to the protection, dignity, and verdant beauty of the {BRAND_CONFIG.region}.
+            © {BRAND_CONFIG.copyrightYear} {BRAND_CONFIG.name}. Eastern Himalayas Platform.
+          </div>
+
+          {/* Watermark: Built with love by Tessimo (tessimo.in) */}
+          <div className="flex items-center gap-1.5 text-[#D8E8D5] text-xs">
+            <span>Built with love by</span>
+            <a
+              href="https://tessimo.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#34D399] font-bold hover:text-white hover:underline transition-colors"
+            >
+              Tessimo (tessimo.in)
+            </a>
           </div>
 
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5 text-[#91A77B]">
               <Leaf className="w-3.5 h-3.5 text-[#91A77B]" />
-              <span>100% Community Supported • Carbon Conscious</span>
+              <span>100% Community Supported</span>
             </span>
 
             <button

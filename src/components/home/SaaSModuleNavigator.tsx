@@ -1,47 +1,42 @@
 import type { FC } from 'react'
-import { Sparkles, Home, Briefcase, MessageSquare } from 'lucide-react'
+import { Sparkles, Home, Briefcase, FileText, ShieldCheck } from 'lucide-react'
 
-export type SaaSModuleTab = 'all' | 'properties' | 'jobs' | 'community'
+export type SaaSModuleTab = 'all' | 'stays' | 'jobs' | 'community' | 'ethics'
 
 interface SaaSModuleNavigatorProps {
   activeTab: SaaSModuleTab
   onSelectTab: (tab: SaaSModuleTab) => void
-  counts?: {
-    properties?: number
-    jobs?: number
-    dispatches?: number
-  }
 }
 
 export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
   activeTab,
-  onSelectTab,
-  counts
+  onSelectTab
 }) => {
   const tabs = [
     {
       id: 'all' as SaaSModuleTab,
-      label: 'All Modules',
-      icon: Sparkles,
-      badge: undefined
+      label: 'All Inquiries',
+      icon: Sparkles
     },
     {
-      id: 'properties' as SaaSModuleTab,
-      label: 'Property Lease & Sale',
-      icon: Home,
-      badge: counts?.properties
+      id: 'stays' as SaaSModuleTab,
+      label: 'Stays & Leases',
+      icon: Home
     },
     {
       id: 'jobs' as SaaSModuleTab,
       label: 'Mountain Jobs',
-      icon: Briefcase,
-      badge: counts?.jobs
+      icon: Briefcase
     },
     {
       id: 'community' as SaaSModuleTab,
-      label: 'Community Experiences',
-      icon: MessageSquare,
-      badge: counts?.dispatches
+      label: 'Community Ledger',
+      icon: FileText
+    },
+    {
+      id: 'ethics' as SaaSModuleTab,
+      label: 'Ecology & Ethics',
+      icon: ShieldCheck
     }
   ]
 
@@ -57,10 +52,10 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
               key={tab.id}
               onClick={() => onSelectTab(tab.id)}
               type="button"
-              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-sans font-medium transition-all duration-200 whitespace-nowrap active:scale-95 shrink-0 ${
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-sans font-medium transition-all duration-200 whitespace-nowrap active:scale-95 shrink-0 ${
                 isActive
-                  ? 'bg-[#0B2516] text-[#FAF7EE] shadow-md border border-[#0B2516]'
-                  : 'bg-white/90 hover:bg-white text-[#123D26] hover:text-[#0B2516] border border-[#CBDAC4] hover:border-[#164E2D]/40 shadow-xs'
+                  ? 'bg-[#0B2516] text-[#FAF7EE] shadow-sm border border-[#0B2516]'
+                  : 'bg-white/90 hover:bg-white text-[#123D26] hover:text-[#0B2516] border border-[#CBDAC4] hover:border-[#164E2D]/50 shadow-xs'
               }`}
             >
               <Icon
@@ -69,17 +64,6 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
                 }`}
               />
               <span>{tab.label}</span>
-              {typeof tab.badge === 'number' && (
-                <span
-                  className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
-                    isActive
-                      ? 'bg-white/20 text-[#D8E8D5]'
-                      : 'bg-[#E8EFE3] text-[#123D26]'
-                  }`}
-                >
-                  {tab.badge}
-                </span>
-              )}
             </button>
           )
         })}

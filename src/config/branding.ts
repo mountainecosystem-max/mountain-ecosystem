@@ -54,7 +54,7 @@ export const BRAND_CONFIG: BrandingConfig = {
   headquarters: 'Headquartered on the Ridge • 2,042m • Darjeeling',
   missionStatement:
     'A distinctive digital infrastructure for the Eastern Himalayas. Connecting respectful travellers, indigenous host families, ethical mountain employers, and regenerative stewards across the lush green tea ridges of West Bengal and Sikkim.',
-  supportEmail: 'stewards@mountain-ecosystem.org',
+  supportEmail: 'mountainecosystem@gmail.com',
   copyrightYear: new Date().getFullYear(),
   logo: {
     horizontal: '/logo.png',

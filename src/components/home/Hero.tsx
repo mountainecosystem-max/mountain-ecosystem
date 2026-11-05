@@ -113,7 +113,7 @@ export const Hero: FC<HeroProps> = ({
 
             <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
               <button
-                onClick={() => onSelectTab('properties')}
+                onClick={() => onSelectTab('stays')}
                 type="button"
                 className="text-xs font-semibold text-[#A5C896] hover:text-white flex items-center gap-1 transition"
               >

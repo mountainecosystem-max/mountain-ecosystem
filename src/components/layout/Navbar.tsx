@@ -5,7 +5,6 @@ import {
   Menu,
   X,
   MountainSnow,
-  PhoneCall,
   Mail,
   User,
   PlusCircle,
@@ -47,11 +46,11 @@ export const Navbar: FC<NavbarProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [mobileMenuOpen])
 
-  // Strictly the 3 core SaaS modules + FAQs
+  // Strictly the core SaaS modules matching navigation pills + FAQs
   const navLinks = [
-    { name: 'Property Lease & Sale', href: '#properties', icon: Home },
+    { name: 'Stays & Leases', href: '#stays', icon: Home },
     { name: 'Mountain Jobs', href: '#jobs', icon: Briefcase },
-    { name: 'Community Experiences', href: '#community', icon: MessageSquare },
+    { name: 'Community Ledger', href: '#community', icon: MessageSquare },
     { name: 'FAQs', href: '#faqs', icon: undefined }
   ]
 
@@ -65,20 +64,12 @@ export const Navbar: FC<NavbarProps> = ({
               <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
               <span>Elevation 2,042m • Eastern Himalayas (Darjeeling & Sikkim)</span>
             </span>
-            <span className="hidden md:inline text-white/20">|</span>
-            <a
-              href="tel:+919830029272"
-              className="hover:text-white hidden lg:flex items-center gap-1 transition text-white/80"
-            >
-              <PhoneCall className="w-3 h-3 text-[#D96B27]" />
-              <span>Helpline: +91 98300 MOUNTAIN</span>
-            </a>
-            <span className="hidden lg:inline text-white/20">|</span>
+            <span className="hidden sm:inline text-white/20">|</span>
             <a
               href={`mailto:${BRAND_CONFIG.supportEmail}`}
-              className="hover:text-white hidden xl:flex items-center gap-1 transition text-white/80"
+              className="hover:text-white flex items-center gap-1.5 transition text-[#D8E8D5] font-mono text-[11px]"
             >
-              <Mail className="w-3 h-3 text-[#A5C896]" />
+              <Mail className="w-3.5 h-3.5 text-[#34D399]" />
               <span>{BRAND_CONFIG.supportEmail}</span>
             </a>
           </div>

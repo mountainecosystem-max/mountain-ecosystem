@@ -78,12 +78,14 @@ export const PublicHomePage: FC = () => {
 
   const handleTabChange = (tab: SaaSModuleTab) => {
     setActiveTab(tab)
-    if (tab === 'properties') {
-      document.getElementById('properties')?.scrollIntoView({ behavior: 'smooth' })
+    if (tab === 'stays') {
+      document.getElementById('stays')?.scrollIntoView({ behavior: 'smooth' })
     } else if (tab === 'jobs') {
       document.getElementById('jobs')?.scrollIntoView({ behavior: 'smooth' })
     } else if (tab === 'community') {
       document.getElementById('community')?.scrollIntoView({ behavior: 'smooth' })
+    } else if (tab === 'ethics') {
+      document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -114,17 +116,12 @@ export const PublicHomePage: FC = () => {
         <SaaSModuleNavigator
           activeTab={activeTab}
           onSelectTab={handleTabChange}
-          counts={{
-            properties: homestays.length,
-            jobs: jobs.length,
-            dispatches: dispatches.length
-          }}
         />
 
         {/* 3. The 3 Core SaaS Sections */}
 
-        {/* Section 1: Property Lease & Sale */}
-        {(activeTab === 'all' || activeTab === 'properties') && (
+        {/* Section 1: Stays & Leases (Property Lease & Sale) */}
+        {(activeTab === 'all' || activeTab === 'stays') && (
           <HomestayMarketplace
             homestays={homestays}
             isLoading={isLoading}
