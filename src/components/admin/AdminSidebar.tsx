@@ -19,32 +19,32 @@ interface AdminSidebarProps {
 export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
   const navItems = [
     {
-      to: '/admin/destinations',
-      label: 'Destinations',
+      to: '/admin/properties',
+      label: 'Properties (Lease & Sale)',
       kicker: 'MODULE 01',
-      icon: Compass,
-      description: 'Botanical Atlas & Geo-coordinates'
+      icon: Home,
+      description: 'Cottages, Chalets & Mountain Land'
     },
     {
       to: '/admin/jobs',
       label: 'Mountain Jobs',
       kicker: 'MODULE 02',
       icon: Briefcase,
-      description: 'Valley Residencies & Cooperatives'
-    },
-    {
-      to: '/admin/properties',
-      label: 'Residential Leases',
-      kicker: 'MODULE 03',
-      icon: Home,
-      description: 'Homestays & Mountain Sanctuaries'
+      description: 'Hiring Posts & Valley Residencies'
     },
     {
       to: '/admin/moderation',
-      label: 'Community Moderation',
-      kicker: 'MODULE 04',
+      label: 'Community Experiences & Moderation',
+      kicker: 'MODULE 03',
       icon: ShieldCheck,
-      description: 'Applications, Dispatches & Ledger'
+      description: 'Verify Stories, Inquiries & Ledger'
+    },
+    {
+      to: '/admin/destinations',
+      label: 'Destinations',
+      kicker: 'MODULE 04',
+      icon: Compass,
+      description: 'Regional Mountain Coordinates'
     },
     {
       to: '/admin/businesses',
