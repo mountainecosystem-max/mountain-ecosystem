@@ -9,7 +9,8 @@ import {
   Loader2,
   Compass,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  ShieldAlert
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import type { Job } from '../../types'
@@ -517,14 +518,16 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   </div>
                 </div>
 
-                {/* Zero-Fee Employer Standard Notice */}
-                <div className="p-3 bg-amber-50 border border-amber-300 rounded-lg text-xs text-amber-900 flex items-start gap-2.5 leading-relaxed font-sans">
-                  <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="font-semibold block font-mono text-[10px] uppercase text-amber-950">
-                      Zero-Fee Employer Compliance Standard:
+                {/* Zero-Fee Employer Standard & Anti-Fraud Notice */}
+                <div className="p-3 bg-amber-500/10 border border-amber-600/30 rounded-xl text-xs text-amber-950 flex items-start gap-2.5 leading-relaxed font-sans">
+                  <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-amber-950">
+                      Zero-Fee Policy • Fraud se bachein:
                     </strong>
-                    By posting on Mountain Ecosystem, you legally confirm that you will never charge applicants any registration, uniform, or interview fees. Any listing asking for money from job seekers will be permanently banned.
+                    <p className="text-[11px] text-amber-900 leading-relaxed font-light">
+                      Never ask for or share sensitive <strong>OTPs, bank account credentials, advance recruitment fees, or personal identity documents</strong> (Aadhaar, Passport, PAN) without in-person/official verified contracts. Any listing soliciting money from mountain job seekers is immediately banned.
+                    </p>
                   </div>
                 </div>
               </div>

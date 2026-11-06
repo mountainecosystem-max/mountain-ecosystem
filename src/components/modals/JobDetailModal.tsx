@@ -223,14 +223,18 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                   </span>
                 </div>
 
-                {/* Fraud Advisory */}
-                <div className="p-3 bg-amber-50 border border-amber-300 rounded-sm text-xs text-amber-900 flex items-start gap-2.5 font-sans leading-relaxed">
-                  <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-amber-950">
-                      Zero-Fee Policy • Do Not Pay Money:
-                    </strong>
-                    Never pay any money or security fee for application processing, interview slots, uniform costs, or equipment. Mountain jobs are strictly free to apply.
+                {/* Fraud & Security Advisory */}
+                <div className="p-3 bg-amber-50 border border-amber-300 rounded-sm text-xs text-amber-950 font-sans leading-relaxed">
+                  <div className="flex items-start gap-2.5">
+                    <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-amber-950">
+                        Zero-Fee Policy • Fraud se bachein:
+                      </strong>
+                      <p className="text-[11px] text-amber-900 leading-relaxed font-light">
+                        Never share sensitive <strong>OTPs, bank account credentials, advance recruitment fees, or personal identity documents</strong> (Aadhaar, Passport, PAN) without verified employment contracts. Mountain jobs never ask for application fees or equipment charges.
+                      </p>
+                    </div>
                   </div>
                 </div>
 

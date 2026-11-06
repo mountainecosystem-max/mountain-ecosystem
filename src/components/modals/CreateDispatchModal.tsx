@@ -11,7 +11,8 @@ import {
   TrendingDown,
   Leaf,
   User,
-  MapPin
+  MapPin,
+  ShieldAlert
 } from 'lucide-react'
 import { useAdminAuth } from '../../context/AdminAuthContext'
 import { createDispatch, type CreateDispatchInput } from '../../services/ecosystemService'
@@ -445,6 +446,21 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   </div>
                 </div>
               )}
+
+              {/* Critical Anti-Fraud & Verification Advisory */}
+              <div className="p-3 bg-amber-500/15 border border-amber-500/30 rounded-xl text-xs text-amber-200 font-sans my-2">
+                <div className="flex items-start gap-2.5">
+                  <ShieldAlert className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <div className="font-mono text-[10px] uppercase tracking-wider font-bold text-amber-300 flex items-center gap-1.5">
+                      <span>Trust & Safety Warning • Fraud se bachein</span>
+                    </div>
+                    <p className="text-[11px] text-amber-100/90 leading-relaxed font-light">
+                      Never share sensitive <strong>OTPs, bank account credentials, advance token money, or personal identity documents</strong> (Aadhaar, Passport, PAN) without independent in-person or official live verification. Never transfer money for unverified trails or ride bookings.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               {/* Privacy Policy & Community Guidelines Agreement */}
               <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl my-2">

@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
-  ShieldCheck
+  ShieldAlert
 } from 'lucide-react'
 import { z } from 'zod'
 import { submitLeaseInquiry } from '../../services/ecosystemService'
@@ -281,14 +281,18 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                   </span>
                 </div>
 
-                {/* Inspection & Title Advisory */}
-                <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-sm text-xs text-emerald-900 flex items-start gap-2.5 font-sans leading-relaxed">
-                  <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-emerald-950">
-                      Independent Inspection Notice:
-                    </strong>
-                    Always inspect physical access, utilities, and land ownership credentials in person or via trusted local verification before transferring token advances or lease security payments.
+                {/* Anti-Fraud & Inspection Advisory */}
+                <div className="p-3 bg-amber-50 border border-amber-300 rounded-sm text-xs text-amber-950 font-sans leading-relaxed">
+                  <div className="flex items-start gap-2.5">
+                    <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-amber-950">
+                        Trust & Security Warning • Fraud se bachein:
+                      </strong>
+                      <p className="text-[11px] text-amber-900 leading-relaxed font-light">
+                        Never share sensitive <strong>OTPs, bank account credentials, advance token money, or personal identity documents</strong> (Aadhaar, Passport, PAN) without independent in-person or official live video verification. Always inspect physical access, utilities, and land title credentials before transferring lease deposits.
+                      </p>
+                    </div>
                   </div>
                 </div>
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { FC, FormEvent } from 'react'
-import { X, CheckCircle2, ArrowRight, AlertCircle, Leaf, Loader2 } from 'lucide-react'
+import { X, CheckCircle2, ArrowRight, AlertCircle, Leaf, Loader2, ShieldAlert } from 'lucide-react'
 import { z } from 'zod'
 import { submitFellowshipApplication } from '../../services/ecosystemService'
 import { BRAND_CONFIG } from '../../config/branding'
@@ -245,6 +245,21 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                     {errors.intent}
                   </p>
                 )}
+              </div>
+
+              {/* Critical Anti-Fraud & Verification Advisory */}
+              <div className="p-3 bg-amber-500/10 border border-amber-600/30 rounded-sm text-xs text-amber-950 font-sans">
+                <div className="flex items-start gap-2.5">
+                  <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <div className="font-mono text-[10px] uppercase tracking-wider font-bold text-amber-950 flex items-center gap-1.5">
+                      <span>Trust & Safety Warning • Fraud se bachein</span>
+                    </div>
+                    <p className="text-[11px] text-amber-900 leading-relaxed font-light">
+                      Never share sensitive <strong>OTPs, bank account credentials, advance token money, or personal identity documents</strong> (Aadhaar, Passport, PAN) without independent in-person or official live verification. Mountain fellowship enrollment is strictly free.
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* Privacy Policy & Community Charter Agreement */}
