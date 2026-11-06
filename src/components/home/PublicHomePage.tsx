@@ -183,11 +183,13 @@ export const PublicHomePage: FC = () => {
       <JobDetailModal
         job={selectedJob}
         onClose={() => setSelectedJob(null)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
       />
 
       <HomestayDetailModal
         homestay={selectedHomestay}
         onClose={() => setSelectedHomestay(null)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
       />
 
       <StoryDetailModal
@@ -203,6 +205,7 @@ export const PublicHomePage: FC = () => {
         <JoinCommunityModal
           initialRole={joinRole}
           onClose={() => setJoinModalOpen(false)}
+          onOpenPrivacy={() => setPrivacyModalOpen(true)}
         />
       )}
 
@@ -210,6 +213,7 @@ export const PublicHomePage: FC = () => {
       <CreatePropertyModal
         isOpen={propertyModalOpen}
         onClose={() => setPropertyModalOpen(false)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
         onSuccess={() => {
           refetchAll()
         }}
@@ -218,6 +222,7 @@ export const PublicHomePage: FC = () => {
       <CreateJobModal
         isOpen={jobModalOpen}
         onClose={() => setJobModalOpen(false)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
         onSuccess={() => {
           refetchAll()
         }}
@@ -226,6 +231,7 @@ export const PublicHomePage: FC = () => {
       <CreateDispatchModal
         isOpen={dispatchModalOpen}
         onClose={() => setDispatchModalOpen(false)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
         onSuccess={() => {
           refetchAll()
         }}
@@ -243,6 +249,7 @@ export const PublicHomePage: FC = () => {
 
       <CookieConsentBanner
         onOpenCookiePolicy={() => setCookiesModalOpen(true)}
+        onOpenPrivacy={() => setPrivacyModalOpen(true)}
       />
 
       {/* Grounded AI Concierge Chatbot */}

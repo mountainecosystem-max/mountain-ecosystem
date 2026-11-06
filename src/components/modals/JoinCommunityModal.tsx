@@ -8,6 +8,7 @@ import { BRAND_CONFIG } from '../../config/branding'
 interface JoinCommunityModalProps {
   initialRole?: 'traveller' | 'host' | 'seeker' | 'employer'
   onClose: () => void
+  onOpenPrivacy?: () => void
 }
 
 const joinSchema = z.object({
@@ -24,7 +25,9 @@ type JoinFormData = z.infer<typeof joinSchema>
 export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
   initialRole = 'traveller',
   onClose,
+  onOpenPrivacy
 }) => {
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
   const [formData, setFormData] = useState<JoinFormData>({
     fullName: '',
     email: '',
@@ -47,6 +50,14 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
         fieldErrors[field] = issue.message
       })
       setErrors(fieldErrors)
+      return
+    }
+
+    if (!agreedToPrivacy) {
+      setErrors((prev) => ({
+        ...prev,
+        intent: 'Please check and agree to the Privacy Policy & Community Charter before enrolling.'
+      }))
       return
     }
 
@@ -234,6 +245,30 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                     {errors.intent}
                   </p>
                 )}
+              </div>
+
+              {/* Privacy Policy & Community Charter Agreement */}
+              <div className="p-2.5 bg-white border border-[#CBDAC4] rounded-sm">
+                <label className="flex items-start gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={agreedToPrivacy}
+                    onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                    required
+                    className="mt-0.5 w-3.5 h-3.5 rounded border-stone-400 text-[#123D2D] focus:ring-[#123D2D] cursor-pointer"
+                  />
+                  <span className="text-[11px] text-[#576159] leading-relaxed font-sans">
+                    I have read and agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={onOpenPrivacy}
+                      className="text-[#123D2D] font-semibold underline hover:text-black"
+                    >
+                      Privacy Policy & Community Charter
+                    </button>
+                    .
+                  </span>
+                </label>
               </div>
 
               <button

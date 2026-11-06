@@ -5,9 +5,10 @@ import { BRAND_CONFIG } from '../../config/branding'
 
 interface CookieConsentBannerProps {
   onOpenCookiePolicy?: () => void
+  onOpenPrivacy?: () => void
 }
 
-export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookiePolicy }) => {
+export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookiePolicy, onOpenPrivacy }) => {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -86,6 +87,16 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
                 className="text-[11px] font-mono text-[#8FA777] hover:text-white underline underline-offset-4 ml-1"
               >
                 Cookie Policy
+              </button>
+            )}
+
+            {onOpenPrivacy && (
+              <button
+                type="button"
+                onClick={onOpenPrivacy}
+                className="text-[11px] font-mono text-[#8FA777] hover:text-white underline underline-offset-4 ml-1"
+              >
+                Privacy Policy
               </button>
             )}
           </div>

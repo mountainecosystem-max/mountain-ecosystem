@@ -19,6 +19,7 @@ interface CreateJobModalProps {
   isOpen: boolean
   onClose: () => void
   onSuccess?: (newJob: Job) => void
+  onOpenPrivacy?: () => void
 }
 
 const INDIAN_MOUNTAIN_STATES = [
@@ -39,13 +40,15 @@ const INDIAN_MOUNTAIN_STATES = [
 export const CreateJobModal: FC<CreateJobModalProps> = ({
   isOpen,
   onClose,
-  onSuccess
+  onSuccess,
+  onOpenPrivacy
 }) => {
   const [title, setTitle] = useState('')
   const [employer, setEmployer] = useState('')
   const employerBadge = 'Verified Mountain Enterprise'
   const [category, setCategory] = useState<Job['category']>('Hospitality & Estates')
   const [jobType, setJobType] = useState<Job['type']>('Full-time')
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
 
   // Detailed Work Address (Pan-India)
   const [state, setState] = useState('Himachal Pradesh')
@@ -89,6 +92,11 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
       !contactEmail.trim()
     ) {
       setError('Please fill in all required fields marked with * (Job Title, Employer Name, Village/Town, Full Address, Salary, and Contact Email).')
+      return
+    }
+
+    if (!agreedToPrivacy) {
+      setError('Please review and check the Privacy Policy and Zero-Fee employer agreement before posting.')
       return
     }
 
@@ -519,6 +527,30 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     By posting on Mountain Ecosystem, you legally confirm that you will never charge applicants any registration, uniform, or interview fees. Any listing asking for money from job seekers will be permanently banned.
                   </div>
                 </div>
+              </div>
+
+              {/* Privacy Policy & Zero-Fee Compliance Agreement */}
+              <div className="p-3.5 bg-[#FAF7EE] border border-[#CBDAC4] rounded-xl mb-3">
+                <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={agreedToPrivacy}
+                    onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                    required
+                    className="mt-0.5 w-4 h-4 rounded border-[#164E2D] text-[#164E2D] focus:ring-[#164E2D] cursor-pointer"
+                  />
+                  <span className="text-xs text-stone-700 leading-relaxed font-sans">
+                    I agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={onOpenPrivacy}
+                      className="text-[#164E2D] font-bold underline hover:text-[#0B2516]"
+                    >
+                      Privacy Policy & Community Charter
+                    </button>
+                    , and I legally confirm that this is a zero-fee mountain recruitment role. No registration or interview fees will ever be collected from applicants.
+                  </span>
+                </label>
               </div>
 
               {/* Submit Buttons */}

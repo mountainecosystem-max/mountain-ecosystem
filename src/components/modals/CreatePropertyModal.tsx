@@ -21,6 +21,7 @@ interface CreatePropertyModalProps {
   isOpen: boolean
   onClose: () => void
   onSuccess?: (newProperty: Homestay) => void
+  onOpenPrivacy?: () => void
 }
 
 const INDIAN_MOUNTAIN_STATES = [
@@ -41,11 +42,13 @@ const INDIAN_MOUNTAIN_STATES = [
 export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
   isOpen,
   onClose,
-  onSuccess
+  onSuccess,
+  onOpenPrivacy
 }) => {
   const [listingType, setListingType] = useState<'lease' | 'sale'>('lease')
   const [name, setName] = useState('')
   const [category, setCategory] = useState('Stone Cottage')
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
   
   // Detailed Address Fields
   const [state, setState] = useState('Himachal Pradesh')
@@ -100,6 +103,11 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
     if (listingType === 'sale' && !salePrice.trim()) {
       setError('Please enter the outright sale asking price.')
+      return
+    }
+
+    if (!agreedToPrivacy) {
+      setError('Please review and check the Privacy Policy and terms agreement checkbox before submitting.')
       return
     }
 
@@ -671,6 +679,30 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     />
                   </div>
                 )}
+              </div>
+
+              {/* Privacy Policy Agreement */}
+              <div className="p-3.5 bg-[#FAF7EE] border border-[#CBDAC4] rounded-xl">
+                <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={agreedToPrivacy}
+                    onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                    required
+                    className="mt-0.5 w-4 h-4 rounded border-[#164E2D] text-[#164E2D] focus:ring-[#164E2D] cursor-pointer"
+                  />
+                  <span className="text-xs text-stone-700 leading-relaxed font-sans">
+                    I agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={onOpenPrivacy}
+                      className="text-[#164E2D] font-bold underline hover:text-[#0B2516]"
+                    >
+                      Privacy Policy & Community Charter
+                    </button>
+                    , and I confirm that this property listing details, ownership representation, and ground amenities are genuine and accurate.
+                  </span>
+                </label>
               </div>
 
               {/* Submit Button */}

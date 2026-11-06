@@ -17,6 +17,7 @@ import { submitLeaseInquiry } from '../../services/ecosystemService'
 interface HomestayDetailModalProps {
   homestay: Homestay | null
   onClose: () => void
+  onOpenPrivacy?: () => void
 }
 
 const leaseInquirySchema = z.object({
@@ -34,8 +35,10 @@ type LeaseInquiryFormData = z.infer<typeof leaseInquirySchema>
 export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
   homestay,
   onClose,
+  onOpenPrivacy
 }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
   const [formData, setFormData] = useState<LeaseInquiryFormData>({
     guestName: '',
     email: '',
@@ -61,6 +64,14 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
         fieldErrors[field] = issue.message
       })
       setErrors(fieldErrors)
+      return
+    }
+
+    if (!agreedToPrivacy) {
+      setErrors((prev) => ({
+        ...prev,
+        message: 'Please review and check the Privacy Policy agreement before submitting your lease inquiry.'
+      }))
       return
     }
 
@@ -384,6 +395,30 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                       {errors.message}
                     </p>
                   )}
+                </div>
+
+                {/* Privacy Policy Agreement */}
+                <div className="p-2.5 bg-[#FAF8F3] border border-[#202622]/15 rounded-sm">
+                  <label className="flex items-start gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={agreedToPrivacy}
+                      onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                      required
+                      className="mt-0.5 w-3.5 h-3.5 rounded border-stone-400 text-[#183C32] focus:ring-[#183C32] cursor-pointer"
+                    />
+                    <span className="text-[11px] text-[#202622]/80 leading-relaxed font-sans">
+                      I have read and agree to the{' '}
+                      <button
+                        type="button"
+                        onClick={onOpenPrivacy}
+                        className="text-[#183C32] font-semibold underline hover:text-black"
+                      >
+                        Privacy Policy
+                      </button>
+                      {' '}and consent to sharing my contact details with the host for lease arrangement.
+                    </span>
+                  </label>
                 </div>
 
                 <button

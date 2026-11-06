@@ -21,6 +21,7 @@ interface CreateDispatchModalProps {
   isOpen: boolean
   onClose: () => void
   onSuccess?: () => void
+  onOpenPrivacy?: () => void
 }
 
 const INDIAN_MOUNTAIN_STATES = [
@@ -41,12 +42,14 @@ const INDIAN_MOUNTAIN_STATES = [
 export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
   isOpen,
   onClose,
-  onSuccess
+  onSuccess,
+  onOpenPrivacy
 }) => {
   const { currentUser } = useAdminAuth()
 
   const [type, setType] = useState<CreateDispatchInput['type']>('traveller_story')
   const [title, setTitle] = useState('')
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
   
   // Pan-India Address Fields
   const [state, setState] = useState('Himachal Pradesh')
@@ -77,6 +80,11 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
     if (!title.trim() || !villageRoute.trim() || !excerpt.trim() || !fullContent.trim()) {
       setError('Please fill in all required fields (Title, Route/Village, Excerpt, and Story Content).')
+      return
+    }
+
+    if (!agreedToPrivacy) {
+      setError('Please review and check the Privacy Policy and Community Content agreement before submitting.')
       return
     }
 
@@ -437,6 +445,30 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   </div>
                 </div>
               )}
+
+              {/* Privacy Policy & Community Guidelines Agreement */}
+              <div className="p-3.5 bg-white/5 border border-white/15 rounded-xl my-2">
+                <label className="flex items-start gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={agreedToPrivacy}
+                    onChange={(e) => setAgreedToPrivacy(e.target.checked)}
+                    required
+                    className="mt-0.5 w-4 h-4 rounded border-white/30 text-[#A5C896] focus:ring-[#A5C896] cursor-pointer"
+                  />
+                  <span className="text-xs text-white/80 leading-relaxed font-sans">
+                    I agree to the{' '}
+                    <button
+                      type="button"
+                      onClick={onOpenPrivacy}
+                      className="text-[#A5C896] font-bold underline hover:text-white"
+                    >
+                      Privacy Policy & Community Charter
+                    </button>
+                    , and I confirm that this ground experience or price index is authentic and verified.
+                  </span>
+                </label>
+              </div>
 
               {/* Submit Buttons */}
               <div className="pt-3 border-t border-[#1F4E34] flex items-center justify-end gap-3">
