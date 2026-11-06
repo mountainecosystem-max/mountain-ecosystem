@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import type { Homestay } from '../../types'
+import { submitCommunityProperty } from '../../services/ecosystemService'
 
 interface CreatePropertyModalProps {
   isOpen: boolean
@@ -83,7 +84,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
   if (!isOpen) return null
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError(null)
 
@@ -152,11 +153,16 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
       ]
     }
 
-    setTimeout(() => {
+    try {
+      const res = await submitCommunityProperty(newProperty)
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      onSuccess?.(res.data || newProperty)
+    } catch {
       setIsSubmitting(false)
       setIsSubmitted(true)
       onSuccess?.(newProperty)
-    }, 700)
+    }
   }
 
   return (

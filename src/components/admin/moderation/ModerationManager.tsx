@@ -16,6 +16,12 @@ import {
   MapPin
 } from 'lucide-react'
 import { supabase, isSupabaseConfigured } from '../../../lib/supabase'
+import {
+  MOUNTAIN_STORAGE_KEYS,
+  getStoredItems,
+  setStoredItems,
+  notifyDataUpdated
+} from '../../../services/ecosystemService'
 
 
 interface FellowshipAppRow {
@@ -88,32 +94,31 @@ export const ModerationManager: FC = () => {
     setIsLoading(true)
     setError(null)
 
-    if (!isSupabaseConfigured()) {
-      setDispatches([])
-      setIsLoading(false)
-      return
-    }
+    let dbFel: FellowshipAppRow[] = []
+    let dbLease: LeaseInquiryRow[] = []
+    let dbJob: JobAppRow[] = []
+    let dbDisp: CommunityDispatchRow[] = []
 
-    try {
-      const [felRes, leaseRes, jobRes, dispRes] = await Promise.allSettled([
-        supabase.from('fellowship_applications').select('*').order('created_at', { ascending: false }),
-        supabase.from('lease_inquiries').select('*').order('created_at', { ascending: false }),
-        supabase.from('job_applications').select('*').order('created_at', { ascending: false }),
-        supabase.from('community_dispatches').select('*').order('created_at', { ascending: false })
-      ])
+    if (isSupabaseConfigured()) {
+      try {
+        const [felRes, leaseRes, jobRes, dispRes] = await Promise.allSettled([
+          supabase.from('fellowship_applications').select('*').order('created_at', { ascending: false }),
+          supabase.from('lease_inquiries').select('*').order('created_at', { ascending: false }),
+          supabase.from('job_applications').select('*').order('created_at', { ascending: false }),
+          supabase.from('community_dispatches').select('*').order('created_at', { ascending: false })
+        ])
 
-      if (felRes.status === 'fulfilled' && felRes.value.data) {
-        setFellowships(felRes.value.data as FellowshipAppRow[])
-      }
-      if (leaseRes.status === 'fulfilled' && leaseRes.value.data) {
-        setLeases(leaseRes.value.data as LeaseInquiryRow[])
-      }
-      if (jobRes.status === 'fulfilled' && jobRes.value.data) {
-        setJobApps(jobRes.value.data as JobAppRow[])
-      }
-      if (dispRes.status === 'fulfilled' && dispRes.value.data && dispRes.value.data.length > 0) {
-        setDispatches(
-          (dispRes.value.data as any[]).map((d) => ({
+        if (felRes.status === 'fulfilled' && felRes.value.data) {
+          dbFel = felRes.value.data as FellowshipAppRow[]
+        }
+        if (leaseRes.status === 'fulfilled' && leaseRes.value.data) {
+          dbLease = leaseRes.value.data as LeaseInquiryRow[]
+        }
+        if (jobRes.status === 'fulfilled' && jobRes.value.data) {
+          dbJob = jobRes.value.data as JobAppRow[]
+        }
+        if (dispRes.status === 'fulfilled' && dispRes.value.data) {
+          dbDisp = (dispRes.value.data as any[]).map((d) => ({
             id: d.id,
             type: d.type,
             title: d.title,
@@ -126,195 +131,274 @@ export const ModerationManager: FC = () => {
             is_published: d.is_published !== false,
             created_at: d.created_at || new Date().toISOString()
           }))
-        )
-      } else {
-        setDispatches([])
+        }
+      } catch (err: unknown) {
+        console.warn('Error loading Supabase submissions:', err)
       }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to query moderation data')
-    } finally {
-      setIsLoading(false)
     }
+
+    // Merge with local storage
+    const localDispatches = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+    const existingDispIds = new Set(dbDisp.map((d) => d.id))
+    const existingDispTitles = new Set(dbDisp.map((d) => d.title.toLowerCase().trim()))
+    const mappedLocalDisp: CommunityDispatchRow[] = localDispatches
+      .filter((d: any) => !existingDispIds.has(d.id) && !existingDispTitles.has(d.title.toLowerCase().trim()))
+      .map((d: any) => ({
+        id: d.id,
+        type: d.type,
+        title: d.title,
+        excerpt: d.excerpt || '',
+        location: d.location || '',
+        date: d.date || '',
+        author_name: d.author?.name || d.author_name || 'Community Member',
+        author_role: d.author?.role || d.author_role || 'Contributor',
+        verified: Boolean(d.verified),
+        is_published: d.is_published !== false,
+        created_at: d.created_at || new Date().toISOString()
+      }))
+    setDispatches([...mappedLocalDisp, ...dbDisp])
+
+    const localLeases = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.LEASES)
+    const existingLeaseIds = new Set(dbLease.map((l) => l.id))
+    const mappedLocalLease: LeaseInquiryRow[] = localLeases
+      .filter((l: any) => !existingLeaseIds.has(l.id))
+      .map((l: any) => ({
+        id: l.id,
+        homestay_id: l.homestay_id || null,
+        guest_name: l.guest_name,
+        email: l.email,
+        phone: l.phone,
+        intended_term: l.intended_term,
+        start_date: l.start_date,
+        profession: l.profession,
+        message: l.message,
+        status: l.status || 'inquiry',
+        created_at: l.created_at || new Date().toISOString()
+      }))
+    setLeases([...mappedLocalLease, ...dbLease])
+
+    const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOB_APPS)
+    const existingJobAppIds = new Set(dbJob.map((j) => j.id))
+    const mappedLocalJob: JobAppRow[] = localJobs
+      .filter((j: any) => !existingJobAppIds.has(j.id))
+      .map((j: any) => ({
+        id: j.id,
+        job_id: j.job_id || null,
+        full_name: j.full_name,
+        email: j.email,
+        phone: j.phone,
+        note: j.note,
+        status: j.status || 'submitted',
+        created_at: j.created_at || new Date().toISOString()
+      }))
+    setJobApps([...mappedLocalJob, ...dbJob])
+
+    const localFel = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS)
+    const existingFelIds = new Set(dbFel.map((f) => f.id))
+    const mappedLocalFel: FellowshipAppRow[] = localFel
+      .filter((f: any) => !existingFelIds.has(f.id))
+      .map((f: any) => ({
+        id: f.id,
+        full_name: f.full_name,
+        email: f.email,
+        phone: f.phone,
+        role: f.role,
+        region: f.region,
+        intent: f.intent,
+        status: f.status || 'pending',
+        created_at: f.created_at || new Date().toISOString()
+      }))
+    setFellowships([...mappedLocalFel, ...dbFel])
+
+    setIsLoading(false)
   }, [])
 
   useEffect(() => {
     loadSubmissions()
+    const handleUpdate = () => {
+      loadSubmissions()
+    }
+    window.addEventListener('mountain_data_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('mountain_data_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
   }, [loadSubmissions])
 
   // --- Community Experiences Actions ---
   const toggleDispatchVerify = async (d: CommunityDispatchRow) => {
     const newVerified = !d.verified
-    try {
-      const { error } = await supabase
-        .from('community_dispatches')
-        .update({ verified: newVerified })
-        .eq('id', d.id)
+    // Update local storage
+    const localDispatches = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+    const updatedLocal = localDispatches.map((item: any) =>
+      item.id === d.id ? { ...item, verified: newVerified } : item
+    )
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.DISPATCHES, updatedLocal)
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setDispatches((prev) =>
-          prev.map((item) => (item.id === d.id ? { ...item, verified: newVerified } : item))
-        )
-        showToast(newVerified ? `"${d.title}" is now Verified` : `Verification revoked for "${d.title}"`)
-      }
-    } catch {
-      setDispatches((prev) =>
-        prev.map((item) => (item.id === d.id ? { ...item, verified: newVerified } : item))
-      )
-      showToast(newVerified ? `"${d.title}" is now Verified` : `Verification revoked for "${d.title}"`)
+    setDispatches((prev) =>
+      prev.map((item) => (item.id === d.id ? { ...item, verified: newVerified } : item))
+    )
+    showToast(newVerified ? `"${d.title}" is now Verified` : `Verification revoked for "${d.title}"`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase
+          .from('community_dispatches')
+          .update({ verified: newVerified })
+          .eq('id', d.id)
+      } catch {}
     }
   }
 
   const toggleDispatchPublish = async (d: CommunityDispatchRow) => {
     const newPublished = !d.is_published
-    try {
-      const { error } = await supabase
-        .from('community_dispatches')
-        .update({ is_published: newPublished })
-        .eq('id', d.id)
+    // Update local storage
+    const localDispatches = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+    const updatedLocal = localDispatches.map((item: any) =>
+      item.id === d.id ? { ...item, is_published: newPublished } : item
+    )
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.DISPATCHES, updatedLocal)
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setDispatches((prev) =>
-          prev.map((item) => (item.id === d.id ? { ...item, is_published: newPublished } : item))
-        )
-        showToast(newPublished ? `"${d.title}" is now Live on site` : `"${d.title}" is now Hidden / Draft`)
-      }
-    } catch {
-      setDispatches((prev) =>
-        prev.map((item) => (item.id === d.id ? { ...item, is_published: newPublished } : item))
-      )
-      showToast(newPublished ? `"${d.title}" is now Live on site` : `"${d.title}" is now Hidden / Draft`)
+    setDispatches((prev) =>
+      prev.map((item) => (item.id === d.id ? { ...item, is_published: newPublished } : item))
+    )
+    showToast(newPublished ? `"${d.title}" is now Live on site` : `"${d.title}" is now Hidden / Draft`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase
+          .from('community_dispatches')
+          .update({ is_published: newPublished })
+          .eq('id', d.id)
+      } catch {}
     }
   }
 
   const deleteDispatch = async (d: CommunityDispatchRow) => {
     if (!confirm(`Are you sure you want to permanently delete "${d.title}"?`)) return
-    try {
-      const { error } = await supabase
-        .from('community_dispatches')
-        .delete()
-        .eq('id', d.id)
+    // Remove from local storage
+    const localDispatches = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+    setStoredItems(
+      MOUNTAIN_STORAGE_KEYS.DISPATCHES,
+      localDispatches.filter((item: any) => item.id !== d.id)
+    )
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setDispatches((prev) => prev.filter((item) => item.id !== d.id))
-        showToast(`Deleted experience "${d.title}"`)
-      }
-    } catch {
-      setDispatches((prev) => prev.filter((item) => item.id !== d.id))
-      showToast(`Deleted experience "${d.title}"`)
+    setDispatches((prev) => prev.filter((item) => item.id !== d.id))
+    showToast(`Deleted experience "${d.title}"`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('community_dispatches').delete().eq('id', d.id)
+      } catch {}
     }
   }
 
   // --- Fellowship Actions ---
   const updateFellowshipStatus = async (id: string, newStatus: FellowshipAppRow['status']) => {
-    try {
-      const { error } = await supabase
-        .from('fellowship_applications')
-        .update({ status: newStatus })
-        .eq('id', id)
+    const localFel = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS)
+    const updatedLocal = localFel.map((f: any) => (f.id === id ? { ...f, status: newStatus } : f))
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS, updatedLocal)
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setFellowships((prev) =>
-          prev.map((f) => (f.id === id ? { ...f, status: newStatus } : f))
-        )
-        showToast(`Fellowship status changed to ${newStatus}`)
-      }
-    } catch {
-      showToast('Failed to update status')
+    setFellowships((prev) =>
+      prev.map((f) => (f.id === id ? { ...f, status: newStatus } : f))
+    )
+    showToast(`Fellowship status changed to ${newStatus}`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('fellowship_applications').update({ status: newStatus }).eq('id', id)
+      } catch {}
     }
   }
 
   const deleteFellowship = async (id: string) => {
     if (!confirm('Are you sure you want to delete this application record?')) return
-    try {
-      const { error } = await supabase.from('fellowship_applications').delete().eq('id', id)
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setFellowships((prev) => prev.filter((f) => f.id !== id))
-        showToast('Application deleted')
-      }
-    } catch {
-      showToast('Failed to delete')
+    const localFel = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS)
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS, localFel.filter((f: any) => f.id !== id))
+    notifyDataUpdated()
+
+    setFellowships((prev) => prev.filter((f) => f.id !== id))
+    showToast('Application deleted')
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('fellowship_applications').delete().eq('id', id)
+      } catch {}
     }
   }
 
   // --- Lease Actions ---
   const updateLeaseStatus = async (id: string, newStatus: LeaseInquiryRow['status']) => {
-    try {
-      const { error } = await supabase
-        .from('lease_inquiries')
-        .update({ status: newStatus })
-        .eq('id', id)
+    const localLeases = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.LEASES)
+    const updatedLocal = localLeases.map((l: any) => (l.id === id ? { ...l, status: newStatus } : l))
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.LEASES, updatedLocal)
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setLeases((prev) =>
-          prev.map((l) => (l.id === id ? { ...l, status: newStatus } : l))
-        )
-        showToast(`Lease status updated to ${newStatus}`)
-      }
-    } catch {
-      showToast('Failed to update status')
+    setLeases((prev) =>
+      prev.map((l) => (l.id === id ? { ...l, status: newStatus } : l))
+    )
+    showToast(`Lease status updated to ${newStatus}`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('lease_inquiries').update({ status: newStatus }).eq('id', id)
+      } catch {}
     }
   }
 
   const deleteLease = async (id: string) => {
     if (!confirm('Are you sure you want to delete this lease inquiry?')) return
-    try {
-      const { error } = await supabase.from('lease_inquiries').delete().eq('id', id)
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setLeases((prev) => prev.filter((l) => l.id !== id))
-        showToast('Lease inquiry deleted')
-      }
-    } catch {
-      showToast('Failed to delete')
+    const localLeases = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.LEASES)
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.LEASES, localLeases.filter((l: any) => l.id !== id))
+    notifyDataUpdated()
+
+    setLeases((prev) => prev.filter((l) => l.id !== id))
+    showToast('Lease inquiry deleted')
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('lease_inquiries').delete().eq('id', id)
+      } catch {}
     }
   }
 
   // --- Job Application Actions ---
   const updateJobAppStatus = async (id: string, newStatus: JobAppRow['status']) => {
-    try {
-      const { error } = await supabase
-        .from('job_applications')
-        .update({ status: newStatus })
-        .eq('id', id)
+    const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOB_APPS)
+    const updatedLocal = localJobs.map((j: any) => (j.id === id ? { ...j, status: newStatus } : j))
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.JOB_APPS, updatedLocal)
+    notifyDataUpdated()
 
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setJobApps((prev) =>
-          prev.map((j) => (j.id === id ? { ...j, status: newStatus } : j))
-        )
-        showToast(`Job application marked as ${newStatus}`)
-      }
-    } catch {
-      showToast('Failed to update status')
+    setJobApps((prev) =>
+      prev.map((j) => (j.id === id ? { ...j, status: newStatus } : j))
+    )
+    showToast(`Job application marked as ${newStatus}`)
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('job_applications').update({ status: newStatus }).eq('id', id)
+      } catch {}
     }
   }
 
   const deleteJobApp = async (id: string) => {
     if (!confirm('Are you sure you want to delete this job applicant record?')) return
-    try {
-      const { error } = await supabase.from('job_applications').delete().eq('id', id)
-      if (error) {
-        showToast(`Error: ${error.message}`)
-      } else {
-        setJobApps((prev) => prev.filter((j) => j.id !== id))
-        showToast('Job application deleted')
-      }
-    } catch {
-      showToast('Failed to delete')
+    const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOB_APPS)
+    setStoredItems(MOUNTAIN_STORAGE_KEYS.JOB_APPS, localJobs.filter((j: any) => j.id !== id))
+    notifyDataUpdated()
+
+    setJobApps((prev) => prev.filter((j) => j.id !== id))
+    showToast('Job application deleted')
+
+    if (isSupabaseConfigured()) {
+      try {
+        await supabase.from('job_applications').delete().eq('id', id)
+      } catch {}
     }
   }
 

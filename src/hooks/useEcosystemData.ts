@@ -155,6 +155,16 @@ export const useEcosystemData = (): EcosystemDataState => {
 
   useEffect(() => {
     loadAllData()
+
+    const handleUpdate = () => {
+      loadAllData()
+    }
+    window.addEventListener('mountain_data_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('mountain_data_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
   }, [loadAllData])
 
   return {

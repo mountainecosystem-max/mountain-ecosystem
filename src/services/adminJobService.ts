@@ -1,5 +1,11 @@
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import type { AdminJob } from '../types'
+import {
+  MOUNTAIN_STORAGE_KEYS,
+  getStoredItems,
+  setStoredItems,
+  notifyDataUpdated
+} from './ecosystemService'
 
 export interface DbJobRow {
   id: string
@@ -67,30 +73,54 @@ export const fetchAdminJobs = async (): Promise<{
   error: string | null
   permissionDenied?: boolean
 }> => {
-  if (!isSupabaseConfigured()) {
-    return { data: [], error: 'Supabase credentials not configured in .env' }
+  let dbJobs: AdminJob[] = []
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('mountain_jobs')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (!error && data) {
+        dbJobs = ((data as DbJobRow[]) || []).map(mapDbRowToAdminJob)
+      }
+    } catch (err: unknown) {
+      console.warn('Supabase query error in fetchAdminJobs:', err)
+    }
   }
 
-  try {
-    const { data, error } = await supabase
-      .from('mountain_jobs')
-      .select('*')
-      .order('created_at', { ascending: false })
+  // Merge with locally stored custom items
+  const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOBS)
+  const existingIds = new Set(dbJobs.map((j) => j.id))
+  const existingTitles = new Set(dbJobs.map((j) => `${j.title}-${j.employer}`.toLowerCase().trim()))
 
-    if (error) {
-      const isPermission = error.code === '42501' || error.message?.includes('permission denied')
-      return { data: [], error: error.message, permissionDenied: isPermission }
-    }
+  const mappedLocal: AdminJob[] = localJobs
+    .filter((j: any) => !existingIds.has(j.id) && !existingTitles.has(`${j.title}-${j.employer}`.toLowerCase().trim()))
+    .map((j: any) => ({
+      id: j.id,
+      title: j.title,
+      employer: j.employer,
+      employerBadge: j.employerBadge || undefined,
+      location: j.location,
+      region: j.region,
+      type: j.type as AdminJob['type'],
+      salary: j.salary,
+      housingIncluded: Boolean(j.housingIncluded),
+      category: j.category as AdminJob['category'],
+      description: j.description,
+      responsibilities: j.responsibilities || [],
+      requirements: j.requirements || [],
+      benefits: j.benefits || [],
+      postedDate: j.postedDate || 'Just now',
+      isPublished: j.isPublished !== false,
+      createdAt: j.createdAt || new Date().toISOString(),
+      updatedAt: j.updatedAt || new Date().toISOString()
+    }))
 
-    return {
-      data: ((data as DbJobRow[]) || []).map(mapDbRowToAdminJob),
-      error: null
-    }
-  } catch (err: unknown) {
-    return {
-      data: [],
-      error: err instanceof Error ? err.message : 'Failed to query mountain_jobs'
-    }
+  return {
+    data: [...mappedLocal, ...dbJobs],
+    error: null
   }
 }
 
@@ -189,42 +219,38 @@ export const toggleAdminJobPublish = async (
   id: string,
   isPublished: boolean
 ): Promise<{ success: boolean; error: string | null }> => {
-  if (!isSupabaseConfigured()) {
-    return { success: false, error: 'Supabase credentials not configured.' }
+  // Update in localStorage
+  const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOBS)
+  const updatedLocal = localJobs.map((j: any) => (j.id === id ? { ...j, isPublished } : j))
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.JOBS, updatedLocal)
+  notifyDataUpdated()
+
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase
+        .from('mountain_jobs')
+        .update({ is_published: isPublished, updated_at: new Date().toISOString() })
+        .eq('id', id)
+    } catch {}
   }
 
-  try {
-    const { error } = await supabase
-      .from('mountain_jobs')
-      .update({ is_published: isPublished, updated_at: new Date().toISOString() })
-      .eq('id', id)
-
-    if (error) return { success: false, error: error.message }
-    return { success: true, error: null }
-  } catch (err: unknown) {
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : 'Failed to toggle status'
-    }
-  }
+  return { success: true, error: null }
 }
 
 // 5. Delete job
 export const deleteAdminJob = async (
   id: string
 ): Promise<{ success: boolean; error: string | null }> => {
-  if (!isSupabaseConfigured()) {
-    return { success: false, error: 'Supabase credentials not configured.' }
+  // Remove from localStorage
+  const localJobs = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOBS)
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.JOBS, localJobs.filter((j: any) => j.id !== id))
+  notifyDataUpdated()
+
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase.from('mountain_jobs').delete().eq('id', id)
+    } catch {}
   }
 
-  try {
-    const { error } = await supabase.from('mountain_jobs').delete().eq('id', id)
-    if (error) return { success: false, error: error.message }
-    return { success: true, error: null }
-  } catch (err: unknown) {
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : 'Failed to delete job'
-    }
-  }
+  return { success: true, error: null }
 }

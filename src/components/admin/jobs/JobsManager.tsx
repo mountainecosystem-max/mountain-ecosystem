@@ -71,6 +71,16 @@ export const JobsManager: FC = () => {
 
   useEffect(() => {
     loadJobs()
+
+    const handleUpdate = () => {
+      loadJobs()
+    }
+    window.addEventListener('mountain_data_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('mountain_data_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
   }, [loadJobs])
 
   const handleTogglePublish = async (job: AdminJob) => {

@@ -1,4 +1,5 @@
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
+import { slugify } from './adminDestinationService'
 import type {
   Destination,
   Dispatch,
@@ -7,6 +8,42 @@ import type {
   ArchitecturalSpecimen,
   PriceIndexItem
 } from '../types'
+
+// Local storage synchronization keys for offline/resilient live post persistence
+export const MOUNTAIN_STORAGE_KEYS = {
+  HOMESTAYS: 'mountain_custom_homestays',
+  JOBS: 'mountain_custom_jobs',
+  DISPATCHES: 'mountain_custom_dispatches',
+  LEASES: 'mountain_custom_lease_inquiries',
+  JOB_APPS: 'mountain_custom_job_applications',
+  FELLOWSHIPS: 'mountain_custom_fellowships'
+} as const
+
+export const getStoredItems = <T>(key: string): T[] => {
+  if (typeof window === 'undefined') return []
+  try {
+    const raw = localStorage.getItem(key)
+    return raw ? (JSON.parse(raw) as T[]) : []
+  } catch {
+    return []
+  }
+}
+
+export const setStoredItems = <T>(key: string, items: T[]): void => {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.setItem(key, JSON.stringify(items))
+  } catch (err) {
+    console.warn(`Failed to write to localStorage for key ${key}:`, err)
+  }
+}
+
+export const notifyDataUpdated = () => {
+  if (typeof window === 'undefined') return
+  try {
+    window.dispatchEvent(new CustomEvent('mountain_data_updated'))
+  } catch {}
+}
 import {
   DEV_PREVIEW_DESTINATIONS,
   DEV_PREVIEW_HOMESTAYS,
@@ -154,53 +191,67 @@ export const fetchHomestays = async (mode: DataMode): Promise<Homestay[]> => {
     return DEV_PREVIEW_HOMESTAYS
   }
 
-  if (!isSupabaseConfigured()) {
-    return []
+  let dbHomestays: Homestay[] = []
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('homestays')
+        .select('*')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.warn('Supabase homestays query notice:', error.message)
+      } else if (data && data.length > 0) {
+        dbHomestays = (data as DbHomestay[]).map((h) => ({
+          id: h.id,
+          name: h.name,
+          region: h.region,
+          location: h.location,
+          elevation: h.elevation,
+          monthlyRate: h.monthly_rate,
+          securityDeposit: h.security_deposit,
+          minLeaseTerm: h.min_lease_term,
+          leaseStatus: h.lease_status || 'Available for Lease',
+          furnishing: h.furnishing || 'Furnished Stone & Cedar',
+          rating: h.rating || 5.0,
+          reviewsCount: h.reviews_count || 0,
+          host: {
+            name: h.host_name,
+            role: h.host_role || 'Local Host',
+            yearsHosting: h.host_years || 1,
+            avatar: h.host_avatar || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
+          },
+          roomType: h.room_type,
+          wifi: h.wifi,
+          capacity: h.capacity,
+          images: h.images && h.images.length > 0 ? h.images : [
+            'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85'
+          ],
+          description: h.description,
+          amenities: h.amenities || [],
+          features: h.features || [],
+          utilitiesIncluded: h.utilities_included || []
+        }))
+      }
+    } catch (err) {
+      console.warn('Failed to query homestays from Supabase:', err)
+    }
   }
 
-  const { data, error } = await supabase
-    .from('homestays')
-    .select('*')
-    .eq('is_published', true)
-    .order('created_at', { ascending: false })
+  // Merge locally stored items (deduplicating by id and name)
+  const localItems = getStoredItems<Homestay & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
+    .filter((h) => h.isPublished !== false)
 
-  if (error) {
-    console.error('Failed to query homestays from Supabase:', error.message)
-    throw new Error(`Unable to load homestay leases: ${error.message}`)
-  }
+  const existingIds = new Set(dbHomestays.map((h) => h.id))
+  const existingNames = new Set(dbHomestays.map((h) => h.name.toLowerCase().trim()))
 
-  if (!data || data.length === 0) return []
+  const uniqueLocal = localItems.filter(
+    (h) => !existingIds.has(h.id) && !existingNames.has(h.name.toLowerCase().trim())
+  )
 
-  return (data as DbHomestay[]).map((h) => ({
-    id: h.id,
-    name: h.name,
-    region: h.region,
-    location: h.location,
-    elevation: h.elevation,
-    monthlyRate: h.monthly_rate,
-    securityDeposit: h.security_deposit,
-    minLeaseTerm: h.min_lease_term,
-    leaseStatus: h.lease_status || 'Available for Lease',
-    furnishing: h.furnishing || 'Furnished Stone & Cedar',
-    rating: h.rating || 5.0,
-    reviewsCount: h.reviews_count || 0,
-    host: {
-      name: h.host_name,
-      role: h.host_role || 'Local Host',
-      yearsHosting: h.host_years || 1,
-      avatar: h.host_avatar || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'
-    },
-    roomType: h.room_type,
-    wifi: h.wifi,
-    capacity: h.capacity,
-    images: h.images && h.images.length > 0 ? h.images : [
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=85'
-    ],
-    description: h.description,
-    amenities: h.amenities || [],
-    features: h.features || [],
-    utilitiesIncluded: h.utilities_included || []
-  }))
+  return [...uniqueLocal, ...dbHomestays]
 }
 
 // -----------------------------------------------------------------------------
@@ -211,40 +262,54 @@ export const fetchJobs = async (mode: DataMode): Promise<Job[]> => {
     return DEV_PREVIEW_JOBS
   }
 
-  if (!isSupabaseConfigured()) {
-    return []
+  let dbJobs: Job[] = []
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('mountain_jobs')
+        .select('*')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.warn('Supabase mountain_jobs query notice:', error.message)
+      } else if (data && data.length > 0) {
+        dbJobs = (data as DbJob[]).map((j) => ({
+          id: j.id,
+          title: j.title,
+          employer: j.employer,
+          employerBadge: j.employer_badge || undefined,
+          location: j.location,
+          region: j.region,
+          type: j.type,
+          salary: j.salary,
+          housingIncluded: Boolean(j.housing_included),
+          category: j.category,
+          description: j.description,
+          responsibilities: j.responsibilities || [],
+          requirements: j.requirements || [],
+          benefits: j.benefits || [],
+          postedDate: j.posted_date
+        }))
+      }
+    } catch (err) {
+      console.warn('Failed to query jobs from Supabase:', err)
+    }
   }
 
-  const { data, error } = await supabase
-    .from('mountain_jobs')
-    .select('*')
-    .eq('is_published', true)
-    .order('created_at', { ascending: false })
+  // Merge locally stored items (deduplicating by id and title+employer)
+  const localJobs = getStoredItems<Job & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.JOBS)
+    .filter((j) => j.isPublished !== false)
 
-  if (error) {
-    console.error('Failed to query jobs from Supabase:', error.message)
-    throw new Error(`Unable to load mountain jobs: ${error.message}`)
-  }
+  const existingIds = new Set(dbJobs.map((j) => j.id))
+  const existingTitles = new Set(dbJobs.map((j) => `${j.title}-${j.employer}`.toLowerCase().trim()))
 
-  if (!data || data.length === 0) return []
+  const uniqueLocal = localJobs.filter(
+    (j) => !existingIds.has(j.id) && !existingTitles.has(`${j.title}-${j.employer}`.toLowerCase().trim())
+  )
 
-  return (data as DbJob[]).map((j) => ({
-    id: j.id,
-    title: j.title,
-    employer: j.employer,
-    employerBadge: j.employer_badge || undefined,
-    location: j.location,
-    region: j.region,
-    type: j.type,
-    salary: j.salary,
-    housingIncluded: Boolean(j.housing_included),
-    category: j.category,
-    description: j.description,
-    responsibilities: j.responsibilities || [],
-    requirements: j.requirements || [],
-    benefits: j.benefits || [],
-    postedDate: j.posted_date
-  }))
+  return [...uniqueLocal, ...dbJobs]
 }
 
 // -----------------------------------------------------------------------------
@@ -255,51 +320,65 @@ export const fetchDispatches = async (mode: DataMode): Promise<Dispatch[]> => {
     return DEV_PREVIEW_DISPATCHES
   }
 
-  if (!isSupabaseConfigured()) {
-    return []
+  let dbDispatches: Dispatch[] = []
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('community_dispatches')
+        .select('*')
+        .eq('is_published', true)
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.warn('Supabase community_dispatches query notice:', error.message)
+      } else if (data && data.length > 0) {
+        dbDispatches = (data as DbDispatch[]).map((d) => ({
+          id: d.id,
+          type: d.type,
+          title: d.title,
+          excerpt: d.excerpt,
+          fullContent: d.full_content,
+          location: d.location,
+          date: d.date,
+          readTime: d.read_time,
+          author: {
+            name: d.author_name,
+            role: d.author_role,
+            avatar: d.author_avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
+            communityBadge: d.community_badge || undefined
+          },
+          verified: Boolean(d.verified),
+          helpfulCount: d.helpful_count || 0,
+          priceData: d.price_item
+            ? {
+                item: d.price_item,
+                sharedRate: d.price_shared_rate || '',
+                privateRate: d.price_private_rate || '',
+                fairPriceNote: d.price_note || '',
+                lastUpdated: d.price_last_updated || 'Recent',
+                stabilityScore: d.price_stability_score ? Number(d.price_stability_score) : undefined
+              }
+            : undefined
+        }))
+      }
+    } catch (err) {
+      console.warn('Failed to query dispatches from Supabase:', err)
+    }
   }
 
-  const { data, error } = await supabase
-    .from('community_dispatches')
-    .select('*')
-    .eq('is_published', true)
-    .order('created_at', { ascending: false })
+  // Merge locally stored items (deduplicating by id and title)
+  const localDispatches = getStoredItems<Dispatch & { is_published?: boolean }>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+    .filter((d) => d.is_published !== false)
 
-  if (error) {
-    console.error('Failed to query dispatches from Supabase:', error.message)
-    throw new Error(`Unable to load community dispatches: ${error.message}`)
-  }
+  const existingIds = new Set(dbDispatches.map((d) => d.id))
+  const existingTitles = new Set(dbDispatches.map((d) => d.title.toLowerCase().trim()))
 
-  if (!data || data.length === 0) return []
+  const uniqueLocal = localDispatches.filter(
+    (d) => !existingIds.has(d.id) && !existingTitles.has(d.title.toLowerCase().trim())
+  )
 
-  return (data as DbDispatch[]).map((d) => ({
-    id: d.id,
-    type: d.type,
-    title: d.title,
-    excerpt: d.excerpt,
-    fullContent: d.full_content,
-    location: d.location,
-    date: d.date,
-    readTime: d.read_time,
-    author: {
-      name: d.author_name,
-      role: d.author_role,
-      avatar: d.author_avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
-      communityBadge: d.community_badge || undefined
-    },
-    verified: Boolean(d.verified),
-    helpfulCount: d.helpful_count || 0,
-    priceData: d.price_item
-      ? {
-          item: d.price_item,
-          sharedRate: d.price_shared_rate || '',
-          privateRate: d.price_private_rate || '',
-          fairPriceNote: d.price_note || '',
-          lastUpdated: d.price_last_updated || 'Recent',
-          stabilityScore: d.price_stability_score ? Number(d.price_stability_score) : undefined
-        }
-      : undefined
-  }))
+  return [...uniqueLocal, ...dbDispatches]
 }
 
 // -----------------------------------------------------------------------------
@@ -485,6 +564,21 @@ export interface LeaseInquirySubmission {
 export const submitFellowshipApplication = async (
   data: FellowshipSubmission
 ): Promise<{ success: boolean; error?: string }> => {
+  const localFellowships = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS)
+  const newRow = {
+    id: `fel-${Date.now()}`,
+    full_name: data.fullName,
+    email: data.email,
+    phone: data.phone,
+    role: data.role,
+    region: data.region,
+    intent: data.intent,
+    status: 'pending',
+    created_at: new Date().toISOString()
+  }
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS, [newRow, ...localFellowships])
+  notifyDataUpdated()
+
   if (!isSupabaseConfigured()) {
     return { success: true }
   }
@@ -502,18 +596,26 @@ export const submitFellowshipApplication = async (
   }
   if (userId) payload.user_id = userId
 
-  let { error } = await supabase.from('fellowship_applications').insert(payload)
+  try {
+    let { data: insData, error } = await supabase.from('fellowship_applications').insert(payload).select().single()
 
-  // Fallback if user_id column does not exist yet
-  if (error && error.message?.includes('user_id')) {
-    delete payload.user_id
-    const retry = await supabase.from('fellowship_applications').insert(payload)
-    error = retry.error
-  }
+    // Fallback if user_id column does not exist yet
+    if (error && error.message?.includes('user_id')) {
+      delete payload.user_id
+      const retry = await supabase.from('fellowship_applications').insert(payload).select().single()
+      insData = retry.data
+      error = retry.error
+    }
 
-  if (error) {
-    console.error('Failed to submit fellowship application to Supabase:', error.message)
-    return { success: false, error: error.message }
+    if (!error && insData) {
+      const remapped = [newRow, ...localFellowships].map((f) => (f.id === newRow.id ? { ...f, id: insData.id } : f))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.FELLOWSHIPS, remapped)
+      notifyDataUpdated()
+    } else if (error) {
+      console.warn('Supabase fellowship insert notice:', error.message)
+    }
+  } catch (err) {
+    console.warn('Supabase fellowship error:', err)
   }
 
   return { success: true }
@@ -522,6 +624,20 @@ export const submitFellowshipApplication = async (
 export const submitJobApplication = async (
   data: JobApplicationSubmission
 ): Promise<{ success: boolean; error?: string }> => {
+  const localJobApps = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.JOB_APPS)
+  const newRow = {
+    id: `jobapp-${Date.now()}`,
+    job_id: data.jobId || null,
+    full_name: data.fullName,
+    email: data.email,
+    phone: data.phone,
+    note: data.note,
+    status: 'submitted',
+    created_at: new Date().toISOString()
+  }
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.JOB_APPS, [newRow, ...localJobApps])
+  notifyDataUpdated()
+
   if (!isSupabaseConfigured()) {
     return { success: true }
   }
@@ -538,18 +654,26 @@ export const submitJobApplication = async (
   }
   if (userId) payload.user_id = userId
 
-  let { error } = await supabase.from('job_applications').insert(payload)
+  try {
+    let { data: insData, error } = await supabase.from('job_applications').insert(payload).select().single()
 
-  // Fallback if user_id column does not exist yet
-  if (error && error.message?.includes('user_id')) {
-    delete payload.user_id
-    const retry = await supabase.from('job_applications').insert(payload)
-    error = retry.error
-  }
+    // Fallback if user_id column does not exist yet
+    if (error && error.message?.includes('user_id')) {
+      delete payload.user_id
+      const retry = await supabase.from('job_applications').insert(payload).select().single()
+      insData = retry.data
+      error = retry.error
+    }
 
-  if (error) {
-    console.error('Failed to submit job application to Supabase:', error.message)
-    return { success: false, error: error.message }
+    if (!error && insData) {
+      const remapped = [newRow, ...localJobApps].map((j) => (j.id === newRow.id ? { ...j, id: insData.id } : j))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.JOB_APPS, remapped)
+      notifyDataUpdated()
+    } else if (error) {
+      console.warn('Supabase job application notice:', error.message)
+    }
+  } catch (err) {
+    console.warn('Supabase job application error:', err)
   }
 
   return { success: true }
@@ -558,6 +682,23 @@ export const submitJobApplication = async (
 export const submitLeaseInquiry = async (
   data: LeaseInquirySubmission
 ): Promise<{ success: boolean; error?: string }> => {
+  const localLeases = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.LEASES)
+  const newRow = {
+    id: `lease-${Date.now()}`,
+    homestay_id: data.homestayId || null,
+    guest_name: data.guestName,
+    email: data.email,
+    phone: data.phone,
+    intended_term: data.intendedTerm,
+    start_date: data.startDate,
+    profession: data.profession,
+    message: data.message,
+    status: 'inquiry',
+    created_at: new Date().toISOString()
+  }
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.LEASES, [newRow, ...localLeases])
+  notifyDataUpdated()
+
   if (!isSupabaseConfigured()) {
     return { success: true }
   }
@@ -577,18 +718,26 @@ export const submitLeaseInquiry = async (
   }
   if (userId) payload.user_id = userId
 
-  let { error } = await supabase.from('lease_inquiries').insert(payload)
+  try {
+    let { data: insData, error } = await supabase.from('lease_inquiries').insert(payload).select().single()
 
-  // Fallback if user_id column does not exist yet
-  if (error && error.message?.includes('user_id')) {
-    delete payload.user_id
-    const retry = await supabase.from('lease_inquiries').insert(payload)
-    error = retry.error
-  }
+    // Fallback if user_id column does not exist yet
+    if (error && error.message?.includes('user_id')) {
+      delete payload.user_id
+      const retry = await supabase.from('lease_inquiries').insert(payload).select().single()
+      insData = retry.data
+      error = retry.error
+    }
 
-  if (error) {
-    console.error('Failed to submit lease inquiry to Supabase:', error.message)
-    return { success: false, error: error.message }
+    if (!error && insData) {
+      const remapped = [newRow, ...localLeases].map((l) => (l.id === newRow.id ? { ...l, id: insData.id } : l))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.LEASES, remapped)
+      notifyDataUpdated()
+    } else if (error) {
+      console.warn('Supabase lease inquiry notice:', error.message)
+    }
+  } catch (err) {
+    console.warn('Supabase lease inquiry error:', err)
   }
 
   return { success: true }
@@ -643,6 +792,12 @@ export const createDispatch = async (
       : undefined
   }
 
+  // Always store locally first for instantaneous multi-window & admin sync
+  const localList = getStoredItems<Dispatch & { is_published?: boolean }>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+  const updatedLocal = [{ ...newDispatch, is_published: true }, ...localList.filter((d) => d.id !== newDispatch.id)]
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.DISPATCHES, updatedLocal)
+  notifyDataUpdated()
+
   if (!isSupabaseConfigured()) {
     return { success: true, data: newDispatch }
   }
@@ -671,19 +826,142 @@ export const createDispatch = async (
   }
   if (userId) payload.user_id = userId
 
-  let { error } = await supabase.from('community_dispatches').insert(payload)
+  try {
+    let { data: insData, error } = await supabase.from('community_dispatches').insert(payload).select().single()
 
-  // Fallback if user_id column does not exist yet
-  if (error && error.message?.includes('user_id')) {
-    delete payload.user_id
-    const retry = await supabase.from('community_dispatches').insert(payload)
-    error = retry.error
-  }
+    // Fallback if user_id column does not exist yet
+    if (error && error.message?.includes('user_id')) {
+      delete payload.user_id
+      const retry = await supabase.from('community_dispatches').insert(payload).select().single()
+      insData = retry.data
+      error = retry.error
+    }
 
-  if (error) {
-    console.error('Failed to create dispatch in Supabase:', error.message)
-    return { success: false, error: error.message }
+    if (!error && insData) {
+      newDispatch.id = insData.id
+      const remappedLocal = updatedLocal.map((d) => (d.title === newDispatch.title ? { ...d, id: insData.id } : d))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.DISPATCHES, remappedLocal)
+      notifyDataUpdated()
+      return { success: true, data: newDispatch }
+    } else if (error) {
+      console.warn('Supabase community_dispatches insert notice:', error.message)
+    }
+  } catch (err: unknown) {
+    console.warn('Supabase community_dispatches error:', err)
   }
 
   return { success: true, data: newDispatch }
+}
+
+// -----------------------------------------------------------------------------
+// 9. Community Member Posting (Properties & Mountain Jobs)
+// -----------------------------------------------------------------------------
+export const submitCommunityProperty = async (
+  homestay: Homestay
+): Promise<{ success: boolean; data?: Homestay; error?: string }> => {
+  const generatedSlug = `${slugify(homestay.name)}-${Date.now().toString(36)}`
+
+  // Store in persistent local storage immediately
+  const localList = getStoredItems<Homestay & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
+  const updatedLocal = [{ ...homestay, isPublished: true }, ...localList.filter((h) => h.id !== homestay.id)]
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, updatedLocal)
+  notifyDataUpdated()
+
+  if (!isSupabaseConfigured()) {
+    return { success: true, data: homestay }
+  }
+
+  const payload = {
+    slug: generatedSlug,
+    name: homestay.name.trim(),
+    region: homestay.region.trim(),
+    location: homestay.location.trim(),
+    elevation: homestay.elevation.trim(),
+    monthly_rate: homestay.monthlyRate.trim(),
+    security_deposit: homestay.securityDeposit.trim(),
+    min_lease_term: homestay.minLeaseTerm.trim(),
+    lease_status: homestay.leaseStatus || 'Available for Lease',
+    furnishing: homestay.furnishing || 'Stone & Timber',
+    rating: homestay.rating ?? 5.0,
+    reviews_count: homestay.reviewsCount ?? 1,
+    host_name: homestay.host.name.trim(),
+    host_role: homestay.host.role?.trim() || 'Verified Host',
+    host_years: homestay.host.yearsHosting ?? 1,
+    host_avatar: homestay.host.avatar?.trim() || null,
+    room_type: homestay.roomType.trim(),
+    wifi: homestay.wifi.trim(),
+    capacity: homestay.capacity.trim(),
+    images: homestay.images || [],
+    description: homestay.description.trim(),
+    amenities: homestay.amenities || [],
+    features: homestay.features || [],
+    utilities_included: homestay.utilitiesIncluded || [],
+    is_published: true
+  }
+
+  try {
+    const { data: insData, error } = await supabase.from('homestays').insert(payload).select().single()
+    if (!error && insData) {
+      homestay.id = insData.id
+      const remappedLocal = updatedLocal.map((h) => (h.name === homestay.name ? { ...h, id: insData.id } : h))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, remappedLocal)
+      notifyDataUpdated()
+      return { success: true, data: homestay }
+    } else if (error) {
+      console.warn('Supabase insert homestays notice:', error.message)
+    }
+  } catch (err: unknown) {
+    console.warn('Supabase homestays error:', err)
+  }
+
+  return { success: true, data: homestay }
+}
+
+export const submitCommunityJob = async (
+  job: Job
+): Promise<{ success: boolean; data?: Job; error?: string }> => {
+  // Store locally
+  const localList = getStoredItems<Job & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.JOBS)
+  const updatedLocal = [{ ...job, isPublished: true }, ...localList.filter((j) => j.id !== job.id)]
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.JOBS, updatedLocal)
+  notifyDataUpdated()
+
+  if (!isSupabaseConfigured()) {
+    return { success: true, data: job }
+  }
+
+  const payload = {
+    title: job.title.trim(),
+    employer: job.employer.trim(),
+    employer_badge: job.employerBadge?.trim() || 'Verified Employer',
+    location: job.location.trim(),
+    region: job.region.trim(),
+    type: job.type,
+    salary: job.salary.trim(),
+    housing_included: Boolean(job.housingIncluded),
+    category: job.category,
+    description: job.description.trim(),
+    responsibilities: job.responsibilities || [],
+    requirements: job.requirements || [],
+    benefits: job.benefits || [],
+    posted_date: job.postedDate || 'Just now',
+    is_published: true
+  }
+
+  try {
+    const { data: insData, error } = await supabase.from('mountain_jobs').insert(payload).select().single()
+    if (!error && insData) {
+      job.id = insData.id
+      const remappedLocal = updatedLocal.map((j) => (j.title === job.title ? { ...j, id: insData.id } : j))
+      setStoredItems(MOUNTAIN_STORAGE_KEYS.JOBS, remappedLocal)
+      notifyDataUpdated()
+      return { success: true, data: job }
+    } else if (error) {
+      console.warn('Supabase insert mountain_jobs notice:', error.message)
+    }
+  } catch (err: unknown) {
+    console.warn('Supabase mountain_jobs error:', err)
+  }
+
+  return { success: true, data: job }
 }

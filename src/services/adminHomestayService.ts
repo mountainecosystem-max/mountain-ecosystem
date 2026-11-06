@@ -1,6 +1,12 @@
 import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import type { AdminHomestay } from '../types'
 import { slugify } from './adminDestinationService'
+import {
+  MOUNTAIN_STORAGE_KEYS,
+  getStoredItems,
+  setStoredItems,
+  notifyDataUpdated
+} from './ecosystemService'
 
 export interface DbHomestayRow {
   id: string
@@ -100,30 +106,66 @@ export const fetchAdminHomestays = async (): Promise<{
   error: string | null
   permissionDenied?: boolean
 }> => {
-  if (!isSupabaseConfigured()) {
-    return { data: [], error: 'Supabase credentials not configured in .env' }
+  let dbHomestays: AdminHomestay[] = []
+
+  if (isSupabaseConfigured()) {
+    try {
+      const { data, error } = await supabase
+        .from('homestays')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (!error && data) {
+        dbHomestays = ((data as DbHomestayRow[]) || []).map(mapDbRowToAdminHomestay)
+      }
+    } catch (err: unknown) {
+      console.warn('Supabase query error in fetchAdminHomestays:', err)
+    }
   }
 
-  try {
-    const { data, error } = await supabase
-      .from('homestays')
-      .select('*')
-      .order('created_at', { ascending: false })
+  // Merge with locally stored custom items
+  const localHomestays = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
+  const existingIds = new Set(dbHomestays.map((h) => h.id))
+  const existingNames = new Set(dbHomestays.map((h) => h.name.toLowerCase().trim()))
 
-    if (error) {
-      const isPermission = error.code === '42501' || error.message?.includes('permission denied')
-      return { data: [], error: error.message, permissionDenied: isPermission }
-    }
+  const mappedLocal: AdminHomestay[] = localHomestays
+    .filter((h: any) => !existingIds.has(h.id) && !existingNames.has(h.name.toLowerCase().trim()))
+    .map((h: any) => ({
+      id: h.id,
+      slug: slugify(h.name),
+      name: h.name,
+      region: h.region,
+      location: h.location,
+      elevation: h.elevation,
+      monthlyRate: h.monthlyRate,
+      securityDeposit: h.securityDeposit,
+      minLeaseTerm: h.minLeaseTerm,
+      leaseStatus: h.leaseStatus || 'Available for Lease',
+      furnishing: h.furnishing || 'Furnished Stone & Cedar',
+      rating: Number(h.rating) || 5.0,
+      reviewsCount: Number(h.reviewsCount) || 1,
+      host: h.host || {
+        name: h.hostName || 'Host',
+        role: 'Verified Host',
+        yearsHosting: 1,
+        avatar: ''
+      },
+      roomType: h.roomType,
+      wifi: h.wifi,
+      capacity: h.capacity,
+      images: h.images || [],
+      description: h.description,
+      amenities: h.amenities || [],
+      features: h.features || [],
+      utilitiesIncluded: h.utilitiesIncluded || [],
+      isPublished: h.isPublished !== false,
+      createdAt: h.createdAt || new Date().toISOString(),
+      updatedAt: h.updatedAt || new Date().toISOString()
+    }))
 
-    return {
-      data: ((data as DbHomestayRow[]) || []).map(mapDbRowToAdminHomestay),
-      error: null
-    }
-  } catch (err: unknown) {
-    return {
-      data: [],
-      error: err instanceof Error ? err.message : 'Failed to query homestays'
-    }
+  return {
+    data: [...mappedLocal, ...dbHomestays],
+    error: null
   }
 }
 
@@ -242,42 +284,38 @@ export const toggleAdminHomestayPublish = async (
   id: string,
   isPublished: boolean
 ): Promise<{ success: boolean; error: string | null }> => {
-  if (!isSupabaseConfigured()) {
-    return { success: false, error: 'Supabase credentials not configured.' }
+  // Update in localStorage
+  const localHomestays = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
+  const updatedLocal = localHomestays.map((h: any) => (h.id === id ? { ...h, isPublished } : h))
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, updatedLocal)
+  notifyDataUpdated()
+
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase
+        .from('homestays')
+        .update({ is_published: isPublished, updated_at: new Date().toISOString() })
+        .eq('id', id)
+    } catch {}
   }
 
-  try {
-    const { error } = await supabase
-      .from('homestays')
-      .update({ is_published: isPublished, updated_at: new Date().toISOString() })
-      .eq('id', id)
-
-    if (error) return { success: false, error: error.message }
-    return { success: true, error: null }
-  } catch (err: unknown) {
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : 'Failed to toggle status'
-    }
-  }
+  return { success: true, error: null }
 }
 
 // 5. Delete homestay
 export const deleteAdminHomestay = async (
   id: string
 ): Promise<{ success: boolean; error: string | null }> => {
-  if (!isSupabaseConfigured()) {
-    return { success: false, error: 'Supabase credentials not configured.' }
+  // Remove from localStorage
+  const localHomestays = getStoredItems<any>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
+  setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, localHomestays.filter((h: any) => h.id !== id))
+  notifyDataUpdated()
+
+  if (isSupabaseConfigured()) {
+    try {
+      await supabase.from('homestays').delete().eq('id', id)
+    } catch {}
   }
 
-  try {
-    const { error } = await supabase.from('homestays').delete().eq('id', id)
-    if (error) return { success: false, error: error.message }
-    return { success: true, error: null }
-  } catch (err: unknown) {
-    return {
-      success: false,
-      error: err instanceof Error ? err.message : 'Failed to delete homestay'
-    }
-  }
+  return { success: true, error: null }
 }

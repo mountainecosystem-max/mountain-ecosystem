@@ -72,14 +72,12 @@ export const PublicHomePage: FC = () => {
   const [dispatchModalOpen, setDispatchModalOpen] = useState(false)
   const [propertyModalOpen, setPropertyModalOpen] = useState(false)
   const [jobModalOpen, setJobModalOpen] = useState(false)
-  const [customHomestays, setCustomHomestays] = useState<Homestay[]>([])
-  const [customJobs, setCustomJobs] = useState<Job[]>([])
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
   const [cookiesModalOpen, setCookiesModalOpen] = useState(false)
 
-  const allHomestays = [...customHomestays, ...homestays]
-  const allJobs = [...customJobs, ...jobs]
+  const allHomestays = homestays
+  const allJobs = jobs
 
   const handleOpenJoin = (role: 'traveller' | 'host' | 'seeker' | 'employer' = 'host') => {
     if (role === 'host') {
@@ -215,8 +213,7 @@ export const PublicHomePage: FC = () => {
       <CreatePropertyModal
         isOpen={propertyModalOpen}
         onClose={() => setPropertyModalOpen(false)}
-        onSuccess={(newProp) => {
-          setCustomHomestays((prev) => [newProp, ...prev])
+        onSuccess={() => {
           refetchAll()
         }}
       />
@@ -224,8 +221,7 @@ export const PublicHomePage: FC = () => {
       <CreateJobModal
         isOpen={jobModalOpen}
         onClose={() => setJobModalOpen(false)}
-        onSuccess={(newJob) => {
-          setCustomJobs((prev) => [newJob, ...prev])
+        onSuccess={() => {
           refetchAll()
         }}
       />

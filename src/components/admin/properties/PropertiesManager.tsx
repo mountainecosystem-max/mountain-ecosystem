@@ -71,6 +71,16 @@ export const PropertiesManager: FC = () => {
 
   useEffect(() => {
     loadProperties()
+
+    const handleUpdate = () => {
+      loadProperties()
+    }
+    window.addEventListener('mountain_data_updated', handleUpdate)
+    window.addEventListener('storage', handleUpdate)
+    return () => {
+      window.removeEventListener('mountain_data_updated', handleUpdate)
+      window.removeEventListener('storage', handleUpdate)
+    }
   }, [loadProperties])
 
   const handleTogglePublish = async (h: AdminHomestay) => {

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import type { Job } from '../../types'
+import { submitCommunityJob } from '../../services/ecosystemService'
 
 interface CreateJobModalProps {
   isOpen: boolean
@@ -75,7 +76,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
 
   if (!isOpen) return null
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setError(null)
 
@@ -133,11 +134,16 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
       postedDate: 'Just now'
     }
 
-    setTimeout(() => {
+    try {
+      const res = await submitCommunityJob(newJob)
+      setIsSubmitting(false)
+      setIsSubmitted(true)
+      onSuccess?.(res.data || newJob)
+    } catch {
       setIsSubmitting(false)
       setIsSubmitted(true)
       onSuccess?.(newJob)
-    }, 700)
+    }
   }
 
   return (
