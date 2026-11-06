@@ -259,6 +259,10 @@ export const PublicHomePage: FC = () => {
         jobs={jobs}
         dispatches={dispatches}
         priceIndices={priceIndices}
+        onOpenPropertyModal={() => setPropertyModalOpen(true)}
+        onOpenJobModal={() => setJobModalOpen(true)}
+        onOpenDispatchModal={() => setDispatchModalOpen(true)}
+        onOpenPrivacyModal={() => setPrivacyModalOpen(true)}
       />
 
       {/* Welcome Toast Notification */}

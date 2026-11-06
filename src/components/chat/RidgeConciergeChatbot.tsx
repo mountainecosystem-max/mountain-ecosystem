@@ -10,28 +10,42 @@ import {
   Bot,
   User,
   ChevronRight,
-  Leaf
+  Leaf,
+  Copy,
+  Check
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import type { Destination, Homestay, Job, Dispatch, PriceIndexItem } from '../../types'
 
-interface ChatMessage {
+export interface ChatAction {
+  label: string
+  type: 'scroll' | 'propertyModal' | 'jobModal' | 'dispatchModal' | 'privacyModal' | 'prompt'
+  targetId?: string
+  prompt?: string
+}
+
+export interface ChatMessage {
   id: string
   sender: 'steward' | 'user'
   text: string
   timestamp: string
+  actions?: ChatAction[]
   action?: {
     label: string
     targetId: string
   }
 }
 
-interface RidgeConciergeChatbotProps {
+export interface RidgeConciergeChatbotProps {
   destinations?: Destination[]
   homestays?: Homestay[]
   jobs?: Job[]
   dispatches?: Dispatch[]
   priceIndices?: PriceIndexItem[]
+  onOpenPropertyModal?: () => void
+  onOpenJobModal?: () => void
+  onOpenDispatchModal?: () => void
+  onOpenPrivacyModal?: () => void
 }
 
 export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
@@ -39,31 +53,45 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
   homestays = [],
   jobs = [],
   dispatches = [],
-  priceIndices = []
+  priceIndices = [],
+  onOpenPropertyModal,
+  onOpenJobModal,
+  onOpenDispatchModal,
+  onOpenPrivacyModal
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [hasInteracted, setHasInteracted] = useState(false)
   const [showGreetingBubble, setShowGreetingBubble] = useState(false)
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const initialGreeting: ChatMessage = {
     id: 'msg-1',
     sender: 'steward',
-    text: `Namaste & Tashi Delek! I am Anaya, your ${BRAND_CONFIG.name} AI Concierge. I can help you find mountain properties for lease or outright sale, check verified transit rates, browse and apply for mountain jobs, or guide you through community experiences across Himachal Pradesh, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Western Ghats. How may I assist your mountain journey today?`,
-    timestamp: 'Just now'
+    text: `Namaste & Tashi Delek! 🙏 I am Anaya, your ${BRAND_CONFIG.name} AI Concierge.\n\nI can help you explore verified mountain properties for lease or purchase, check verified transit & taxi fares, discover mountain jobs & residencies, or guide you through ethical Himalayan living across Himachal, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Western Ghats.\n\n💡 Pro tip: Public visitors do NOT need an account or sign-in to browse, apply, or submit listings—everything is 100% free.\n\nHow may I assist your mountain journey today?`,
+    timestamp: 'Just now',
+    actions: [
+      { label: '🏔️ Workation Stays', type: 'scroll', targetId: 'stays' },
+      { label: '💰 Shared Taxi Fares', type: 'scroll', targetId: 'community' },
+      { label: '💼 Zero-Fee Jobs', type: 'scroll', targetId: 'jobs' },
+      { label: '🛡️ Safety Advisory', type: 'prompt', prompt: 'Tell me about mountain safety, job fees, and fraud protection rules' }
+    ]
   }
 
   const [messages, setMessages] = useState<ChatMessage[]>([initialGreeting])
 
   // Suggested prompt chips for instant answers
   const suggestionChips = [
-    { label: '🏔️ Stays for remote work', query: 'Recommend a quiet homestay for remote work with fast broadband' },
-    { label: '💰 Fair shared jeep fares', query: 'What are the fair shared jeep prices from Siliguri to Darjeeling?' },
-    { label: '💼 Open mountain jobs', query: 'What mountain jobs and residencies are currently available?' },
-    { label: '🌿 Ecological Charter', query: 'What is the Ecological Non-Extraction Charter and porter limit?' },
-    { label: '🏛️ Traditional Architecture', query: 'Tell me about the traditional Himalayan architectural materials' }
+    { label: '🏔️ Stays with Fiber WiFi', query: 'Recommend quiet stays for remote work with high-speed fiber broadband' },
+    { label: '💰 Shared Taxi Fares', query: 'What are the current verified shared taxi and jeep rates?' },
+    { label: '💼 Zero-Fee Jobs', query: 'What mountain jobs and residencies are open right now?' },
+    { label: '🛡️ Fraud & Safety Rules', query: 'What are the rules regarding advance payments, job fees, and scam prevention?' },
+    { label: '📝 How to List Free (No Login)', query: 'How can I list my mountain property or job without signing in?' },
+    { label: '⛅ Weather & Best Seasons', query: 'When is the best season and weather to travel or stay in the mountains?' },
+    { label: '🌿 20kg Porter Charter', query: 'What is the Ecological Non-Extraction Charter and porter load limit?' },
+    { label: '🏛️ Traditional Architecture', query: 'Tell me about Dhajji-Dewari and traditional Himalayan building materials' }
   ]
 
   // Show subtle greeting pill after 3.5s if unopened
@@ -93,6 +121,30 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     }
   }
 
+  const handleActionClick = (act: ChatAction) => {
+    if (act.type === 'scroll' && act.targetId) {
+      scrollToSection(act.targetId)
+    } else if (act.type === 'propertyModal' && onOpenPropertyModal) {
+      onOpenPropertyModal()
+    } else if (act.type === 'jobModal' && onOpenJobModal) {
+      onOpenJobModal()
+    } else if (act.type === 'dispatchModal' && onOpenDispatchModal) {
+      onOpenDispatchModal()
+    } else if (act.type === 'privacyModal' && onOpenPrivacyModal) {
+      onOpenPrivacyModal()
+    } else if (act.type === 'prompt' && act.prompt) {
+      handleSend(act.prompt)
+    }
+  }
+
+  const handleCopyText = (text: string, msgId: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedId(msgId)
+    setTimeout(() => {
+      setCopiedId(null)
+    }, 2000)
+  }
+
   const handleSend = (textToSend?: string) => {
     const userText = (textToSend || input).trim()
     if (!userText) return
@@ -111,12 +163,12 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     if (!textToSend) setInput('')
     setIsTyping(true)
 
-    // Generate intelligent response grounded in webpage details
+    // Generate intelligent response grounded in live platform data
     setTimeout(() => {
       const botResponse = generateKnowledgeResponse(userText)
       setMessages((prev) => [...prev, botResponse])
       setIsTyping(false)
-    }, 600 + Math.random() * 400)
+    }, 450 + Math.random() * 350)
   }
 
   const handleSubmit = (e: FormEvent) => {
@@ -128,129 +180,438 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     setMessages([initialGreeting])
   }
 
-  // Knowledge Engine grounded in platform data
+  // Knowledge Engine grounded in live platform props & multilingual queries
   const generateKnowledgeResponse = (query: string): ChatMessage => {
     const q = query.toLowerCase()
     const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-    // 1. Homestays & Remote Work / Leases & Sales
-    if (q.includes('homestay') || q.includes('stay') || q.includes('property') || q.includes('sale') || q.includes('remote') || q.includes('work') || q.includes('wifi') || q.includes('broadband') || q.includes('rent') || q.includes('sabbatical') || q.includes('lease') || q.includes('buy')) {
+    // Check for specific regional mentions
+    const regions = [
+      { name: 'Darjeeling', keys: ['darjeeling', 'lebong', 'takdah', 'kurseong', 'mirik', 'ghoom'] },
+      { name: 'Kalimpong', keys: ['kalimpong', 'lava', 'rishyap', 'pedong', 'rillence'] },
+      { name: 'Sikkim', keys: ['sikkim', 'gangtok', 'pelling', 'ravangla', 'lachung', 'yuksom', 'rumtek'] },
+      { name: 'Himachal Pradesh', keys: ['himachal', 'manali', 'spiti', 'tirthan', 'kullu', 'dharamshala', 'jibhi', 'kaza', 'kinnaur'] },
+      { name: 'Uttarakhand', keys: ['uttarakhand', 'mukteshwar', 'mussoorie', 'chopta', 'rishikesh', 'nainital', 'almora', 'kumaon', 'garhwal'] },
+      { name: 'Ladakh', keys: ['ladakh', 'leh', 'nubra', 'zanskar', 'pangong'] },
+      { name: 'Kashmir', keys: ['kashmir', 'srinagar', 'gulmarg', 'pahalgam', 'sonamarg'] },
+      { name: 'Western Ghats', keys: ['nilgiris', 'coorg', 'ooty', 'wayanad', 'munnar', 'ghats'] },
+      { name: 'Dooars', keys: ['dooars', 'lataguri', 'jaldapara', 'buxa'] }
+    ]
+
+    const matchedRegion = regions.find(r => r.keys.some(k => q.includes(k)))
+
+    // Regional Filter Branch
+    if (matchedRegion) {
+      const matchedStays = homestays.filter(h =>
+        matchedRegion.keys.some(k =>
+          (h.location?.toLowerCase().includes(k)) ||
+          (h.region?.toLowerCase().includes(k)) ||
+          (h.name?.toLowerCase().includes(k))
+        )
+      )
+
+      const matchedJobsList = jobs.filter(j =>
+        matchedRegion.keys.some(k =>
+          (j.location?.toLowerCase().includes(k)) ||
+          (j.region?.toLowerCase().includes(k)) ||
+          (j.title?.toLowerCase().includes(k))
+        )
+      )
+
+      const matchedPricesList = priceIndices.filter(p =>
+        matchedRegion.keys.some(k =>
+          (p.routeOrOrigin?.toLowerCase().includes(k)) ||
+          (p.item?.toLowerCase().includes(k))
+        )
+      )
+
+      let regionReply = `📍 **Verified Ground Intelligence for ${matchedRegion.name}:**\n\n`
+
+      if (matchedStays.length > 0) {
+        regionReply += `🏡 **Verified Mountain Properties (${matchedStays.length} available):**\n`
+        matchedStays.slice(0, 3).forEach(s => {
+          const priceInfo = s.listingType === 'sale'
+            ? `Outright Sale: ${s.salePrice || 'Price on request'}`
+            : `Monthly Lease: ${s.monthlyRate || '₹25,000/mo'}`
+          regionReply += `• **${s.name}** (${s.location || s.region})\n  ${priceInfo} • Elev: ${s.elevation || 'Misty Ridge'} • WiFi: ${s.wifi || '100+ Mbps Fiber'}\n`
+        })
+        regionReply += '\n'
+      }
+
+      if (matchedJobsList.length > 0) {
+        regionReply += `💼 **Mountain Vacancies & Residencies (${matchedJobsList.length}):**\n`
+        matchedJobsList.slice(0, 2).forEach(j => {
+          regionReply += `• **${j.title}** at ${j.employer} (${j.salary || 'Dignified Living Wage'})\n  Includes: Free cottage stay & mountain meals.\n`
+        })
+        regionReply += '\n'
+      }
+
+      if (matchedPricesList.length > 0) {
+        regionReply += `🚕 **Fair Transit & Commodity Index:**\n`
+        matchedPricesList.slice(0, 2).forEach(p => {
+          regionReply += `• ${p.item} (${p.routeOrOrigin}): **${p.primaryRate} ${p.rateUnit}** (Verified)\n`
+        })
+        regionReply += '\n'
+      }
+
+      regionReply += `💡 *All properties and jobs can be applied for or listed 100% free with zero sign-in required!*`
+
+      const regionActions: ChatAction[] = [
+        { label: `View ${matchedRegion.name} Listings`, type: 'scroll', targetId: 'stays' },
+        { label: `List Property in ${matchedRegion.name}`, type: 'propertyModal' }
+      ]
+
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: regionReply,
+        timestamp: now,
+        actions: regionActions
+      }
+    }
+
+    // 1. Anti-Fraud, Safety & Payment Rules (High Priority Query)
+    if (
+      q.includes('fraud') ||
+      q.includes('scam') ||
+      q.includes('fake') ||
+      q.includes('paisa') ||
+      q.includes('advance') ||
+      q.includes('deposit') ||
+      q.includes('safe') ||
+      q.includes('safety') ||
+      q.includes('trust') ||
+      q.includes('rule') ||
+      q.includes('security') ||
+      q.includes('suraksha') ||
+      q.includes('scammer')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `🛡️ **Mountain Ecosystem Trust, Safety & Anti-Fraud Protocol:**\n\n1. 🚫 **NEVER Pay Any Money for Jobs:** Mountain job applications, interviews, or steward fellowships are **100% FREE**. If anyone demands registration fees, uniform charges, or security deposits, it is a scam. Report them immediately!\n\n2. 🏡 **Homestay & Lease Verification:** Never transfer large token advances without a live video call verification of the property and host, or an in-person physical site visit.\n\n3. 📜 **Outright Land / Property Purchase:** Always verify Jamabandi, mutation registers, and tribal land ceiling covenants (e.g., Section 118 in Himachal or Sixth Schedule norms in the North East) with a local advocate before signing agreements.\n\n4. ⚖️ **Fair Mountain Wages & Porter Limits:** All human porter loads are strictly capped at 20kg per our Non-Extraction Charter with fair base pay (₹900–₹1,200/day).\n\nNeed to report something suspicious? Email **${BRAND_CONFIG.supportEmail}** anytime.`,
+        timestamp: now,
+        actions: [
+          { label: 'View Trust & Charter FAQs', type: 'scroll', targetId: 'faqs' },
+          { label: 'Review Privacy & Terms', type: 'privacyModal' },
+          { label: 'Browse Verified Stays', type: 'scroll', targetId: 'stays' }
+        ]
+      }
+    }
+
+    // 2. How to Post / Zero Sign-In Requirement
+    if (
+      q.includes('how to list') ||
+      q.includes('how to post') ||
+      q.includes('post property') ||
+      q.includes('post job') ||
+      q.includes('submit') ||
+      q.includes('account') ||
+      q.includes('sign in') ||
+      q.includes('login') ||
+      q.includes('register') ||
+      q.includes('kaise daale') ||
+      q.includes('kaise post') ||
+      q.includes('add property') ||
+      q.includes('free')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `✨ **Zero-Barrier Public Platform (No Account or Login Required):**\n\n• **Public Visitors & Hosts:** You do **not** need to register or sign in to browse properties, apply for jobs, list a mountain home, or share community experiences.\n• **Listing is 100% Free:** Simply click "List Property" or "Post a Mountain Job". Fill in your property or job details, accept our non-extraction charter, and submit directly.\n• **Steward Moderation:** Every submission is reviewed by our volunteer team to prevent spam and protect visitors from fraudulent brokers.\n• **Staff Administration:** Only authorized platform stewards use \`/admin/login\` to verify records.\n\nReady to contribute to the Himalayan registry?`,
+        timestamp: now,
+        actions: [
+          { label: '📝 List a Property (Free)', type: 'propertyModal' },
+          { label: '💼 Post a Mountain Job (Free)', type: 'jobModal' },
+          { label: '✍️ Share Community Story', type: 'dispatchModal' }
+        ]
+      }
+    }
+
+    // 3. Stays, Leases, Sales, Kiraya & Remote Work (Hinglish + English)
+    if (
+      q.includes('homestay') ||
+      q.includes('stay') ||
+      q.includes('property') ||
+      q.includes('sale') ||
+      q.includes('remote') ||
+      q.includes('work') ||
+      q.includes('wifi') ||
+      q.includes('broadband') ||
+      q.includes('rent') ||
+      q.includes('kiraya') ||
+      q.includes('bhaada') ||
+      q.includes('rate') ||
+      q.includes('room') ||
+      q.includes('kamra') ||
+      q.includes('makan') ||
+      q.includes('kothi') ||
+      q.includes('sabbatical') ||
+      q.includes('lease') ||
+      q.includes('buy') ||
+      q.includes('purchase')
+    ) {
       const stayCount = homestays.length || 6
+      const featuredStay = homestays[0]
+      const sampleLine = featuredStay
+        ? `Example: **${featuredStay.name}** in ${featuredStay.location} (${featuredStay.monthlyRate || '₹28,000/mo'}, ${featuredStay.wifi || 'High-Speed Fiber'}).`
+        : 'Featured: Cedar cottages with fiber broadband and 360° snow peak views.'
+
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `We feature ${stayCount} verified mountain properties across India (Himachal Pradesh, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Nilgiris) for both long-term residential lease and outright purchase.\n\n• High-speed fiber broadband (100–300 Mbps) with dedicated workstations.\n• Full verified addresses with landmark, village, and elevation.\n• Monthly leases (₹21,000 to ₹42,000/mo) and outright sales with verified land title covenants.\n\nWould you like to browse current listings or add your own property?`,
+        text: `🏡 We feature **${stayCount} verified mountain sanctuaries** across Himachal Pradesh, Uttarakhand, Ladakh, Kashmir, Sikkim, Bengal Hills, and the Nilgiris:\n\n• **Monthly Leases:** ₹18,000 to ₹45,000/mo with dedicated timber work desks and optical fiber broadband (100–300 Mbps).\n• **Outright Purchases:** Verified stone & timber homesteads with surveyed boundary covenants.\n• **Direct Host Contact:** Zero broker commissions—interact directly with indigenous host families.\n\n${sampleLine}\n\nWould you like to browse current listings or submit your own property?`,
         timestamp: now,
-        action: {
-          label: 'View Mountain Properties',
-          targetId: 'stays'
-        }
+        actions: [
+          { label: 'Inspect Mountain Stays', type: 'scroll', targetId: 'stays' },
+          { label: '📝 List Your Property (Free)', type: 'propertyModal' }
+        ]
       }
     }
 
-    // 2. Transport, Shared Jeeps & Price Index
-    if (q.includes('price') || q.includes('fare') || q.includes('jeep') || q.includes('transport') || q.includes('taxi') || q.includes('cost') || q.includes('index') || q.includes('manali') || q.includes('spiti') || q.includes('siliguri') || q.includes('darjeeling')) {
+    // 4. Transport, Shared Jeeps & Price Index (Hinglish + English)
+    if (
+      q.includes('price') ||
+      q.includes('fare') ||
+      q.includes('jeep') ||
+      q.includes('transport') ||
+      q.includes('taxi') ||
+      q.includes('cost') ||
+      q.includes('index') ||
+      q.includes('sumo') ||
+      q.includes('bolero') ||
+      q.includes('bhaada') ||
+      q.includes('gaadi') ||
+      q.includes('cab') ||
+      q.includes('travel') ||
+      q.includes('reach') ||
+      q.includes('road') ||
+      q.includes('siliguri') ||
+      q.includes('manali') ||
+      q.includes('spiti')
+    ) {
       const livePriceLines = priceIndices.length > 0
-        ? priceIndices.slice(0, 3).map(p => `• ${p.item} (${p.routeOrOrigin}): ${p.primaryRate} ${p.rateUnit}`).join('\n')
-        : '• Shared 4x4 Bolero (Manali to Kaza/Spiti): ₹1,200 per seat.\n• Shared Sumo (Siliguri to Darjeeling): ₹350 per seat.\n• Shared Jeep (Rishikesh to Chopta): ₹450 per seat.'
+        ? priceIndices.slice(0, 3).map(p => `• **${p.item}** (${p.routeOrOrigin}): ${p.primaryRate} ${p.rateUnit}`).join('\n')
+        : '• **Shared 4x4 Bolero** (Manali to Kaza/Spiti): ₹1,200 per seat.\n• **Shared Tata Sumo** (Siliguri to Darjeeling): ₹350 per seat.\n• **Shared Jeep** (Rishikesh to Chopta): ₹450 per seat.'
+
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `According to our verified Pan-India Community Ground Price Index:\n\n${livePriceLines}\n• Certified High-Altitude Porter (strictly capped at 20kg): ₹900 – ₹1,200/day.\n• Heirloom Orchard Produce: ₹70 – ₹90/dozen direct farmgate.\n\nAll rates are verified by local driver unions and mountain residents to prevent seasonal overcharging.`,
+        text: `🚕 **Verified Pan-India Mountain Ground Price Index (November 2026):**\n\n${livePriceLines}\n• **Certified High-Altitude Porter:** ₹900 – ₹1,200/day (strictly capped at 20kg maximum).\n• **Direct Farmgate Orchard Apples:** ₹70 – ₹90/dozen.\n\n💡 Rates are verified directly with local driver syndicates and mountain transport unions to prevent tourist overcharging.`,
         timestamp: now,
-        action: {
-          label: 'Inspect Ground Price Ledger',
-          targetId: 'community'
-        }
+        actions: [
+          { label: 'Inspect Ground Price Ledger', type: 'scroll', targetId: 'community' },
+          { label: '✍️ Submit Fare Update', type: 'dispatchModal' }
+        ]
       }
     }
 
-    // 3. Mountain Jobs & Residencies
-    if (q.includes('job') || q.includes('work') || q.includes('career') || q.includes('hiring') || q.includes('fellowship') || q.includes('employment') || q.includes('salary') || q.includes('residency') || q.includes('hire')) {
+    // 5. Mountain Jobs, Residencies & Naukri (Hinglish + English)
+    if (
+      q.includes('job') ||
+      q.includes('work') ||
+      q.includes('career') ||
+      q.includes('hiring') ||
+      q.includes('fellowship') ||
+      q.includes('employment') ||
+      q.includes('salary') ||
+      q.includes('residency') ||
+      q.includes('hire') ||
+      q.includes('naukri') ||
+      q.includes('kaam') ||
+      q.includes('kamaai') ||
+      q.includes('stipend') ||
+      q.includes('apply') ||
+      q.includes('vacancy')
+    ) {
       const jobCount = jobs.length || 6
+      const jobExamples = jobs.length > 0
+        ? jobs.slice(0, 3).map(j => `• **${j.title}** at ${j.employer} (${j.location}) — ${j.salary}`).join('\n')
+        : '• **Riverside Eco-Lodge Lead** (Tirthan Valley, HP) — ₹35,000–₹45,000/mo\n• **Agro-Forestry & Seed Steward** (Mukteshwar, UK) — ₹28,000/mo + Cottage\n• **Solar Microgrid Operations Lead** (Leh, Ladakh) — ₹40,000/mo'
+
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `We currently host ${jobCount} ethical Mountain Job vacancies and Residencies across India. Current openings include:\n\n• Riverside Eco-Lodge Lead (Tirthan Valley, Himachal Pradesh)\n• Agro-Forestry & Seed Steward (Mukteshwar, Uttarakhand)\n• Solar Microgrid Operations Lead (Leh, Ladakh)\n• Heritage Tea Estate Manager (Darjeeling, Bengal)\n\nEvery opening guarantees dignified mountain living wages, free lodging, and organic meals. Anyone can also post jobs directly on our exchange!`,
+        text: `💼 **Verified Mountain Jobs & Residencies (${jobCount} Openings):**\n\n${jobExamples}\n\n🌟 **All openings guarantee:**\n1. Dignified mountain living wages & ethical hours.\n2. Clean mountain cottage lodging & organic hearth meals included.\n3. **100% Free Application Guarantee** — No applicant ever pays any fee to apply!\n\nAnyone can also post an opening directly to our registry.`,
         timestamp: now,
-        action: {
-          label: 'Explore Mountain Jobs',
-          targetId: 'jobs'
-        }
+        actions: [
+          { label: 'Explore Mountain Jobs', type: 'scroll', targetId: 'jobs' },
+          { label: '💼 Post a Job (Free)', type: 'jobModal' }
+        ]
       }
     }
 
-    // 4. Destinations, Seasons & Hiking
-    if (q.includes('destination') || q.includes('region') || q.includes('season') || q.includes('weather') || q.includes('darjeeling') || q.includes('kalimpong') || q.includes('sikkim') || q.includes('dooars') || q.includes('trek') || q.includes('hike') || q.includes('mountain') || q.includes('kanchenjunga')) {
+    // 6. Weather, Best Time to Visit, Seasons & Roads (Hinglish + English)
+    if (
+      q.includes('weather') ||
+      q.includes('season') ||
+      q.includes('mausam') ||
+      q.includes('snow') ||
+      q.includes('barf') ||
+      q.includes('rain') ||
+      q.includes('monsoon') ||
+      q.includes('winter') ||
+      q.includes('cold') ||
+      q.includes('thand') ||
+      q.includes('garmi') ||
+      q.includes('best time') ||
+      q.includes('when to visit') ||
+      q.includes('temperature')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `⛅ **Himalayan Seasonal & Weather Advisory:**\n\n• 🍂 **Autumn (Oct – Nov):** Pristine crystal-clear skies, crisp 8°C–18°C days, and the clearest snow-peak panoramas of Kanchenjunga and Nanda Devi.\n• 🌸 **Spring (Mar – May):** Rhododendron valleys in full bloom, mild 14°C–24°C days—ideal for work sabbaticals and outdoor ridge trails.\n• ❄️ **Winter (Dec – Feb):** Heavy snow in Spiti, Ladakh, and Upper Manali (-15°C to 5°C); sunny, crisp winter days in Darjeeling and Kalimpong (4°C to 14°C).\n• 🌧️ **Monsoon (Jul – Aug):** Lower ranges experience heavy rain; however, **Ladakh and Spiti** sit in the Trans-Himalayan rain shadow and remain dry, sunny, and accessible!\n\nAlways carry sturdy waterproof trekking shoes and layered thermal fleece.`,
+        timestamp: now,
+        actions: [
+          { label: 'Explore Destination Atlas', type: 'scroll', targetId: 'destinations' },
+          { label: 'Browse Verified Stays', type: 'scroll', targetId: 'stays' }
+        ]
+      }
+    }
+
+    // 7. Direct Host Contact & WhatsApp Inquiries
+    if (
+      q.includes('contact') ||
+      q.includes('phone') ||
+      q.includes('mobile') ||
+      q.includes('call') ||
+      q.includes('whatsapp') ||
+      q.includes('number') ||
+      q.includes('owner') ||
+      q.includes('host') ||
+      q.includes('talk') ||
+      q.includes('baat')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `📞 **Direct Host & Employer Communication:**\n\n• **Direct Verification:** Click on any Homestay or Job card to view the host's background, years hosting, village elevation, and verified contact badge.\n• **Instant Inquiry:** Use the "Submit Inquiry" or "Direct WhatsApp" button on the listing modal to initiate immediate, direct contact.\n• **0% Middleman Fees:** We do not take cuts or broker fees from mountain hosts or job seekers, ensuring all funds flow directly to local communities.`,
+        timestamp: now,
+        actions: [
+          { label: 'Browse Verified Stays', type: 'scroll', targetId: 'stays' },
+          { label: 'Explore Mountain Jobs', type: 'scroll', targetId: 'jobs' }
+        ]
+      }
+    }
+
+    // 8. Traditional Himalayan Architecture & Materials
+    if (
+      q.includes('architecture') ||
+      q.includes('specimen') ||
+      q.includes('ledger') ||
+      q.includes('material') ||
+      q.includes('dhajji') ||
+      q.includes('stone') ||
+      q.includes('slate') ||
+      q.includes('bamboo') ||
+      q.includes('wood') ||
+      q.includes('timber') ||
+      q.includes('kath-kuni')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `🏛️ **Vernacular Himalayan Architecture Ledger:**\n\n• **Dhajji-Dewari & Kath-Kuni:** Earthquake-resilient deodar timber framework interlocked with dry stone rubble infill without brittle mortar.\n• **Chorten Slate Masonry:** Hand-chiseled metamorphic river stone assembled to breathe with thermal inertia.\n• **Ikra Woven Reeds:** Flexible river reeds plastered in clay and lime wash, proven against high seismic stress.\n• **Bamboo Wattle & Daub:** Naturally renewable, breathable walls engineered for subtropical mountain slopes.\n\nExplore our digital material specimen museum on this page!`,
+        timestamp: now,
+        actions: [
+          { label: 'View Architectural Ledger', type: 'scroll', targetId: 'architecture' }
+        ]
+      }
+    }
+
+    // 9. Ecological Non-Extraction Charter & Ethics
+    if (
+      q.includes('ethic') ||
+      q.includes('charter') ||
+      q.includes('porter') ||
+      q.includes('plastic') ||
+      q.includes('nature') ||
+      q.includes('green') ||
+      q.includes('ecology') ||
+      q.includes('pledge') ||
+      q.includes('environment')
+    ) {
+      return {
+        id: `bot-${Date.now()}`,
+        sender: 'steward',
+        text: `🌿 **The Ecological Non-Extraction Charter:**\n\n1. **Porter Dignity:** Loads strictly capped at 20kg per porter with mandated cold-weather gear and fair base wages (₹900–₹1,200/day).\n2. **Zero Single-Use Plastics:** Every homestay provides glass carafes and mountain-filtered spring water.\n3. **Sacred Ridge Silence:** Maintain quietude near high-altitude gompas, cedar groves, and traverse mani prayer walls clockwise (kora).\n4. **Direct Local Economy:** 100% of homestay and guiding revenue remains with local families.`,
+        timestamp: now,
+        actions: [
+          { label: 'Review Charter FAQs', type: 'scroll', targetId: 'faqs' }
+        ]
+      }
+    }
+
+    // 10. Destination Atlas & Botanical Sanctuaries
+    if (
+      q.includes('destination') ||
+      q.includes('atlas') ||
+      q.includes('places') ||
+      q.includes('jagah') ||
+      q.includes('ghoomne')
+    ) {
       const destSummary = destinations.length > 0
-        ? destinations.slice(0, 4).map((d, i) => `${i + 1}. ${d.name} (${d.elevation}): ${d.subtitle}`).join('\n')
-        : '1. Darjeeling Tea Belt (2,042m): Biodynamic misty tea slopes\n2. Kalimpong Orchid Ridge (1,247m): Subtropical flowers & paper workshops\n3. Sikkim Organic Valleys (1,600m): Sacred cedar groves\n4. Dooars Sal Forest (300m): Dense foothills & riverside tea'
+        ? destinations.slice(0, 4).map((d, i) => `${i + 1}. **${d.name}** (${d.elevation}): ${d.subtitle}`).join('\n')
+        : '1. **Darjeeling Tea Belt** (2,042m): Biodynamic misty tea slopes\n2. **Kalimpong Orchid Ridge** (1,247m): Subtropical flowers & paper workshops\n3. **Sikkim Organic Valleys** (1,600m): Sacred cedar groves\n4. **Dooars Foothills** (300m): Dense sal forest wildlife sanctuary'
+
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `The ${BRAND_CONFIG.name} spans four primary botanical sanctuaries:\n\n${destSummary}\n\nBest seasons: Autumn (Oct–Nov) for crisp peak visibility; Spring (Mar–Apr) for blooming rhododendrons.`,
+        text: `🗺️ **The Mountain Ecosystem Destination Atlas:**\n\n${destSummary}\n\nEach region is documented with elevation profiles, seasonal guides, and verified ground homestays.`,
         timestamp: now,
-        action: {
-          label: 'Explore Destination Atlas',
-          targetId: 'destinations'
-        }
+        actions: [
+          { label: 'Explore Destination Atlas', type: 'scroll', targetId: 'destinations' },
+          { label: 'View Verified Stays', type: 'scroll', targetId: 'stays' }
+        ]
       }
     }
 
-    // 5. Himalayan Architecture & Materials
-    if (q.includes('architecture') || q.includes('specimen') || q.includes('ledger') || q.includes('material') || q.includes('dhajji') || q.includes('stone') || q.includes('slate') || q.includes('bamboo') || q.includes('wood')) {
+    // 11. Community Stories & Field Dispatches
+    if (
+      q.includes('dispatch') ||
+      q.includes('story') ||
+      q.includes('katha') ||
+      q.includes('experience') ||
+      q.includes('kahani') ||
+      q.includes('field report')
+    ) {
+      const dispatchNote = dispatches.length > 0
+        ? `We currently feature ${dispatches.length} verified ground dispatches from local guides, botanists, and travellers.`
+        : 'We feature authentic field dispatches from local naturalists, tea growers, and mountain fellows.'
+
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `Our Himalayan Architectural & Material Ledger documents indigenous vernacular building crafts:\n\n• Dhajji-Dewari: Earthquake-resilient cedar timber frames with interlocking stone rubble infill.\n• Chorten Slate Masonry: Hand-chiseled metamorphic river stone assembled without cement mortar.\n• Ikra Woven Reeds: Flexible river reeds plastered in clay and lime wash.\n• Bamboo Wattle & Daub: Breathable, renewable thermal walls.\n\nYou can explore our interactive Digital Museum right on this page!`,
+        text: `📖 **Himalayan Community Stories & Field Reports:**\n\n${dispatchNote}\n\nTopics range from organic tea harvest logs and medicinal herb conservation to winter transit survival notes. Anyone can publish a dispatch without logging in!`,
         timestamp: now,
-        action: {
-          label: 'View Architectural Ledger',
-          targetId: 'architecture'
-        }
+        actions: [
+          { label: 'Read Community Ledger', type: 'scroll', targetId: 'community' },
+          { label: '✍️ Submit a Field Dispatch (Free)', type: 'dispatchModal' }
+        ]
       }
     }
 
-    // 6. Ecological Charter, Porter Limits, Rules & Ethics
-    if (q.includes('ethic') || q.includes('charter') || q.includes('porter') || q.includes('plastic') || q.includes('rule') || q.includes('nature') || q.includes('green') || q.includes('ecology') || q.includes('pledge')) {
+    // 12. Greetings & Friendly Small Talk
+    if (
+      q === 'hi' ||
+      q === 'hello' ||
+      q === 'hey' ||
+      q === 'namaste' ||
+      q === 'tashi delek' ||
+      q.includes('kaisa hai') ||
+      q.includes('kaise ho')
+    ) {
       return {
         id: `bot-${Date.now()}`,
         sender: 'steward',
-        text: `The ${BRAND_CONFIG.name} Ecological Non-Extraction Charter requires all guests and partners to honor 4 core tenets:\n\n1. Porter Dignity: Loads are strictly capped at 20kg per porter with mandated high-altitude gear and fair base pay.\n2. Zero Single-Use Plastics: We use mountain filtered glass carafes and reusable ridge hydration stations.\n3. Sacred Space Reverence: Strict quietude in monastic cedar forests and respect for ancestral prayer walls (pass clockwise).\n4. Direct Local Economy: 100% of homestay and guiding fees remain with the indigenous families.`,
+        text: `Namaste ji! 🙏 Main Anaya hoon, aapki Mountain AI Concierge.\n\nAap mujhse Himachal, Uttarakhand, Ladakh, Kashmir, ya Sikkim ke verified homestays, fair taxi rates, zero-fee mountain jobs, ya mausam ke baare me pooch sakte hain.\n\nBatayein, main aapki kya madad kar sakti hoon?`,
         timestamp: now,
-        action: {
-          label: 'Review FAQs & Charter',
-          targetId: 'faqs'
-        }
-      }
-    }
-
-    // 7. Community Dispatches & Posting
-    if (q.includes('post') || q.includes('write') || q.includes('dispatch') || q.includes('contribute') || q.includes('story') || q.includes('publish')) {
-      const dispatchNote = dispatches.length > 0 ? `We currently have ${dispatches.length} published dispatches in our ledger.` : ''
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'steward',
-        text: `Any verified community fellow or traveller can publish field dispatches to our ledger! ${dispatchNote}\n\nSimply sign in with your email account, click "Submit Ground Dispatch", and share your trail notes, tea harvest updates, or regional price reports. Posts are verified to keep our platform transparent.`,
-        timestamp: now,
-        action: {
-          label: 'Read Community Ledger',
-          targetId: 'community'
-        }
-      }
-    }
-
-    // 8. Sign in / Admin / Account
-    if (q.includes('login') || q.includes('sign in') || q.includes('admin') || q.includes('account') || q.includes('auth')) {
-      return {
-        id: `bot-${Date.now()}`,
-        sender: 'steward',
-        text: `We maintain two distinct experiences:\n\n• Public Visitors & Fellows: Sign in with your email using the "Sign In" button in the top navigation to publish field dispatches and track inquiries.\n• Administrative Staff: Staff members authenticate via email/password at /admin/login. Admin accounts are provisioned securely by platform stewards.`,
-        timestamp: now,
-        action: {
-          label: 'Visit Frequently Asked Questions',
-          targetId: 'faqs'
-        }
+        actions: [
+          { label: '🏔️ Stays with Fiber WiFi', type: 'scroll', targetId: 'stays' },
+          { label: '💰 Shared Taxi Fares', type: 'scroll', targetId: 'community' },
+          { label: '💼 Zero-Fee Jobs', type: 'scroll', targetId: 'jobs' }
+        ]
       }
     }
 
@@ -258,20 +619,21 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     return {
       id: `bot-${Date.now()}`,
       sender: 'steward',
-      text: `Thank you for asking. The ${BRAND_CONFIG.name} is dedicated to connecting respectful travellers, indigenous host families, and regenerative stewards across ${BRAND_CONFIG.region}.\n\nYou can explore our verified Homestay Marketplace, Mountain Jobs, Architectural Ledger, or Community Price Index. If you have a custom inquiry, write directly to ${BRAND_CONFIG.supportEmail}.`,
+      text: `Thank you for asking! The ${BRAND_CONFIG.name} is a zero-brokerage, community-verified registry connecting conscious travellers, indigenous hosts, and regenerative stewards across ${BRAND_CONFIG.region}.\n\nFeel free to ask me about:\n• Homestays & long-term leases with high-speed fiber broadband\n• Verified shared taxi & jeep fares\n• Ethical mountain jobs & fellowships (100% free to apply)\n• Road conditions, weather seasons, or how to list your property without signing in.\n\nFor custom inquiries, you can also write directly to ${BRAND_CONFIG.supportEmail}.`,
       timestamp: now,
-      action: {
-        label: 'Explore Destinations',
-        targetId: 'destinations'
-      }
+      actions: [
+        { label: 'Browse Verified Stays', type: 'scroll', targetId: 'stays' },
+        { label: 'Explore Mountain Jobs', type: 'scroll', targetId: 'jobs' },
+        { label: 'View Fair Price Index', type: 'scroll', targetId: 'community' }
+      ]
     }
   }
 
   return (
     <>
-      {/* 1. Proactive Greeting Bubble (Pops up gently above button, compact on mobile) */}
+      {/* 1. Proactive Greeting Bubble */}
       {showGreetingBubble && !isOpen && (
-        <div className="fixed bottom-20 right-3 sm:right-6 z-40 max-w-[280px] sm:max-w-xs bg-[#0B2516] text-[#F8F6F0] border border-[#1F4E34] p-3 sm:p-3.5 rounded-xl shadow-2xl animate-fade-in-scale font-sans">
+        <div className="fixed bottom-20 right-3 sm:right-6 z-40 max-w-[290px] sm:max-w-xs bg-[#0B2516] text-[#F8F6F0] border border-[#1F4E34] p-3 sm:p-3.5 rounded-xl shadow-2xl animate-fade-in-scale font-sans">
           <div className="flex items-start justify-between gap-2 mb-1">
             <span className="text-[10px] font-mono text-[#8FA777] uppercase tracking-wider font-semibold flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-[#8FA777]" />
@@ -286,7 +648,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             </button>
           </div>
           <p className="text-xs text-white/90 leading-relaxed font-light">
-            Need advice on mountain properties for lease or sale, fair transit fares, or jobs? Ask me anything!
+            Need advice on mountain leases, shared jeep fares, weather, or zero-fee jobs? Ask me anything!
           </p>
           <button
             onClick={() => {
@@ -341,10 +703,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
         <div
           role="dialog"
           aria-label="Anaya AI Mountain Concierge Chat"
-          className="fixed bottom-18 sm:bottom-20 right-2 sm:right-6 z-50 w-[95vw] sm:w-[420px] max-h-[82vh] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
+          className="fixed bottom-18 sm:bottom-20 right-2 sm:right-6 z-50 w-[95vw] sm:w-[440px] max-h-[85vh] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
         >
           {/* Header */}
-          <div className="bg-[#0B2516] border-b border-[#1F4E34] p-4 flex items-center justify-between">
+          <div className="bg-[#0B2516] border-b border-[#1F4E34] p-3.5 sm:p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <div className="w-9 h-9 rounded-full bg-[#123D2D] border border-[#8FA777]/50 flex items-center justify-center text-[#8FA777]">
@@ -357,6 +719,9 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                   <h3 className="font-serif text-base text-white font-medium">Anaya AI</h3>
                   <span className="px-1.5 py-0.2 bg-[#8FA777]/20 border border-[#8FA777]/40 rounded-full text-[9px] font-mono text-[#8FA777] uppercase">
                     Live
+                  </span>
+                  <span className="px-1.5 py-0.2 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-[9px] font-mono text-emerald-300">
+                    No Sign-in
                   </span>
                 </div>
                 <p className="text-[11px] font-mono text-[#8FA777]/80 truncate">
@@ -401,7 +766,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
           </div>
 
           {/* Messages Scroll Area */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-4 max-h-[50vh] sm:max-h-[380px] text-xs">
+          <div className="flex-1 p-3.5 sm:p-4 overflow-y-auto space-y-4 max-h-[52vh] sm:max-h-[400px] text-xs">
             {messages.map((msg) => {
               const isSteward = msg.sender === 'steward'
               return (
@@ -415,18 +780,35 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                     </div>
                   )}
 
-                  <div className={`space-y-1.5 max-w-[85%] ${isSteward ? '' : 'text-right'}`}>
+                  <div className={`space-y-1.5 max-w-[88%] ${isSteward ? '' : 'text-right'}`}>
                     <div
-                      className={`p-3.5 rounded-sm whitespace-pre-line leading-relaxed ${
+                      className={`p-3.5 rounded-md whitespace-pre-line leading-relaxed ${
                         isSteward
-                          ? 'bg-[#123D2D]/80 border border-[#1F4E34] text-[#E8EFE3] text-left'
+                          ? 'bg-[#123D2D]/85 border border-[#1F4E34] text-[#E8EFE3] text-left'
                           : 'bg-[#FDFBF7] text-[#0B2516] font-medium text-left shadow-md'
                       }`}
                     >
                       <p className="font-light">{msg.text}</p>
 
-                      {/* Interactive Section Action Button */}
-                      {msg.action && (
+                      {/* Interactive Multi-Action Buttons */}
+                      {msg.actions && msg.actions.length > 0 && (
+                        <div className="mt-3 pt-2.5 border-t border-white/15 flex flex-wrap gap-1.5">
+                          {msg.actions.map((act, actIdx) => (
+                            <button
+                              key={actIdx}
+                              type="button"
+                              onClick={() => handleActionClick(act)}
+                              className="inline-flex items-center gap-1 text-[11px] font-sans font-semibold text-emerald-300 hover:text-white bg-white/10 hover:bg-white/20 px-2.5 py-1.5 rounded-sm border border-emerald-400/30 transition-all shrink-0 active:scale-95"
+                            >
+                              <span>{act.label}</span>
+                              <ChevronRight className="w-3 h-3 text-emerald-400" />
+                            </button>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Backward compatibility for legacy single action */}
+                      {!msg.actions && msg.action && (
                         <div className="mt-3 pt-2.5 border-t border-white/15">
                           <button
                             type="button"
@@ -440,8 +822,28 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                       )}
                     </div>
 
-                    <div className="text-[10px] font-mono text-white/40 px-1">
-                      {msg.timestamp}
+                    <div className="flex items-center justify-between text-[10px] font-mono text-white/40 px-1">
+                      <span>{msg.timestamp}</span>
+                      {isSteward && (
+                        <button
+                          type="button"
+                          onClick={() => handleCopyText(msg.text, msg.id)}
+                          className="hover:text-white flex items-center gap-1 transition-colors ml-2"
+                          title="Copy message"
+                        >
+                          {copiedId === msg.id ? (
+                            <>
+                              <Check className="w-3 h-3 text-emerald-400" />
+                              <span className="text-emerald-400">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      )}
                     </div>
                   </div>
 
@@ -464,7 +866,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-1" />
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-2" />
                   <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-3" />
-                  <span className="text-[10px] text-white/50 ml-1">Anaya consulting ledger...</span>
+                  <span className="text-[10px] text-white/50 ml-1">Anaya consulting Himalayan ledger...</span>
                 </div>
               </div>
             )}
@@ -481,7 +883,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Anaya about mountain properties, jobs, community stories..."
+              placeholder="Ask Anaya about stays, taxi fares, jobs, or weather..."
               className="flex-1 bg-black/30 border border-white/20 px-3.5 py-2.5 text-xs text-white placeholder:text-white/40 rounded-sm focus:outline-none focus:border-[#8FA777]"
               maxLength={300}
             />
