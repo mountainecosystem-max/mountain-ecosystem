@@ -16,7 +16,7 @@ import {
   MapPin
 } from 'lucide-react'
 import { supabase, isSupabaseConfigured } from '../../../lib/supabase'
-import { COMMUNITY_DISPATCHES } from '../../../data/mockData'
+
 
 interface FellowshipAppRow {
   id: string
@@ -89,22 +89,7 @@ export const ModerationManager: FC = () => {
     setError(null)
 
     if (!isSupabaseConfigured()) {
-      // Mock / Preview Mode fallback
-      setDispatches(
-        COMMUNITY_DISPATCHES.map((d) => ({
-          id: d.id,
-          type: d.type,
-          title: d.title,
-          excerpt: d.excerpt,
-          location: d.location,
-          date: d.date,
-          author_name: d.author.name,
-          author_role: d.author.role,
-          verified: Boolean(d.verified),
-          is_published: true,
-          created_at: new Date().toISOString()
-        }))
-      )
+      setDispatches([])
       setIsLoading(false)
       return
     }
@@ -143,22 +128,7 @@ export const ModerationManager: FC = () => {
           }))
         )
       } else {
-        // Fallback to verified template dispatches if DB has 0 rows
-        setDispatches(
-          COMMUNITY_DISPATCHES.map((d) => ({
-            id: d.id,
-            type: d.type,
-            title: d.title,
-            excerpt: d.excerpt,
-            location: d.location,
-            date: d.date,
-            author_name: d.author.name,
-            author_role: d.author.role,
-            verified: Boolean(d.verified),
-            is_published: true,
-            created_at: new Date().toISOString()
-          }))
-        )
+        setDispatches([])
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Failed to query moderation data')
