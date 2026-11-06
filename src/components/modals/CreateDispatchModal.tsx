@@ -21,7 +21,6 @@ interface CreateDispatchModalProps {
   isOpen: boolean
   onClose: () => void
   onSuccess?: () => void
-  onOpenPublicAuth?: () => void
 }
 
 const INDIAN_MOUNTAIN_STATES = [
@@ -42,8 +41,7 @@ const INDIAN_MOUNTAIN_STATES = [
 export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
   isOpen,
   onClose,
-  onSuccess,
-  onOpenPublicAuth
+  onSuccess
 }) => {
   const { currentUser } = useAdminAuth()
 
@@ -228,19 +226,6 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     </span>
                   </div>
                 </div>
-
-                {!currentUser && onOpenPublicAuth && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onClose()
-                      onOpenPublicAuth()
-                    }}
-                    className="text-[11px] font-mono text-[#A5C896] hover:underline"
-                  >
-                    Sign in for verified badge →
-                  </button>
-                )}
               </div>
 
               {/* 1. Category Selector */}

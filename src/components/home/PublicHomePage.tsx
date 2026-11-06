@@ -19,7 +19,6 @@ import { JoinCommunityModal } from '../modals/JoinCommunityModal'
 import { CreateDispatchModal } from '../modals/CreateDispatchModal'
 import { CreatePropertyModal } from '../modals/CreatePropertyModal'
 import { CreateJobModal } from '../modals/CreateJobModal'
-import { PublicAuthModal } from '../modals/PublicAuthModal'
 import { PrivacyPolicyModal } from '../modals/PrivacyPolicyModal'
 import { CookiePolicyModal } from '../modals/CookiePolicyModal'
 import { CookieConsentBanner } from '../common/CookieConsentBanner'
@@ -72,7 +71,6 @@ export const PublicHomePage: FC = () => {
   const [dispatchModalOpen, setDispatchModalOpen] = useState(false)
   const [propertyModalOpen, setPropertyModalOpen] = useState(false)
   const [jobModalOpen, setJobModalOpen] = useState(false)
-  const [authModalOpen, setAuthModalOpen] = useState(false)
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
   const [cookiesModalOpen, setCookiesModalOpen] = useState(false)
 
@@ -109,7 +107,6 @@ export const PublicHomePage: FC = () => {
       {/* SaaS App Header */}
       <Navbar
         onOpenJoinModal={handleOpenJoin}
-        onOpenAuthModal={() => setAuthModalOpen(true)}
       />
 
       {/* Main SaaS Platform View */}
@@ -229,15 +226,6 @@ export const PublicHomePage: FC = () => {
       <CreateDispatchModal
         isOpen={dispatchModalOpen}
         onClose={() => setDispatchModalOpen(false)}
-        onOpenPublicAuth={() => setAuthModalOpen(true)}
-        onSuccess={() => {
-          refetchAll()
-        }}
-      />
-
-      <PublicAuthModal
-        isOpen={authModalOpen}
-        onClose={() => setAuthModalOpen(false)}
         onSuccess={() => {
           refetchAll()
         }}

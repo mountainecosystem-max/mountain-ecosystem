@@ -6,7 +6,6 @@ import {
   X,
   MountainSnow,
   Mail,
-  User,
   PlusCircle,
   Home,
   Briefcase,
@@ -21,12 +20,10 @@ import { useAdminAuth } from '../../context/AdminAuthContext'
 
 interface NavbarProps {
   onOpenJoinModal?: (role?: 'traveller' | 'host' | 'seeker' | 'employer') => void
-  onOpenAuthModal?: () => void
 }
 
 export const Navbar: FC<NavbarProps> = ({
-  onOpenJoinModal,
-  onOpenAuthModal
+  onOpenJoinModal
 }) => {
   const { currentUser, profile, logout } = useAdminAuth()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -167,23 +164,14 @@ export const Navbar: FC<NavbarProps> = ({
                   </button>
                 </div>
               ) : (
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => onOpenAuthModal?.()}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/15 transition active:scale-95 font-medium"
-                  >
-                    <User className="w-3.5 h-3.5 text-[#8FA777]" />
-                    <span>Sign In</span>
-                  </button>
-                  <Link
-                    to="/admin/login"
-                    className="text-[10px] font-mono text-white/40 hover:text-white transition"
-                    title="Staff Portal (Restricted to Administrators)"
-                  >
-                    Staff
-                  </Link>
-                </div>
+                <Link
+                  to="/admin/login"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/15 transition active:scale-95 font-medium font-mono"
+                  title="Staff Portal (Restricted to Administrators)"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+                  <span>Admin Staff</span>
+                </Link>
               )}
             </div>
 
@@ -284,27 +272,6 @@ export const Navbar: FC<NavbarProps> = ({
                         </div>
                         <ChevronRight className="w-3.5 h-3.5 text-[#34D399] group-hover:translate-x-0.5 transition" />
                       </Link>
-
-                      {/* Secondary Item: Community Member Sign In */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setStaffMenuOpen(false)
-                          onOpenAuthModal?.()
-                        }}
-                        className="w-full flex items-center justify-between px-3 py-2 text-xs font-mono text-white hover:bg-white/5 rounded-xl transition text-left group"
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
-                            <User className="w-4 h-4 text-[#8FA777]" />
-                          </div>
-                          <div>
-                            <div className="font-semibold text-white">Member Sign In</div>
-                            <div className="text-[10px] text-white/50">Traveller & Host</div>
-                          </div>
-                        </div>
-                        <ChevronRight className="w-3.5 h-3.5 text-white/40 group-hover:translate-x-0.5 transition" />
-                      </button>
                     </div>
                   )}
                 </div>
