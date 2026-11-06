@@ -12,7 +12,8 @@ import {
   Users,
   PlusCircle,
   Tag,
-  Building2
+  Building2,
+  ShieldCheck
 } from 'lucide-react'
 import { DataLoadingSkeleton, DataEmptyState, DataErrorState } from '../common/StateViews'
 
@@ -151,6 +152,19 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                 {reg.label}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Verification & Title Disclaimer */}
+        <div className="mb-8 p-3.5 sm:p-4 rounded-xl bg-emerald-50/90 border border-emerald-300 flex items-start sm:items-center gap-3 text-xs text-emerald-900 shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700">
+            <ShieldCheck className="w-4 h-4" />
+          </div>
+          <div className="flex-1 font-sans leading-relaxed">
+            <strong className="font-semibold text-emerald-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
+              🛡️ Independent Verification Advisory:
+            </strong>
+            Please independently verify all property title deeds, municipal land registry records, year-round water supply, winter road access, and physical premises before executing lease agreements or transferring advance deposits.
           </div>
         </div>
 

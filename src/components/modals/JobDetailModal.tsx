@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { FC, FormEvent } from 'react'
 import type { Job } from '../../types'
-import { X, MapPin, Briefcase, Home, CheckCircle2, Check, ArrowRight, AlertCircle, Leaf, Loader2 } from 'lucide-react'
+import { X, MapPin, Briefcase, Home, CheckCircle2, Check, ArrowRight, AlertCircle, Leaf, Loader2, ShieldAlert } from 'lucide-react'
 import { z } from 'zod'
 import { submitJobApplication } from '../../services/ecosystemService'
 
@@ -211,6 +211,17 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose }) => {
                   <span className="text-[10px] font-mono text-[#285A40] font-bold">
                     Direct • Zero Middleman Fees
                   </span>
+                </div>
+
+                {/* Fraud Advisory */}
+                <div className="p-3 bg-amber-50 border border-amber-300 rounded-sm text-xs text-amber-900 flex items-start gap-2.5 font-sans leading-relaxed">
+                  <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-amber-950">
+                      Zero-Fee Policy • Do Not Pay Money:
+                    </strong>
+                    Never pay any money or security fee for application processing, interview slots, uniform costs, or equipment. Mountain jobs are strictly free to apply.
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -12,7 +12,8 @@ import {
   Filter,
   ThumbsUp,
   MapPin,
-  Leaf
+  Leaf,
+  ShieldCheck
 } from 'lucide-react'
 import { DataLoadingSkeleton, DataEmptyState, DataErrorState } from '../common/StateViews'
 
@@ -135,6 +136,19 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
               <span>+ Share Your Experience</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#A5C896]" />
             </button>
+          </div>
+        </div>
+
+        {/* Trust & Community Feedback Advisory */}
+        <div className="mb-8 p-3.5 sm:p-4 rounded-xl bg-emerald-50/90 border border-emerald-300 flex items-start sm:items-center gap-3 text-xs text-emerald-900 shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700">
+            <ShieldCheck className="w-4 h-4" />
+          </div>
+          <div className="flex-1 font-sans leading-relaxed">
+            <strong className="font-semibold text-emerald-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
+              📢 Community Feedback & Price Advisory:
+            </strong>
+            Field notes, traveller journals, and shared jeep transit benchmarks are independently crowd-sourced by travellers and local residents. Rates and road accessibility vary with monsoon washouts, winter passes, and fuel fluctuations. Always cross-verify with local shared taxi stands or village panchayats before traveling.
           </div>
         </div>
 

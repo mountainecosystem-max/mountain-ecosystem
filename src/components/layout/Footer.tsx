@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Compass, ArrowUp, Leaf, Mail } from 'lucide-react'
+import { Compass, ArrowUp, Leaf, Mail, ShieldCheck } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 
 interface FooterProps {
@@ -183,6 +183,31 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
                 </a>
               </li>
             </ul>
+          </div>
+        </div>
+
+        {/* Professional Trust & Verification Standards Strip */}
+        <div className="py-6 border-b border-[#285A40]/40 my-2">
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-[#164E2D] border border-[#34D399]/40 flex items-center justify-center shrink-0 text-[#34D399]">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="font-semibold text-white uppercase font-mono tracking-wider text-[11px] block">
+                  Platform Safety & Verification Standard
+                </span>
+                <p className="text-[#D8E8D5]/70 text-[11px] font-light mt-0.5 leading-relaxed">
+                  Never pay money for job openings or interviews. For property leases and sales, independently inspect physical access and registry deeds before transferring deposits. Community reports and ground prices are user-shared benchmarks.
+                </p>
+              </div>
+            </div>
+            <a
+              href={`mailto:${BRAND_CONFIG.supportEmail}?subject=Trust%20and%20Safety%20Inquiry`}
+              className="shrink-0 text-[11px] font-mono text-[#34D399] hover:text-white px-3 py-1.5 rounded-lg border border-[#34D399]/40 hover:bg-[#34D399]/10 transition"
+            >
+              Report Fraud / Discrepancy →
+            </a>
           </div>
         </div>
 

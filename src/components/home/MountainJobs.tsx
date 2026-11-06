@@ -8,7 +8,8 @@ import {
   Filter,
   Building2,
   PlusCircle,
-  ShieldCheck
+  ShieldCheck,
+  ShieldAlert
 } from 'lucide-react'
 import { DataLoadingSkeleton, DataEmptyState, DataErrorState } from '../common/StateViews'
 
@@ -137,6 +138,19 @@ export const MountainJobs: FC<MountainJobsProps> = ({
               <ShieldCheck className="w-4 h-4 text-[#164E2D]" />
               <span>Verified Dignified Wages • Lodging & Food Included</span>
             </div>
+          </div>
+        </div>
+
+        {/* Fraud Prevention & Zero-Fee Disclaimer */}
+        <div className="mb-8 p-3.5 sm:p-4 rounded-xl bg-amber-50/90 border border-amber-300 flex items-start sm:items-center gap-3 text-xs text-amber-900 shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 text-amber-700">
+            <ShieldAlert className="w-4 h-4" />
+          </div>
+          <div className="flex-1 font-sans leading-relaxed">
+            <strong className="font-semibold text-amber-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
+              ⚠️ Official Employment Safety Notice:
+            </strong>
+            Legitimate mountain employers and residencies will <strong>NEVER ask applicants to pay money</strong> for job offers, registration, uniform deposits, or interview slots. Never transfer funds or share private OTPs. Please independently verify all employers before traveling.
           </div>
         </div>
 

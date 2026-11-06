@@ -40,6 +40,12 @@ export const FAQSection: FC = () => {
       answer: `Commercial tourist inflation often distorts local transport and living costs in the Himalayas. Our community ledger crowd-sources verified price benchmarks for shared local jeeps, ridge porters, organic produce, and village guides. All price dispatches are submitted by verified community members and local residents to guarantee transparency and fair compensation.`
     },
     {
+      id: 'faq-safety',
+      category: 'jobs',
+      question: 'Do employers or Mountain Ecosystem ever charge money for job applications or interviews?',
+      answer: `Never. Mountain Ecosystem enforces a strict zero-fee employment policy. Legitimate mountain employers will never ask job seekers to pay registration charges, uniform fees, interview appointment costs, or advance security deposits. Never send money to anyone claiming to offer mountain jobs. For property leases, always verify property boundaries and title registry independently before paying advance deposits.`
+    },
+    {
       id: 'faq-4',
       category: 'jobs',
       question: 'How do Mountain Jobs and seasonal residencies work?',

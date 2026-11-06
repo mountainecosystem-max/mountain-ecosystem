@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import type { Destination, Dispatch } from '../../types'
-import { X, Leaf } from 'lucide-react'
+import { X, Leaf, ShieldCheck } from 'lucide-react'
 
 interface StoryDetailModalProps {
   destination?: Destination | null
@@ -171,6 +171,17 @@ export const StoryDetailModal: FC<StoryDetailModalProps> = ({
               </div>
             </>
           )}
+
+          {/* Community Feedback Advisory */}
+          <div className="p-3 bg-stone-100 border border-stone-300 rounded-sm text-xs text-stone-700 flex items-start gap-2.5 font-sans leading-relaxed">
+            <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+            <div>
+              <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-stone-900">
+                Community Sourced Insight:
+              </strong>
+              Experiences and fares are shared by independent travellers and locals. Conditions in mountain passes shift rapidly. Please cross-verify with local operators and checkpoints.
+            </div>
+          </div>
 
           <div className="pt-4 border-t border-[#CBDAC4] flex justify-end">
             <button

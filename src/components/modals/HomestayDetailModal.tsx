@@ -8,7 +8,8 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertCircle,
-  Loader2
+  Loader2,
+  ShieldCheck
 } from 'lucide-react'
 import { z } from 'zod'
 import { submitLeaseInquiry } from '../../services/ecosystemService'
@@ -267,6 +268,17 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                   <span className="text-[10px] font-mono text-[#C47755] font-semibold">
                     Standardized Mountain Lease Contract • 0% Middleman Fees
                   </span>
+                </div>
+
+                {/* Inspection & Title Advisory */}
+                <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-sm text-xs text-emerald-900 flex items-start gap-2.5 font-sans leading-relaxed">
+                  <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="font-semibold block font-mono text-[10px] uppercase tracking-wider text-emerald-950">
+                      Independent Inspection Notice:
+                    </strong>
+                    Always inspect physical access, utilities, and land ownership credentials in person or via trusted local verification before transferring token advances or lease security payments.
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
