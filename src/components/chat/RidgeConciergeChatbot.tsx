@@ -12,7 +12,9 @@ import {
   ChevronRight,
   Leaf,
   Copy,
-  Check
+  Check,
+  Volume2,
+  VolumeX
 } from 'lucide-react'
 import { BRAND_CONFIG } from '../../config/branding'
 import type { Destination, Homestay, Job, Dispatch, PriceIndexItem } from '../../types'
@@ -35,6 +37,130 @@ export interface ChatMessage {
     targetId: string
   }
 }
+
+// ==============================================================================
+// Himalayan Audio Synthesizer via Web Audio API (Zero external assets/downloads)
+// ==============================================================================
+class AnayaAudioEngine {
+  private ctx: AudioContext | null = null
+
+  private getContext(): AudioContext | null {
+    if (typeof window === 'undefined') return null
+    try {
+      if (!this.ctx) {
+        const AudioCtx =
+          window.AudioContext ||
+          (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+        if (AudioCtx) {
+          this.ctx = new AudioCtx()
+        }
+      }
+      if (this.ctx && this.ctx.state === 'suspended') {
+        this.ctx.resume()
+      }
+      return this.ctx
+    } catch {
+      return null
+    }
+  }
+
+  // Soft Mountain Chime on Open (gliding warm bell)
+  playOpenChime() {
+    const ctx = this.getContext()
+    if (!ctx) return
+    try {
+      const now = ctx.currentTime
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+
+      osc.type = 'sine'
+      osc.frequency.setValueAtTime(523.25, now) // C5
+      osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.14) // E5
+
+      gain.gain.setValueAtTime(0.001, now)
+      gain.gain.linearRampToValueAtTime(0.06, now + 0.03)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35)
+
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+
+      osc.start(now)
+      osc.stop(now + 0.36)
+    } catch {
+      // Audio playback fails silently if browser policy blocks autoplay
+    }
+  }
+
+  // Tactile bamboo / bubble tap on message dispatch
+  playSendTap() {
+    const ctx = this.getContext()
+    if (!ctx) return
+    try {
+      const now = ctx.currentTime
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+
+      osc.type = 'triangle'
+      osc.frequency.setValueAtTime(740, now)
+      osc.frequency.exponentialRampToValueAtTime(380, now + 0.05)
+
+      gain.gain.setValueAtTime(0.001, now)
+      gain.gain.linearRampToValueAtTime(0.05, now + 0.01)
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.07)
+
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+
+      osc.start(now)
+      osc.stop(now + 0.08)
+    } catch {
+      // Audio fail silent
+    }
+  }
+
+  // Harmonic Tibetan Singing Bowl Double Chime on Bot Response
+  playReceiveChime() {
+    const ctx = this.getContext()
+    if (!ctx) return
+    try {
+      const now = ctx.currentTime
+
+      // Fundamental Note: D5 (587.33 Hz)
+      const osc1 = ctx.createOscillator()
+      const gain1 = ctx.createGain()
+      osc1.type = 'sine'
+      osc1.frequency.setValueAtTime(587.33, now)
+
+      gain1.gain.setValueAtTime(0.001, now)
+      gain1.gain.linearRampToValueAtTime(0.06, now + 0.03)
+      gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.42)
+
+      osc1.connect(gain1)
+      gain1.connect(ctx.destination)
+      osc1.start(now)
+      osc1.stop(now + 0.44)
+
+      // Harmonic Note: A5 (880 Hz) with warm chime decay
+      const osc2 = ctx.createOscillator()
+      const gain2 = ctx.createGain()
+      osc2.type = 'sine'
+      osc2.frequency.setValueAtTime(880, now + 0.08)
+
+      gain2.gain.setValueAtTime(0.0001, now + 0.08)
+      gain2.gain.linearRampToValueAtTime(0.05, now + 0.11)
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.52)
+
+      osc2.connect(gain2)
+      gain2.connect(ctx.destination)
+      osc2.start(now + 0.08)
+      osc2.stop(now + 0.54)
+    } catch {
+      // Audio fail silent
+    }
+  }
+}
+
+const anayaAudio = new AnayaAudioEngine()
 
 export interface RidgeConciergeChatbotProps {
   destinations?: Destination[]
@@ -65,7 +191,22 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [soundEnabled, setSoundEnabled] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return true
+    return localStorage.getItem('mountain_anaya_sound') !== 'false'
+  })
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  const toggleSound = () => {
+    const next = !soundEnabled
+    setSoundEnabled(next)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('mountain_anaya_sound', String(next))
+    }
+    if (next) {
+      anayaAudio.playOpenChime()
+    }
+  }
 
   const initialGreeting: ChatMessage = {
     id: 'msg-1',
@@ -149,6 +290,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     const userText = (textToSend || input).trim()
     if (!userText) return
 
+    if (soundEnabled) {
+      anayaAudio.playSendTap()
+    }
+
     setHasInteracted(true)
     setShowGreetingBubble(false)
 
@@ -168,6 +313,9 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
       const botResponse = generateKnowledgeResponse(userText)
       setMessages((prev) => [...prev, botResponse])
       setIsTyping(false)
+      if (soundEnabled) {
+        anayaAudio.playReceiveChime()
+      }
     }, 450 + Math.random() * 350)
   }
 
@@ -654,6 +802,9 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             onClick={() => {
               setShowGreetingBubble(false)
               setIsOpen(true)
+              if (soundEnabled) {
+                anayaAudio.playOpenChime()
+              }
             }}
             className="mt-2 text-[11px] font-mono text-[#8FA777] hover:text-white underline underline-offset-4 flex items-center gap-1"
           >
@@ -668,9 +819,13 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
         <button
           type="button"
           onClick={() => {
-            setIsOpen(!isOpen)
+            const nextOpen = !isOpen
+            setIsOpen(nextOpen)
             setShowGreetingBubble(false)
             setHasInteracted(true)
+            if (nextOpen && soundEnabled) {
+              anayaAudio.playOpenChime()
+            }
           }}
           className={`group flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full text-xs font-sans font-semibold tracking-wide transition-all duration-300 shadow-2xl active:scale-95 ${
             isOpen
@@ -731,6 +886,19 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             </div>
 
             <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={toggleSound}
+                title={soundEnabled ? 'Mute sound effects' : 'Enable Himalayan sound effects'}
+                className="p-1.5 text-white/50 hover:text-white hover:bg-white/10 rounded-sm transition-colors"
+                aria-label={soundEnabled ? 'Mute sound effects' : 'Enable sound effects'}
+              >
+                {soundEnabled ? (
+                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                ) : (
+                  <VolumeX className="w-3.5 h-3.5 text-white/40" />
+                )}
+              </button>
               <button
                 type="button"
                 onClick={handleReset}
