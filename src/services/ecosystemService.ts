@@ -160,11 +160,11 @@ export const fetchDestinations = async (mode: DataMode): Promise<Destination[]> 
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.warn('Failed to query destinations from Supabase, using verified fallback:', error.message)
-    return DEV_PREVIEW_DESTINATIONS
+    console.warn('Failed to query destinations from Supabase:', error.message)
+    return []
   }
 
-  if (!data || data.length === 0) return DEV_PREVIEW_DESTINATIONS
+  if (!data || data.length === 0) return []
 
   return (data as DbDestination[]).map((d) => ({
     id: d.id,
@@ -242,7 +242,7 @@ export const fetchHomestays = async (mode: DataMode): Promise<Homestay[]> => {
 
   // Merge locally stored items (deduplicating by id and name)
   const localItems = getStoredItems<Homestay & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
-    .filter((h) => h.isPublished !== false)
+    .filter((h) => h.isPublished !== false && !h.id.startsWith('dev-') && !h.id.startsWith('mock-'))
 
   const existingIds = new Set(dbHomestays.map((h) => h.id))
   const existingNames = new Set(dbHomestays.map((h) => h.name.toLowerCase().trim()))
@@ -252,7 +252,7 @@ export const fetchHomestays = async (mode: DataMode): Promise<Homestay[]> => {
   )
 
   const combinedHomestays = [...uniqueLocal, ...dbHomestays]
-  return combinedHomestays.length > 0 ? combinedHomestays : DEV_PREVIEW_HOMESTAYS
+  return combinedHomestays
 }
 
 // -----------------------------------------------------------------------------
@@ -301,7 +301,7 @@ export const fetchJobs = async (mode: DataMode): Promise<Job[]> => {
 
   // Merge locally stored items (deduplicating by id and title+employer)
   const localJobs = getStoredItems<Job & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.JOBS)
-    .filter((j) => j.isPublished !== false)
+    .filter((j) => j.isPublished !== false && !j.id.startsWith('dev-') && !j.id.startsWith('mock-'))
 
   const existingIds = new Set(dbJobs.map((j) => j.id))
   const existingTitles = new Set(dbJobs.map((j) => `${j.title}-${j.employer}`.toLowerCase().trim()))
@@ -311,7 +311,7 @@ export const fetchJobs = async (mode: DataMode): Promise<Job[]> => {
   )
 
   const combinedJobs = [...uniqueLocal, ...dbJobs]
-  return combinedJobs.length > 0 ? combinedJobs : DEV_PREVIEW_JOBS
+  return combinedJobs
 }
 
 // -----------------------------------------------------------------------------
@@ -371,7 +371,7 @@ export const fetchDispatches = async (mode: DataMode): Promise<Dispatch[]> => {
 
   // Merge locally stored items (deduplicating by id and title)
   const localDispatches = getStoredItems<Dispatch & { is_published?: boolean }>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
-    .filter((d) => d.is_published !== false)
+    .filter((d) => d.is_published !== false && !d.id.startsWith('dev-') && !d.id.startsWith('mock-') && !d.id.startsWith('disp-'))
 
   const existingIds = new Set(dbDispatches.map((d) => d.id))
   const existingTitles = new Set(dbDispatches.map((d) => d.title.toLowerCase().trim()))
@@ -381,7 +381,7 @@ export const fetchDispatches = async (mode: DataMode): Promise<Dispatch[]> => {
   )
 
   const combinedDispatches = [...uniqueLocal, ...dbDispatches]
-  return combinedDispatches.length > 0 ? combinedDispatches : DEV_PREVIEW_DISPATCHES
+  return combinedDispatches
 }
 
 // -----------------------------------------------------------------------------
@@ -409,11 +409,11 @@ export const fetchArchitecturalSpecimens = async (
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.warn('Failed to query architectural specimens from Supabase, using verified fallback:', error.message)
-    return DEV_PREVIEW_SPECIMENS
+    console.warn('Failed to query architectural specimens from Supabase:', error.message)
+    return []
   }
 
-  if (!data || data.length === 0) return DEV_PREVIEW_SPECIMENS
+  if (!data || data.length === 0) return []
 
   interface SupabaseSpecimenJoin {
     id: string
@@ -482,11 +482,11 @@ export const fetchPriceIndex = async (mode: DataMode): Promise<PriceIndexItem[]>
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.warn('Failed to query price indices from Supabase, using verified fallback:', error.message)
-    return DEV_PREVIEW_PRICE_INDEX
+    console.warn('Failed to query price indices from Supabase:', error.message)
+    return []
   }
 
-  if (!data || data.length === 0) return DEV_PREVIEW_PRICE_INDEX
+  if (!data || data.length === 0) return []
 
   interface SupabasePriceJoin {
     id: string

@@ -142,7 +142,7 @@ export const ModerationManager: FC = () => {
     const existingDispIds = new Set(dbDisp.map((d) => d.id))
     const existingDispTitles = new Set(dbDisp.map((d) => d.title.toLowerCase().trim()))
     const mappedLocalDisp: CommunityDispatchRow[] = localDispatches
-      .filter((d: any) => !existingDispIds.has(d.id) && !existingDispTitles.has(d.title.toLowerCase().trim()))
+      .filter((d: any) => !existingDispIds.has(d.id) && !existingDispTitles.has(d.title.toLowerCase().trim()) && !d.id?.startsWith('dev-') && !d.id?.startsWith('mock-') && !d.id?.startsWith('disp-'))
       .map((d: any) => ({
         id: d.id,
         type: d.type,
