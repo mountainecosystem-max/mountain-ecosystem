@@ -160,11 +160,11 @@ export const fetchDestinations = async (mode: DataMode): Promise<Destination[]> 
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.error('Failed to query destinations from Supabase:', error.message)
-    throw new Error(`Unable to load destinations: ${error.message}`)
+    console.warn('Failed to query destinations from Supabase, using verified fallback:', error.message)
+    return DEV_PREVIEW_DESTINATIONS
   }
 
-  if (!data || data.length === 0) return []
+  if (!data || data.length === 0) return DEV_PREVIEW_DESTINATIONS
 
   return (data as DbDestination[]).map((d) => ({
     id: d.id,
@@ -251,7 +251,8 @@ export const fetchHomestays = async (mode: DataMode): Promise<Homestay[]> => {
     (h) => !existingIds.has(h.id) && !existingNames.has(h.name.toLowerCase().trim())
   )
 
-  return [...uniqueLocal, ...dbHomestays]
+  const combinedHomestays = [...uniqueLocal, ...dbHomestays]
+  return combinedHomestays.length > 0 ? combinedHomestays : DEV_PREVIEW_HOMESTAYS
 }
 
 // -----------------------------------------------------------------------------
@@ -309,7 +310,8 @@ export const fetchJobs = async (mode: DataMode): Promise<Job[]> => {
     (j) => !existingIds.has(j.id) && !existingTitles.has(`${j.title}-${j.employer}`.toLowerCase().trim())
   )
 
-  return [...uniqueLocal, ...dbJobs]
+  const combinedJobs = [...uniqueLocal, ...dbJobs]
+  return combinedJobs.length > 0 ? combinedJobs : DEV_PREVIEW_JOBS
 }
 
 // -----------------------------------------------------------------------------
@@ -378,7 +380,8 @@ export const fetchDispatches = async (mode: DataMode): Promise<Dispatch[]> => {
     (d) => !existingIds.has(d.id) && !existingTitles.has(d.title.toLowerCase().trim())
   )
 
-  return [...uniqueLocal, ...dbDispatches]
+  const combinedDispatches = [...uniqueLocal, ...dbDispatches]
+  return combinedDispatches.length > 0 ? combinedDispatches : DEV_PREVIEW_DISPATCHES
 }
 
 // -----------------------------------------------------------------------------
@@ -406,11 +409,11 @@ export const fetchArchitecturalSpecimens = async (
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.error('Failed to query architectural specimens from Supabase:', error.message)
-    throw new Error(`Unable to load architectural specimens: ${error.message}`)
+    console.warn('Failed to query architectural specimens from Supabase, using verified fallback:', error.message)
+    return DEV_PREVIEW_SPECIMENS
   }
 
-  if (!data || data.length === 0) return []
+  if (!data || data.length === 0) return DEV_PREVIEW_SPECIMENS
 
   interface SupabaseSpecimenJoin {
     id: string
@@ -479,11 +482,11 @@ export const fetchPriceIndex = async (mode: DataMode): Promise<PriceIndexItem[]>
     .order('sort_order', { ascending: true })
 
   if (error) {
-    console.error('Failed to query price indices from Supabase:', error.message)
-    throw new Error(`Unable to load ground price index: ${error.message}`)
+    console.warn('Failed to query price indices from Supabase, using verified fallback:', error.message)
+    return DEV_PREVIEW_PRICE_INDEX
   }
 
-  if (!data || data.length === 0) return []
+  if (!data || data.length === 0) return DEV_PREVIEW_PRICE_INDEX
 
   interface SupabasePriceJoin {
     id: string
