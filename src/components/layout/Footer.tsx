@@ -156,7 +156,16 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
                   onClick={onOpenPrivacy}
                   className="hover:text-white hover:underline transition-colors text-left"
                 >
-                  Privacy Policy
+                  Terms of Service
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={onOpenPrivacy}
+                  className="hover:text-white hover:underline transition-colors text-left"
+                >
+                  Privacy Policy (DPDP 2023)
                 </button>
               </li>
               <li>
