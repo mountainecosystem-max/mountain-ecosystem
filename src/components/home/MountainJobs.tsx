@@ -83,9 +83,9 @@ export const MountainJobs: FC<MountainJobsProps> = ({
             <button
               onClick={onPostJobClick}
               type="button"
-              className="inline-flex items-center gap-2 bg-[#164E2D] hover:bg-[#0A2316] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition active:scale-95"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
             >
-              <PlusCircle className="w-4 h-4 text-[#A5C896]" />
+              <PlusCircle className="w-4 h-4 text-[#34D399]" />
               <span>Post a Mountain Job</span>
             </button>
           </div>
@@ -95,7 +95,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
         <div className="space-y-3 pb-6 mb-8 border-b border-[#CBDAC4]/70">
           {/* Pan-India Region Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
+            <span className="text-[11px] font-sans uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
               Region:
             </span>
             {regions.map((reg) => (
@@ -103,9 +103,9 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                 key={reg.id}
                 onClick={() => setSelectedRegion(reg.id)}
                 type="button"
-                className={`px-3.5 py-2 min-h-[38px] text-xs font-mono rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
+                className={`px-3.5 py-2 min-h-[38px] text-xs font-sans rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
-                    ? 'bg-[#164E2D] text-white font-bold shadow-xs'
+                    ? 'bg-gradient-to-r from-[#0A2316] to-[#164E2D] text-white font-semibold shadow-xs border border-emerald-500/30'
                     : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
                 }`}
               >
@@ -123,9 +123,9 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                   key={cat.value}
                   onClick={() => setActiveCategory(cat.value)}
                   type="button"
-                  className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
+                  className={`px-4 py-2 min-h-[38px] text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                     activeCategory === cat.value
-                      ? 'bg-[#0B2516] text-white font-bold shadow-xs'
+                      ? 'bg-[#0B2516] text-white font-semibold shadow-xs border border-emerald-500/30'
                       : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
                   }`}
                 >
@@ -248,10 +248,10 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                       e.stopPropagation()
                       onSelectJob(job)
                     }}
-                    className="inline-flex items-center gap-1.5 bg-[#164E2D] hover:bg-[#0A2316] text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-xl shadow transition transform active:scale-95"
+                    className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
                   >
                     <span>Apply / Details</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#34D399] group-hover/btn:translate-x-0.5 transition-transform" />
                   </button>
                 </div>
               </div>

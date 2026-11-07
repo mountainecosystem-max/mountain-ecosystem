@@ -90,119 +90,119 @@ export const Hero: FC<HeroProps> = ({
         </p>
 
         {/* 3 Core Interactive SaaS Cards (Properties, Jobs, Community) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 sm:mt-10 w-full max-w-4xl text-left">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 sm:mt-10 w-full max-w-5xl text-left">
           {/* Pillar 1: Properties for Lease & Sale */}
-          <div className="group bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 hover:border-[#34D399]/50 p-5 rounded-2xl transition-all shadow-md flex flex-col justify-between">
+          <div className="group bg-gradient-to-b from-white/[0.12] to-white/[0.04] hover:from-white/[0.18] hover:to-white/[0.08] backdrop-blur-xl border border-white/15 hover:border-emerald-400/50 p-5 sm:p-6 rounded-3xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-950/40 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0B2516] text-[#A5C896] flex items-center justify-center border border-[#1F4E34]">
+              <div className="flex items-center justify-between mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0B2516] to-[#164E2D] text-[#A5C896] flex items-center justify-center border border-emerald-500/30 shadow-inner">
                   <Home className="w-5 h-5 text-[#A5C896]" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#164E2D] text-[#C6E8A3] px-2.5 py-0.5 rounded-full font-semibold">
+                <span className="text-[11px] font-sans bg-[#164E2D]/80 backdrop-blur-md text-[#C6E8A3] border border-emerald-500/30 px-3 py-1 rounded-full font-medium shadow-xs">
                   {counts?.properties || 6} Available
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors">
+              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors tracking-tight">
                 Properties (Lease & Sale)
               </h3>
-              <p className="text-xs text-[#D8E8D5]/80 font-light mt-1.5 leading-relaxed">
+              <p className="text-xs text-[#D8E8D5]/80 font-light mt-2 leading-relaxed">
                 Post your stone cottage, wooden chalet, or mountain land across India for long-term lease or outright sale with complete address details.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('stays')}
                 type="button"
-                className="text-xs font-semibold text-[#A5C896] hover:text-white flex items-center gap-1 transition"
+                className="group/btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-sans font-medium text-[#D8E8D5] hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-200"
               >
                 <span>Browse Listings</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#A5C896] group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={onOpenListProperty}
                 type="button"
-                className="text-[11px] font-mono bg-white/15 hover:bg-white/25 text-white px-2.5 py-1 rounded-lg transition border border-white/10 flex items-center gap-1"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans font-semibold text-white bg-gradient-to-r from-[#164E2D] to-[#1F6B3E] hover:from-[#1A5B35] hover:to-[#267F4B] border border-[#34D399]/40 shadow-sm hover:shadow-md hover:shadow-emerald-950/40 active:scale-95 transition-all duration-200"
               >
-                <PlusCircle className="w-3 h-3 text-[#34D399]" />
+                <PlusCircle className="w-3.5 h-3.5 text-[#34D399]" />
                 <span>List Space</span>
               </button>
             </div>
           </div>
 
           {/* Pillar 2: Mountain Jobs (Hire & Work) */}
-          <div className="group bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 hover:border-[#34D399]/50 p-5 rounded-2xl transition-all shadow-md flex flex-col justify-between">
+          <div className="group bg-gradient-to-b from-white/[0.12] to-white/[0.04] hover:from-white/[0.18] hover:to-white/[0.08] backdrop-blur-xl border border-white/15 hover:border-emerald-400/50 p-5 sm:p-6 rounded-3xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-950/40 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0B2516] text-[#A5C896] flex items-center justify-center border border-[#1F4E34]">
+              <div className="flex items-center justify-between mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0B2516] to-[#164E2D] text-[#A5C896] flex items-center justify-center border border-emerald-500/30 shadow-inner">
                   <Briefcase className="w-5 h-5 text-[#34D399]" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#164E2D] text-[#C6E8A3] px-2.5 py-0.5 rounded-full font-semibold">
+                <span className="text-[11px] font-sans bg-[#164E2D]/80 backdrop-blur-md text-[#C6E8A3] border border-emerald-500/30 px-3 py-1 rounded-full font-medium shadow-xs">
                   {counts?.jobs || 4} Openings
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors">
+              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors tracking-tight">
                 Mountain Jobs & Hiring
               </h3>
-              <p className="text-xs text-[#D8E8D5]/80 font-light mt-1.5 leading-relaxed">
+              <p className="text-xs text-[#D8E8D5]/80 font-light mt-2 leading-relaxed">
                 Anyone can post vacancies to hire local talent or applicants. Apply for dignified mountain jobs and paid residencies.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('jobs')}
                 type="button"
-                className="text-xs font-semibold text-[#A5C896] hover:text-white flex items-center gap-1 transition"
+                className="group/btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-sans font-medium text-[#D8E8D5] hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-200"
               >
                 <span>View Jobs</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#34D399] group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={onOpenPostJob}
                 type="button"
-                className="text-[11px] font-mono bg-white/15 hover:bg-white/25 text-white px-2.5 py-1 rounded-lg transition border border-white/10 flex items-center gap-1"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans font-semibold text-white bg-gradient-to-r from-[#164E2D] to-[#1F6B3E] hover:from-[#1A5B35] hover:to-[#267F4B] border border-[#34D399]/40 shadow-sm hover:shadow-md hover:shadow-emerald-950/40 active:scale-95 transition-all duration-200"
               >
-                <PlusCircle className="w-3 h-3 text-[#34D399]" />
+                <PlusCircle className="w-3.5 h-3.5 text-[#34D399]" />
                 <span>Post Job</span>
               </button>
             </div>
           </div>
 
           {/* Pillar 3: Community Section (Experiences & Stories) */}
-          <div className="group bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 hover:border-[#34D399]/50 p-5 rounded-2xl transition-all shadow-md flex flex-col justify-between">
+          <div className="group bg-gradient-to-b from-white/[0.12] to-white/[0.04] hover:from-white/[0.18] hover:to-white/[0.08] backdrop-blur-xl border border-white/15 hover:border-emerald-400/50 p-5 sm:p-6 rounded-3xl transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-emerald-950/40 flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-10 h-10 rounded-xl bg-[#0B2516] text-[#A5C896] flex items-center justify-center border border-[#1F4E34]">
+              <div className="flex items-center justify-between mb-3.5">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0B2516] to-[#164E2D] text-[#A5C896] flex items-center justify-center border border-emerald-500/30 shadow-inner">
                   <MessageSquare className="w-5 h-5 text-[#A5C896]" />
                 </div>
-                <span className="text-[10px] font-mono bg-[#164E2D] text-[#C6E8A3] px-2.5 py-0.5 rounded-full font-semibold">
+                <span className="text-[11px] font-sans bg-[#164E2D]/80 backdrop-blur-md text-[#C6E8A3] border border-emerald-500/30 px-3 py-1 rounded-full font-medium shadow-xs">
                   {counts?.dispatches || 6} Stories
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors">
+              <h3 className="font-display text-xl font-bold text-white uppercase group-hover:text-[#A5C896] transition-colors tracking-tight">
                 Community Experiences
               </h3>
-              <p className="text-xs text-[#D8E8D5]/80 font-light mt-1.5 leading-relaxed">
+              <p className="text-xs text-[#D8E8D5]/80 font-light mt-2 leading-relaxed">
                 Post your field notes, mountain adventures, trail logs, and transparent transport price reports for fellow travelers.
               </p>
             </div>
 
-            <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('community')}
                 type="button"
-                className="text-xs font-semibold text-[#A5C896] hover:text-white flex items-center gap-1 transition"
+                className="group/btn inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-sans font-medium text-[#D8E8D5] hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all duration-200"
               >
                 <span>Read Stories</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-[#A5C896] group-hover/btn:translate-x-0.5 transition-transform" />
               </button>
               <button
                 onClick={onOpenCreateDispatch}
                 type="button"
-                className="text-[11px] font-mono bg-white/15 hover:bg-white/25 text-white px-2.5 py-1 rounded-lg transition border border-white/10 flex items-center gap-1"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans font-semibold text-white bg-gradient-to-r from-[#164E2D] to-[#1F6B3E] hover:from-[#1A5B35] hover:to-[#267F4B] border border-[#34D399]/40 shadow-sm hover:shadow-md hover:shadow-emerald-950/40 active:scale-95 transition-all duration-200"
               >
-                <PlusCircle className="w-3 h-3 text-[#34D399]" />
+                <PlusCircle className="w-3.5 h-3.5 text-[#34D399]" />
                 <span>Share Story</span>
               </button>
             </div>

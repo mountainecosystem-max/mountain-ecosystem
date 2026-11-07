@@ -166,7 +166,7 @@ export const Navbar: FC<NavbarProps> = ({
               ) : (
                 <Link
                   to="/admin/login"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/15 transition active:scale-95 font-medium font-mono"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/20 transition-all active:scale-95 font-sans font-medium shadow-xs"
                   title="Staff Portal (Restricted to Administrators)"
                 >
                   <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
@@ -179,9 +179,9 @@ export const Navbar: FC<NavbarProps> = ({
             <button
               onClick={() => onOpenJoinModal?.('host')}
               type="button"
-              className="inline-flex items-center gap-1.5 bg-[#164E2D] hover:bg-[#0E331F] text-white text-xs sm:text-xs md:text-sm font-bold uppercase tracking-wider px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform active:scale-95 border border-[#34D399]/30"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#123E24] via-[#164E2D] to-[#1F633B] hover:from-[#164E2D] hover:to-[#267F4B] text-white text-xs sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-emerald-950/40 hover:shadow-lg hover:shadow-emerald-950/60 transition-all transform active:scale-95 border border-emerald-400/40"
             >
-              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A5C896]" />
+              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#34D399]" />
               <span>Post Listing</span>
             </button>
 

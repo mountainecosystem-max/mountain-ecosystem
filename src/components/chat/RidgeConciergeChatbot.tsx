@@ -828,10 +828,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               anayaAudio.playOpenChime()
             }
           }}
-          className={`group flex items-center gap-2.5 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full text-xs font-sans font-semibold tracking-wide transition-all duration-300 shadow-2xl active:scale-95 ${
+          className={`group flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-950/60 active:scale-95 border border-emerald-400/40 ${
             isOpen
-              ? 'bg-[#123D2D] text-white border border-[#8FA777]/50'
-              : 'bg-[#0B2516] hover:bg-[#123D2D] text-white border border-[#1F4E34] animate-pulse-glow'
+              ? 'bg-gradient-to-r from-[#0E2F1D] to-[#164E2D] text-white ring-2 ring-emerald-400/20'
+              : 'bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white animate-pulse-glow'
           }`}
           aria-expanded={isOpen}
           aria-label="Toggle Anaya AI Concierge"

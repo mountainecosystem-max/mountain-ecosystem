@@ -37,7 +37,7 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
 
   return (
     <div className="w-full py-3 sm:py-3.5 px-3 sm:px-6 sticky top-[76px] sm:top-[80px] z-30 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] shadow-xs transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none py-1">
+      <div className="max-w-7xl mx-auto flex items-center justify-start sm:justify-center gap-2 sm:gap-2.5 overflow-x-auto scrollbar-none py-1">
         {tabs.map((tab) => {
           const Icon = tab.icon
           const isActive = activeTab === tab.id
@@ -47,15 +47,15 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
               key={tab.id}
               onClick={() => onSelectTab(tab.id)}
               type="button"
-              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-sans font-medium transition-all duration-200 whitespace-nowrap active:scale-95 shrink-0 ${
+              className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-sans transition-all duration-200 whitespace-nowrap active:scale-95 shrink-0 ${
                 isActive
-                  ? 'bg-[#0B2516] text-[#FAF7EE] shadow-sm border border-[#0B2516]'
-                  : 'bg-white/90 hover:bg-white text-[#123D26] hover:text-[#0B2516] border border-[#CBDAC4] hover:border-[#164E2D]/50 shadow-xs'
+                  ? 'bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#164E2D] text-white shadow-md shadow-emerald-950/25 border border-emerald-500/40 font-semibold ring-1 ring-emerald-400/20'
+                  : 'bg-white/80 hover:bg-white text-stone-700 hover:text-[#0A2316] font-medium border border-[#CBDAC4] hover:border-emerald-700/40 shadow-xs hover:shadow-sm'
               }`}
             >
               <Icon
                 className={`w-4 h-4 transition-colors ${
-                  isActive ? 'text-[#A5C896]' : 'text-[#164E2D]'
+                  isActive ? 'text-[#34D399]' : 'text-[#164E2D]'
                 }`}
               />
               <span>{tab.label}</span>

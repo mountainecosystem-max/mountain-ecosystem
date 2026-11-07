@@ -881,7 +881,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2 bg-[#0B2516] hover:bg-[#164E2D] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-7 py-3 rounded-full transition shadow-md active:scale-95 disabled:opacity-50"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

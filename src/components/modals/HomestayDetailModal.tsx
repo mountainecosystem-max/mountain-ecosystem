@@ -450,7 +450,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#183C32] hover:bg-[#122e26] disabled:opacity-60 text-[#F8F6F0] py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-colors shadow-sm"
+                  className="w-full inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] disabled:opacity-60 text-white py-3.5 px-6 text-xs sm:text-sm font-sans font-semibold tracking-wide rounded-full transition-all duration-200 shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

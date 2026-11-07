@@ -504,7 +504,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2 bg-[#FAF7EE] hover:bg-white text-[#0B2516] text-xs sm:text-sm font-bold uppercase tracking-wider px-7 py-3 rounded-full transition shadow-md active:scale-95 disabled:opacity-50"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#FAF7EE] to-[#E8EFE3] hover:from-white hover:to-[#FAF7EE] text-[#0A2316] text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

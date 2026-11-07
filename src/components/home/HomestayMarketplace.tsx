@@ -89,9 +89,9 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={onListHomestayClick}
               type="button"
-              className="inline-flex items-center gap-2 bg-[#164E2D] hover:bg-[#0A2316] text-white text-xs sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition active:scale-95"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
             >
-              <PlusCircle className="w-4 h-4 text-[#A5C896]" />
+              <PlusCircle className="w-4 h-4 text-[#34D399]" />
               <span>Post a Property (Lease / Sale)</span>
             </button>
           </div>
@@ -100,13 +100,13 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
         {/* Lease vs Sale Mode Selector + Territory Filters */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-8 gap-4 border-b border-[#CBDAC4]/70">
           {/* Lease / Sale Segmented Tabs */}
-          <div className="inline-flex items-center bg-white p-1 rounded-full border border-[#CBDAC4] shadow-xs">
+          <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-full border border-[#CBDAC4] shadow-inner">
             <button
               onClick={() => setFilterType('all')}
               type="button"
-              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'all'
-                  ? 'bg-[#0B2516] text-white font-bold shadow-xs'
+                  ? 'bg-gradient-to-r from-[#0A2316] to-[#164E2D] text-white font-semibold shadow-sm border border-emerald-500/30'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -115,9 +115,9 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={() => setFilterType('lease')}
               type="button"
-              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'lease'
-                  ? 'bg-[#164E2D] text-white font-bold shadow-xs'
+                  ? 'bg-gradient-to-r from-[#123E24] to-[#184F2E] text-white font-semibold shadow-sm border border-emerald-500/40 ring-1 ring-emerald-400/20'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -126,9 +126,9 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={() => setFilterType('sale')}
               type="button"
-              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'sale'
-                  ? 'bg-[#D96B27] text-white font-bold shadow-xs'
+                  ? 'bg-gradient-to-r from-[#B85419] to-[#D96B27] text-white font-semibold shadow-sm border border-amber-500/40'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -143,10 +143,10 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                 key={reg.id}
                 onClick={() => setSelectedRegion(reg.id)}
                 type="button"
-                className={`px-3.5 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
+                className={`px-3.5 py-2 min-h-[38px] text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
-                    ? 'bg-[#0B2516] text-white font-semibold'
-                    : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                    ? 'bg-[#0B2516] text-white font-semibold shadow-sm border border-emerald-500/30'
+                    : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
                 }`}
               >
                 {reg.label}
@@ -330,10 +330,10 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                         e.stopPropagation()
                         onSelectHomestay(stay)
                       }}
-                      className="inline-flex items-center gap-1.5 bg-[#164E2D] hover:bg-[#0A2316] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2.5 rounded-xl shadow transition transform active:scale-95"
+                      className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
                     >
                       <span>{isSale ? 'Buy / Inquire' : 'Lease Space'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#34D399] group-hover/btn:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
                 </article>
