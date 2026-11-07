@@ -551,6 +551,71 @@ export interface JobApplicationSubmission {
   email: string
   phone: string
   note: string
+  resumeFileName?: string
+  resumeStoragePath?: string
+}
+
+/**
+ * Generates a short-lived (60 seconds) private signed URL for candidate resumes.
+ * Prevents public resume indexing and protects candidate PII.
+ */
+export const getApplicantResumeSignedUrl = async (
+  storagePath: string,
+  expiresInSeconds = 60
+): Promise<{ signedUrl: string | null; error?: string }> => {
+  if (!isSupabaseConfigured() || !storagePath) {
+    return { signedUrl: storagePath || null }
+  }
+
+  try {
+    const { data, error } = await supabase.storage
+      .from('resumes')
+      .createSignedUrl(storagePath, expiresInSeconds)
+
+    if (error) {
+      return { signedUrl: null, error: error.message }
+    }
+
+    return { signedUrl: data.signedUrl }
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Storage signed URL error'
+    return { signedUrl: null, error: message }
+  }
+}
+
+/**
+ * Uploads candidate resume/CV to private Supabase bucket ('resumes').
+ * Never generates a public URL; strictly accessed via short-lived signed URLs.
+ */
+export const uploadApplicantResume = async (
+  file: File
+): Promise<{ storagePath: string | null; error?: string }> => {
+  if (!isSupabaseConfigured()) {
+    return { storagePath: `local-resumes/${Date.now()}-${file.name}` }
+  }
+
+  try {
+    const fileExt = file.name.split('.').pop() || 'pdf'
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`
+    const filePath = `resumes/${fileName}`
+
+    const { error } = await supabase.storage
+      .from('resumes')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false
+      })
+
+    if (error) {
+      console.warn('Storage upload notice (private resumes bucket):', error.message)
+      return { storagePath: `local-resumes/${fileName}` }
+    }
+
+    return { storagePath: filePath }
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Upload failed'
+    return { storagePath: null, error: message }
+  }
 }
 
 export interface LeaseInquirySubmission {
@@ -635,6 +700,8 @@ export const submitJobApplication = async (
     email: data.email,
     phone: data.phone,
     note: data.note,
+    resume_file_name: data.resumeFileName || null,
+    resume_storage_path: data.resumeStoragePath || null,
     status: 'submitted',
     created_at: new Date().toISOString()
   }
@@ -653,7 +720,9 @@ export const submitJobApplication = async (
     full_name: data.fullName,
     email: data.email,
     phone: data.phone,
-    note: data.note
+    note: data.note,
+    resume_file_name: data.resumeFileName || null,
+    resume_storage_path: data.resumeStoragePath || null
   }
   if (userId) payload.user_id = userId
 
@@ -795,14 +864,20 @@ export const createDispatch = async (
       : undefined
   }
 
-  // Always store locally first for instantaneous multi-window & admin sync
-  const localList = getStoredItems<Dispatch & { is_published?: boolean }>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
-  const updatedLocal = [{ ...newDispatch, is_published: true }, ...localList.filter((d) => d.id !== newDispatch.id)]
+  // Store locally in moderation queue (pending review)
+  const pendingDispatch: Dispatch = {
+    ...newDispatch,
+    verified: false,
+    verificationTier: 'community_listed',
+    isPublished: false
+  }
+  const localList = getStoredItems<Dispatch & { is_published?: boolean; isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.DISPATCHES)
+  const updatedLocal = [pendingDispatch, ...localList.filter((d) => d.id !== newDispatch.id)]
   setStoredItems(MOUNTAIN_STORAGE_KEYS.DISPATCHES, updatedLocal)
   notifyDataUpdated()
 
   if (!isSupabaseConfigured()) {
-    return { success: true, data: newDispatch }
+    return { success: true, data: pendingDispatch }
   }
 
   const session = (await supabase.auth.getSession()).data?.session
@@ -819,10 +894,11 @@ export const createDispatch = async (
     author_name: input.authorName,
     author_role: input.authorRole || 'Community Fellow',
     author_avatar: input.authorAvatar || null,
-    community_badge: 'Verified Fellow',
+    community_badge: 'Community Contributor',
     verified: false,
+    is_published: false,
+    verification_tier: 'community_listed',
     helpful_count: 0,
-    is_published: true,
     price_item: input.priceItem || null,
     price_shared_rate: input.priceSharedRate || null,
     price_private_rate: input.pricePrivateRate || null
@@ -864,14 +940,21 @@ export const submitCommunityProperty = async (
 ): Promise<{ success: boolean; data?: Homestay; error?: string }> => {
   const generatedSlug = `${slugify(homestay.name)}-${Date.now().toString(36)}`
 
-  // Store in persistent local storage immediately
+  // Default community submissions to pending moderation queue (isPublished = false)
+  const pendingHomestay: Homestay = {
+    ...homestay,
+    isPublished: false,
+    verificationTier: 'community_listed'
+  }
+
+  // Store in persistent local storage queue
   const localList = getStoredItems<Homestay & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.HOMESTAYS)
-  const updatedLocal = [{ ...homestay, isPublished: true }, ...localList.filter((h) => h.id !== homestay.id)]
+  const updatedLocal = [pendingHomestay, ...localList.filter((h) => h.id !== homestay.id)]
   setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, updatedLocal)
   notifyDataUpdated()
 
   if (!isSupabaseConfigured()) {
-    return { success: true, data: homestay }
+    return { success: true, data: pendingHomestay }
   }
 
   const payload = {
@@ -899,17 +982,19 @@ export const submitCommunityProperty = async (
     amenities: homestay.amenities || [],
     features: homestay.features || [],
     utilities_included: homestay.utilitiesIncluded || [],
-    is_published: true
+    is_published: false,
+    phone_visibility: homestay.phoneVisibility || 'relay',
+    verification_tier: 'community_listed'
   }
 
   try {
     const { data: insData, error } = await supabase.from('homestays').insert(payload).select().single()
     if (!error && insData) {
-      homestay.id = insData.id
+      pendingHomestay.id = insData.id
       const remappedLocal = updatedLocal.map((h) => (h.name === homestay.name ? { ...h, id: insData.id } : h))
       setStoredItems(MOUNTAIN_STORAGE_KEYS.HOMESTAYS, remappedLocal)
       notifyDataUpdated()
-      return { success: true, data: homestay }
+      return { success: true, data: pendingHomestay }
     } else if (error) {
       console.warn('Supabase insert homestays notice:', error.message)
     }
@@ -917,26 +1002,33 @@ export const submitCommunityProperty = async (
     console.warn('Supabase homestays error:', err)
   }
 
-  return { success: true, data: homestay }
+  return { success: true, data: pendingHomestay }
 }
 
 export const submitCommunityJob = async (
   job: Job
 ): Promise<{ success: boolean; data?: Job; error?: string }> => {
-  // Store locally
+  // Default community submissions to pending moderation queue (isPublished = false)
+  const pendingJob: Job = {
+    ...job,
+    isPublished: false,
+    verificationTier: 'community_listed'
+  }
+
+  // Store locally in queue
   const localList = getStoredItems<Job & { isPublished?: boolean }>(MOUNTAIN_STORAGE_KEYS.JOBS)
-  const updatedLocal = [{ ...job, isPublished: true }, ...localList.filter((j) => j.id !== job.id)]
+  const updatedLocal = [pendingJob, ...localList.filter((j) => j.id !== job.id)]
   setStoredItems(MOUNTAIN_STORAGE_KEYS.JOBS, updatedLocal)
   notifyDataUpdated()
 
   if (!isSupabaseConfigured()) {
-    return { success: true, data: job }
+    return { success: true, data: pendingJob }
   }
 
   const payload = {
     title: job.title.trim(),
     employer: job.employer.trim(),
-    employer_badge: job.employerBadge?.trim() || 'Verified Employer',
+    employer_badge: job.employerBadge?.trim() || 'Community Employer',
     location: job.location.trim(),
     region: job.region.trim(),
     type: job.type,
@@ -948,7 +1040,8 @@ export const submitCommunityJob = async (
     requirements: job.requirements || [],
     benefits: job.benefits || [],
     posted_date: job.postedDate || 'Just now',
-    is_published: true
+    is_published: false,
+    verification_tier: 'community_listed'
   }
 
   try {

@@ -136,7 +136,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
 
             <div className="flex items-center gap-2 text-xs font-mono text-[#164E2D]">
               <ShieldCheck className="w-4 h-4 text-[#164E2D]" />
-              <span>Verified Dignified Wages • Lodging & Food Included</span>
+              <span>Two-Tier Audited Opportunities • Lodging & Food Transparency</span>
             </div>
           </div>
         </div>
@@ -148,9 +148,9 @@ export const MountainJobs: FC<MountainJobsProps> = ({
           </div>
           <div className="flex-1 font-sans leading-relaxed">
             <strong className="font-semibold text-amber-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
-              ⚠️ Official Employment Safety Notice:
+              ⚠️ Official Employment Safety & Verification Advisory:
             </strong>
-            Legitimate mountain employers and residencies will <strong>NEVER ask applicants to pay money</strong> for job offers, registration, uniform deposits, or interview slots. Never transfer funds or share private OTPs. Please independently verify all employers before traveling.
+            <span className="font-semibold text-amber-950">Steward Verified ✓</span> listings have completed employer verification. <span className="font-medium text-amber-900">Community Listed</span> posts are unvetted community notices. Legitimate mountain employers will <strong>NEVER ask applicants to pay money</strong> for job offers, registration, uniform deposits, or interview slots. Never transfer funds or share private OTPs.
           </div>
         </div>
 
@@ -200,6 +200,17 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                     <span className="bg-[#FAF7EE] text-[#0A2316] text-[10px] font-mono px-2 py-0.5 rounded border border-[#CBDAC4]">
                       {job.category}
                     </span>
+                    <span className="text-stone-300 hidden sm:inline">•</span>
+                    {job.verificationTier === 'community_listed' ? (
+                      <span className="bg-stone-100 text-stone-700 text-[10px] font-mono px-2 py-0.5 rounded border border-stone-300">
+                        Community Listed
+                      </span>
+                    ) : (
+                      <span className="bg-emerald-50 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1">
+                        <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                        <span>Steward Verified ✓</span>
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#164E2D] transition-colors leading-snug">
@@ -227,7 +238,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                       {job.salary}
                     </div>
                     <div className="text-[10px] font-mono text-[#164E2D] font-semibold">
-                      Verified Living Wage
+                      Dignified Compensation
                     </div>
                   </div>
 

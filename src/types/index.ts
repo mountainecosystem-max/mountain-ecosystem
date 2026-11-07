@@ -32,6 +32,8 @@ export interface Dispatch {
     communityBadge?: string
   }
   verified: boolean
+  verificationTier?: 'steward_verified' | 'community_listed'
+  isPublished?: boolean
   helpfulCount: number
   priceData?: {
     item: string
@@ -81,6 +83,8 @@ export interface Job {
   requirements: string[]
   benefits: string[]
   postedDate: string
+  verificationTier?: 'steward_verified' | 'community_listed'
+  isPublished?: boolean
 }
 
 export interface Homestay {
@@ -98,6 +102,11 @@ export interface Homestay {
   furnishing: string
   rating: number
   reviewsCount: number
+  phoneVisibility?: 'relay' | 'public'
+  verificationTier?: 'steward_verified' | 'community_listed'
+  isPublished?: boolean
+  hostPhone?: string
+  hostEmail?: string
   host: {
     name: string
     role: string

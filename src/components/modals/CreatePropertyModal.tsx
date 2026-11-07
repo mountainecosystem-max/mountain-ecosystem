@@ -1,22 +1,23 @@
 import { useState } from 'react'
-import type { FC, FormEvent } from 'react'
+import type { FC, FormEvent, ChangeEvent } from 'react'
 import {
   X,
   Building2,
   Home,
   Tag,
   MapPin,
-  CheckCircle2,
   AlertCircle,
   Loader2,
   Compass,
   FileCheck2,
   Sparkles,
-  ShieldAlert
+  ShieldAlert,
+  ShieldCheck,
+  Upload
 } from 'lucide-react'
-import { BRAND_CONFIG } from '../../config/branding'
 import type { Homestay } from '../../types'
 import { submitCommunityProperty } from '../../services/ecosystemService'
+import { stripExifAndCompress } from '../../utils/imagePrivacy'
 
 interface CreatePropertyModalProps {
   isOpen: boolean
@@ -81,12 +82,37 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
   const [hostName, setHostName] = useState('')
   const [contactEmail, setContactEmail] = useState('')
   const [phoneWhatsApp, setPhoneWhatsApp] = useState('')
+  const [phoneVisibility, setPhoneVisibility] = useState<'relay' | 'public'>('relay')
+
+  // EXIF & Image Sanitization State
+  const [imageProcessing, setImageProcessing] = useState(false)
+  const [imageNotice, setImageNotice] = useState<string | null>(null)
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   if (!isOpen) return null
+
+  const handlePhotoUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setImageProcessing(true)
+    setImageNotice('Sanitizing photo & stripping EXIF GPS location data...')
+
+    try {
+      const processed = await stripExifAndCompress(file)
+      setImageUrl(processed.dataUrl)
+      setImageNotice(
+        `✓ EXIF GPS purged. Photo compressed from ${(processed.originalSize / 1024).toFixed(0)} KB to ${(processed.processedSize / 1024).toFixed(0)} KB.`
+      )
+    } catch {
+      setImageNotice('Error sanitizing image. Please use another photo.')
+    } finally {
+      setImageProcessing(false)
+    }
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -114,7 +140,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
     setIsSubmitting(true)
 
-    // Build the new Homestay object
+    // Build the new Homestay object - defaulted to Moderation Queue (isPublished = false)
     const newProperty: Homestay = {
       id: `property-${Date.now()}`,
       name: name.trim(),
@@ -126,13 +152,18 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
       monthlyRate: listingType === 'lease' ? (monthlyRate.startsWith('₹') ? monthlyRate : `₹${monthlyRate}`) : 'For Sale',
       securityDeposit: securityDeposit ? (securityDeposit.startsWith('₹') ? securityDeposit : `₹${securityDeposit}`) : '₹0',
       minLeaseTerm: listingType === 'lease' ? minLeaseTerm : 'Outright Sale',
-      leaseStatus: listingType === 'lease' ? 'Available for Lease' : 'For Sale • Verified Title',
+      leaseStatus: listingType === 'lease' ? 'Pending Steward Verification' : 'For Sale • Verification Pending',
       furnishing: `${category} • ${heatingType}`,
       rating: 5.0,
       reviewsCount: 1,
+      phoneVisibility,
+      verificationTier: 'community_listed',
+      isPublished: false,
+      hostPhone: phoneWhatsApp.trim(),
+      hostEmail: contactEmail.trim(),
       host: {
         name: hostName.trim(),
-        role: listingType === 'lease' ? 'Verified Mountain Host' : 'Verified Property Owner',
+        role: listingType === 'lease' ? 'Community Mountain Host' : 'Community Property Owner',
         yearsHosting: 1,
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
       },
@@ -208,20 +239,42 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
         {/* Content Body */}
         <div className="p-5 sm:p-8">
           {isSubmitted ? (
-            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-8 sm:p-10 rounded-xl text-center">
-              <CheckCircle2 className="w-12 h-12 text-[#164E2D] mx-auto mb-3 animate-bounce" />
+            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-[#164E2D] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-[#A5C896]" />
+              </div>
               <h3 className="font-display text-2xl text-[#0B2516] font-bold uppercase">
-                Property Listed Successfully!
+                Submitted to Verification Queue!
               </h3>
-              <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-md mx-auto leading-relaxed">
-                Your mountain property in <strong>{villageTown || state}</strong> has been listed in the {BRAND_CONFIG.name} exchange. An automated confirmation has been logged with stewards at <span className="font-mono text-[#164E2D]">{BRAND_CONFIG.supportEmail}</span>.
+              <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-lg mx-auto leading-relaxed">
+                Your listing for <strong>{villageTown || state}</strong> has been received by the Mountain Steward Moderation Ledger. To protect travellers and buyers against fraud, unvetted listings, and scams, our stewards verify ownership/title records before making it live (usually within 12–24 hours).
               </p>
+
+              <div className="mt-5 p-3.5 bg-white/80 border border-[#CBDAC4] rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Moderation Status:</span>
+                  <span className="text-[#D96B27] font-bold">Under Steward Review (Queue)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Verification Tier:</span>
+                  <span className="text-[#164E2D] font-bold">Community Listed (Pending Audit)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Contact Privacy:</span>
+                  <span className="font-bold text-stone-800">
+                    {phoneVisibility === 'relay'
+                      ? '🛡️ Protected Relay (Phone Hidden)'
+                      : 'Public WhatsApp (Owner Consented)'}
+                  </span>
+                </div>
+              </div>
+
               <button
                 onClick={onClose}
                 type="button"
                 className="mt-6 inline-flex items-center gap-2 bg-[#0B2516] hover:bg-[#164E2D] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
               >
-                <span>Done & View Listings</span>
+                <span>Done & Return to Exchange</span>
               </button>
             </div>
           ) : (
@@ -640,6 +693,61 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
+
+                  {/* DPDP Section 6 Contact Privacy Selector */}
+                  <div className="sm:col-span-3 mt-2 p-3 bg-white border border-[#CBDAC4] rounded-xl space-y-2">
+                    <div className="text-xs font-mono uppercase tracking-wider font-bold text-[#164E2D] flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+                      <span>DPDP Act 2023 • Contact Privacy & Telemarketing Shield</span>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <label
+                        className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition ${
+                          phoneVisibility === 'relay'
+                            ? 'bg-[#E8EFE3] border-[#164E2D] text-[#0B2516]'
+                            : 'bg-stone-50 border-stone-200 text-stone-600'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="phoneVisibility"
+                          value="relay"
+                          checked={phoneVisibility === 'relay'}
+                          onChange={() => setPhoneVisibility('relay')}
+                          className="mt-0.5 text-[#164E2D]"
+                        />
+                        <div>
+                          <strong className="block font-semibold">Hide My Phone (Recommended)</strong>
+                          <span className="text-[11px] leading-tight block text-stone-500">
+                            Prevents web scrapers and spam calls. Prospective buyers/guests contact via platform message form.
+                          </span>
+                        </div>
+                      </label>
+
+                      <label
+                        className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition ${
+                          phoneVisibility === 'public'
+                            ? 'bg-[#E8EFE3] border-[#164E2D] text-[#0B2516]'
+                            : 'bg-stone-50 border-stone-200 text-stone-600'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="phoneVisibility"
+                          value="public"
+                          checked={phoneVisibility === 'public'}
+                          onChange={() => setPhoneVisibility('public')}
+                          className="mt-0.5 text-[#164E2D]"
+                        />
+                        <div>
+                          <strong className="block font-semibold">Public WhatsApp Button</strong>
+                          <span className="text-[11px] leading-tight block text-stone-500">
+                            I give explicit consent under DPDP Act 2023 to display my WhatsApp publicly for direct inquiries.
+                          </span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -657,19 +765,59 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                 />
               </div>
 
+              {/* Photo Upload with Client-Side EXIF GPS Stripping */}
               <div>
                 <label className="block text-xs font-mono uppercase tracking-wider text-stone-700 font-bold mb-1">
-                  Photo URL
+                  Property Photos (EXIF & GPS Sanitized)
                 </label>
-                <input
-                  type="url"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="https://images.unsplash.com/..."
-                  className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
-                />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                  {/* Direct File Upload with EXIF GPS Purge */}
+                  <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-[#164E2D]/40 hover:border-[#164E2D] rounded-xl bg-white/80 cursor-pointer transition hover:bg-[#E8EFE3]/50 text-center">
+                    <Upload className="w-6 h-6 text-[#164E2D] mb-1" />
+                    <span className="text-xs font-bold text-[#0B2516]">Upload from Device</span>
+                    <span className="text-[10px] text-stone-500 font-mono mt-0.5">
+                      Auto-purges camera GPS & compresses to WebP
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoUpload}
+                      disabled={imageProcessing}
+                      className="hidden"
+                    />
+                  </label>
+
+                  {/* Or Image URL Input */}
+                  <div>
+                    <label className="block text-[11px] font-mono text-stone-600 font-semibold mb-1">
+                      Or Paste Image URL
+                    </label>
+                    <input
+                      type="url"
+                      value={imageUrl}
+                      onChange={(e) => setImageUrl(e.target.value)}
+                      placeholder="https://images.unsplash.com/..."
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    />
+                  </div>
+                </div>
+
+                {imageProcessing && (
+                  <div className="p-2.5 bg-emerald-50 border border-emerald-300 rounded-lg text-xs text-emerald-900 flex items-center gap-2">
+                    <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-700" />
+                    <span>Stripping EXIF GPS coordinates & re-compressing image pixels...</span>
+                  </div>
+                )}
+
+                {imageNotice && !imageProcessing && (
+                  <div className="p-2.5 bg-emerald-50 border border-emerald-300 rounded-lg text-xs text-emerald-900 font-mono">
+                    {imageNotice}
+                  </div>
+                )}
+
                 {imageUrl && (
-                  <div className="mt-2 w-full h-28 rounded-lg overflow-hidden border border-[#CBDAC4]">
+                  <div className="mt-2 w-full h-32 rounded-xl overflow-hidden border border-[#CBDAC4] shadow-xs">
                     <img
                       src={imageUrl}
                       alt="Property preview"

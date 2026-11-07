@@ -9,7 +9,9 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
-  ShieldAlert
+  ShieldAlert,
+  ShieldCheck,
+  MessageCircle
 } from 'lucide-react'
 import { z } from 'zod'
 import { submitLeaseInquiry } from '../../services/ecosystemService'
@@ -207,16 +209,36 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
               alt={homestay.host.name}
               className="w-12 h-12 rounded-full object-cover border border-[#202622]/15 flex-shrink-0"
             />
-            <div>
-              <div className="flex items-center gap-2">
+            <div className="flex-1">
+              <div className="flex flex-wrap items-center gap-2">
                 <h3 className="text-sm font-semibold text-[#183C32]">Hosted & Maintained by {homestay.host.name}</h3>
-                <span className="text-[10px] font-mono uppercase bg-[#71866B]/20 text-[#183C32] px-2 py-0.5 rounded-sm">
-                  Verified Local Steward
+                <span className="text-[10px] font-mono uppercase bg-[#71866B]/20 text-[#183C32] px-2 py-0.5 rounded-full font-semibold">
+                  {homestay.verificationTier === 'community_listed' ? 'Community Listed' : 'Steward Verified ✓'}
                 </span>
               </div>
               <p className="text-xs text-[#202622]/70 font-mono mt-0.5">
-                {homestay.host.role} • Welcoming long-stay sabbatical residents for {homestay.host.yearsHosting} years
+                {homestay.host.role} • Welcoming long-stay residents for {homestay.host.yearsHosting} years
               </p>
+
+              {/* DPDP Section 6 Contact Transparency */}
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                {homestay.phoneVisibility === 'public' && homestay.hostPhone ? (
+                  <a
+                    href={`https://wa.me/${homestay.hostPhone.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-700 hover:bg-emerald-800 text-white rounded-full text-[11px] font-mono transition shadow-xs"
+                  >
+                    <MessageCircle className="w-3 h-3" />
+                    <span>WhatsApp Owner Directly</span>
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-900 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                    <ShieldCheck className="w-3 h-3 text-emerald-700" />
+                    <span>Contact Shield Active: Host number protected against telemarketing scrapers</span>
+                  </span>
+                )}
+              </div>
             </div>
           </div>
 

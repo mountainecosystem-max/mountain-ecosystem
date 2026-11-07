@@ -4,7 +4,6 @@ import {
   X,
   Briefcase,
   MapPin,
-  CheckCircle2,
   AlertCircle,
   Loader2,
   Compass,
@@ -12,7 +11,6 @@ import {
   ShieldCheck,
   ShieldAlert
 } from 'lucide-react'
-import { BRAND_CONFIG } from '../../config/branding'
 import type { Job } from '../../types'
 import { submitCommunityJob } from '../../services/ecosystemService'
 
@@ -46,7 +44,6 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
 }) => {
   const [title, setTitle] = useState('')
   const [employer, setEmployer] = useState('')
-  const employerBadge = 'Verified Mountain Enterprise'
   const [category, setCategory] = useState<Job['category']>('Hospitality & Estates')
   const [jobType, setJobType] = useState<Job['type']>('Full-time')
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
@@ -117,7 +114,9 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
       id: `job-${Date.now()}`,
       title: title.trim(),
       employer: employer.trim(),
-      employerBadge: employerBadge || 'Verified Mountain Employer',
+      employerBadge: 'Community Employer',
+      verificationTier: 'community_listed',
+      isPublished: false,
       location: `${fullWorkAddress.trim()}, ${workVillageTown.trim()}, ${state}`,
       region: state,
       type: jobType,
@@ -189,14 +188,28 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
         {/* Form Body */}
         <div className="p-5 sm:p-8">
           {isSubmitted ? (
-            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-8 sm:p-10 rounded-xl text-center">
-              <CheckCircle2 className="w-12 h-12 text-[#164E2D] mx-auto mb-3 animate-bounce" />
+            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-[#164E2D] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-[#A5C896]" />
+              </div>
               <h3 className="font-display text-2xl text-[#0B2516] font-bold uppercase">
-                Mountain Job Posted!
+                Submitted to Verification Queue!
               </h3>
-              <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-md mx-auto leading-relaxed">
-                Your opening for <strong>{title}</strong> at <strong>{employer}</strong> ({state}) is now live on the {BRAND_CONFIG.name} exchange. Applicants will contact you directly via <span className="font-mono text-[#164E2D]">{contactEmail}</span>.
+              <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-lg mx-auto leading-relaxed">
+                Your opening for <strong>{title}</strong> at <strong>{employer}</strong> ({state}) has been logged in our Steward Moderation Ledger. To protect mountain applicants from recruitment scams and unvetted job fees, stewards review employer credentials before publishing it live (usually within 12–24 hours).
               </p>
+
+              <div className="mt-5 p-3.5 bg-white/80 border border-[#CBDAC4] rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Moderation Status:</span>
+                  <span className="text-[#D96B27] font-bold">Under Steward Review (Queue)</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-stone-500">Employment Policy:</span>
+                  <span className="text-[#164E2D] font-bold">Zero-Fee Guaranteed • Lodging & Food</span>
+                </div>
+              </div>
+
               <button
                 onClick={onClose}
                 type="button"

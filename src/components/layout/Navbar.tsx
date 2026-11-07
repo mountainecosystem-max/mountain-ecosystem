@@ -92,7 +92,7 @@ export const Navbar: FC<NavbarProps> = ({
           <div className="flex items-center gap-2 shrink-0">
             <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[9px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
-              <span>Verified Mountain Exchange</span>
+              <span>Curated Mountain Exchange • Two-Tier Verification</span>
             </span>
           </div>
         </div>

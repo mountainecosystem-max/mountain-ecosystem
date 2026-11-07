@@ -162,9 +162,9 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
           </div>
           <div className="flex-1 font-sans leading-relaxed">
             <strong className="font-semibold text-emerald-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
-              🛡️ Independent Verification Advisory:
+              🛡️ Two-Tier Trust Protocol & Verification Advisory:
             </strong>
-            Please independently verify all property title deeds, municipal land registry records, year-round water supply, winter road access, and physical premises before executing lease agreements or transferring advance deposits.
+            <span className="font-semibold text-emerald-950">Steward Verified ✓</span> listings have completed live video inspection or land registry verification. <span className="font-medium text-emerald-800">Community Listed</span> entries are self-declared host submissions. Always independently verify municipal records, water rights, and premises before executing lease agreements or transferring advance deposits.
           </div>
         </div>
 
@@ -217,8 +217,8 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
 
                       <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-black/20 pointer-events-none" />
 
-                      {/* Prominent FOR LEASE vs FOR SALE Badge */}
-                      <div className="absolute top-4 left-4">
+                      {/* Prominent FOR LEASE vs FOR SALE Badge + Verification Badge */}
+                      <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
                         {isSale ? (
                           <span className="bg-[#D96B27] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                             <Tag className="w-3 h-3" />
@@ -228,6 +228,17 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                           <span className="bg-[#164E2D] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                             <Sparkles className="w-3 h-3 text-[#A5C896]" />
                             <span>FOR LEASE (1–12 MOS)</span>
+                          </span>
+                        )}
+
+                        {stay.verificationTier === 'community_listed' ? (
+                          <span className="bg-stone-900/90 backdrop-blur-md text-stone-200 border border-white/20 text-[9px] font-mono font-medium uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                            <span>Community Listed</span>
+                          </span>
+                        ) : (
+                          <span className="bg-emerald-950/90 backdrop-blur-md text-emerald-300 border border-emerald-500/40 text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                            <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                            <span>Steward Verified ✓</span>
                           </span>
                         )}
                       </div>

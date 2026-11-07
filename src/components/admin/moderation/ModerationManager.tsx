@@ -13,14 +13,17 @@ import {
   MessageSquare,
   Eye,
   EyeOff,
-  MapPin
+  MapPin,
+  FileText,
+  Lock
 } from 'lucide-react'
 import { supabase, isSupabaseConfigured } from '../../../lib/supabase'
 import {
   MOUNTAIN_STORAGE_KEYS,
   getStoredItems,
   setStoredItems,
-  notifyDataUpdated
+  notifyDataUpdated,
+  getApplicantResumeSignedUrl
 } from '../../../services/ecosystemService'
 
 
@@ -57,6 +60,8 @@ interface JobAppRow {
   email: string
   phone: string
   note: string
+  resume_file_name?: string
+  resume_storage_path?: string
   status: 'submitted' | 'interviewing' | 'placed' | 'closed'
   created_at: string
 }
@@ -188,6 +193,8 @@ export const ModerationManager: FC = () => {
         email: j.email,
         phone: j.phone,
         note: j.note,
+        resume_file_name: j.resume_file_name || j.resumeFileName || undefined,
+        resume_storage_path: j.resume_storage_path || j.resumeStoragePath || undefined,
         status: j.status || 'submitted',
         created_at: j.created_at || new Date().toISOString()
       }))
@@ -399,6 +406,20 @@ export const ModerationManager: FC = () => {
       try {
         await supabase.from('job_applications').delete().eq('id', id)
       } catch {}
+    }
+  }
+
+  const handleOpenResume = async (storagePath: string) => {
+    try {
+      const { signedUrl, error: err } = await getApplicantResumeSignedUrl(storagePath, 60)
+      if (err || !signedUrl) {
+        showToast(err || 'Failed to generate signed URL')
+        return
+      }
+      window.open(signedUrl, '_blank', 'noopener,noreferrer')
+      showToast('Opened private CV in secure viewer (60s signed access)')
+    } catch {
+      showToast('Could not open resume')
     }
   }
 
@@ -785,9 +806,22 @@ export const ModerationManager: FC = () => {
                   </span>
                 </div>
 
-                <div className="text-xs font-mono text-[#576159] flex flex-wrap gap-4">
+                <div className="text-xs font-mono text-[#576159] flex flex-wrap items-center gap-4">
                   <span>Email: <strong className="text-[#123D2D]">{j.email}</strong></span>
                   <span>Phone: <strong className="text-[#123D2D]">{j.phone}</strong></span>
+                  {j.resume_storage_path && (
+                    <button
+                      type="button"
+                      onClick={() => handleOpenResume(j.resume_storage_path!)}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 rounded text-xs transition active:scale-95"
+                      title="Generate 60-second time-limited private signed URL (DPDP Act compliant)"
+                    >
+                      <Lock className="w-3 h-3 text-emerald-600" />
+                      <FileText className="w-3.5 h-3.5 text-emerald-700" />
+                      <span>{j.resume_file_name || 'Attached Candidate CV'}</span>
+                      <span className="text-[10px] bg-emerald-200/70 text-emerald-900 px-1 rounded font-semibold">Signed 60s</span>
+                    </button>
+                  )}
                 </div>
 
                 <p className="text-xs text-[#202622] italic bg-[#F8F6F0] p-3 rounded border border-[#CBDAC4]/40">

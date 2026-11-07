@@ -1,9 +1,24 @@
 import { useState } from 'react'
-import type { FC, FormEvent } from 'react'
+import type { FC, FormEvent, ChangeEvent } from 'react'
 import type { Job } from '../../types'
-import { X, MapPin, Briefcase, Home, CheckCircle2, Check, ArrowRight, AlertCircle, Leaf, Loader2, ShieldAlert } from 'lucide-react'
+import {
+  X,
+  MapPin,
+  Briefcase,
+  Home,
+  CheckCircle2,
+  Check,
+  ArrowRight,
+  AlertCircle,
+  Leaf,
+  Loader2,
+  ShieldAlert,
+  ShieldCheck,
+  Upload
+} from 'lucide-react'
 import { z } from 'zod'
-import { submitJobApplication } from '../../services/ecosystemService'
+import { submitJobApplication, uploadApplicantResume } from '../../services/ecosystemService'
+import { isSafeDocumentFile } from '../../utils/imagePrivacy'
 
 interface JobDetailModalProps {
   job: Job | null
@@ -23,6 +38,8 @@ type ApplicationFormData = z.infer<typeof applicationSchema>
 
 export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPrivacy }) => {
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
+  const [resumeFile, setResumeFile] = useState<File | null>(null)
+  const [resumeError, setResumeError] = useState<string | null>(null)
   const [formData, setFormData] = useState<ApplicationFormData>({
     fullName: '',
     email: '',
@@ -34,6 +51,24 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   if (!job) return null
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setResumeError(null)
+
+    if (!isSafeDocumentFile(file)) {
+      setResumeError('Please upload a valid document (PDF, DOC, DOCX, or TXT). Executables and scripts are strictly blocked.')
+      return
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setResumeError('Resume file size must be under 5 MB.')
+      return
+    }
+
+    setResumeFile(file)
+  }
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -58,9 +93,20 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
     setErrors({})
     setIsSubmitting(true)
+
+    let resumeStoragePath: string | undefined = undefined
+    if (resumeFile) {
+      const uploadRes = await uploadApplicantResume(resumeFile)
+      if (uploadRes.storagePath) {
+        resumeStoragePath = uploadRes.storagePath
+      }
+    }
+
     await submitJobApplication({
       jobId: job.id,
-      ...formData
+      ...formData,
+      resumeFileName: resumeFile?.name,
+      resumeStoragePath
     })
     setIsSubmitting(false)
     setSubmitted(true)
@@ -316,7 +362,41 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                   )}
                 </div>
 
-                {/* Privacy Agreement Checkbox */}
+                {/* Optional Resume / Bio Document Attachment */}
+                <div>
+                  <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                    Attach CV / Resume / Bio (Optional)
+                  </label>
+                  <label className="flex items-center gap-3 p-3 bg-white border border-[#CBDAC4] rounded-sm cursor-pointer hover:border-[#285A40] transition">
+                    <Upload className="w-4 h-4 text-[#285A40] shrink-0" />
+                    <div className="flex-1 truncate text-xs">
+                      {resumeFile ? (
+                        <span className="font-semibold text-[#123D2D] truncate block">
+                          📄 {resumeFile.name} ({(resumeFile.size / 1024).toFixed(0)} KB)
+                        </span>
+                      ) : (
+                        <span className="text-[#576159]">
+                          Click to select PDF, DOCX or TXT (Max 5MB)
+                        </span>
+                      )}
+                    </div>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.txt"
+                      onChange={handleFileChange}
+                      className="hidden"
+                    />
+                  </label>
+                  {resumeError && (
+                    <p className="text-[10px] text-[#C47755] mt-1 font-mono">{resumeError}</p>
+                  )}
+                  <p className="text-[10px] text-[#576159] font-mono mt-1 flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3 text-[#285A40]" />
+                    <span>Private & Encrypted • Resumes are kept in a protected private bucket and never indexed publicly.</span>
+                  </p>
+                </div>
+
+                {/* DPDP Section 6 Candidate Protection & Privacy Agreement */}
                 <div className="p-2.5 bg-[#FAF8F3] border border-[#CBDAC4] rounded-sm">
                   <label className="flex items-start gap-2 cursor-pointer select-none">
                     <input
@@ -327,15 +407,14 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                       className="mt-0.5 w-3.5 h-3.5 rounded border-stone-400 text-[#123D2D] focus:ring-[#123D2D] cursor-pointer"
                     />
                     <span className="text-[11px] text-[#576159] leading-relaxed font-sans">
-                      I have read and agree to the{' '}
+                      Under DPDP Act 2023, I consent to the collection and transmission of my contact info & CV solely to <strong>{job.employer}</strong> for evaluating this role. I have reviewed the{' '}
                       <button
                         type="button"
                         onClick={onOpenPrivacy}
                         className="text-[#123D2D] font-semibold underline hover:text-black"
                       >
                         Privacy Policy
-                      </button>
-                      {' '}and authorize transmission of my application details to the employer.
+                      </button>.
                     </span>
                   </label>
                 </div>

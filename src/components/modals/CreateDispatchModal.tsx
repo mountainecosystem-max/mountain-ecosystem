@@ -4,7 +4,7 @@ import {
   X,
   Send,
   Loader2,
-  CheckCircle2,
+  ShieldCheck,
   AlertCircle,
   Compass,
   FileText,
@@ -202,20 +202,26 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
           )}
 
           {isSubmitted ? (
-            <div className="bg-[#123D26] border border-[#8FA777]/40 p-8 sm:p-10 rounded-xl text-center">
-              <CheckCircle2 className="w-12 h-12 text-[#34D399] mx-auto mb-3 animate-bounce" />
+            <div className="bg-[#123D26] border border-[#8FA777]/40 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-[#0B2516] border border-[#34D399]/40 text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-[#34D399]" />
+              </div>
               <h3 className="font-display text-2xl text-white font-bold uppercase">
-                Experience Published to Ledger!
+                Submitted to Verification Ledger!
               </h3>
               <p className="text-xs sm:text-sm text-[#D8E8D5] font-sans mt-2 max-w-md mx-auto leading-relaxed">
-                Your dispatch has been written to the {BRAND_CONFIG.name} Pan-India community archives. Fellow travellers and locals can now read and upvote your verified field note.
+                Your dispatch has been submitted to the {BRAND_CONFIG.name} moderation ledger. To keep the community archive free from commercial spam and misleading rates, stewards verify contributor authenticity before publishing live.
               </p>
+              <div className="mt-4 p-3 bg-black/30 border border-[#8FA777]/30 rounded-lg max-w-sm mx-auto text-left text-xs font-mono space-y-1 text-white/80">
+                <div>• Status: <span className="text-[#34D399] font-bold">Pending Steward Verification</span></div>
+                <div>• Archive: <span className="text-white font-bold">Community Listed</span></div>
+              </div>
               <button
                 onClick={onClose}
                 type="button"
                 className="mt-6 inline-flex items-center gap-2 bg-[#FAF7EE] hover:bg-white text-[#0B2516] text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
               >
-                <span>View on Community Ledger</span>
+                <span>Done & Return to Community</span>
               </button>
             </div>
           ) : (
