@@ -7,6 +7,7 @@ import {
   ShieldCheck,
   Store,
   Users,
+  Video,
   X,
   Database
 } from 'lucide-react'
@@ -40,23 +41,30 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
       description: 'Verify Stories, Inquiries & Ledger'
     },
     {
+      to: '/admin/conference',
+      label: 'Virtual Conference Suite',
+      kicker: 'MODULE 04',
+      icon: Video,
+      description: 'Live Host Verification & Candidate Interviews'
+    },
+    {
       to: '/admin/destinations',
       label: 'Destinations',
-      kicker: 'MODULE 04',
+      kicker: 'MODULE 05',
       icon: Compass,
       description: 'Regional Mountain Coordinates'
     },
     {
       to: '/admin/businesses',
       label: 'Local Businesses',
-      kicker: 'MODULE 05',
+      kicker: 'MODULE 06',
       icon: Store,
       description: 'Artisan Guilds & Farmgate Partners'
     },
     {
       to: '/admin/users',
       label: 'User Management',
-      kicker: 'MODULE 06',
+      kicker: 'MODULE 07',
       icon: Users,
       description: 'Staff Roles, Hosts & Permissions'
     }

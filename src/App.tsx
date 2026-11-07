@@ -13,6 +13,7 @@ import { PropertiesManager } from './components/admin/properties/PropertiesManag
 import { ModerationManager } from './components/admin/moderation/ModerationManager'
 import { BusinessesManager } from './components/admin/businesses/BusinessesManager'
 import { UsersManager } from './components/admin/users/UsersManager'
+import { VideoConferenceManager } from './components/admin/conference/VideoConferenceManager'
 
 export function App() {
   useEffect(() => {
@@ -43,10 +44,11 @@ export function App() {
             }
           >
             <Route index element={<Navigate to="/admin/destinations" replace />} />
-            <Route path="destinations" element={<DestinationsManager />} />
-            <Route path="jobs" element={<JobsManager />} />
             <Route path="properties" element={<PropertiesManager />} />
+            <Route path="jobs" element={<JobsManager />} />
             <Route path="moderation" element={<ModerationManager />} />
+            <Route path="conference" element={<VideoConferenceManager />} />
+            <Route path="destinations" element={<DestinationsManager />} />
             <Route path="businesses" element={<BusinessesManager />} />
             <Route path="users" element={<UsersManager />} />
           </Route>
