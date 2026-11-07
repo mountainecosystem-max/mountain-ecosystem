@@ -49,8 +49,8 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
 
   // Filter homestays by Lease vs Sale and Region
   const filteredProperties = homestays.filter((stay, idx) => {
-    // Derive lease vs sale: even indices = lease, odd indices or specified = sale for demo variety
-    const isSale = stay.listingType === 'sale' || idx % 2 === 1
+    // Strictly respect listingType if specified; fallback only for legacy mock data
+    const isSale = stay.listingType ? stay.listingType === 'sale' : idx % 2 === 1
     const matchesType =
       filterType === 'all'
         ? true
@@ -104,7 +104,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={() => setFilterType('all')}
               type="button"
-              className={`px-4 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
                 filterType === 'all'
                   ? 'bg-[#0B2516] text-white font-bold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -115,7 +115,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={() => setFilterType('lease')}
               type="button"
-              className={`px-4 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
                 filterType === 'lease'
                   ? 'bg-[#164E2D] text-white font-bold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -126,7 +126,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={() => setFilterType('sale')}
               type="button"
-              className={`px-4 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all ${
+              className={`px-4 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all flex items-center justify-center ${
                 filterType === 'sale'
                   ? 'bg-[#D96B27] text-white font-bold shadow-xs'
                   : 'text-stone-600 hover:text-stone-900'
@@ -143,7 +143,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                 key={reg.id}
                 onClick={() => setSelectedRegion(reg.id)}
                 type="button"
-                className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap ${
+                className={`px-3.5 py-2 min-h-[38px] text-xs font-mono uppercase tracking-wider rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
                     ? 'bg-[#0B2516] text-white font-semibold'
                     : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
@@ -184,7 +184,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
           /* Property Cards Grid */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filteredProperties.map((stay, idx) => {
-              const isSale = stay.listingType === 'sale' || idx % 2 === 1
+              const isSale = stay.listingType ? stay.listingType === 'sale' : idx % 2 === 1
               const numericMonthly =
                 parseInt(stay.monthlyRate.replace(/[^0-9]/g, ''), 10) || 32000
               const salePrice =

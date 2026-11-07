@@ -255,7 +255,7 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
                 key={reg.id}
                 onClick={() => setSelectedRegion(reg.id)}
                 type="button"
-                className={`px-3 py-1 text-xs font-mono rounded-full transition-all whitespace-nowrap ${
+                className={`px-3.5 py-2 min-h-[38px] text-xs font-mono rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
                     ? 'bg-[#164E2D] text-white font-bold shadow-xs'
                     : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'

@@ -40,32 +40,32 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
           {/* Links Column 1: Explore Regions (2 cols) */}
           <div className="lg:col-span-2">
             <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#91A77B] mb-4">
-              GREEN REGIONS
+              MOUNTAIN REGIONS
             </h4>
             <ul className="space-y-2.5 text-xs text-[#E8EFE3]/80 font-mono">
               <li>
-                <a href="#destinations" className="hover:text-white hover:underline transition-colors">
-                  Darjeeling Tea Belt
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
+                  Himachal Pradesh
                 </a>
               </li>
               <li>
-                <a href="#destinations" className="hover:text-white hover:underline transition-colors">
-                  Kalimpong Orchid Ridge
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
+                  Uttarakhand & Kumaon
                 </a>
               </li>
               <li>
-                <a href="#destinations" className="hover:text-white hover:underline transition-colors">
-                  Sikkim Organic Valleys
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
+                  Ladakh & Kashmir
                 </a>
               </li>
               <li>
-                <a href="#destinations" className="hover:text-white hover:underline transition-colors">
-                  Dooars Sal Forest
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
+                  Sikkim & Northeast
                 </a>
               </li>
               <li>
-                <a href="#destinations" className="hover:text-white hover:underline transition-colors">
-                  Kurseong Tea Slopes
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
+                  Bengal Hills & Nilgiris
                 </a>
               </li>
             </ul>
@@ -118,26 +118,26 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
               </li>
               <li>
                 <a href="#jobs" className="hover:text-white hover:underline transition-colors">
-                  Tea Estate Residencies
+                  Estate & Trail Residencies
                 </a>
               </li>
               <li>
-                <a href="#homestays" className="hover:text-white hover:underline transition-colors">
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
                   Village Sabbaticals
                 </a>
               </li>
               <li>
-                <a href="#homestays" className="hover:text-white hover:underline transition-colors">
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
                   Fiber Optic Cottages
                 </a>
               </li>
               <li>
-                <a href="#architecture" className="hover:text-white hover:underline transition-colors text-[#91A77B]">
-                  Architectural Ledger
+                <a href="#community" className="hover:text-white hover:underline transition-colors text-[#91A77B]">
+                  Ground Price Index
                 </a>
               </li>
               <li>
-                <a href="#homestays" className="hover:text-white hover:underline transition-colors">
+                <a href="#stays" className="hover:text-white hover:underline transition-colors">
                   Fair Lease Standards
                 </a>
               </li>
@@ -214,7 +214,7 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
         {/* Bottom Bar: Copyright & Tessimo Watermark */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#E8EFE3]/70">
           <div>
-            © {BRAND_CONFIG.copyrightYear} {BRAND_CONFIG.name}. Eastern Himalayas Platform.
+            © {BRAND_CONFIG.copyrightYear} {BRAND_CONFIG.name}. Pan-India Mountain Digital Exchange.
           </div>
 
           {/* Watermark: Built with love by Tessimo (tessimo.in) */}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import type { FC } from 'react'
 import { useLocation } from 'react-router-dom'
 import { CheckCircle2, X } from 'lucide-react'
@@ -12,15 +12,34 @@ import { CommunityDispatches } from './CommunityDispatches'
 import { FAQSection } from './FAQSection'
 import { Footer } from '../layout/Footer'
 
-import { JobDetailModal } from '../modals/JobDetailModal'
-import { HomestayDetailModal } from '../modals/HomestayDetailModal'
-import { StoryDetailModal } from '../modals/StoryDetailModal'
-import { JoinCommunityModal } from '../modals/JoinCommunityModal'
-import { CreateDispatchModal } from '../modals/CreateDispatchModal'
-import { CreatePropertyModal } from '../modals/CreatePropertyModal'
-import { CreateJobModal } from '../modals/CreateJobModal'
-import { PrivacyPolicyModal } from '../modals/PrivacyPolicyModal'
-import { CookiePolicyModal } from '../modals/CookiePolicyModal'
+// Lazy-loaded interactive modals (loaded on demand to ensure lightning-fast initial page paint)
+const JobDetailModal = lazy(() =>
+  import('../modals/JobDetailModal').then((m) => ({ default: m.JobDetailModal }))
+)
+const HomestayDetailModal = lazy(() =>
+  import('../modals/HomestayDetailModal').then((m) => ({ default: m.HomestayDetailModal }))
+)
+const StoryDetailModal = lazy(() =>
+  import('../modals/StoryDetailModal').then((m) => ({ default: m.StoryDetailModal }))
+)
+const JoinCommunityModal = lazy(() =>
+  import('../modals/JoinCommunityModal').then((m) => ({ default: m.JoinCommunityModal }))
+)
+const CreateDispatchModal = lazy(() =>
+  import('../modals/CreateDispatchModal').then((m) => ({ default: m.CreateDispatchModal }))
+)
+const CreatePropertyModal = lazy(() =>
+  import('../modals/CreatePropertyModal').then((m) => ({ default: m.CreatePropertyModal }))
+)
+const CreateJobModal = lazy(() =>
+  import('../modals/CreateJobModal').then((m) => ({ default: m.CreateJobModal }))
+)
+const PrivacyPolicyModal = lazy(() =>
+  import('../modals/PrivacyPolicyModal').then((m) => ({ default: m.PrivacyPolicyModal }))
+)
+const CookiePolicyModal = lazy(() =>
+  import('../modals/CookiePolicyModal').then((m) => ({ default: m.CookiePolicyModal }))
+)
 import { CookieConsentBanner } from '../common/CookieConsentBanner'
 import { StartupAnimation } from '../common/StartupAnimation'
 import { RidgeConciergeChatbot } from '../chat/RidgeConciergeChatbot'
@@ -179,73 +198,91 @@ export const PublicHomePage: FC = () => {
         onOpenCookies={() => setCookiesModalOpen(true)}
       />
 
-      {/* Interactive Modals */}
-      <JobDetailModal
-        job={selectedJob}
-        onClose={() => setSelectedJob(null)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-      />
+      {/* Interactive Modals (Loaded on-demand via React.lazy) */}
+      <Suspense fallback={null}>
+        {selectedJob && (
+          <JobDetailModal
+            job={selectedJob}
+            onClose={() => setSelectedJob(null)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+          />
+        )}
 
-      <HomestayDetailModal
-        homestay={selectedHomestay}
-        onClose={() => setSelectedHomestay(null)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-      />
+        {selectedHomestay && (
+          <HomestayDetailModal
+            homestay={selectedHomestay}
+            onClose={() => setSelectedHomestay(null)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+          />
+        )}
 
-      <StoryDetailModal
-        destination={selectedDestination}
-        dispatch={selectedDispatch}
-        onClose={() => {
-          setSelectedDestination(null)
-          setSelectedDispatch(null)
-        }}
-      />
+        {(selectedDestination || selectedDispatch) && (
+          <StoryDetailModal
+            destination={selectedDestination}
+            dispatch={selectedDispatch}
+            onClose={() => {
+              setSelectedDestination(null)
+              setSelectedDispatch(null)
+            }}
+          />
+        )}
 
-      {joinModalOpen && (
-        <JoinCommunityModal
-          initialRole={joinRole}
-          onClose={() => setJoinModalOpen(false)}
-          onOpenPrivacy={() => setPrivacyModalOpen(true)}
-        />
-      )}
+        {joinModalOpen && (
+          <JoinCommunityModal
+            initialRole={joinRole}
+            onClose={() => setJoinModalOpen(false)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+          />
+        )}
 
-      {/* Dedicated Pan-India Mountain Modals with Full Address Details */}
-      <CreatePropertyModal
-        isOpen={propertyModalOpen}
-        onClose={() => setPropertyModalOpen(false)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-        onSuccess={() => {
-          refetchAll()
-        }}
-      />
+        {/* Dedicated Pan-India Mountain Modals with Full Address Details */}
+        {propertyModalOpen && (
+          <CreatePropertyModal
+            isOpen={propertyModalOpen}
+            onClose={() => setPropertyModalOpen(false)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+            onSuccess={() => {
+              refetchAll()
+            }}
+          />
+        )}
 
-      <CreateJobModal
-        isOpen={jobModalOpen}
-        onClose={() => setJobModalOpen(false)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-        onSuccess={() => {
-          refetchAll()
-        }}
-      />
+        {jobModalOpen && (
+          <CreateJobModal
+            isOpen={jobModalOpen}
+            onClose={() => setJobModalOpen(false)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+            onSuccess={() => {
+              refetchAll()
+            }}
+          />
+        )}
 
-      <CreateDispatchModal
-        isOpen={dispatchModalOpen}
-        onClose={() => setDispatchModalOpen(false)}
-        onOpenPrivacy={() => setPrivacyModalOpen(true)}
-        onSuccess={() => {
-          refetchAll()
-        }}
-      />
+        {dispatchModalOpen && (
+          <CreateDispatchModal
+            isOpen={dispatchModalOpen}
+            onClose={() => setDispatchModalOpen(false)}
+            onOpenPrivacy={() => setPrivacyModalOpen(true)}
+            onSuccess={() => {
+              refetchAll()
+            }}
+          />
+        )}
 
-      <PrivacyPolicyModal
-        isOpen={privacyModalOpen}
-        onClose={() => setPrivacyModalOpen(false)}
-      />
+        {privacyModalOpen && (
+          <PrivacyPolicyModal
+            isOpen={privacyModalOpen}
+            onClose={() => setPrivacyModalOpen(false)}
+          />
+        )}
 
-      <CookiePolicyModal
-        isOpen={cookiesModalOpen}
-        onClose={() => setCookiesModalOpen(false)}
-      />
+        {cookiesModalOpen && (
+          <CookiePolicyModal
+            isOpen={cookiesModalOpen}
+            onClose={() => setCookiesModalOpen(false)}
+          />
+        )}
+      </Suspense>
 
       <CookieConsentBanner
         onOpenCookiePolicy={() => setCookiesModalOpen(true)}

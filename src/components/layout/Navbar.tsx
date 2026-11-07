@@ -142,7 +142,7 @@ export const Navbar: FC<NavbarProps> = ({
                 <div className="flex items-center gap-2">
                   {profile ? (
                     <Link
-                      to="/admin/destinations"
+                      to="/admin/properties"
                       className="text-xs font-mono text-[#8FA777] hover:text-white px-2 py-1 rounded bg-[#123D26] border border-[#1F4E34]"
                     >
                       Admin Staff
@@ -220,7 +220,7 @@ export const Navbar: FC<NavbarProps> = ({
 
                       {profile && (
                         <Link
-                          to="/admin/destinations"
+                          to="/admin/properties"
                           onClick={() => setStaffMenuOpen(false)}
                           className="flex items-center justify-between px-3 py-2.5 text-xs font-mono text-white hover:bg-[#123D26] rounded-xl transition group"
                         >

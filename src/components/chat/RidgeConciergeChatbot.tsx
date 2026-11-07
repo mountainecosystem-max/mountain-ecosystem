@@ -297,11 +297,12 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     setHasInteracted(true)
     setShowGreetingBubble(false)
 
+    const timestampStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     const userMessage: ChatMessage = {
       id: `usr-${Date.now()}`,
       sender: 'user',
       text: userText,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      timestamp: timestampStr
     }
 
     setMessages((prev) => [...prev, userMessage])
@@ -316,7 +317,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
       if (soundEnabled) {
         anayaAudio.playReceiveChime()
       }
-    }, 450 + Math.random() * 350)
+    }, 600)
   }
 
   const handleSubmit = (e: FormEvent) => {
@@ -858,7 +859,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
         <div
           role="dialog"
           aria-label="Anaya AI Mountain Concierge Chat"
-          className="fixed bottom-18 sm:bottom-20 right-2 sm:right-6 z-50 w-[95vw] sm:w-[440px] max-h-[85vh] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
+          className="fixed bottom-20 sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[440px] max-h-[min(82dvh,640px)] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
         >
           {/* Header */}
           <div className="bg-[#0B2516] border-b border-[#1F4E34] p-3.5 sm:p-4 flex items-center justify-between">
