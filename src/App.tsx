@@ -7,13 +7,11 @@ import { AdminLoginPage } from './components/auth/AdminLoginPage'
 import { AuthCallback } from './components/auth/AuthCallback'
 import { ProtectedRoute } from './components/admin/ProtectedRoute'
 import { AdminLayout } from './components/admin/AdminLayout'
-import { DestinationsManager } from './components/admin/destinations/DestinationsManager'
-import { JobsManager } from './components/admin/jobs/JobsManager'
 import { PropertiesManager } from './components/admin/properties/PropertiesManager'
+import { JobsManager } from './components/admin/jobs/JobsManager'
 import { ModerationManager } from './components/admin/moderation/ModerationManager'
-import { BusinessesManager } from './components/admin/businesses/BusinessesManager'
-import { UsersManager } from './components/admin/users/UsersManager'
 import { VideoConferenceManager } from './components/admin/conference/VideoConferenceManager'
+import { UsersManager } from './components/admin/users/UsersManager'
 
 export function App() {
   useEffect(() => {
@@ -43,13 +41,11 @@ export function App() {
               </ProtectedRoute>
             }
           >
-            <Route index element={<Navigate to="/admin/destinations" replace />} />
+            <Route index element={<Navigate to="/admin/properties" replace />} />
             <Route path="properties" element={<PropertiesManager />} />
             <Route path="jobs" element={<JobsManager />} />
             <Route path="moderation" element={<ModerationManager />} />
             <Route path="conference" element={<VideoConferenceManager />} />
-            <Route path="destinations" element={<DestinationsManager />} />
-            <Route path="businesses" element={<BusinessesManager />} />
             <Route path="users" element={<UsersManager />} />
           </Route>
 

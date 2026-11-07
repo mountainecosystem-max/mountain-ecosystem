@@ -24,7 +24,7 @@ export const AdminNavbar: FC<AdminNavbarProps> = ({ onToggleSidebar }) => {
           <Menu className="w-5 h-5" />
         </button>
 
-        <Link to="/admin/destinations" className="flex items-center gap-3">
+        <Link to="/admin/properties" className="flex items-center gap-3">
           <img
             src={BRAND_CONFIG.logo.icon}
             alt={BRAND_CONFIG.name}

@@ -1,11 +1,9 @@
 import type { FC } from 'react'
 import { NavLink } from 'react-router-dom'
 import {
-  Compass,
   Briefcase,
   Home,
   ShieldCheck,
-  Store,
   Users,
   Video,
   X,
@@ -48,23 +46,9 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
       description: 'Live Host Verification & Candidate Interviews'
     },
     {
-      to: '/admin/destinations',
-      label: 'Destinations',
-      kicker: 'MODULE 05',
-      icon: Compass,
-      description: 'Regional Mountain Coordinates'
-    },
-    {
-      to: '/admin/businesses',
-      label: 'Local Businesses',
-      kicker: 'MODULE 06',
-      icon: Store,
-      description: 'Artisan Guilds & Farmgate Partners'
-    },
-    {
       to: '/admin/users',
       label: 'User Management',
-      kicker: 'MODULE 07',
+      kicker: 'MODULE 05',
       icon: Users,
       description: 'Staff Roles, Hosts & Permissions'
     }
