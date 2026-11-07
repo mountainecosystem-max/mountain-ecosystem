@@ -100,7 +100,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
         {/* Lease vs Sale Mode Selector + Territory Filters */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-8 gap-4 border-b border-[#CBDAC4]/70">
           {/* Lease / Sale Segmented Tabs */}
-          <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-full border border-[#CBDAC4] shadow-inner">
+          <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-full border border-[#CBDAC4] shadow-inner max-w-full overflow-x-auto scrollbar-none touch-momentum">
             <button
               onClick={() => setFilterType('all')}
               type="button"
@@ -137,7 +137,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
           </div>
 
           {/* Region Chips */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
             {regions.map((reg) => (
               <button
                 key={reg.id}
@@ -265,7 +265,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                     </div>
 
                     {/* Content Details */}
-                    <div className="p-6">
+                    <div className="p-4 sm:p-6">
                       <h3 className="font-display text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#164E2D] transition-colors leading-tight">
                         {stay.name}
                       </h3>
@@ -300,7 +300,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                   </div>
 
                   {/* Card Pricing Footer & Action */}
-                  <div className="px-6 py-4 bg-stone-50 border-t border-stone-100 flex items-center justify-between mt-auto">
+                  <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-stone-50 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 mt-auto">
                     <div>
                       {isSale ? (
                         <div>

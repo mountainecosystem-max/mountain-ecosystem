@@ -246,7 +246,7 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
         {/* Region & Type Dual Filter Bar */}
         <div className="space-y-3 pb-6 border-b border-[#285A40]/15 mb-8">
           {/* Pan-India Region Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
             <span className="text-[11px] font-sans uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
               Region:
             </span>
@@ -270,13 +270,13 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
           <div className="flex items-center justify-between overflow-x-auto gap-4 scrollbar-none pt-1">
             <div className="flex items-center gap-2">
               <Filter className="w-3.5 h-3.5 text-[#285A40] hidden sm:block" />
-              <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
                 {filterTabs.map((tab) => (
                   <button
                     key={tab.value}
                     onClick={() => setActiveFilter(tab.value)}
                     type="button"
-                    className={`px-4 py-1.5 text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap ${
+                    className={`px-3.5 sm:px-4 py-2 min-h-[38px] text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap shrink-0 ${
                       activeFilter === tab.value
                         ? 'bg-[#123D2D] text-white font-semibold shadow-xs border border-emerald-500/30'
                         : 'text-stone-600 hover:text-[#0B2516] hover:bg-white/80'

@@ -163,11 +163,11 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#0B2516] border border-[#1F4E34] text-[#FAF7EE] rounded-2xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#0B2516] border border-[#1F4E34] text-[#FAF7EE] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -185,7 +185,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-white/60 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-white/60 hover:text-white hover:bg-white/10 active:bg-white/20 rounded-full transition-colors shrink-0"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
@@ -287,7 +287,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Winter Snow Status on Atal Tunnel Pass / Manali to Kaza Shared Fare Index"
-                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
+                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
                 />
               </div>
 
@@ -306,7 +306,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-[#071F13] border border-[#1F4E34] rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-[#071F13] border border-[#1F4E34] rounded-lg px-3 py-2 text-base sm:text-xs text-white focus:outline-none focus:border-[#A5C896]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -325,7 +325,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={elevation}
                       onChange={(e) => setElevation(e.target.value)}
                       placeholder="e.g. 2,050 m / 3,100 m"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     value={villageRoute}
                     onChange={(e) => setVillageRoute(e.target.value)}
                     placeholder="e.g. Old Manali to Solang Valley / Chopta to Tungnath Ridge / Yuksom Valley"
-                    className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                    className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                   />
                 </div>
               </div>
@@ -361,7 +361,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={priceItem}
                         onChange={(e) => setPriceItem(e.target.value)}
                         placeholder="e.g. Shared Bolero to Kaza"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                     <div>
@@ -373,7 +373,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={priceSharedRate}
                         onChange={(e) => setPriceSharedRate(e.target.value)}
                         placeholder="e.g. ₹1,200 / seat"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                     <div>
@@ -385,7 +385,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={pricePrivateRate}
                         onChange={(e) => setPricePrivateRate(e.target.value)}
                         placeholder="e.g. ₹9,500 / vehicle"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                   </div>
@@ -403,7 +403,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="e.g. Shared 4x4 Boleros running daily from Manali with standard ₹1,200 union fares."
-                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
+                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
                 />
               </div>
 
@@ -418,7 +418,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={fullContent}
                   onChange={(e) => setFullContent(e.target.value)}
                   placeholder="Share details on road conditions, snow, winter heating, porter availability, contact booths, or food along the route..."
-                  className="w-full bg-black/40 border border-[#1F4E34] p-3 text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896] leading-relaxed"
+                  className="w-full bg-black/40 border border-[#1F4E34] p-3 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896] leading-relaxed"
                 />
               </div>
 
@@ -434,7 +434,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
                       placeholder="e.g. Rahul Verma"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
 
@@ -447,7 +447,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={guestRole}
                       onChange={(e) => setGuestRole(e.target.value)}
                       placeholder="e.g. Mountain Trekker / Sabbatical Fellow"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
                 </div>
@@ -478,7 +478,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     required
                     className="mt-0.5 w-4 h-4 rounded border-white/30 text-[#A5C896] focus:ring-[#A5C896] cursor-pointer"
                   />
-                  <span className="text-xs text-white/80 leading-relaxed font-sans">
+                  <span className="text-base sm:text-xs text-white/80 leading-relaxed font-sans">
                     I agree to the{' '}
                     <button
                       type="button"

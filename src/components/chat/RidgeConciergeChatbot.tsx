@@ -816,7 +816,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
       )}
 
       {/* 2. Floating Action Button (Always visible on bottom right) */}
-      <div className="fixed bottom-5 right-3 sm:right-6 z-40">
+      <div className="fixed bottom-[calc(1.25rem+env(safe-area-inset-bottom,0px))] right-3 sm:right-6 z-40">
         <button
           type="button"
           onClick={() => {
@@ -828,7 +828,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               anayaAudio.playOpenChime()
             }
           }}
-          className={`group flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-950/60 active:scale-95 border border-emerald-400/40 ${
+          className={`group flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-950/60 active:scale-95 border border-emerald-400/40 ${
             isOpen
               ? 'bg-gradient-to-r from-[#0E2F1D] to-[#164E2D] text-white ring-2 ring-emerald-400/20'
               : 'bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white animate-pulse-glow'
@@ -859,7 +859,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
         <div
           role="dialog"
           aria-label="Anaya AI Mountain Concierge Chat"
-          className="fixed bottom-20 sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[440px] max-h-[min(82dvh,640px)] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
+          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[440px] max-h-[min(82dvh,640px)] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
         >
           {/* Header */}
           <div className="bg-[#0B2516] border-b border-[#1F4E34] p-3.5 sm:p-4 flex items-center justify-between">
@@ -1053,13 +1053,13 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Anaya about stays, taxi fares, jobs, or weather..."
-              className="flex-1 bg-black/30 border border-white/20 px-3.5 py-2.5 text-xs text-white placeholder:text-white/40 rounded-sm focus:outline-none focus:border-[#8FA777]"
+              className="flex-1 bg-black/30 border border-white/20 px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/40 rounded-sm focus:outline-none focus:border-[#8FA777]"
               maxLength={300}
             />
             <button
               type="submit"
               disabled={!input.trim()}
-              className="p-2.5 bg-[#FDFBF7] hover:bg-white text-[#0B2516] rounded-sm disabled:opacity-40 transition-all shrink-0 font-semibold"
+              className="p-2.5 min-w-[42px] min-h-[42px] flex items-center justify-center bg-[#FDFBF7] hover:bg-white text-[#0B2516] rounded-sm disabled:opacity-40 transition-all shrink-0 font-semibold"
               aria-label="Send inquiry"
             >
               <Send className="w-4 h-4" />

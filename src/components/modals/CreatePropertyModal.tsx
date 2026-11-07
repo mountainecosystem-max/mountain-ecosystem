@@ -207,11 +207,11 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -229,7 +229,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] rounded-full transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -332,7 +332,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Pine Ridge Cedar Stone Cottage with Snow Views"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -343,7 +343,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   >
                     <option value="Stone Cottage">Stone Cottage</option>
                     <option value="Kath-Kuni Timber Chalet">Kath-Kuni Timber Chalet</option>
@@ -370,7 +370,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -389,7 +389,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={mountainRange}
                       onChange={(e) => setMountainRange(e.target.value)}
                       placeholder="e.g. Parvati Valley / Kumaon / Zanskar / Nilgiris"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>
@@ -405,7 +405,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={villageTown}
                       onChange={(e) => setVillageTown(e.target.value)}
                       placeholder="e.g. Old Manali / Mukteshwar / Yuksom / Kotagiri"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -418,7 +418,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={elevation}
                       onChange={(e) => setElevation(e.target.value)}
                       placeholder="e.g. 2,050 m / 6,700 ft"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>
@@ -434,7 +434,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={fullAddress}
                       onChange={(e) => setFullAddress(e.target.value)}
                       placeholder="e.g. House No. 14, Upper Temple Road, Near Deodar Pine Grove"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -447,7 +447,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={districtPin}
                       onChange={(e) => setDistrictPin(e.target.value)}
                       placeholder="e.g. Kullu District - 175131"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>
@@ -472,7 +472,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={monthlyRate}
                         onChange={(e) => setMonthlyRate(e.target.value)}
                         placeholder="e.g. ₹32,000 / month"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       />
                     </div>
 
@@ -485,7 +485,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={securityDeposit}
                         onChange={(e) => setSecurityDeposit(e.target.value)}
                         placeholder="e.g. ₹32,000 (Refundable)"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       />
                     </div>
 
@@ -496,7 +496,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       <select
                         value={minLeaseTerm}
                         onChange={(e) => setMinLeaseTerm(e.target.value)}
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       >
                         <option value="1 Month">1 Month</option>
                         <option value="1–3 Months">1–3 Months</option>
@@ -525,7 +525,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={salePrice}
                         onChange={(e) => setSalePrice(e.target.value)}
                         placeholder="e.g. ₹1.45 Cr or ₹85 Lakh"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       />
                     </div>
 
@@ -538,7 +538,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={landArea}
                         onChange={(e) => setLandArea(e.target.value)}
                         placeholder="e.g. 10 Nali / 1.5 Acres / 3,200 sq ft"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       />
                     </div>
 
@@ -549,7 +549,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       <select
                         value={landTitleType}
                         onChange={(e) => setLandTitleType(e.target.value)}
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                       >
                         <option value="Freehold Clear Title">Freehold Clear Title</option>
                         <option value="Registry / Khatoni Verified">Registry / Khatoni Verified</option>
@@ -572,7 +572,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={bedrooms}
                     onChange={(e) => setBedrooms(e.target.value)}
                     placeholder="e.g. 2 Bedrooms • Solarium Study"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -585,7 +585,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={wifiSpeed}
                     onChange={(e) => setWifiSpeed(e.target.value)}
                     placeholder="e.g. 100 Mbps Dedicated Fiber"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -598,7 +598,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={heatingType}
                     onChange={(e) => setHeatingType(e.target.value)}
                     placeholder="e.g. Bukhari Wood Stove / Cast Iron Fireplace"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
               </div>
@@ -614,7 +614,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={roadAccess}
                     onChange={(e) => setRoadAccess(e.target.value)}
                     placeholder="e.g. Direct Car Drive-in to Gate / 5-min foot trail"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -627,7 +627,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={waterSource}
                     onChange={(e) => setWaterSource(e.target.value)}
                     placeholder="e.g. Natural Himalayan Spring / Gravity Feed"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -640,7 +640,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={powerBackup}
                     onChange={(e) => setPowerBackup(e.target.value)}
                     placeholder="e.g. Inverter & Solar Battery / Grid Only"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
               </div>
@@ -663,7 +663,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={hostName}
                       onChange={(e) => setHostName(e.target.value)}
                       placeholder="e.g. Virender Singh"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -677,7 +677,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="your.email@domain.com"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -690,7 +690,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={phoneWhatsApp}
                       onChange={(e) => setPhoneWhatsApp(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -761,7 +761,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the natural light, view of snow ranges, serenity, heating, nearby village trail, and water supply..."
-                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                 />
               </div>
 
@@ -798,7 +798,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={imageUrl}
                       onChange={(e) => setImageUrl(e.target.value)}
                       placeholder="https://images.unsplash.com/..."
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>

@@ -75,11 +75,12 @@ export const Hero: FC<HeroProps> = ({
         {/* SaaS Platform Kicker Badge */}
         <div className="inline-flex items-center gap-2 bg-[#092617]/90 border border-[#2D6B48]/80 text-[#C6E8A3] text-[10px] sm:text-xs font-mono font-semibold px-3.5 py-1.5 rounded-full mb-3 sm:mb-5 mt-1 sm:mt-0 backdrop-blur-md shadow-lg animate-float-slow">
           <Compass className="w-3.5 h-3.5 text-[#34D399]" />
-          <span>ALL-INDIA MOUNTAIN DIGITAL EXCHANGE • PAN-INDIA MOUNTAINS</span>
+          <span className="hidden sm:inline">ALL-INDIA MOUNTAIN DIGITAL EXCHANGE • PAN-INDIA MOUNTAINS</span>
+          <span className="sm:hidden">ALL-INDIA MOUNTAIN DIGITAL EXCHANGE</span>
         </div>
 
         {/* Main Motto Headline */}
-        <h1 className="font-display text-3xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-tight text-white max-w-4xl mx-auto leading-[1.06] drop-shadow-md">
+        <h1 className="font-display text-2xl xs:text-3xl sm:text-5xl lg:text-7xl font-bold uppercase tracking-tight text-white max-w-4xl mx-auto leading-[1.08] drop-shadow-md break-words">
           COMMUNITY EXPERIENCES. <br />
           <span className="text-[#A5C896]">MOUNTAIN JOBS. PROPERTIES FOR LEASE & SALE.</span>
         </h1>
@@ -110,7 +111,7 @@ export const Hero: FC<HeroProps> = ({
               </p>
             </div>
 
-            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('stays')}
                 type="button"
@@ -149,7 +150,7 @@ export const Hero: FC<HeroProps> = ({
               </p>
             </div>
 
-            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('jobs')}
                 type="button"
@@ -188,7 +189,7 @@ export const Hero: FC<HeroProps> = ({
               </p>
             </div>
 
-            <div className="mt-6 pt-3.5 border-t border-white/10 flex items-center justify-between gap-2">
+            <div className="mt-6 pt-3.5 border-t border-white/10 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
               <button
                 onClick={() => onSelectTab('community')}
                 type="button"

@@ -57,7 +57,7 @@ export const AdminLoginPage: FC = () => {
   return (
     <div className="min-h-screen bg-[#06180E] text-[#F8F6F0] flex flex-col justify-between selection:bg-[#8FA777]/30 selection:text-white">
       {/* Top Header */}
-      <header className="p-6 sm:p-8 flex items-center justify-between border-b border-white/10">
+      <header className="p-4 sm:p-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-xs font-mono text-white/70 hover:text-white transition-colors"
@@ -131,7 +131,7 @@ export const AdminLoginPage: FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={`admin@${BRAND_CONFIG.name.toLowerCase().replace(/\s+/g, '-')}.org`}
-                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
+                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
                 />
               </div>
             </div>
@@ -148,7 +148,7 @@ export const AdminLoginPage: FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
+                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
                 />
               </div>
             </div>

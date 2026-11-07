@@ -38,7 +38,7 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
     <div
       role="region"
       aria-label="Cookie Preferences"
-      className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-40 bg-[#0B2516]/95 backdrop-blur-md border border-[#1F4E34] text-[#F8F6F0] p-5 rounded-sm shadow-2xl animate-fade-in font-sans"
+      className="fixed bottom-20 sm:bottom-6 left-3 right-3 sm:left-6 sm:right-auto sm:max-w-md z-40 bg-[#0B2516]/95 backdrop-blur-md border border-[#1F4E34] text-[#F8F6F0] p-4 sm:p-5 rounded-2xl shadow-2xl animate-fade-in font-sans"
     >
       <div className="flex items-start gap-3.5">
         <div className="w-8 h-8 rounded-full bg-white/10 border border-[#8FA777]/30 flex items-center justify-center shrink-0 mt-0.5">
@@ -67,7 +67,7 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="px-3.5 py-1.5 bg-[#F8F6F0] hover:bg-white text-[#0B2516] text-[11px] font-semibold uppercase tracking-wider rounded-sm transition-colors shadow-sm"
+              className="px-4 py-2 min-h-[38px] bg-[#F8F6F0] hover:bg-white text-[#0B2516] text-[11px] font-semibold uppercase tracking-wider rounded-full transition-colors shadow-sm flex items-center justify-center"
             >
               Accept All
             </button>
@@ -75,7 +75,7 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
             <button
               type="button"
               onClick={handleEssentialOnly}
-              className="px-3.5 py-1.5 bg-white/10 hover:bg-white/15 text-white text-[11px] font-mono uppercase tracking-wider rounded-sm transition-colors border border-white/15"
+              className="px-4 py-2 min-h-[38px] bg-white/10 hover:bg-white/15 text-white text-[11px] font-mono uppercase tracking-wider rounded-full transition-colors border border-white/15 flex items-center justify-center"
             >
               Essential Only
             </button>

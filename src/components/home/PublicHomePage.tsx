@@ -119,7 +119,7 @@ export const PublicHomePage: FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7EE] text-[#1E2621] font-sans selection:bg-[#164E2D]/20 selection:text-[#0A2316]">
+    <div className="min-h-screen flex flex-col bg-[#FAF7EE] text-[#1E2621] font-sans selection:bg-[#164E2D]/20 selection:text-[#0A2316] overflow-x-hidden w-full relative">
       {/* 0. Cinematic Launch Startup Animation */}
       <StartupAnimation />
 
@@ -129,7 +129,7 @@ export const PublicHomePage: FC = () => {
       />
 
       {/* Main SaaS Platform View */}
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         {/* 1. SaaS Hero with Platform Mission & Direct Action Cards */}
         <Hero
           onSelectTab={handleTabChange}

@@ -89,11 +89,11 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#0f2720]/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0f2720]/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#F8F6F0] border border-[#202622]/20 rounded-sm max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative"
+        className="bg-[#F8F6F0] border border-[#202622]/20 rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Header */}
@@ -110,7 +110,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-[#202622]/60 hover:text-[#183C32] hover:bg-[#202622]/5 rounded-sm transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-[#202622]/60 hover:text-[#183C32] hover:bg-[#202622]/5 active:bg-[#202622]/10 rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -133,13 +133,13 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
             </div>
 
             {/* Thumbnail selector */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none touch-momentum">
               {homestay.images.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
-                  className={`w-20 h-14 rounded-sm overflow-hidden border-2 transition-all ${
+                  className={`w-20 h-14 rounded-sm overflow-hidden border-2 transition-all shrink-0 ${
                     activeImageIndex === idx ? 'border-[#183C32] scale-102' : 'border-transparent opacity-70 hover:opacity-100'
                   }`}
                 >
@@ -326,7 +326,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                     <select
                       value={formData.intendedTerm}
                       onChange={(e) => setFormData({ ...formData, intendedTerm: e.target.value })}
-                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                     >
                       <option value="1 Month">1 Month Sabbatical</option>
                       <option value="3 Months">3 Months Seasonal Lease</option>
@@ -343,7 +343,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                       type="date"
                       value={formData.startDate}
                       onChange={(e) => setFormData({ ...formData, startDate: e.target.value })}
-                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                     />
                     {errors.startDate && (
                       <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">
@@ -364,7 +364,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                       value={formData.guestName}
                       onChange={(e) => setFormData({ ...formData, guestName: e.target.value })}
                       placeholder="e.g. Maya Sen"
-                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                     />
                     {errors.guestName && (
                       <p className="text-[10px] text-[#C47755] mt-1 font-mono">{errors.guestName}</p>
@@ -380,7 +380,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. maya@example.com"
-                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                     />
                     {errors.email && (
                       <p className="text-[10px] text-[#C47755] mt-1 font-mono">{errors.email}</p>
@@ -396,7 +396,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                       value={formData.profession}
                       onChange={(e) => setFormData({ ...formData, profession: e.target.value })}
                       placeholder="e.g. Botanist / Remote Dev"
-                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                      className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                     />
                     {errors.profession && (
                       <p className="text-[10px] text-[#C47755] mt-1 font-mono">{errors.profession}</p>
@@ -413,7 +413,7 @@ export const HomestayDetailModal: FC<HomestayDetailModalProps> = ({
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Tell your hosts about your remote work routine, peaceful lifestyle, or creative purpose..."
-                    className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
+                    className="w-full bg-[#FAF8F3] border border-[#202622]/20 px-3 py-2 text-base sm:text-xs text-[#202622] rounded-sm focus:outline-none focus:border-[#183C32]"
                   />
                   {errors.message && (
                     <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">

@@ -94,7 +94,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
         {/* Region & Category Dual Filter Bar */}
         <div className="space-y-3 pb-6 mb-8 border-b border-[#CBDAC4]/70">
           {/* Pan-India Region Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
             <span className="text-[11px] font-sans uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
               Region:
             </span>
@@ -116,7 +116,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
 
           {/* Role Category Pills */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
               <Filter className="w-3.5 h-3.5 text-[#164E2D] mr-1 flex-shrink-0 hidden sm:inline" />
               {categories.map((cat) => (
                 <button
@@ -173,7 +173,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
               <div
                 key={job.id}
                 onClick={() => onSelectJob(job)}
-                className="group bg-white p-5 sm:p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-5 card-hover-lift"
+                className="group bg-white p-4 sm:p-6 rounded-3xl border border-stone-200 shadow-sm hover:shadow-xl transition-all cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-5 card-hover-lift"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {

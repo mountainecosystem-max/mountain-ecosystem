@@ -92,7 +92,8 @@ export const Navbar: FC<NavbarProps> = ({
           <div className="flex items-center gap-2 shrink-0">
             <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[9px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-xs font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
-              <span>Curated Mountain Exchange • Two-Tier Verification</span>
+              <span className="hidden sm:inline">Curated Mountain Exchange • Two-Tier Verification</span>
+              <span className="sm:hidden">Two-Tier Verified</span>
             </span>
           </div>
         </div>
@@ -179,7 +180,7 @@ export const Navbar: FC<NavbarProps> = ({
             <button
               onClick={() => onOpenJoinModal?.('host')}
               type="button"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-[#123E24] via-[#164E2D] to-[#1F633B] hover:from-[#164E2D] hover:to-[#267F4B] text-white text-xs sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-emerald-950/40 hover:shadow-lg hover:shadow-emerald-950/60 transition-all transform active:scale-95 border border-emerald-400/40"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[#123E24] via-[#164E2D] to-[#1F633B] hover:from-[#164E2D] hover:to-[#267F4B] text-white text-[11px] sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-emerald-950/40 hover:shadow-lg hover:shadow-emerald-950/60 transition-all transform active:scale-95 border border-emerald-400/40 shrink-0"
             >
               <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#34D399]" />
               <span>Post Listing</span>
@@ -193,7 +194,7 @@ export const Navbar: FC<NavbarProps> = ({
                   setStaffMenuOpen(!staffMenuOpen)
                   if (mobileMenuOpen) setMobileMenuOpen(false)
                 }}
-                className={`p-2 rounded-lg border transition-all ${
+                className={`min-w-[42px] min-h-[42px] flex items-center justify-center p-2 rounded-lg border transition-all ${
                   staffMenuOpen
                     ? 'bg-[#164E2D] text-white border-[#34D399]'
                     : 'text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border-white/10'
@@ -285,7 +286,7 @@ export const Navbar: FC<NavbarProps> = ({
                 if (staffMenuOpen) setStaffMenuOpen(false)
               }}
               type="button"
-              className="p-2 text-white hover:text-[#C6E8A3] focus:outline-none lg:hidden rounded-lg hover:bg-white/10"
+              className="min-w-[42px] min-h-[42px] flex items-center justify-center p-2 text-white hover:text-[#C6E8A3] focus:outline-none lg:hidden rounded-lg hover:bg-white/10"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

@@ -70,11 +70,11 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-lg w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -92,7 +92,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] rounded-sm transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -161,7 +161,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                   placeholder="e.g. Tshering Norbu"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                 />
                 {errors.fullName && (
                   <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">
@@ -181,7 +181,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="e.g. name@domain.com"
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                   />
                   {errors.email && (
                     <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">
@@ -200,7 +200,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="e.g. +91 98320 00000"
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                   />
                   {errors.phone && (
                     <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">
@@ -218,7 +218,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                 <select
                   value={formData.region}
                   onChange={(e) => setFormData({ ...formData, region: e.target.value })}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                 >
                   <option value="Darjeeling & Kurseong Tea Hills">Darjeeling & Kurseong Tea Hills</option>
                   <option value="Kalimpong Orchid Ridge">Kalimpong Orchid Ridge</option>
@@ -237,7 +237,7 @@ export const JoinCommunityModal: FC<JoinCommunityModalProps> = ({
                   value={formData.intent}
                   onChange={(e) => setFormData({ ...formData, intent: e.target.value })}
                   placeholder={`Share what brings you to ${BRAND_CONFIG.name} (e.g. looking for a quiet month-long writing stay, wanting to host travellers, seeking an alpine guide role)...`}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                 />
                 {errors.intent && (
                   <p className="text-[10px] text-[#C47755] mt-1 font-mono flex items-center gap-1">

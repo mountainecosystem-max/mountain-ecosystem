@@ -114,11 +114,11 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -136,7 +136,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] rounded-sm transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -294,7 +294,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       placeholder="e.g. Tshering Lepcha"
-                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                     />
                     {errors.fullName && (
                       <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
@@ -313,7 +313,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. name@domain.com"
-                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                     />
                     {errors.email && (
                       <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
@@ -333,7 +333,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="e.g. +91 98320 00000"
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                   />
                   {errors.phone && (
                     <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
@@ -352,7 +352,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                     value={formData.note}
                     onChange={(e) => setFormData({ ...formData, note: e.target.value })}
                     placeholder="Briefly describe your relevant background, mountain readiness, or creative goals..."
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
                   />
                   {errors.note && (
                     <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">

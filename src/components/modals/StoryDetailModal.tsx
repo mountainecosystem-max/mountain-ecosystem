@@ -17,11 +17,11 @@ export const StoryDetailModal: FC<StoryDetailModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Header */}
@@ -41,7 +41,7 @@ export const StoryDetailModal: FC<StoryDetailModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] rounded-sm transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />

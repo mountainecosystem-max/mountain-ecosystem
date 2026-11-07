@@ -156,11 +156,11 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -178,7 +178,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] rounded-full transition-colors"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -239,7 +239,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. Homestay Operations Lead / Trek Naturalist / Farm Manager"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -253,7 +253,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={employer}
                     onChange={(e) => setEmployer(e.target.value)}
                     placeholder="e.g. Cedar Ridge Sanctuary / High Valley Permaculture"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
               </div>
@@ -267,7 +267,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value as Job['category'])}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   >
                     <option value="Hospitality & Estates">Hospitality & Estates</option>
                     <option value="Guiding & Conservation">Guiding & Conservation</option>
@@ -283,7 +283,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   <select
                     value={jobType}
                     onChange={(e) => setJobType(e.target.value as Job['type'])}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-xs sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   >
                     <option value="Full-time">Full-time (Year-Round)</option>
                     <option value="Seasonal">Seasonal (Summer / Winter Peak)</option>
@@ -308,7 +308,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -327,7 +327,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={mountainRange}
                       onChange={(e) => setMountainRange(e.target.value)}
                       placeholder="e.g. Tirthan Valley / Kumaon / Zanskar / Nilgiris"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={workVillageTown}
                       onChange={(e) => setWorkVillageTown(e.target.value)}
                       placeholder="e.g. Gushaini / Mukteshwar / Leh / Yuksom / Kotagiri"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -356,7 +356,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={nearestHighwayHub}
                       onChange={(e) => setNearestHighwayHub(e.target.value)}
                       placeholder="e.g. Aut Tunnel Bus Stand / Kathgodam Railhead"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>
@@ -371,7 +371,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={fullWorkAddress}
                     onChange={(e) => setFullWorkAddress(e.target.value)}
                     placeholder="e.g. Riverbank Estate, Near Forest Rest House, Gushaini Road"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
               </div>
@@ -394,7 +394,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={salary}
                       onChange={(e) => setSalary(e.target.value)}
                       placeholder="e.g. ₹40,000 – ₹55,000 / month"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -433,7 +433,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={housingDetails}
                       onChange={(e) => setHousingDetails(e.target.value)}
                       placeholder="e.g. Independent wooden cabin with heated wood stove & WiFi"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 )}
@@ -449,7 +449,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the high-altitude setting, daily rhythm, mountain property culture, and community environment..."
-                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                 />
               </div>
 
@@ -464,7 +464,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={responsibilitiesText}
                     onChange={(e) => setResponsibilitiesText(e.target.value)}
                     placeholder="Lead day-to-day guest hospitality rituals&#10;Coordinate organic kitchen garden harvest&#10;Supervise winter heating & firewood"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
 
@@ -477,7 +477,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={requirementsText}
                     onChange={(e) => setRequirementsText(e.target.value)}
                     placeholder="Comfortable with high-altitude mountain living&#10;Fluency in Hindi and English&#10;Minimum 1 year hospitality or wilderness experience"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                   />
                 </div>
               </div>
@@ -499,7 +499,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
                       placeholder="e.g. General Manager / Estate Owner"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -513,7 +513,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="hiring@mountainestate.com"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
 
@@ -526,7 +526,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={phoneWhatsApp}
                       onChange={(e) => setPhoneWhatsApp(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
                     />
                   </div>
                 </div>

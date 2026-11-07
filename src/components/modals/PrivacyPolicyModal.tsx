@@ -26,14 +26,14 @@ export const PrivacyPolicyModal: FC<PrivacyPolicyModalProps> = ({ isOpen, onClos
 
   return (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-labelledby="privacy-policy-title"
     >
       <div
-        className="bg-[#F8F6F0] border border-[#CBDAC4] text-[#123D2D] rounded-sm max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative animate-fade-in"
+        className="bg-[#F8F6F0] border border-[#CBDAC4] text-[#123D2D] rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fade-in flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Sticky Header with DPDP Statutory Tag & Language Selector */}
@@ -80,7 +80,7 @@ export const PrivacyPolicyModal: FC<PrivacyPolicyModalProps> = ({ isOpen, onClos
 
             <button
               onClick={onClose}
-              className="p-1.5 text-[#576159] hover:text-[#0B2516] hover:bg-[#E8EFE3] rounded-sm transition-colors"
+              className="w-9 h-9 flex items-center justify-center p-1.5 text-[#576159] hover:text-[#0B2516] hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
               aria-label="Close dialog"
             >
               <X className="w-5 h-5" />
