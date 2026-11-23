@@ -117,8 +117,8 @@ export const FAQSection: FC = () => {
                 onClick={() => setActiveCategory(cat.key as any)}
                 className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-sans font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#0B1B3D] to-[#2575fc] text-white shadow-md'
-                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200'
+                    ? 'bg-[#0B1B3D] text-white shadow-xs border border-[#2575fc]/40'
+                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 active:scale-[0.97]'
                 }`}
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#38BDF8]' : 'text-[#2575fc]'}`} />
@@ -181,7 +181,7 @@ export const FAQSection: FC = () => {
           </div>
           <a
             href={`mailto:${BRAND_CONFIG.supportEmail}`}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] to-[#1E3A8A] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs font-sans font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-sm transition-colors shrink-0"
+            className="btn-primary px-5 py-2.5 text-xs shrink-0"
           >
             <Compass className="w-3.5 h-3.5 text-sky-200" />
             <span>Contact Stewards</span>

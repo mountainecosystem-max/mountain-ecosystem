@@ -131,7 +131,7 @@ export const CommunityDispatches: FC<CommunityDispatchesProps> = ({
             <button
               onClick={onWriteDispatch}
               type="button"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200"
+              className="btn-primary px-5 py-2.5 sm:px-6 sm:py-3 text-xs sm:text-sm"
             >
               <span>+ Share Your Experience</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#7DD3FC]" />

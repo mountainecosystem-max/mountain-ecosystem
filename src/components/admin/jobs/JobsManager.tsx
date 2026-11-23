@@ -188,7 +188,7 @@ export const JobsManager: FC = () => {
               setEditingJob(null)
               setFormModalOpen(true)
             }}
-            className="inline-flex items-center gap-2 bg-[#0F224A] hover:bg-[#285A40] text-white px-4 py-2.5 rounded-sm text-xs font-mono uppercase tracking-wider font-semibold transition-colors shadow-sm"
+            className="btn-primary px-4 py-2.5 text-xs font-semibold uppercase tracking-wider"
           >
             <Plus className="w-4 h-4" />
             <span>Post Residency / Job</span>

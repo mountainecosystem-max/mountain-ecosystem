@@ -180,7 +180,7 @@ export const Navbar: FC<NavbarProps> = ({
             <button
               onClick={() => onOpenJoinModal?.('host')}
               type="button"
-              className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-[11px] sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-blue-900/30 hover:shadow-lg hover:shadow-blue-600/30 transition-all transform active:scale-95 border border-sky-400/30 shrink-0"
+              className="btn-primary px-3 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm shrink-0"
             >
               <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7DD3FC]" />
               <span>Post Listing</span>
@@ -332,7 +332,7 @@ export const Navbar: FC<NavbarProps> = ({
                   setMobileMenuOpen(false)
                   onOpenJoinModal?.('host')
                 }}
-                className="w-full text-center flex items-center justify-center gap-2 bg-gradient-to-r from-[#2575fc] to-[#1E3A8A] hover:from-[#1d63d8] hover:to-[#2575fc] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
+                className="btn-primary w-full py-3 text-sm font-semibold tracking-tight shadow-md"
               >
                 <PlusCircle className="w-4 h-4 text-[#7DD3FC]" />
                 <span>Post Listing (Property / Job)</span>

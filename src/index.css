@@ -8,7 +8,7 @@
   --color-forest-soft: #1E3A8A;
 
   --color-evergreen: #2575fc;
-  --color-evergreen-dark: #1b5fd0;
+  --color-evergreen-dark: #1a64ea;
   --color-evergreen-light: #4285f4;
   --color-evergreen-soft: #DBEAFE;
 
@@ -40,15 +40,20 @@
   --color-tea-garden: #0B1B3D;
   --color-tea-bud: #38BDF8;
 
-  /* Typography */
-  --font-display: "Oswald", "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", "Newsreader", "Playfair Display", Georgia, serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Tier-1 Tech Company Typography Stack (Plus Jakarta Sans / Inter / Apple System) */
+  --font-display: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --font-serif: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
 }
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
+}
+
+.font-serif {
+  font-family: var(--font-sans);
+  letter-spacing: -0.015em;
 }
 
 :root {
@@ -70,12 +75,16 @@ body {
   overflow-x: hidden;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  letter-spacing: -0.011em;
+  letter-spacing: -0.012em;
 }
 
 /* Mobile Touch, Haptics & Scrolling Optimization */
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+button, a, [role="button"], input, select, textarea {
+  touch-action: manipulation;
 }
 
 .pb-safe {
@@ -92,113 +101,210 @@ body {
   flex-direction: column;
 }
 
-/* Tactile nature scrollbar */
+/* Modern Minimalist Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #94A3B8;
-  border-radius: 3px;
+  background: #CBD5E1;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #2575fc;
-}
-
-/* Atmospheric Hero Drift: Slow-motion Ken Burns zoom mimicking shifting mountain mist */
-@keyframes heroKenBurns {
-  0% {
-    transform: scale(1.0) translate3d(0, 0, 0);
-  }
-  50% {
-    transform: scale(1.03) translate3d(-0.35%, -0.2%, 0);
-  }
-  100% {
-    transform: scale(1.0) translate3d(0, 0, 0);
-  }
-}
-
-.animate-hero-drift {
-  animation: heroKenBurns 20s cubic-bezier(0.42, 0, 0.58, 1) infinite;
-  will-change: transform;
-  transform-origin: center center;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-hero-drift {
-    animation: none;
-    transform: scale(1.0);
-  }
-}
-
-/* Editorial Navigation Links: Razor-thin 0.5px line drawn left-to-right & soft opacity fade */
-.editorial-nav-link {
-  position: relative;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  letter-spacing: 0.05em;
-  font-weight: 500;
-  color: #FDFBF7;
-  opacity: 0.78;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  transition: opacity 0.4s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-}
-
-.editorial-nav-link:hover {
-  opacity: 1;
-}
-
-.editorial-nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0.5px;
-  background-color: rgba(253, 251, 247, 0.9);
-  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  pointer-events: none;
-}
-
-.editorial-nav-link:hover::after {
-  width: 100%;
+  background: #94A3B8;
 }
 
 /* ==========================================================================
-   Tactile Organic & Editorial Animation Utilities
+   Tier-1 Tech Company Button System (Linear / Stripe / Vercel style)
    ========================================================================== */
 
-/* 1. Gentle Floating Drift (Ambient Himalayan Breeze) */
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+/* Primary Action Button: Solid Electric Tech Blue with subtle top specular highlight */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.015em;
+  color: #FFFFFF !important;
+  background-color: #2575fc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(15, 23, 42, 0.08),
+    0 4px 12px -2px rgba(37, 117, 252, 0.35);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none !important;
 }
 
-.animate-float-slow {
-  animation: floatSlow 5s ease-in-out infinite;
+.btn-primary:hover {
+  background-color: #1a64ea;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 2px 4px rgba(15, 23, 42, 0.12),
+    0 8px 20px -3px rgba(37, 117, 252, 0.45);
+  transform: translateY(-1px);
 }
 
-/* 2. Soft Breathing Pulse Ring for Live Verified Badges (Electric Blue / Glacial Ice) */
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+/* Secondary Button: Crisp Slate Card Pill */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.015em;
+  color: #0F172A !important;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none !important;
+}
+
+.btn-secondary:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #0B1B3D !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0) scale(0.97);
+  background-color: #F1F5F9;
+}
+
+/* Glass Button: Refined dark/translucent backdrop */
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.015em;
+  color: #E2E8F0 !important;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none !important;
+}
+
+.btn-glass:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-glass:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Coral Accent Button: For Sale / Urgent CTAs */
+.btn-coral {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: -0.015em;
+  color: #FFFFFF !important;
+  background-color: #f96933;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 1px 2px rgba(15, 23, 42, 0.08),
+    0 4px 12px -2px rgba(249, 105, 51, 0.35);
+  transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none !important;
+}
+
+.btn-coral:hover {
+  background-color: #e0531e;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 2px 4px rgba(15, 23, 42, 0.12),
+    0 8px 20px -3px rgba(249, 105, 51, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-coral:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Spring Touch Animation for cards, links and chips */
+.tap-spring {
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.tap-spring:active {
+  transform: scale(0.97);
+}
+
+/* Modern Card Hover Elevation (Linear / Vercel style) */
+.card-hover-lift {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.18s ease;
+}
+
+.card-hover-lift:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.card-hover-lift:active {
+  transform: scale(0.99);
+}
+
+/* Soft Breathing Pulse Ring for Live Badges */
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 117, 252, 0.55);
+    box-shadow: 0 0 0 0 rgba(37, 117, 252, 0.4);
   }
   70% {
-    box-shadow: 0 0 0 9px rgba(37, 117, 252, 0);
+    box-shadow: 0 0 0 6px rgba(37, 117, 252, 0);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(37, 117, 252, 0);
@@ -206,10 +312,10 @@ body {
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulseGlow 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* 3. Subtle Shimmer across badges and CTA pills */
+/* Subtle Shimmer */
 @keyframes shimmerWave {
   0% {
     background-position: -200% 0;
@@ -223,30 +329,18 @@ body {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.18) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 200% 100%;
   animation: shimmerWave 3.5s infinite;
 }
 
-/* 4. Elegant Card Hover Lift with Soft Slate Shadow (Figma Design Grade) */
-.card-hover-lift {
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.35s ease;
-}
-
-.card-hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
-}
-
-/* 5. Smooth Fade-in & Scale for Popovers and Chatbot Window */
+/* Smooth Fade-in & Scale for Popovers and Modals */
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: scale(0.97) translateY(6px);
   }
   to {
     opacity: 1;
@@ -255,13 +349,13 @@ body {
 }
 
 .animate-fade-in-scale {
-  animation: fadeInScale 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInScale 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 6. Message Typing Dots Animation */
+/* Typing Dots Animation */
 @keyframes typingBounce {
   0%, 80%, 100% {
-    transform: scale(0.65);
+    transform: scale(0.7);
     opacity: 0.4;
   }
   40% {

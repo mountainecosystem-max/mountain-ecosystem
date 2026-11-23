@@ -132,7 +132,7 @@ export const DataEmptyState: FC<DataEmptyStateProps> = ({
           <button
             onClick={onAction}
             type="button"
-            className="inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase tracking-wider font-sans font-semibold rounded-xl bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white shadow-md shadow-blue-500/20 active:scale-[0.98] transition-all"
+            className="btn-primary px-6 py-2.5 text-xs uppercase tracking-wider"
           >
             <span>{actionLabel}</span>
           </button>
@@ -176,7 +176,7 @@ export const DataErrorState: FC<DataErrorStateProps> = ({
         <button
           onClick={onRetry}
           type="button"
-          className="inline-flex items-center gap-2 px-5 py-2.5 mt-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] text-white text-xs font-mono uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all active:scale-[0.98]"
+          className="btn-primary px-5 py-2.5 mt-2 text-xs font-mono uppercase tracking-wider"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Retry Query</span>

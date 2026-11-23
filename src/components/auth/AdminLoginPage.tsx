@@ -156,17 +156,17 @@ export const AdminLoginPage: FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all shadow-md disabled:opacity-50"
+              className="btn-primary w-full mt-2 py-3.5 text-xs font-semibold uppercase tracking-wider rounded-xl shadow-md disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin text-[#0F172A]" />
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
                   <span>Verifying Credentials...</span>
                 </>
               ) : (
                 <>
                   <span>Authorize Staff Session</span>
-                  <ArrowRight className="w-4 h-4 text-[#0F172A]" />
+                  <ArrowRight className="w-4 h-4 text-white" />
                 </>
               )}
             </button>

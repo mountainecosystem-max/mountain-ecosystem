@@ -189,7 +189,7 @@ export const StoryDetailModal: FC<StoryDetailModalProps> = ({
             <button
               onClick={onClose}
               type="button"
-              className="px-6 py-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all active:scale-[0.98]"
+              className="btn-primary px-6 py-2.5 text-xs font-semibold uppercase tracking-wider"
             >
               Close
             </button>

@@ -672,7 +672,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
-            className="px-4 py-2 border border-slate-200 text-xs font-mono text-slate-600 hover:bg-[#F3EFE6] rounded-sm transition-colors"
+            className="btn-secondary px-4 py-2 text-xs font-medium"
           >
             Cancel
           </button>
@@ -680,7 +680,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             type="submit"
             form="job-form"
             disabled={isSubmitting}
-            className="px-5 py-2 bg-[#0F224A] hover:bg-[#285A40] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded-sm transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50"
+            className="btn-primary px-5 py-2 text-xs font-semibold uppercase tracking-wider disabled:opacity-50"
           >
             {isSubmitting ? (
               <>

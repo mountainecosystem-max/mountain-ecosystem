@@ -49,8 +49,8 @@ export const SaaSModuleNavigator: FC<SaaSModuleNavigatorProps> = ({
               type="button"
               className={`inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 min-h-[42px] rounded-full text-xs sm:text-sm font-sans transition-all duration-200 whitespace-nowrap active:scale-95 shrink-0 ${
                 isActive
-                  ? 'bg-gradient-to-r from-[#0B1B3D] via-[#1E3A8A] to-[#2575fc] text-white shadow-md shadow-blue-900/25 border border-sky-400/40 font-semibold ring-1 ring-sky-400/30'
-                  : 'bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0B1B3D] font-medium border border-slate-200 hover:border-blue-400/50 shadow-xs hover:shadow-sm'
+                  ? 'bg-[#0B1B3D] text-white shadow-sm border border-[#2575fc]/50 font-semibold ring-2 ring-[#2575fc]/20'
+                  : 'bg-white hover:bg-slate-50 text-slate-700 hover:text-[#0B1B3D] font-medium border border-slate-200/90 shadow-2xs hover:shadow-xs active:scale-[0.98]'
               }`}
             >
               <Icon

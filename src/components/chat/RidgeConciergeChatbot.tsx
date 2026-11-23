@@ -828,10 +828,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               anayaAudio.playOpenChime()
             }
           }}
-          className={`group flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-blue-950/40 hover:shadow-2xl hover:shadow-blue-600/30 active:scale-95 border border-sky-400/40 ${
+          className={`group flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-sans font-semibold tracking-tight transition-all duration-200 shadow-xl shadow-blue-950/30 hover:shadow-2xl active:scale-[0.96] border ${
             isOpen
-              ? 'bg-gradient-to-r from-[#1E3A8A] to-[#2575fc] text-white ring-2 ring-sky-400/20'
-              : 'bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white animate-pulse-glow'
+              ? 'bg-[#0B1B3D] text-white border-[#2575fc] ring-2 ring-[#2575fc]/30'
+              : 'bg-[#2575fc] hover:bg-[#1a64ea] text-white border-white/20 shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_20px_rgba(37,117,252,0.35)]'
           }`}
           aria-expanded={isOpen}
           aria-label="Toggle Anaya AI Concierge"
@@ -1059,7 +1059,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             <button
               type="submit"
               disabled={!input.trim()}
-              className="p-2.5 min-w-[42px] min-h-[42px] flex items-center justify-center bg-[#2575fc] hover:bg-[#1d63d8] text-white rounded-sm disabled:opacity-40 transition-all shrink-0 font-semibold"
+              className="btn-primary p-2.5 min-w-[42px] min-h-[42px] rounded-xl shrink-0 font-semibold disabled:opacity-40"
               aria-label="Send inquiry"
             >
               <Send className="w-4 h-4" />

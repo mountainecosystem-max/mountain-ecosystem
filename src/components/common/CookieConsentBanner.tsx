@@ -67,7 +67,7 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="px-4 py-2 min-h-[38px] bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white text-[11px] font-semibold uppercase tracking-wider rounded-full transition-all shadow-md shadow-blue-500/20 flex items-center justify-center active:scale-95"
+              className="btn-primary px-4 py-2 text-[11px] font-semibold tracking-normal"
             >
               Accept All
             </button>
@@ -75,7 +75,7 @@ export const CookieConsentBanner: FC<CookieConsentBannerProps> = ({ onOpenCookie
             <button
               type="button"
               onClick={handleEssentialOnly}
-              className="px-4 py-2 min-h-[38px] bg-white/10 hover:bg-white/15 text-white text-[11px] font-mono uppercase tracking-wider rounded-full transition-colors border border-white/15 flex items-center justify-center active:scale-95"
+              className="btn-glass px-4 py-2 text-[11px] font-medium tracking-normal"
             >
               Essential Only
             </button>

@@ -576,14 +576,14 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-full border border-slate-200 text-xs font-bold text-stone-600 hover:bg-slate-100 transition"
+                  className="btn-secondary px-5 py-2.5 text-xs font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  className="btn-primary px-7 py-3 text-xs sm:text-sm disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
