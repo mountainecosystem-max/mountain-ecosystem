@@ -150,23 +150,23 @@ export const PropertiesManager: FC = () => {
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#123D2D] text-[#F8F6F0] border border-[#8FA777]/50 px-4 py-3 rounded-sm shadow-2xl flex items-center gap-2.5 text-xs font-mono animate-fade-in">
-          <CheckCircle2 className="w-4 h-4 text-[#8FA777]" />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0F224A] text-[#F8F6F0] border border-[#38BDF8]/50 px-4 py-3 rounded-sm shadow-2xl flex items-center gap-2.5 text-xs font-mono animate-fade-in">
+          <CheckCircle2 className="w-4 h-4 text-[#38BDF8]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#CBDAC4]">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.24em] text-[#285A40] font-bold mb-1">
-            <Home className="w-3.5 h-3.5 text-[#285A40]" />
+          <div className="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.24em] text-[#2575fc] font-bold mb-1">
+            <Home className="w-3.5 h-3.5 text-[#2575fc]" />
             <span>MODULE 03 • RESIDENTIAL LEASES & SANCTUARIES</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#123D2D] font-normal tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#0F172A] font-normal tracking-tight">
             Homestays & Residential Leases
           </h1>
-          <p className="mt-1 text-xs sm:text-sm text-[#576159] font-light">
+          <p className="mt-1 text-xs sm:text-sm text-slate-600 font-light">
             Manage long-term sabbatical leases, hand-dressed stone cottages, cedar lofts, and resident host verification.
           </p>
         </div>
@@ -176,7 +176,7 @@ export const PropertiesManager: FC = () => {
             type="button"
             onClick={loadProperties}
             disabled={isLoading}
-            className="p-2.5 border border-[#CBDAC4] text-[#123D2D] hover:bg-white rounded-sm transition-colors text-xs font-mono"
+            className="p-2.5 border border-slate-200 text-[#0F172A] hover:bg-white rounded-sm transition-colors text-xs font-mono"
             title="Refresh homestays database"
           >
             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
@@ -188,7 +188,7 @@ export const PropertiesManager: FC = () => {
               setEditingHomestay(null)
               setFormModalOpen(true)
             }}
-            className="inline-flex items-center gap-2 bg-[#123D2D] hover:bg-[#285A40] text-white px-4 py-2.5 rounded-sm text-xs font-mono uppercase tracking-wider font-semibold transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 bg-[#0F224A] hover:bg-[#285A40] text-white px-4 py-2.5 rounded-sm text-xs font-mono uppercase tracking-wider font-semibold transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Add Homestay</span>
@@ -220,36 +220,36 @@ export const PropertiesManager: FC = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono">
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#576159] tracking-wider">Total Properties</div>
-          <div className="text-2xl font-serif text-[#123D2D] font-normal mt-1">{homestays.length}</div>
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-slate-600 tracking-wider">Total Properties</div>
+          <div className="text-2xl font-serif text-[#0F172A] font-normal mt-1">{homestays.length}</div>
         </div>
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#285A40] tracking-wider font-bold">Live on Website</div>
-          <div className="text-2xl font-serif text-[#285A40] font-normal mt-1">{publishedCount}</div>
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-[#2575fc] tracking-wider font-bold">Live on Website</div>
+          <div className="text-2xl font-serif text-[#2575fc] font-normal mt-1">{publishedCount}</div>
         </div>
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#576159] tracking-wider">Draft / Internal</div>
-          <div className="text-2xl font-serif text-[#576159] font-normal mt-1">{draftCount}</div>
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-slate-600 tracking-wider">Draft / Internal</div>
+          <div className="text-2xl font-serif text-slate-600 font-normal mt-1">{draftCount}</div>
         </div>
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#285A40] tracking-wider">Available for Lease</div>
-          <div className="text-2xl font-serif text-[#123D2D] font-normal mt-1">{availableCount}</div>
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-[#2575fc] tracking-wider">Available for Lease</div>
+          <div className="text-2xl font-serif text-[#0F172A] font-normal mt-1">{availableCount}</div>
         </div>
       </div>
 
       {/* Search & Filters */}
-      <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm space-y-4">
+      <div className="bg-white border border-slate-200 p-4 rounded-sm space-y-4">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           {/* Status Tabs */}
-          <div className="inline-flex rounded-sm border border-[#CBDAC4] p-1 bg-[#F8F6F0] text-xs font-mono">
+          <div className="inline-flex rounded-sm border border-slate-200 p-1 bg-[#F8FAFC] text-xs font-mono">
             <button
               type="button"
               onClick={() => setStatusFilter('all')}
               className={`px-3 py-1.5 rounded-sm transition-colors ${
                 statusFilter === 'all'
-                  ? 'bg-[#123D2D] text-white shadow-xs font-semibold'
-                  : 'text-[#576159] hover:text-[#123D2D]'
+                  ? 'bg-[#0F224A] text-white shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-[#0F172A]'
               }`}
             >
               All Properties ({homestays.length})
@@ -259,8 +259,8 @@ export const PropertiesManager: FC = () => {
               onClick={() => setStatusFilter('published')}
               className={`px-3 py-1.5 rounded-sm transition-colors ${
                 statusFilter === 'published'
-                  ? 'bg-[#123D2D] text-white shadow-xs font-semibold'
-                  : 'text-[#576159] hover:text-[#123D2D]'
+                  ? 'bg-[#0F224A] text-white shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-[#0F172A]'
               }`}
             >
               Live ({publishedCount})
@@ -270,8 +270,8 @@ export const PropertiesManager: FC = () => {
               onClick={() => setStatusFilter('draft')}
               className={`px-3 py-1.5 rounded-sm transition-colors ${
                 statusFilter === 'draft'
-                  ? 'bg-[#123D2D] text-white shadow-xs font-semibold'
-                  : 'text-[#576159] hover:text-[#123D2D]'
+                  ? 'bg-[#0F224A] text-white shadow-xs font-semibold'
+                  : 'text-slate-600 hover:text-[#0F172A]'
               }`}
             >
               Drafts ({draftCount})
@@ -280,12 +280,12 @@ export const PropertiesManager: FC = () => {
 
           {/* View Mode Toggle */}
           <div className="flex items-center gap-2 self-end lg:self-auto">
-            <div className="inline-flex border border-[#CBDAC4] rounded-sm p-0.5 bg-[#F8F6F0]">
+            <div className="inline-flex border border-slate-200 rounded-sm p-0.5 bg-[#F8FAFC]">
               <button
                 type="button"
                 onClick={() => setViewMode('table')}
                 className={`p-1.5 rounded-xs transition-colors ${
-                  viewMode === 'table' ? 'bg-[#123D2D] text-white' : 'text-[#576159] hover:text-[#123D2D]'
+                  viewMode === 'table' ? 'bg-[#0F224A] text-white' : 'text-slate-600 hover:text-[#0F172A]'
                 }`}
                 title="Table View"
               >
@@ -295,7 +295,7 @@ export const PropertiesManager: FC = () => {
                 type="button"
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded-xs transition-colors ${
-                  viewMode === 'grid' ? 'bg-[#123D2D] text-white' : 'text-[#576159] hover:text-[#123D2D]'
+                  viewMode === 'grid' ? 'bg-[#0F224A] text-white' : 'text-slate-600 hover:text-[#0F172A]'
                 }`}
                 title="Card Grid View"
               >
@@ -308,20 +308,20 @@ export const PropertiesManager: FC = () => {
         {/* Input & dropdowns */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div className="relative">
-            <Search className="w-4 h-4 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by property, valley, host..."
-              className="w-full bg-[#FAF8F5] border border-[#CBDAC4] pl-9 pr-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+              className="w-full bg-[#FAF8F5] border border-slate-200 pl-9 pr-3 py-2 text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
             />
           </div>
 
           <select
             value={regionFilter}
             onChange={(e) => setRegionFilter(e.target.value)}
-            className="bg-[#FAF8F5] border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+            className="bg-[#FAF8F5] border border-slate-200 px-3 py-2 text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
           >
             <option value="all">All Regions</option>
             <option value="Sikkim">Sikkim</option>
@@ -335,7 +335,7 @@ export const PropertiesManager: FC = () => {
           <select
             value={leaseFilter}
             onChange={(e) => setLeaseFilter(e.target.value)}
-            className="bg-[#FAF8F5] border border-[#CBDAC4] px-3 py-2 text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+            className="bg-[#FAF8F5] border border-slate-200 px-3 py-2 text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
           >
             <option value="all">All Lease Statuses</option>
             <option value="Available for Lease">Available for Lease</option>
@@ -348,17 +348,17 @@ export const PropertiesManager: FC = () => {
 
       {/* Content Area */}
       {isLoading ? (
-        <div className="p-12 text-center bg-white border border-[#CBDAC4] rounded-sm">
-          <RefreshCw className="w-6 h-6 animate-spin mx-auto text-[#285A40] mb-3" />
-          <div className="text-xs font-mono text-[#576159]">Connecting to Supabase homestays table...</div>
+        <div className="p-12 text-center bg-white border border-slate-200 rounded-sm">
+          <RefreshCw className="w-6 h-6 animate-spin mx-auto text-[#2575fc] mb-3" />
+          <div className="text-xs font-mono text-slate-600">Connecting to Supabase homestays table...</div>
         </div>
       ) : filtered.length === 0 ? (
-        <div className="p-12 text-center bg-white border border-[#CBDAC4] rounded-sm space-y-3">
-          <div className="w-12 h-12 rounded-full bg-[#F3EFE6] text-[#285A40] flex items-center justify-center mx-auto">
+        <div className="p-12 text-center bg-white border border-slate-200 rounded-sm space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#F3EFE6] text-[#2575fc] flex items-center justify-center mx-auto">
             <Home className="w-6 h-6" />
           </div>
-          <h3 className="font-serif text-lg text-[#123D2D]">No Homestay Properties Found</h3>
-          <p className="text-xs text-[#576159] max-w-md mx-auto">
+          <h3 className="font-serif text-lg text-[#0F172A]">No Homestay Properties Found</h3>
+          <p className="text-xs text-slate-600 max-w-md mx-auto">
             {homestays.length === 0
               ? 'Your homestays table currently contains zero properties. Register a stone-and-timber sanctuary to begin.'
               : 'No properties match your search or filter parameters. Try clearing your filters.'}
@@ -370,7 +370,7 @@ export const PropertiesManager: FC = () => {
                 setEditingHomestay(null)
                 setFormModalOpen(true)
               }}
-              className="inline-flex items-center gap-2 bg-[#123D2D] hover:bg-[#285A40] text-white px-4 py-2 text-xs font-mono uppercase tracking-wider rounded-sm transition-colors mt-2"
+              className="inline-flex items-center gap-2 bg-[#0F224A] hover:bg-[#285A40] text-white px-4 py-2 text-xs font-mono uppercase tracking-wider rounded-sm transition-colors mt-2"
             >
               <Plus className="w-4 h-4" />
               <span>Register First Sanctuary</span>
@@ -379,10 +379,10 @@ export const PropertiesManager: FC = () => {
         </div>
       ) : viewMode === 'table' ? (
         /* Table View */
-        <div className="bg-white border border-[#CBDAC4] rounded-sm overflow-hidden shadow-xs">
+        <div className="bg-white border border-slate-200 rounded-sm overflow-hidden shadow-xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#FAF8F5] border-b border-[#CBDAC4] text-[#285A40] font-mono uppercase tracking-wider text-[11px]">
+              <thead className="bg-[#FAF8F5] border-b border-slate-200 text-[#2575fc] font-mono uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="py-3 px-4">Sanctuary & Photo</th>
                   <th className="py-3 px-4">Location / Elevation</th>
@@ -403,11 +403,11 @@ export const PropertiesManager: FC = () => {
                           <img
                             src={mainPhoto}
                             alt={h.name}
-                            className="w-12 h-12 rounded-sm object-cover border border-[#CBDAC4] shrink-0"
+                            className="w-12 h-12 rounded-sm object-cover border border-slate-200 shrink-0"
                           />
                           <div>
-                            <div className="font-medium text-[#123D2D] text-sm">{h.name}</div>
-                            <div className="text-[11px] text-[#576159] font-mono mt-0.5">
+                            <div className="font-medium text-[#0F172A] text-sm">{h.name}</div>
+                            <div className="text-[11px] text-slate-600 font-mono mt-0.5">
                               {h.roomType} • {h.furnishing}
                             </div>
                           </div>
@@ -416,23 +416,23 @@ export const PropertiesManager: FC = () => {
 
                       {/* Location & Elevation */}
                       <td className="py-3.5 px-4">
-                        <div className="flex items-center gap-1.5 text-[#123D2D]">
-                          <MapPin className="w-3.5 h-3.5 text-[#285A40]" />
+                        <div className="flex items-center gap-1.5 text-[#0F172A]">
+                          <MapPin className="w-3.5 h-3.5 text-[#2575fc]" />
                           <span>{h.region}</span>
                         </div>
-                        <div className="text-[11px] text-[#576159] pl-5">{h.location} • {h.elevation}</div>
+                        <div className="text-[11px] text-slate-600 pl-5">{h.location} • {h.elevation}</div>
                       </td>
 
                       {/* Host Stewardship */}
                       <td className="py-3.5 px-4">
-                        <div className="font-medium text-[#123D2D]">{h.host.name}</div>
-                        <div className="text-[11px] text-[#576159]">{h.host.role} ({h.host.yearsHosting}y)</div>
+                        <div className="font-medium text-[#0F172A]">{h.host.name}</div>
+                        <div className="text-[11px] text-slate-600">{h.host.role} ({h.host.yearsHosting}y)</div>
                       </td>
 
                       {/* Rate & Status */}
                       <td className="py-3.5 px-4 font-mono">
-                        <div className="text-[#123D2D] font-medium">{h.monthlyRate}</div>
-                        <div className="text-[10px] text-[#285A40] mt-0.5">{h.leaseStatus}</div>
+                        <div className="text-[#0F172A] font-medium">{h.monthlyRate}</div>
+                        <div className="text-[10px] text-[#2575fc] mt-0.5">{h.leaseStatus}</div>
                       </td>
 
                       {/* Publication Status toggle */}
@@ -442,14 +442,14 @@ export const PropertiesManager: FC = () => {
                           onClick={() => handleTogglePublish(h)}
                           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase transition-colors ${
                             h.isPublished
-                              ? 'bg-[#285A40]/15 text-[#285A40] hover:bg-[#285A40]/25'
+                              ? 'bg-[#285A40]/15 text-[#2575fc] hover:bg-[#285A40]/25'
                               : 'bg-amber-100 text-amber-800 hover:bg-amber-200'
                           }`}
                           title="Click to toggle publish status"
                         >
                           {h.isPublished ? (
                             <>
-                              <CheckCircle2 className="w-3 h-3 text-[#285A40]" />
+                              <CheckCircle2 className="w-3 h-3 text-[#2575fc]" />
                               <span>Live</span>
                             </>
                           ) : (
@@ -470,7 +470,7 @@ export const PropertiesManager: FC = () => {
                               setEditingHomestay(h)
                               setFormModalOpen(true)
                             }}
-                            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#F3EFE6] rounded-sm transition-colors"
+                            className="p-1.5 text-slate-600 hover:text-[#0F172A] hover:bg-[#F3EFE6] rounded-sm transition-colors"
                             title="Edit Homestay"
                           >
                             <Edit className="w-4 h-4" />
@@ -500,7 +500,7 @@ export const PropertiesManager: FC = () => {
             return (
               <div
                 key={h.id}
-                className="bg-white border border-[#CBDAC4] rounded-sm overflow-hidden flex flex-col justify-between shadow-xs"
+                className="bg-white border border-slate-200 rounded-sm overflow-hidden flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="relative aspect-video bg-black/10">
@@ -510,7 +510,7 @@ export const PropertiesManager: FC = () => {
                       onClick={() => handleTogglePublish(h)}
                       className={`absolute top-2.5 right-2.5 inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono tracking-wider uppercase backdrop-blur-xs ${
                         h.isPublished
-                          ? 'bg-[#123D2D]/90 text-[#F8F6F0] border border-[#8FA777]/40'
+                          ? 'bg-[#0F224A]/90 text-[#F8F6F0] border border-[#38BDF8]/40'
                           : 'bg-amber-900/90 text-amber-100 border border-amber-500/40'
                       }`}
                     >
@@ -523,35 +523,35 @@ export const PropertiesManager: FC = () => {
 
                   <div className="p-4 space-y-3">
                     <div>
-                      <h3 className="font-serif text-lg text-[#123D2D] leading-snug">{h.name}</h3>
-                      <div className="text-xs text-[#576159] mt-0.5">{h.location}</div>
+                      <h3 className="font-serif text-lg text-[#0F172A] leading-snug">{h.name}</h3>
+                      <div className="text-xs text-slate-600 mt-0.5">{h.location}</div>
                     </div>
 
-                    <div className="flex items-center justify-between text-xs font-mono pt-2 border-t border-[#CBDAC4]/50">
-                      <span className="font-bold text-[#123D2D]">{h.monthlyRate}</span>
-                      <span className="text-[#285A40] text-[11px]">{h.leaseStatus}</span>
+                    <div className="flex items-center justify-between text-xs font-mono pt-2 border-t border-slate-200/50">
+                      <span className="font-bold text-[#0F172A]">{h.monthlyRate}</span>
+                      <span className="text-[#2575fc] text-[11px]">{h.leaseStatus}</span>
                     </div>
 
-                    <div className="text-xs text-[#576159] line-clamp-2 leading-relaxed">
+                    <div className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
                       {h.description}
                     </div>
 
-                    <div className="flex items-center gap-3 text-[11px] font-mono text-[#576159] pt-1">
+                    <div className="flex items-center gap-3 text-[11px] font-mono text-slate-600 pt-1">
                       <div className="flex items-center gap-1">
-                        <Users className="w-3.5 h-3.5 text-[#285A40]" />
+                        <Users className="w-3.5 h-3.5 text-[#2575fc]" />
                         <span>{h.capacity}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Wifi className="w-3.5 h-3.5 text-[#285A40]" />
+                        <Wifi className="w-3.5 h-3.5 text-[#2575fc]" />
                         <span className="truncate max-w-[120px]">{h.wifi}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 border-t border-[#CBDAC4] bg-[#FAF8F5] flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-[#576159]">
-                    Host: <span className="font-semibold text-[#123D2D]">{h.host.name}</span>
+                <div className="p-4 border-t border-slate-200 bg-[#FAF8F5] flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-slate-600">
+                    Host: <span className="font-semibold text-[#0F172A]">{h.host.name}</span>
                   </span>
                   <div className="flex items-center gap-1">
                     <button
@@ -560,7 +560,7 @@ export const PropertiesManager: FC = () => {
                         setEditingHomestay(h)
                         setFormModalOpen(true)
                       }}
-                      className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-white rounded-sm transition-colors text-xs font-mono inline-flex items-center gap-1"
+                      className="p-1.5 text-slate-600 hover:text-[#0F172A] hover:bg-white rounded-sm transition-colors text-xs font-mono inline-flex items-center gap-1"
                     >
                       <Edit className="w-3.5 h-3.5" />
                       <span>Edit</span>

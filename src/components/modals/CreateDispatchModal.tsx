@@ -163,18 +163,20 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#060E1E]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#0B2516] border border-[#1F4E34] text-[#FAF7EE] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#0B1B3D] border border-[#1E3A8A] text-[#F8FAFC] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile Pull Handle */}
+        <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 -mb-1 sm:hidden shrink-0" />
         {/* Header */}
-        <div className="sticky top-0 bg-[#0B2516]/95 backdrop-blur-md border-b border-[#1F4E34] px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
+        <div className="sticky top-0 bg-[#0B1B3D]/95 backdrop-blur-md border-b border-[#1E3A8A] px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
           <div>
-            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#8FA777] font-semibold">
-              <Compass className="w-4 h-4 text-[#34D399]" />
+            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#38BDF8] font-semibold">
+              <Compass className="w-4 h-4 text-[#38BDF8]" />
               <span>PAN-INDIA COMMUNITY EXPERIENCES</span>
             </div>
             <h2 className="font-display text-xl sm:text-2xl text-white font-bold uppercase mt-0.5">
@@ -202,24 +204,24 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
           )}
 
           {isSubmitted ? (
-            <div className="bg-[#123D26] border border-[#8FA777]/40 p-6 sm:p-8 rounded-xl text-center">
-              <div className="w-12 h-12 rounded-full bg-[#0B2516] border border-[#34D399]/40 text-white flex items-center justify-center mx-auto mb-3 shadow-md">
-                <ShieldCheck className="w-6 h-6 text-[#34D399]" />
+            <div className="bg-[#13284F] border border-[#38BDF8]/30 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-[#0F224A] border border-[#38BDF8]/40 shadow-lg shadow-blue-500/20 text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-[#7DD3FC]" />
               </div>
               <h3 className="font-display text-2xl text-white font-bold uppercase">
                 Submitted to Verification Ledger!
               </h3>
-              <p className="text-xs sm:text-sm text-[#D8E8D5] font-sans mt-2 max-w-md mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 font-sans mt-2 max-w-md mx-auto leading-relaxed">
                 Your dispatch has been submitted to the {BRAND_CONFIG.name} moderation ledger. To keep the community archive free from commercial spam and misleading rates, stewards verify contributor authenticity before publishing live.
               </p>
-              <div className="mt-4 p-3 bg-black/30 border border-[#8FA777]/30 rounded-lg max-w-sm mx-auto text-left text-xs font-mono space-y-1 text-white/80">
-                <div>• Status: <span className="text-[#34D399] font-bold">Pending Steward Verification</span></div>
+              <div className="mt-4 p-3 bg-black/30 border border-[#38BDF8]/30 rounded-lg max-w-sm mx-auto text-left text-xs font-mono space-y-1 text-white/80">
+                <div>• Status: <span className="text-[#7DD3FC] font-bold">Pending Steward Verification</span></div>
                 <div>• Archive: <span className="text-white font-bold">Community Listed</span></div>
               </div>
               <button
                 onClick={onClose}
                 type="button"
-                className="mt-6 inline-flex items-center gap-2 bg-[#FAF7EE] hover:bg-white text-[#0B2516] text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
+                className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] text-white shadow-md shadow-blue-500/20 text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
               >
                 <span>Done & Return to Community</span>
               </button>
@@ -227,16 +229,16 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               {/* Contributor Profile Status */}
-              <div className="bg-white/5 border border-[#1F4E34] p-3 rounded-xl flex items-center justify-between text-xs">
+              <div className="bg-white/5 border border-[#1E3A8A] p-3 rounded-xl flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-[#123D26] border border-[#8FA777]/40 flex items-center justify-center font-mono text-xs text-[#A5C896]">
+                  <div className="w-7 h-7 rounded-full bg-[#152A56] border border-[#38BDF8]/40 flex items-center justify-center font-mono text-xs text-[#38BDF8]">
                     {currentUser ? (currentUser.email?.charAt(0).toUpperCase()) : <User className="w-3.5 h-3.5" />}
                   </div>
                   <div>
                     <span className="text-white font-medium block truncate max-w-[200px]">
                       {currentUser?.user_metadata?.full_name || currentUser?.email || guestName || 'Community Member'}
                     </span>
-                    <span className="text-[10px] font-mono text-[#8FA777]">
+                    <span className="text-[10px] font-mono text-[#38BDF8]">
                       {currentUser ? 'Verified Contributor' : 'Guest Field Note Contributor'}
                     </span>
                   </div>
@@ -245,7 +247,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
               {/* 1. Category Selector */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#A5C896] mb-2 font-bold">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#38BDF8] mb-2 font-bold">
                   Select Nature of Experience *
                 </label>
                 <div className="grid grid-cols-2 gap-2.5">
@@ -259,11 +261,11 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         onClick={() => setType(opt.key)}
                         className={`p-3 text-left border rounded-xl transition-all flex items-start gap-2.5 ${
                           isSelected
-                            ? 'bg-[#123D26] border-[#A5C896] text-white shadow-sm'
+                            ? 'bg-[#1E3A8A] border-[#38BDF8] text-white shadow-sm'
                             : 'bg-black/20 border-white/10 text-white/70 hover:border-white/30'
                         }`}
                       >
-                        <Icon className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? 'text-[#34D399]' : 'text-white/40'}`} />
+                        <Icon className={`w-4 h-4 shrink-0 mt-0.5 ${isSelected ? 'text-[#38BDF8]' : 'text-white/40'}`} />
                         <div>
                           <span className="text-xs font-semibold block">{opt.label}</span>
                           <span className="text-[10px] font-mono text-white/50 block leading-tight mt-0.5">
@@ -278,7 +280,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
               {/* 2. Dispatch Title */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#A5C896] mb-1 font-bold">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#7DD3FC] mb-1 font-bold">
                   Experience / Report Title *
                 </label>
                 <input
@@ -287,14 +289,14 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Winter Snow Status on Atal Tunnel Pass / Manali to Kaza Shared Fare Index"
-                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
+                  className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3.5 py-2.5 text-base sm:text-sm text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
                 />
               </div>
 
               {/* 3. Pan-India Mountain Location & Address */}
-              <div className="bg-white/5 border border-[#1F4E34] p-4 rounded-xl space-y-3">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#A5C896] font-bold border-b border-white/10 pb-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#34D399]" />
+              <div className="bg-white/5 border border-[#1E3A8A]/60 p-4 rounded-xl space-y-3">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#7DD3FC] font-bold border-b border-white/10 pb-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#7DD3FC]" />
                   <span>Pan-India Mountain Location Details</span>
                 </div>
 
@@ -306,7 +308,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-[#071F13] border border-[#1F4E34] rounded-lg px-3 py-2 text-base sm:text-xs text-white focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-[#0B1528] border border-[#1E3A8A]/60 rounded-lg px-3 py-2 text-base sm:text-xs text-white focus:outline-none focus:border-[#A5C896]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -325,7 +327,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={elevation}
                       onChange={(e) => setElevation(e.target.value)}
                       placeholder="e.g. 2,050 m / 3,100 m"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
                 </div>
@@ -340,15 +342,15 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     value={villageRoute}
                     onChange={(e) => setVillageRoute(e.target.value)}
                     placeholder="e.g. Old Manali to Solang Valley / Chopta to Tungnath Ridge / Yuksom Valley"
-                    className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                    className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                   />
                 </div>
               </div>
 
               {/* 4. Conditional Ground Price Details */}
               {type === 'price_report' && (
-                <div className="p-4 bg-white/5 border border-[#1F4E34] rounded-xl space-y-3">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#A5C896] block font-bold">
+                <div className="p-4 bg-white/5 border border-[#1E3A8A]/60 rounded-xl space-y-3">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-[#7DD3FC] block font-bold">
                     Ground Transit / Rate Metadata
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
@@ -361,7 +363,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={priceItem}
                         onChange={(e) => setPriceItem(e.target.value)}
                         placeholder="e.g. Shared Bolero to Kaza"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1E3A8A]/60 px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                     <div>
@@ -373,7 +375,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={priceSharedRate}
                         onChange={(e) => setPriceSharedRate(e.target.value)}
                         placeholder="e.g. ₹1,200 / seat"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1E3A8A]/60 px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                     <div>
@@ -385,7 +387,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                         value={pricePrivateRate}
                         onChange={(e) => setPricePrivateRate(e.target.value)}
                         placeholder="e.g. ₹9,500 / vehicle"
-                        className="w-full bg-black/40 border border-[#1F4E34] px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                        className="w-full bg-black/40 border border-[#1E3A8A]/60 px-2.5 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                       />
                     </div>
                   </div>
@@ -394,7 +396,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
 
               {/* 5. Short Summary (Excerpt) */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#A5C896] mb-1 font-bold">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#7DD3FC] mb-1 font-bold">
                   Quick 1-Line Summary *
                 </label>
                 <input
@@ -403,13 +405,13 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="e.g. Shared 4x4 Boleros running daily from Manali with standard ₹1,200 union fares."
-                  className="w-full bg-black/40 border border-[#1F4E34] px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
+                  className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896]"
                 />
               </div>
 
               {/* 6. Full Story Content */}
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#A5C896] mb-1 font-bold">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#7DD3FC] mb-1 font-bold">
                   Detailed Experience & Observations *
                 </label>
                 <textarea
@@ -418,7 +420,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                   value={fullContent}
                   onChange={(e) => setFullContent(e.target.value)}
                   placeholder="Share details on road conditions, snow, winter heating, porter availability, contact booths, or food along the route..."
-                  className="w-full bg-black/40 border border-[#1F4E34] p-3 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896] leading-relaxed"
+                  className="w-full bg-black/40 border border-[#1E3A8A]/60 p-3 text-base sm:text-xs text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-[#A5C896] leading-relaxed"
                 />
               </div>
 
@@ -434,7 +436,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
                       placeholder="e.g. Rahul Verma"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
 
@@ -447,7 +449,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                       value={guestRole}
                       onChange={(e) => setGuestRole(e.target.value)}
                       placeholder="e.g. Mountain Trekker / Sabbatical Fellow"
-                      className="w-full bg-black/40 border border-[#1F4E34] px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
+                      className="w-full bg-black/40 border border-[#1E3A8A]/60 px-3 py-2 text-base sm:text-xs text-white rounded-lg focus:outline-none focus:border-[#A5C896]"
                     />
                   </div>
                 </div>
@@ -476,14 +478,14 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     checked={agreedToPrivacy}
                     onChange={(e) => setAgreedToPrivacy(e.target.checked)}
                     required
-                    className="mt-0.5 w-4 h-4 rounded border-white/30 text-[#A5C896] focus:ring-[#A5C896] cursor-pointer"
+                    className="mt-0.5 w-4 h-4 rounded border-white/30 text-[#2575fc] focus:ring-[#2575fc] cursor-pointer"
                   />
                   <span className="text-base sm:text-xs text-white/80 leading-relaxed font-sans">
                     I agree to the{' '}
                     <button
                       type="button"
                       onClick={onOpenPrivacy}
-                      className="text-[#A5C896] font-bold underline hover:text-white"
+                      className="text-[#38BDF8] font-bold underline hover:text-white"
                     >
                       Privacy Policy & Community Charter
                     </button>
@@ -493,7 +495,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
               </div>
 
               {/* Submit Buttons */}
-              <div className="pt-3 border-t border-[#1F4E34] flex items-center justify-end gap-3">
+              <div className="pt-3 border-t border-[#1E3A8A] flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={onClose}
@@ -504,7 +506,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#FAF7EE] to-[#E8EFE3] hover:from-white hover:to-[#FAF7EE] text-[#0A2316] text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-lg shadow-blue-900/30 hover:shadow-xl active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -513,7 +515,7 @@ export const CreateDispatchModal: FC<CreateDispatchModalProps> = ({
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4 text-[#0B2516]" />
+                      <Send className="w-4 h-4 text-white" />
                       <span>Publish Field Dispatch</span>
                     </>
                   )}

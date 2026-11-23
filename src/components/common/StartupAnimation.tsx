@@ -28,7 +28,7 @@ export const StartupAnimation: FC = () => {
   return (
     <div
       aria-hidden="true"
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#05170D] transition-opacity duration-700 ease-out select-none pointer-events-none ${
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#0B1B3D] transition-opacity duration-700 ease-out select-none pointer-events-none ${
         fading ? 'opacity-0' : 'opacity-100'
       }`}
     >
@@ -36,7 +36,7 @@ export const StartupAnimation: FC = () => {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at center, rgba(22, 78, 45, 0.35) 0%, rgba(5, 23, 13, 0.95) 70%, rgba(3, 15, 8, 1) 100%)'
+          background: 'radial-gradient(circle at center, rgba(37, 117, 252, 0.35) 0%, rgba(11, 27, 61, 0.95) 70%, rgba(6, 14, 30, 1) 100%)'
         }}
       />
 
@@ -44,7 +44,7 @@ export const StartupAnimation: FC = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-4 animate-fade-in-scale">
         {/* Emblem */}
         <div className="relative mb-5">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#0A2316] border-2 border-[#34D399]/40 flex items-center justify-center shadow-2xl p-2.5">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#0F224A] border-2 border-[#38BDF8]/50 flex items-center justify-center shadow-2xl shadow-blue-500/30 p-2.5">
             <img
               src="/logo-icon.png"
               alt={BRAND_CONFIG.name}
@@ -56,7 +56,7 @@ export const StartupAnimation: FC = () => {
             />
           </div>
           {/* Subtle luminous halo */}
-          <div className="absolute inset-0 rounded-full border border-[#A5C896]/30 animate-ping opacity-25" />
+          <div className="absolute inset-0 rounded-full border border-[#38BDF8]/40 animate-ping opacity-25" />
         </div>
 
         {/* Brand Name */}
@@ -65,13 +65,13 @@ export const StartupAnimation: FC = () => {
         </h1>
 
         {/* Territory Kicker */}
-        <p className="mt-1.5 text-[11px] sm:text-xs font-mono text-[#A5C896] uppercase tracking-[0.25em] font-semibold">
+        <p className="mt-1.5 text-[11px] sm:text-xs font-mono text-[#7DD3FC] uppercase tracking-[0.25em] font-semibold">
           PAN-INDIA MOUNTAIN DIGITAL INFRASTRUCTURE
         </p>
 
         {/* Elegant glowing loading bar */}
         <div className="w-36 h-0.5 bg-white/10 rounded-full mt-6 overflow-hidden relative">
-          <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#34D399] to-[#A5C896] w-full animate-shimmer" />
+          <div className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#2575fc] via-[#38BDF8] to-[#7DD3FC] w-full animate-shimmer" />
         </div>
       </div>
     </div>

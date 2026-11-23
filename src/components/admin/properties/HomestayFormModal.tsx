@@ -357,18 +357,18 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#FAF8F5] border border-[#CBDAC4] text-[#123D2D] w-full max-w-3xl rounded-sm shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+      <div className="bg-[#FAF8F5] border border-slate-200 text-[#0F172A] w-full max-w-3xl rounded-sm shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#CBDAC4] bg-white flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 border-b border-slate-200 bg-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#123D2D]/10 text-[#123D2D] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-[#0F224A]/10 text-[#0F172A] flex items-center justify-center">
               <Home className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="font-serif text-lg sm:text-xl font-normal text-[#123D2D]">
+              <h2 className="font-serif text-lg sm:text-xl font-normal text-[#0F172A]">
                 {isEdit ? 'Edit Homestay Sanctuary' : 'Register Homestay / Residential Lease'}
               </h2>
-              <p className="text-[11px] font-mono text-[#576159] tracking-wider uppercase">
+              <p className="text-[11px] font-mono text-slate-600 tracking-wider uppercase">
                 {isEdit ? `ID: ${editingHomestay?.id}` : 'Long-term residential sanctuaries & sabbatical lofts'}
               </p>
             </div>
@@ -377,7 +377,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#F3EFE6] rounded-sm transition-colors"
+            className="p-1.5 text-slate-600 hover:text-[#0F172A] hover:bg-[#F3EFE6] rounded-sm transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -386,9 +386,9 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
         {/* Scrollable Form Body */}
         <div className="overflow-y-auto p-6 flex-1 space-y-6">
           {!isEdit && (
-            <div className="p-3.5 bg-[#F3EFE6] border border-[#CBDAC4] rounded-sm">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#285A40] font-bold mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#285A40]" />
+            <div className="p-3.5 bg-[#F3EFE6] border border-slate-200 rounded-sm">
+              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#2575fc] font-bold mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#2575fc]" />
                 <span>Quick Test Templates:</span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -397,7 +397,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                     key={tmpl.name}
                     type="button"
                     onClick={() => applyTemplate(tmpl)}
-                    className="text-xs font-mono px-3 py-1 bg-white border border-[#CBDAC4] text-[#123D2D] hover:bg-[#123D2D] hover:text-white rounded-sm transition-colors"
+                    className="text-xs font-mono px-3 py-1 bg-white border border-slate-200 text-[#0F172A] hover:bg-[#0F224A] hover:text-white rounded-sm transition-colors"
                   >
                     + {tmpl.name}
                   </button>
@@ -417,7 +417,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Name & Region */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="sm:col-span-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Sanctuary / Homestay Name *
                 </label>
                 <input
@@ -426,18 +426,18 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Chuchen Stone & Cedar Residency"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Region *
                 </label>
                 <select
                   value={region}
                   onChange={(e) => setRegion(e.target.value)}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {REGION_PRESETS.map((r) => (
                     <option key={r} value={r}>
@@ -451,24 +451,24 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Location & Elevation */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Location / Hamlet *
                 </label>
                 <div className="relative">
-                  <MapPin className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <MapPin className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="e.g. Chuchen, West Sikkim"
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Elevation
                 </label>
                 <input
@@ -476,7 +476,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={elevation}
                   onChange={(e) => setElevation(e.target.value)}
                   placeholder="e.g. 1,820m"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
             </div>
@@ -484,7 +484,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Rates, Deposit & Term */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Monthly Rate *
                 </label>
                 <input
@@ -493,12 +493,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={monthlyRate}
                   onChange={(e) => setMonthlyRate(e.target.value)}
                   placeholder="e.g. ₹28,000 / month"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Security Deposit
                 </label>
                 <input
@@ -506,12 +506,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={securityDeposit}
                   onChange={(e) => setSecurityDeposit(e.target.value)}
                   placeholder="e.g. ₹20,000 refundable"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Min Lease Term
                 </label>
                 <input
@@ -519,7 +519,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={minLeaseTerm}
                   onChange={(e) => setMinLeaseTerm(e.target.value)}
                   placeholder="e.g. 3 months"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
             </div>
@@ -527,13 +527,13 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Status & Furnishing */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Lease Availability Status
                 </label>
                 <select
                   value={leaseStatus}
                   onChange={(e) => setLeaseStatus(e.target.value)}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {LEASE_STATUS_OPTIONS.map((opt) => (
                     <option key={opt} value={opt}>
@@ -544,13 +544,13 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Interior & Furnishing
                 </label>
                 <select
                   value={furnishing}
                   onChange={(e) => setFurnishing(e.target.value)}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {FURNISHING_OPTIONS.map((f) => (
                     <option key={f} value={f}>
@@ -562,40 +562,40 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             </div>
 
             {/* Host Details */}
-            <div className="p-4 bg-white border border-[#CBDAC4] rounded-sm space-y-3">
-              <div className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold">
+            <div className="p-4 bg-white border border-slate-200 rounded-sm space-y-3">
+              <div className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold">
                 Host & Stewardship Information
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[11px] font-mono text-[#576159] mb-1">Host Name *</label>
+                  <label className="block text-[11px] font-mono text-slate-600 mb-1">Host Name *</label>
                   <input
                     type="text"
                     required
                     value={hostName}
                     onChange={(e) => setHostName(e.target.value)}
                     placeholder="e.g. Tenzing & Pema Lepcha"
-                    className="w-full bg-[#FAF8F5] border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                    className="w-full bg-[#FAF8F5] border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-mono text-[#576159] mb-1">Stewardship Role</label>
+                  <label className="block text-[11px] font-mono text-slate-600 mb-1">Stewardship Role</label>
                   <input
                     type="text"
                     value={hostRole}
                     onChange={(e) => setHostRole(e.target.value)}
                     placeholder="e.g. Organic Orchardist"
-                    className="w-full bg-[#FAF8F5] border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                    className="w-full bg-[#FAF8F5] border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-mono text-[#576159] mb-1">Years Hosting</label>
+                  <label className="block text-[11px] font-mono text-slate-600 mb-1">Years Hosting</label>
                   <input
                     type="number"
                     min={0}
                     value={hostYears}
                     onChange={(e) => setHostYears(Number(e.target.value))}
-                    className="w-full bg-[#FAF8F5] border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                    className="w-full bg-[#FAF8F5] border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                   />
                 </div>
               </div>
@@ -604,7 +604,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Room Type, Wifi & Capacity */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Room Configuration
                 </label>
                 <input
@@ -612,38 +612,38 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   value={roomType}
                   onChange={(e) => setRoomType(e.target.value)}
                   placeholder="e.g. Entire 2-Bed Cedar Loft"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Wifi / Connectivity
                 </label>
                 <div className="relative">
-                  <Wifi className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Wifi className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={wifi}
                     onChange={(e) => setWifi(e.target.value)}
                     placeholder="e.g. 100 Mbps Starlink"
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Resident Capacity
                 </label>
                 <div className="relative">
-                  <Users className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Users className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     value={capacity}
                     onChange={(e) => setCapacity(e.target.value)}
                     placeholder="e.g. 2–3 Residents"
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
@@ -652,17 +652,17 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             {/* Images Array */}
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold">
+                <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold">
                   Photographs & Architecture Visuals ({images.length}) *
                 </label>
-                <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#576159]">
+                <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-600">
                   <span>Quick Presets:</span>
                   {PHOTO_PRESETS.map((p) => (
                     <button
                       key={p.name}
                       type="button"
                       onClick={() => setImages((prev) => [...prev, p.url])}
-                      className="text-[#285A40] hover:underline"
+                      className="text-[#2575fc] hover:underline"
                     >
                       +{p.name}
                     </button>
@@ -672,20 +672,20 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
 
               <div className="flex gap-2 mb-2">
                 <div className="relative flex-1">
-                  <ImageIcon className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <ImageIcon className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="url"
                     value={newImage}
                     onChange={(e) => setNewImage(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddImage())}
                     placeholder="https://images.unsplash.com/photo-..."
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                   />
                 </div>
                 <button
                   type="button"
                   onClick={handleAddImage}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -694,7 +694,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
               {images.length > 0 && (
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
                   {images.map((imgUrl, idx) => (
-                    <div key={idx} className="relative group border border-[#CBDAC4] rounded-sm overflow-hidden aspect-video bg-black/10">
+                    <div key={idx} className="relative group border border-slate-200 rounded-sm overflow-hidden aspect-video bg-black/10">
                       <img src={imgUrl} alt={`Homestay ${idx + 1}`} className="w-full h-full object-cover" />
                       <button
                         type="button"
@@ -711,7 +711,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Monograph & Architectural Description *
               </label>
               <textarea
@@ -720,13 +720,13 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe the timber craftsmanship, solar orientation, hearth heating, mountain vistas, and daily rhythm..."
-                className="w-full bg-white border border-[#CBDAC4] p-3 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                className="w-full bg-white border border-slate-200 p-3 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
               />
             </div>
 
             {/* Amenities list editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Resident Amenities ({amenities.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -736,12 +736,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   onChange={(e) => setNewAmenity(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddAmenity())}
                   placeholder="e.g. Wood-burning Bukhari Fireplace..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddAmenity}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -751,7 +751,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   {amenities.map((item, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#CBDAC4] text-xs text-[#123D2D] rounded-sm font-mono"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 text-xs text-[#0F172A] rounded-sm font-mono"
                     >
                       <span>✓ {item}</span>
                       <button
@@ -769,7 +769,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
 
             {/* Features list editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Property Features ({features.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -779,12 +779,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   onChange={(e) => setNewFeature(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddFeature())}
                   placeholder="e.g. Zero sound pollution, organic terraces..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddFeature}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -794,7 +794,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   {features.map((item, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#CBDAC4] text-xs text-[#123D2D] rounded-sm font-mono"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 text-xs text-[#0F172A] rounded-sm font-mono"
                     >
                       <span>★ {item}</span>
                       <button
@@ -812,7 +812,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
 
             {/* Utilities Included editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Utilities Included ({utilitiesIncluded.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -822,12 +822,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   onChange={(e) => setNewUtility(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddUtility())}
                   placeholder="e.g. Starlink WiFi, Firewood supply..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddUtility}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -837,7 +837,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
                   {utilitiesIncluded.map((item, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-[#CBDAC4] text-xs text-[#123D2D] rounded-sm font-mono"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 text-xs text-[#0F172A] rounded-sm font-mono"
                     >
                       <span>⚡ {item}</span>
                       <button
@@ -854,12 +854,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             </div>
 
             {/* Status toggle */}
-            <div className="p-3 bg-white border border-[#CBDAC4] rounded-sm flex items-center justify-between">
+            <div className="p-3 bg-white border border-slate-200 rounded-sm flex items-center justify-between">
               <div>
-                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#123D2D]">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A]">
                   Listing Publication Status
                 </div>
-                <div className="text-[11px] text-[#576159]">
+                <div className="text-[11px] text-slate-600">
                   {isPublished
                     ? 'Live — Visible to prospective residents on public homepage'
                     : 'Draft — Stored privately in Supabase database'}
@@ -879,12 +879,12 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-[#CBDAC4] bg-white flex items-center justify-end gap-3 shrink-0">
+        <div className="px-6 py-4 border-t border-slate-200 bg-white flex items-center justify-end gap-3 shrink-0">
           <button
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
-            className="px-4 py-2 border border-[#CBDAC4] text-xs font-mono text-[#576159] hover:bg-[#F3EFE6] rounded-sm transition-colors"
+            className="px-4 py-2 border border-slate-200 text-xs font-mono text-slate-600 hover:bg-[#F3EFE6] rounded-sm transition-colors"
           >
             Cancel
           </button>
@@ -892,7 +892,7 @@ export const HomestayFormModal: FC<HomestayFormModalProps> = ({
             type="submit"
             form="homestay-form"
             disabled={isSubmitting}
-            className="px-5 py-2 bg-[#123D2D] hover:bg-[#285A40] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded-sm transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50"
+            className="px-5 py-2 bg-[#0F224A] hover:bg-[#285A40] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded-sm transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50"
           >
             {isSubmitting ? (
               <>

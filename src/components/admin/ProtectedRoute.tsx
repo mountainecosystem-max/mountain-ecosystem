@@ -9,12 +9,12 @@ export const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#06180E] text-[#F8F6F0] flex flex-col items-center justify-center p-6">
-        <div className="flex items-center gap-3 text-sm font-mono tracking-widest text-[#8FA777] uppercase mb-4 animate-pulse">
-          <Compass className="w-5 h-5 text-[#8FA777]" />
+      <div className="min-h-screen bg-[#0B1B3D] text-[#F8F6F0] flex flex-col items-center justify-center p-6">
+        <div className="flex items-center gap-3 text-sm font-mono tracking-widest text-[#38BDF8] uppercase mb-4 animate-pulse">
+          <Compass className="w-5 h-5 text-[#38BDF8]" />
           <span>AUTHENTICATING STAFF PORTAL</span>
         </div>
-        <Loader2 className="w-8 h-8 text-[#8FA777] animate-spin" />
+        <Loader2 className="w-8 h-8 text-[#38BDF8] animate-spin" />
         <p className="mt-4 text-xs font-mono text-white/50">Verifying Supabase cryptographic session...</p>
       </div>
     )
@@ -23,8 +23,8 @@ export const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
   // Google-authenticated ordinary users attempting /admin access are denied
   if (currentUser && !profile) {
     return (
-      <div className="min-h-screen bg-[#06180E] text-[#F8F6F0] flex flex-col items-center justify-center p-6 text-center font-sans">
-        <div className="w-full max-w-md bg-[#0B2516] border border-red-500/40 p-8 sm:p-10 shadow-2xl rounded-sm">
+      <div className="min-h-screen bg-[#0B1B3D] text-[#F8F6F0] flex flex-col items-center justify-center p-6 text-center font-sans">
+        <div className="w-full max-w-md bg-[#0B1B3D] border border-red-500/40 p-8 sm:p-10 shadow-2xl rounded-sm">
           <div className="w-14 h-14 mx-auto rounded-full bg-red-950/70 border border-red-500/50 flex items-center justify-center mb-6">
             <ShieldAlert className="w-7 h-7 text-red-400" />
           </div>
@@ -44,9 +44,9 @@ export const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
           <div className="space-y-3">
             <Link
               to="/"
-              className="w-full inline-flex items-center justify-center gap-2 bg-[#F8F6F0] hover:bg-white text-[#0B2516] py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all shadow-md"
+              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all shadow-md"
             >
-              <ArrowLeft className="w-4 h-4 text-[#0B2516]" />
+              <ArrowLeft className="w-4 h-4 text-[#0F172A]" />
               <span>Return to Public Website</span>
             </Link>
 
@@ -55,7 +55,7 @@ export const ProtectedRoute: FC<{ children: ReactNode }> = ({ children }) => {
               type="button"
               className="w-full inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white py-2.5 text-xs font-mono uppercase tracking-wider rounded-sm transition-all border border-white/15"
             >
-              <LogOut className="w-3.5 h-3.5 text-[#8FA777]" />
+              <LogOut className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>Sign Out of This Account</span>
             </button>
           </div>

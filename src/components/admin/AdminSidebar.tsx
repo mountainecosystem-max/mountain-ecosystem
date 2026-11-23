@@ -66,14 +66,14 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
 
       {/* Sidebar Panel */}
       <aside
-        className={`fixed lg:sticky top-0 lg:top-[57px] bottom-0 left-0 z-50 lg:z-20 w-72 bg-[#06180E] border-r border-[#1F4E34] text-[#F8F6F0] flex flex-col justify-between transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:sticky top-0 lg:top-[57px] bottom-0 left-0 z-50 lg:z-20 w-72 bg-[#0B1B3D] border-r border-[#1E3A8A] text-[#F8F6F0] flex flex-col justify-between transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         } h-screen lg:h-[calc(100vh-57px)]`}
       >
         <div className="flex-1 overflow-y-auto p-4 sm:p-5 scrollbar-thin scrollbar-thumb-white/10">
           {/* Mobile Header with Close button */}
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10 lg:hidden">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#8FA777]">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#38BDF8]">
               Navigation Menu
             </span>
             <button
@@ -102,16 +102,16 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
                   className={({ isActive }) =>
                     `group flex items-start gap-3 p-3 rounded-sm transition-all border ${
                       isActive
-                        ? 'bg-[#0B2516] border-[#8FA777]/50 text-white shadow-sm'
+                        ? 'bg-[#0B1B3D] border-[#38BDF8]/50 text-white shadow-sm'
                         : 'border-transparent text-white/70 hover:text-white hover:bg-white/5'
                     }`
                   }
                 >
-                  <Icon className="w-4 h-4 text-[#8FA777] shrink-0 mt-0.5 group-hover:scale-105 transition-transform" />
+                  <Icon className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5 group-hover:scale-105 transition-transform" />
                   <div className="flex-1 text-left">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-medium font-sans">{item.label}</span>
-                      <span className="text-[9px] font-mono text-[#8FA777]/80">{item.kicker}</span>
+                      <span className="text-[9px] font-mono text-[#38BDF8]/80">{item.kicker}</span>
                     </div>
                     <p className="text-[10px] text-white/40 font-mono mt-0.5 leading-snug truncate">
                       {item.description}
@@ -127,7 +127,7 @@ export const AdminSidebar: FC<AdminSidebarProps> = ({ isOpen, onClose }) => {
         <div className="p-4 border-t border-white/10 bg-black/30">
           <div className="flex items-center justify-between text-[10px] font-mono mb-2">
             <div className="flex items-center gap-1.5 text-white/70">
-              <Database className="w-3 h-3 text-[#8FA777]" />
+              <Database className="w-3 h-3 text-[#38BDF8]" />
               <span>SUPABASE BACKEND</span>
             </div>
             <span className="text-emerald-400 font-semibold">ACTIVE</span>

@@ -114,21 +114,23 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0A241A]/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0B1B3D]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#F8F6F0] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#F8FAFC] border border-slate-200 rounded-t-3xl sm:rounded-2xl max-w-2xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile Pull Handle */}
+        <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 -mb-1 sm:hidden shrink-0" />
         {/* Modal Header */}
-        <div className="sticky top-0 bg-[#F8F6F0] border-b border-[#CBDAC4] px-6 sm:px-8 py-5 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-[#F8FAFC] border-b border-slate-200 px-6 sm:px-8 py-5 flex items-center justify-between z-10">
           <div>
-            <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#285A40] font-bold">
-              <Leaf className="w-3.5 h-3.5 text-[#285A40]" />
+            <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#2575fc] font-bold">
+              <Leaf className="w-3.5 h-3.5 text-[#2575fc]" />
               <span>ROLE SPECIFICATION</span>
             </div>
-            <div className="text-xs text-[#576159] font-mono mt-0.5">
+            <div className="text-xs text-slate-600 font-mono mt-0.5">
               Ref ID: {job.id.toUpperCase()} • Posted {job.postedDate}
             </div>
           </div>
@@ -136,7 +138,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
           <button
             onClick={onClose}
             type="button"
-            className="w-9 h-9 flex items-center justify-center p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-slate-600 hover:text-[#0F172A] hover:bg-sky-50 active:bg-slate-200 rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -147,36 +149,36 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
         <div className="p-6 sm:p-8 space-y-6">
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-2">
-              <span className="text-sm font-semibold text-[#123D2D]">{job.employer}</span>
+              <span className="text-sm font-semibold text-[#0F172A]">{job.employer}</span>
               {job.employerBadge && (
-                <span className="text-[10px] font-mono uppercase text-[#285A40] bg-[#E8EFE3] px-2 py-0.5 rounded-sm border border-[#CBDAC4]">
+                <span className="text-[10px] font-mono uppercase text-[#2575fc] bg-sky-50 px-2 py-0.5 rounded-sm border border-slate-200">
                   {job.employerBadge}
                 </span>
               )}
             </div>
 
-            <h2 className="font-serif text-2xl sm:text-3xl text-[#123D2D] font-normal leading-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#0F172A] font-normal leading-tight">
               {job.title}
             </h2>
 
             {/* Badges Bar */}
-            <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-[#CBDAC4]">
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#123D2D] bg-[#E8EFE3] border border-[#CBDAC4] px-3 py-1 rounded-sm">
-                <MapPin className="w-3.5 h-3.5 text-[#285A40]" />
+            <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-slate-200">
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#0F172A] bg-sky-50 border border-slate-200 px-3 py-1 rounded-sm">
+                <MapPin className="w-3.5 h-3.5 text-[#2575fc]" />
                 {job.location}
               </span>
 
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#576159] bg-[#FAF8F3] border border-[#CBDAC4] px-3 py-1 rounded-sm">
-                <Briefcase className="w-3.5 h-3.5 text-[#285A40]" />
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-600 bg-white border border-slate-200 px-3 py-1 rounded-sm">
+                <Briefcase className="w-3.5 h-3.5 text-[#2575fc]" />
                 {job.type}
               </span>
 
-              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#123D2D] font-bold bg-[#285A40]/15 border border-[#285A40]/30 px-3 py-1 rounded-sm">
+              <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#0F172A] font-bold bg-[#2575fc]/15 border border-[#2575fc]/30 px-3 py-1 rounded-sm">
                 {job.salary}
               </span>
 
               {job.housingIncluded && (
-                <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#285A40] bg-[#E8EFE3] border border-[#CBDAC4] px-3 py-1 rounded-sm font-medium">
+                <span className="inline-flex items-center gap-1.5 text-xs font-mono text-[#2575fc] bg-sky-50 border border-slate-200 px-3 py-1 rounded-sm font-medium">
                   <Home className="w-3.5 h-3.5" />
                   Estate Housing & Organic Meals Included
                 </span>
@@ -186,23 +188,23 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
           {/* Description */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#123D2D] font-bold mb-2">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#0F172A] font-bold mb-2">
               The Mission & Setting
             </h3>
-            <p className="text-sm text-[#576159] leading-relaxed font-light">
+            <p className="text-sm text-slate-600 leading-relaxed font-light">
               {job.description}
             </p>
           </div>
 
           {/* Responsibilities */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#123D2D] font-bold mb-3">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#0F172A] font-bold mb-3">
               Core Responsibilities
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-[#576159] font-light">
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-600 font-light">
               {job.responsibilities.map((r, i) => (
                 <li key={i} className="flex items-start gap-2.5">
-                  <span className="text-[#285A40] font-mono font-bold">•</span>
+                  <span className="text-[#2575fc] font-mono font-bold">•</span>
                   <span>{r}</span>
                 </li>
               ))}
@@ -211,13 +213,13 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
           {/* Requirements */}
           <div>
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#123D2D] font-bold mb-3">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#0F172A] font-bold mb-3">
               Qualifications & Temperament
             </h3>
-            <ul className="space-y-2 text-xs sm:text-sm text-[#576159] font-light">
+            <ul className="space-y-2 text-xs sm:text-sm text-slate-600 font-light">
               {job.requirements.map((req, i) => (
                 <li key={i} className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#285A40] flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2575fc] flex-shrink-0 mt-0.5" />
                   <span>{req}</span>
                 </li>
               ))}
@@ -225,14 +227,14 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
           </div>
 
           {/* Benefits */}
-          <div className="bg-[#E8EFE3]/60 p-4 sm:p-5 rounded-sm border border-[#CBDAC4]">
-            <h3 className="text-xs font-mono uppercase tracking-wider text-[#123D2D] font-bold mb-2">
+          <div className="bg-sky-50/60 p-4 sm:p-5 rounded-sm border border-slate-200">
+            <h3 className="text-xs font-mono uppercase tracking-wider text-[#0F172A] font-bold mb-2">
               Living Accommodations & Stewardship Perks
             </h3>
-            <ul className="space-y-2 text-xs text-[#123D2D] font-mono">
+            <ul className="space-y-2 text-xs text-[#0F172A] font-mono">
               {job.benefits.map((b, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#285A40] flex-shrink-0 mt-0.5" />
+                  <Check className="w-3.5 h-3.5 text-[#2575fc] flex-shrink-0 mt-0.5" />
                   <span>{b}</span>
                 </li>
               ))}
@@ -240,20 +242,20 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
           </div>
 
           {/* Direct Application Form (Validated with Zod) */}
-          <div className="pt-6 border-t border-[#CBDAC4]">
+          <div className="pt-6 border-t border-slate-200">
             {submitted ? (
-              <div className="bg-[#E8EFE3] border border-[#285A40]/40 p-6 rounded-sm text-center">
-                <CheckCircle2 className="w-8 h-8 text-[#285A40] mx-auto mb-2" />
-                <h4 className="font-serif text-xl text-[#123D2D] font-medium">
+              <div className="bg-sky-50 border border-[#2575fc]/40 p-6 rounded-sm text-center">
+                <CheckCircle2 className="w-8 h-8 text-[#2575fc] mx-auto mb-2" />
+                <h4 className="font-serif text-xl text-[#0F172A] font-medium">
                   Application Dispatched
                 </h4>
-                <p className="text-xs text-[#576159] font-mono mt-1">
+                <p className="text-xs text-slate-600 font-mono mt-1">
                   Your details and motivation have been forwarded directly to the hiring steward at {job.employer}. You will receive a response within 48 hours.
                 </p>
                 <button
                   onClick={onClose}
                   type="button"
-                  className="mt-4 px-4 py-2 bg-[#123D2D] text-[#E8EFE3] text-xs font-mono uppercase tracking-wider rounded-sm hover:bg-[#0A241A]"
+                  className="mt-4 px-4 py-2 bg-[#0B1B3D] text-slate-200 text-xs font-mono uppercase tracking-wider rounded-sm hover:bg-[#0B1B3D]"
                 >
                   Close Window
                 </button>
@@ -261,10 +263,10 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-serif text-xl text-[#123D2D] font-medium">
+                  <h3 className="font-serif text-xl text-[#0F172A] font-medium">
                     Apply for this Mountain Opportunity
                   </h3>
-                  <span className="text-[10px] font-mono text-[#285A40] font-bold">
+                  <span className="text-[10px] font-mono text-[#2575fc] font-bold">
                     Direct • Zero Middleman Fees
                   </span>
                 </div>
@@ -286,7 +288,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                    <label className="block text-[11px] font-mono uppercase tracking-wider text-slate-600 mb-1">
                       Full Name *
                     </label>
                     <input
@@ -294,10 +296,10 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                       value={formData.fullName}
                       onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                       placeholder="e.g. Tshering Lepcha"
-                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                      className="w-full bg-white border border-slate-200 px-3 py-2 text-base sm:text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                     />
                     {errors.fullName && (
-                      <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
+                      <p className="text-[10px] text-[#f96933] mt-1 flex items-center gap-1 font-mono">
                         <AlertCircle className="w-3 h-3" />
                         {errors.fullName}
                       </p>
@@ -305,7 +307,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                    <label className="block text-[11px] font-mono uppercase tracking-wider text-slate-600 mb-1">
                       Email Address *
                     </label>
                     <input
@@ -313,10 +315,10 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. name@domain.com"
-                      className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                      className="w-full bg-white border border-slate-200 px-3 py-2 text-base sm:text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                     />
                     {errors.email && (
-                      <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
+                      <p className="text-[10px] text-[#f96933] mt-1 flex items-center gap-1 font-mono">
                         <AlertCircle className="w-3 h-3" />
                         {errors.email}
                       </p>
@@ -325,7 +327,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                  <label className="block text-[11px] font-mono uppercase tracking-wider text-slate-600 mb-1">
                     Phone / WhatsApp *
                   </label>
                   <input
@@ -333,10 +335,10 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="e.g. +91 98320 00000"
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 px-3 py-2 text-base sm:text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                   {errors.phone && (
-                    <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
+                    <p className="text-[10px] text-[#f96933] mt-1 flex items-center gap-1 font-mono">
                       <AlertCircle className="w-3 h-3" />
                       {errors.phone}
                     </p>
@@ -344,7 +346,7 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                  <label className="block text-[11px] font-mono uppercase tracking-wider text-slate-600 mb-1">
                     Why does this mountain role resonate with your path? *
                   </label>
                   <textarea
@@ -352,10 +354,10 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                     value={formData.note}
                     onChange={(e) => setFormData({ ...formData, note: e.target.value })}
                     placeholder="Briefly describe your relevant background, mountain readiness, or creative goals..."
-                    className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-base sm:text-xs text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 px-3 py-2 text-base sm:text-xs text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                   {errors.note && (
-                    <p className="text-[10px] text-[#C47755] mt-1 flex items-center gap-1 font-mono">
+                    <p className="text-[10px] text-[#f96933] mt-1 flex items-center gap-1 font-mono">
                       <AlertCircle className="w-3 h-3" />
                       {errors.note}
                     </p>
@@ -364,18 +366,18 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
 
                 {/* Optional Resume / Bio Document Attachment */}
                 <div>
-                  <label className="block text-[11px] font-mono uppercase tracking-wider text-[#576159] mb-1">
+                  <label className="block text-[11px] font-mono uppercase tracking-wider text-slate-600 mb-1">
                     Attach CV / Resume / Bio (Optional)
                   </label>
-                  <label className="flex items-center gap-3 p-3 bg-white border border-[#CBDAC4] rounded-sm cursor-pointer hover:border-[#285A40] transition">
-                    <Upload className="w-4 h-4 text-[#285A40] shrink-0" />
+                  <label className="flex items-center gap-3 p-3 bg-white border border-slate-200 rounded-sm cursor-pointer hover:border-[#2575fc] transition">
+                    <Upload className="w-4 h-4 text-[#2575fc] shrink-0" />
                     <div className="flex-1 truncate text-xs">
                       {resumeFile ? (
-                        <span className="font-semibold text-[#123D2D] truncate block">
+                        <span className="font-semibold text-[#0F172A] truncate block">
                           📄 {resumeFile.name} ({(resumeFile.size / 1024).toFixed(0)} KB)
                         </span>
                       ) : (
-                        <span className="text-[#576159]">
+                        <span className="text-slate-600">
                           Click to select PDF, DOCX or TXT (Max 5MB)
                         </span>
                       )}
@@ -388,30 +390,30 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                     />
                   </label>
                   {resumeError && (
-                    <p className="text-[10px] text-[#C47755] mt-1 font-mono">{resumeError}</p>
+                    <p className="text-[10px] text-[#f96933] mt-1 font-mono">{resumeError}</p>
                   )}
-                  <p className="text-[10px] text-[#576159] font-mono mt-1 flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3 text-[#285A40]" />
+                  <p className="text-[10px] text-slate-600 font-mono mt-1 flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3 text-[#2575fc]" />
                     <span>Private & Encrypted • Resumes are kept in a protected private bucket and never indexed publicly.</span>
                   </p>
                 </div>
 
                 {/* DPDP Section 6 Candidate Protection & Privacy Agreement */}
-                <div className="p-2.5 bg-[#FAF8F3] border border-[#CBDAC4] rounded-sm">
+                <div className="p-2.5 bg-white border border-slate-200 rounded-sm">
                   <label className="flex items-start gap-2 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={agreedToPrivacy}
                       onChange={(e) => setAgreedToPrivacy(e.target.checked)}
                       required
-                      className="mt-0.5 w-3.5 h-3.5 rounded border-stone-400 text-[#123D2D] focus:ring-[#123D2D] cursor-pointer"
+                      className="mt-0.5 w-3.5 h-3.5 rounded border-stone-400 text-[#0F172A] focus:ring-[#123D2D] cursor-pointer"
                     />
-                    <span className="text-[11px] text-[#576159] leading-relaxed font-sans">
+                    <span className="text-[11px] text-slate-600 leading-relaxed font-sans">
                       Under DPDP Act 2023, I consent to the collection and transmission of my contact info & CV solely to <strong>{job.employer}</strong> for evaluating this role. I have reviewed the{' '}
                       <button
                         type="button"
                         onClick={onOpenPrivacy}
-                        className="text-[#123D2D] font-semibold underline hover:text-black"
+                        className="text-[#0F172A] font-semibold underline hover:text-black"
                       >
                         Privacy Policy
                       </button>.
@@ -422,17 +424,17 @@ export const JobDetailModal: FC<JobDetailModalProps> = ({ job, onClose, onOpenPr
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] disabled:opacity-60 text-white py-3.5 px-6 text-xs sm:text-sm font-sans font-semibold tracking-wide rounded-full transition-all duration-200 shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] disabled:opacity-60 text-white py-3.5 px-6 text-xs sm:text-sm font-sans font-semibold tracking-wide rounded-full transition-all duration-200 shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin text-[#91A77B]" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-[#7DD3FC]" />
                       <span>Transmitting Application...</span>
                     </>
                   ) : (
                     <>
                       <span>Submit Application to {job.employer}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#91A77B]" />
+                      <ArrowRight className="w-3.5 h-3.5 text-sky-200" />
                     </>
                   )}
                 </button>

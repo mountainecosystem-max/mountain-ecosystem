@@ -287,18 +287,18 @@ export const JobFormModal: FC<JobFormModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#FAF8F5] border border-[#CBDAC4] text-[#123D2D] w-full max-w-3xl rounded-sm shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+      <div className="bg-[#FAF8F5] border border-slate-200 text-[#0F172A] w-full max-w-3xl rounded-sm shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-[#CBDAC4] bg-white flex items-center justify-between shrink-0">
+        <div className="px-6 py-4 border-b border-slate-200 bg-white flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#123D2D]/10 text-[#123D2D] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-[#0F224A]/10 text-[#0F172A] flex items-center justify-center">
               <Briefcase className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="font-serif text-lg sm:text-xl font-normal text-[#123D2D]">
+              <h2 className="font-serif text-lg sm:text-xl font-normal text-[#0F172A]">
                 {isEdit ? 'Edit Mountain Residency / Job' : 'Post New Mountain Residency'}
               </h2>
-              <p className="text-[11px] font-mono text-[#576159] tracking-wider uppercase">
+              <p className="text-[11px] font-mono text-slate-600 tracking-wider uppercase">
                 {isEdit ? `ID: ${editingJob?.id}` : 'Verified valley openings & apprenticeships'}
               </p>
             </div>
@@ -307,7 +307,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 text-[#576159] hover:text-[#123D2D] hover:bg-[#F3EFE6] rounded-sm transition-colors"
+            className="p-1.5 text-slate-600 hover:text-[#0F172A] hover:bg-[#F3EFE6] rounded-sm transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -317,9 +317,9 @@ export const JobFormModal: FC<JobFormModalProps> = ({
         <div className="overflow-y-auto p-6 flex-1 space-y-6">
           {/* Quick presets (only in create mode) */}
           {!isEdit && (
-            <div className="p-3.5 bg-[#F3EFE6] border border-[#CBDAC4] rounded-sm">
-              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#285A40] font-bold mb-2">
-                <Sparkles className="w-3.5 h-3.5 text-[#285A40]" />
+            <div className="p-3.5 bg-[#F3EFE6] border border-slate-200 rounded-sm">
+              <div className="flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-[#2575fc] font-bold mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#2575fc]" />
                 <span>Quick Test Templates:</span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -328,7 +328,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                     key={tmpl.name}
                     type="button"
                     onClick={() => applyTemplate(tmpl)}
-                    className="text-xs font-mono px-3 py-1 bg-white border border-[#CBDAC4] text-[#123D2D] hover:bg-[#123D2D] hover:text-white rounded-sm transition-colors"
+                    className="text-xs font-mono px-3 py-1 bg-white border border-slate-200 text-[#0F172A] hover:bg-[#0F224A] hover:text-white rounded-sm transition-colors"
                   >
                     + {tmpl.name}
                   </button>
@@ -348,7 +348,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             {/* Title & Employer */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Residency / Job Title *
                 </label>
                 <input
@@ -357,23 +357,23 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Alpine Botanical Curator"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Employer / Syndicate *
                 </label>
                 <div className="relative">
-                  <Building className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Building className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
                     value={employer}
                     onChange={(e) => setEmployer(e.target.value)}
                     placeholder="e.g. Temi Highlands Cooperative"
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
@@ -382,7 +382,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             {/* Employer Badge & Location */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Employer Trust Badge (Optional)
                 </label>
                 <input
@@ -390,23 +390,23 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   value={employerBadge}
                   onChange={(e) => setEmployerBadge(e.target.value)}
                   placeholder="e.g. Heritage Estate Partner, Certified Organic"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Location / Valley *
                 </label>
                 <div className="relative">
-                  <MapPin className="w-3.5 h-3.5 text-[#576159] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <MapPin className="w-3.5 h-3.5 text-slate-600 absolute left-3 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     required
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="e.g. Yuksom Ridge, 1,780m"
-                    className="w-full bg-white border border-[#CBDAC4] pl-9 pr-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                    className="w-full bg-white border border-slate-200 pl-9 pr-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
@@ -415,13 +415,13 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             {/* Region, Type, Category */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Region *
                 </label>
                 <select
                   value={region}
                   onChange={(e) => setRegion(e.target.value)}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {REGION_PRESETS.map((r) => (
                     <option key={r} value={r}>
@@ -432,13 +432,13 @@ export const JobFormModal: FC<JobFormModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Tenure / Type *
                 </label>
                 <select
                   value={type}
                   onChange={(e) => setType(e.target.value as AdminJob['type'])}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {TYPE_OPTIONS.map((t) => (
                     <option key={t} value={t}>
@@ -449,13 +449,13 @@ export const JobFormModal: FC<JobFormModalProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Category *
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value as AdminJob['category'])}
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 >
                   {CATEGORY_OPTIONS.map((c) => (
                     <option key={c} value={c}>
@@ -469,7 +469,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             {/* Salary & Housing */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
               <div className="sm:col-span-2">
-                <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+                <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                   Salary / Stipend *
                 </label>
                 <input
@@ -478,7 +478,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   value={salary}
                   onChange={(e) => setSalary(e.target.value)}
                   placeholder="e.g. ₹35,000 – ₹45,000 / mo"
-                  className="w-full bg-white border border-[#CBDAC4] px-3 py-2 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                  className="w-full bg-white border border-slate-200 px-3 py-2 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
@@ -488,9 +488,9 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                     type="checkbox"
                     checked={housingIncluded}
                     onChange={(e) => setHousingIncluded(e.target.checked)}
-                    className="w-4 h-4 rounded text-[#285A40] border-[#CBDAC4] focus:ring-[#285A40]"
+                    className="w-4 h-4 rounded text-[#2575fc] border-slate-200 focus:ring-[#285A40]"
                   />
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#123D2D] font-bold">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#0F172A] font-bold">
                     Housing Included
                   </span>
                 </label>
@@ -499,7 +499,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
 
             {/* Description */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Overview & Description *
               </label>
               <textarea
@@ -508,13 +508,13 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe the residency role, community living arrangements, seasonal context, and day-to-day rhythms..."
-                className="w-full bg-white border border-[#CBDAC4] p-3 text-sm text-[#123D2D] rounded-sm focus:outline-none focus:border-[#285A40]"
+                className="w-full bg-white border border-slate-200 p-3 text-sm text-[#0F172A] rounded-sm focus:outline-none focus:border-[#2575fc]"
               />
             </div>
 
             {/* Responsibilities list editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Core Responsibilities ({responsibilities.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -524,12 +524,12 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   onChange={(e) => setNewResp(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddResp())}
                   placeholder="e.g. Lead daily morning harvest inspection..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddResp}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -539,7 +539,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   {responsibilities.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between gap-2 p-2 bg-white border border-[#CBDAC4] text-xs rounded-sm"
+                      className="flex items-center justify-between gap-2 p-2 bg-white border border-slate-200 text-xs rounded-sm"
                     >
                       <span>• {item}</span>
                       <button
@@ -557,7 +557,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
 
             {/* Requirements list editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Requirements & Experience ({requirements.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -567,12 +567,12 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   onChange={(e) => setNewReq(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddReq())}
                   placeholder="e.g. Wilderness First Responder certificate..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddReq}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -582,7 +582,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   {requirements.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between gap-2 p-2 bg-white border border-[#CBDAC4] text-xs rounded-sm"
+                      className="flex items-center justify-between gap-2 p-2 bg-white border border-slate-200 text-xs rounded-sm"
                     >
                       <span>• {item}</span>
                       <button
@@ -600,7 +600,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
 
             {/* Benefits list editor */}
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wider text-[#285A40] font-bold mb-1">
+              <label className="block text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold mb-1">
                 Benefits & Provisions ({benefits.length})
               </label>
               <div className="flex gap-2 mb-2">
@@ -610,12 +610,12 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   onChange={(e) => setNewBenefit(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddBenefit())}
                   placeholder="e.g. Free organic estate meals, resident cottage..."
-                  className="flex-1 bg-white border border-[#CBDAC4] px-3 py-1.5 text-xs text-[#123D2D] rounded-sm"
+                  className="flex-1 bg-white border border-slate-200 px-3 py-1.5 text-xs text-[#0F172A] rounded-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddBenefit}
-                  className="px-3 py-1.5 bg-[#123D2D] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
+                  className="px-3 py-1.5 bg-[#0F224A] text-white hover:bg-[#285A40] text-xs font-mono rounded-sm"
                 >
                   <Plus className="w-3.5 h-3.5" />
                 </button>
@@ -625,7 +625,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
                   {benefits.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between gap-2 p-2 bg-white border border-[#CBDAC4] text-xs rounded-sm"
+                      className="flex items-center justify-between gap-2 p-2 bg-white border border-slate-200 text-xs rounded-sm"
                     >
                       <span>• {item}</span>
                       <button
@@ -642,12 +642,12 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             </div>
 
             {/* Status toggle */}
-            <div className="p-3 bg-white border border-[#CBDAC4] rounded-sm flex items-center justify-between">
+            <div className="p-3 bg-white border border-slate-200 rounded-sm flex items-center justify-between">
               <div>
-                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#123D2D]">
+                <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#0F172A]">
                   Listing Publication Status
                 </div>
-                <div className="text-[11px] text-[#576159]">
+                <div className="text-[11px] text-slate-600">
                   {isPublished
                     ? 'Live — Visible to job seekers on public homepage'
                     : 'Draft — Stored privately in Supabase database'}
@@ -667,12 +667,12 @@ export const JobFormModal: FC<JobFormModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-[#CBDAC4] bg-white flex items-center justify-end gap-3 shrink-0">
+        <div className="px-6 py-4 border-t border-slate-200 bg-white flex items-center justify-end gap-3 shrink-0">
           <button
             type="button"
             onClick={onClose}
             disabled={isSubmitting}
-            className="px-4 py-2 border border-[#CBDAC4] text-xs font-mono text-[#576159] hover:bg-[#F3EFE6] rounded-sm transition-colors"
+            className="px-4 py-2 border border-slate-200 text-xs font-mono text-slate-600 hover:bg-[#F3EFE6] rounded-sm transition-colors"
           >
             Cancel
           </button>
@@ -680,7 +680,7 @@ export const JobFormModal: FC<JobFormModalProps> = ({
             type="submit"
             form="job-form"
             disabled={isSubmitting}
-            className="px-5 py-2 bg-[#123D2D] hover:bg-[#285A40] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded-sm transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50"
+            className="px-5 py-2 bg-[#0F224A] hover:bg-[#285A40] text-white text-xs font-mono uppercase tracking-wider font-semibold rounded-sm transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50"
           >
             {isSubmitting ? (
               <>

@@ -89,18 +89,18 @@ export const FAQSection: FC = () => {
   ]
 
   return (
-    <section id="faqs" className="py-20 sm:py-24 bg-[#F2EFE9] border-t border-[#CBDAC4] text-[#123D2D]">
+    <section id="faqs" className="py-20 sm:py-24 bg-[#F8FAFC] border-t border-slate-200 text-[#0F172A]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#123D2D]/10 text-[#123D2D] text-[11px] font-mono uppercase tracking-[0.2em] mb-4">
-            <HelpCircle className="w-3.5 h-3.5 text-[#285A40]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 text-[#2575fc] border border-sky-200 text-[11px] font-mono uppercase tracking-[0.2em] mb-4">
+            <HelpCircle className="w-3.5 h-3.5 text-[#2575fc]" />
             <span>HIMALAYAN INQUIRY LEDGER</span>
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#0B2516] font-medium tracking-tight mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl text-[#0F172A] font-bold uppercase tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm font-sans text-[#48534C] leading-relaxed">
+          <p className="text-sm font-sans text-slate-600 leading-relaxed">
             Essential guidelines on village homestay leases, verified mountain jobs, fair regional pricing, and our ecological community charter.
           </p>
         </div>
@@ -117,11 +117,11 @@ export const FAQSection: FC = () => {
                 onClick={() => setActiveCategory(cat.key as any)}
                 className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-sans font-medium transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#0B2516] text-[#F8F6F0] shadow-md'
-                    : 'bg-white/70 hover:bg-white text-[#285A40] border border-[#CBDAC4]/80'
+                    ? 'bg-gradient-to-r from-[#0B1B3D] to-[#2575fc] text-white shadow-md'
+                    : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200'
                 }`}
               >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#8FA777]' : 'text-[#285A40]'}`} />
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-[#38BDF8]' : 'text-[#2575fc]'}`} />
                 <span>{cat.label}</span>
               </button>
             )
@@ -137,8 +137,8 @@ export const FAQSection: FC = () => {
                 key={faq.id}
                 className={`border rounded-sm transition-all duration-300 ${
                   isOpen
-                    ? 'bg-white border-[#285A40]/40 shadow-sm'
-                    : 'bg-white/60 hover:bg-white border-[#CBDAC4]/70'
+                    ? 'bg-white border-[#2575fc]/40 shadow-sm'
+                    : 'bg-white/60 hover:bg-white border-slate-200'
                 }`}
               >
                 <button
@@ -147,14 +147,14 @@ export const FAQSection: FC = () => {
                   aria-expanded={isOpen}
                   className="w-full text-left px-5 sm:px-7 py-4.5 sm:py-5 flex items-center justify-between gap-4 focus:outline-none"
                 >
-                  <span className="font-serif text-base sm:text-lg text-[#0B2516] font-medium leading-snug">
+                  <span className="font-serif text-base sm:text-lg text-[#0F172A] font-medium leading-snug">
                     {faq.question}
                   </span>
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
                       isOpen
-                        ? 'bg-[#0B2516] text-[#F8F6F0] rotate-180'
-                        : 'bg-[#E8EFE3] text-[#123D2D]'
+                        ? 'bg-[#2575fc] text-white rotate-180'
+                        : 'bg-slate-100 text-[#0F172A]'
                     }`}
                   >
                     <ChevronDown className="w-4 h-4" />
@@ -162,7 +162,7 @@ export const FAQSection: FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 sm:px-7 pb-5 sm:pb-6 pt-1 text-xs sm:text-sm text-[#48534C] font-sans leading-relaxed border-t border-[#E8EFE3]/60">
+                  <div className="px-5 sm:px-7 pb-5 sm:pb-6 pt-1 text-xs sm:text-sm text-slate-600 font-sans leading-relaxed border-t border-slate-100">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -172,18 +172,18 @@ export const FAQSection: FC = () => {
         </div>
 
         {/* Helpful Support Footnote */}
-        <div className="mt-12 text-center p-6 bg-white/70 border border-[#CBDAC4] rounded-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-12 text-center p-6 bg-white border border-slate-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-left">
-            <h4 className="font-serif text-base text-[#0B2516] font-medium">Have a specific regional inquiry?</h4>
+            <h4 className="font-serif text-base text-[#0F172A] font-medium">Have a specific regional inquiry?</h4>
             <p className="text-xs text-[#576159] mt-0.5">
               Our regional stewards and village elders respond to trail, lease, and fellowship inquiries.
             </p>
           </div>
           <a
             href={`mailto:${BRAND_CONFIG.supportEmail}`}
-            className="inline-flex items-center gap-2 bg-[#0B2516] hover:bg-[#123D2D] text-white text-xs font-sans font-semibold uppercase tracking-wider px-5 py-2.5 rounded-sm shadow-sm transition-colors shrink-0"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] to-[#1E3A8A] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs font-sans font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-sm transition-colors shrink-0"
           >
-            <Compass className="w-3.5 h-3.5 text-[#8FA777]" />
+            <Compass className="w-3.5 h-3.5 text-sky-200" />
             <span>Contact Stewards</span>
           </a>
         </div>

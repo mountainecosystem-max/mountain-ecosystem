@@ -1,44 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand Greenery Palette (#0B2516 aesthetic) */
-  --color-forest: #0B2516;
-  --color-forest-dark: #06180E;
-  --color-forest-light: #133D26;
-  --color-forest-soft: #1C5435;
+  /* Brand Alpine Glacial Tech Palette (Forgebs #2575fc & Himalayan Glacial Blue aesthetic) */
+  --color-forest: #0B1B3D;
+  --color-forest-dark: #061024;
+  --color-forest-light: #152A56;
+  --color-forest-soft: #1E3A8A;
 
-  --color-evergreen: #1F4E34;
-  --color-evergreen-dark: #143523;
-  --color-evergreen-light: #2D6B48;
-  --color-evergreen-soft: #D5E5DC;
+  --color-evergreen: #2575fc;
+  --color-evergreen-dark: #1b5fd0;
+  --color-evergreen-light: #4285f4;
+  --color-evergreen-soft: #DBEAFE;
 
-  --color-moss: #8FA777;
-  --color-moss-dark: #6E8757;
-  --color-moss-light: #B2C89E;
-  --color-moss-soft: #EEF4EA;
+  --color-moss: #38BDF8;
+  --color-moss-dark: #0284C7;
+  --color-moss-light: #7DD3FC;
+  --color-moss-soft: #F0F9FF;
 
-  --color-sage: #E7EFE3;
-  --color-sage-light: #F2F7EF;
-  --color-sage-dark: #D1DEC9;
-  --color-sage-border: #C8D7BF;
+  --color-sage: #E0F2FE;
+  --color-sage-light: #F0F9FF;
+  --color-sage-dark: #BAE6FD;
+  --color-sage-border: #BFDBFE;
 
-  --color-cream: #F8F6F0;
-  --color-ivory: #F8F6F0;
-  --color-ivory-light: #FDFCF9;
-  --color-ivory-dark: #ECE7DC;
-  --color-ivory-card: #FAF8F3;
+  --color-cream: #F8FAFC;
+  --color-ivory: #FFFFFF;
+  --color-ivory-light: #FFFFFF;
+  --color-ivory-dark: #F1F5F9;
+  --color-ivory-card: #FFFFFF;
 
-  --color-charcoal: #202622;
-  --color-charcoal-muted: #576159;
-  --color-charcoal-light: #828E85;
-  --color-charcoal-border: rgba(18, 61, 45, 0.12);
+  --color-charcoal: #0F172A;
+  --color-charcoal-muted: #475569;
+  --color-charcoal-light: #64748B;
+  --color-charcoal-border: rgba(15, 23, 42, 0.08);
 
-  --color-terracotta: #C47755;
-  --color-terracotta-dark: #a95f3e;
-  --color-amber-hearth: #D96B27;
-  --color-tea-leaf: #164E2D;
-  --color-tea-garden: #0F3320;
-  --color-tea-bud: #8FA777;
+  --color-terracotta: #f96933;
+  --color-terracotta-dark: #e0531e;
+  --color-amber-hearth: #fe8f75;
+  --color-tea-leaf: #1E40AF;
+  --color-tea-garden: #0B1B3D;
+  --color-tea-bud: #38BDF8;
 
   /* Typography */
   --font-display: "Oswald", "Plus Jakarta Sans", system-ui, sans-serif;
@@ -62,17 +62,26 @@ html {
 
 body {
   margin: 0;
-  background-color: #F8F6F0;
-  color: #202622;
+  background-color: #F8FAFC;
+  color: #0F172A;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  letter-spacing: -0.011em;
 }
 
-/* iOS momentum touch scrolling utility */
+/* Mobile Touch, Haptics & Scrolling Optimization */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 .touch-momentum {
   -webkit-overflow-scrolling: touch;
 }
@@ -90,16 +99,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #E8EFE3;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #91A77B;
+  background: #94A3B8;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #285A40;
+  background: #2575fc;
 }
 
 /* Atmospheric Hero Drift: Slow-motion Ken Burns zoom mimicking shifting mountain mist */
@@ -183,16 +192,16 @@ body {
   animation: floatSlow 5s ease-in-out infinite;
 }
 
-/* 2. Soft Breathing Pulse Ring for Live Verified Badges */
+/* 2. Soft Breathing Pulse Ring for Live Verified Badges (Electric Blue / Glacial Ice) */
 @keyframes pulseGlow {
   0% {
-    box-shadow: 0 0 0 0 rgba(143, 167, 119, 0.5);
+    box-shadow: 0 0 0 0 rgba(37, 117, 252, 0.55);
   }
   70% {
-    box-shadow: 0 0 0 9px rgba(143, 167, 119, 0);
+    box-shadow: 0 0 0 9px rgba(37, 117, 252, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(143, 167, 119, 0);
+    box-shadow: 0 0 0 0 rgba(37, 117, 252, 0);
   }
 }
 
@@ -221,7 +230,7 @@ body {
   animation: shimmerWave 3.5s infinite;
 }
 
-/* 4. Elegant Card Hover Lift with Soft Shadow */
+/* 4. Elegant Card Hover Lift with Soft Slate Shadow (Figma Design Grade) */
 .card-hover-lift {
   transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -230,7 +239,7 @@ body {
 
 .card-hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 32px -8px rgba(11, 37, 22, 0.16), 0 4px 12px rgba(11, 37, 22, 0.08);
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
 }
 
 /* 5. Smooth Fade-in & Scale for Popovers and Chatbot Window */

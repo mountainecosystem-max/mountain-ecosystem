@@ -156,21 +156,23 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0B1B3D]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#F8FAFC] border border-slate-200 rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile Pull Handle */}
+        <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 -mb-1 sm:hidden shrink-0" />
         {/* Header */}
-        <div className="sticky top-0 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
+        <div className="sticky top-0 bg-[#F8FAFC]/95 backdrop-blur-md border-b border-slate-200 px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
           <div>
-            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#164E2D] font-bold">
-              <Briefcase className="w-4 h-4 text-[#D96B27]" />
+            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#2575fc] font-bold">
+              <Briefcase className="w-4 h-4 text-[#f96933]" />
               <span>PAN-INDIA RECRUITMENT EXCHANGE</span>
             </div>
-            <h2 className="font-display text-xl sm:text-2xl text-[#0B2516] font-bold uppercase mt-0.5">
+            <h2 className="font-display text-xl sm:text-2xl text-[#0F172A] font-bold uppercase mt-0.5">
               Post a Mountain Job / Residency
             </h2>
           </div>
@@ -178,7 +180,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-slate-100 active:bg-slate-200 rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -188,32 +190,32 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
         {/* Form Body */}
         <div className="p-5 sm:p-8">
           {isSubmitted ? (
-            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-6 sm:p-8 rounded-xl text-center">
-              <div className="w-12 h-12 rounded-full bg-[#164E2D] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
-                <ShieldCheck className="w-6 h-6 text-[#A5C896]" />
+            <div className="bg-sky-50/70 border border-sky-200 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#2575fc] to-[#1e40af] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-sky-300" />
               </div>
-              <h3 className="font-display text-2xl text-[#0B2516] font-bold uppercase">
+              <h3 className="font-display text-2xl text-[#0F172A] font-bold uppercase">
                 Submitted to Verification Queue!
               </h3>
               <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-lg mx-auto leading-relaxed">
                 Your opening for <strong>{title}</strong> at <strong>{employer}</strong> ({state}) has been logged in our Steward Moderation Ledger. To protect mountain applicants from recruitment scams and unvetted job fees, stewards review employer credentials before publishing it live (usually within 12–24 hours).
               </p>
 
-              <div className="mt-5 p-3.5 bg-white/80 border border-[#CBDAC4] rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
+              <div className="mt-5 p-3.5 bg-white/80 border border-slate-200 rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
                 <div className="flex items-center justify-between">
                   <span className="text-stone-500">Moderation Status:</span>
-                  <span className="text-[#D96B27] font-bold">Under Steward Review (Queue)</span>
+                  <span className="text-[#f96933] font-bold">Under Steward Review (Queue)</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-stone-500">Employment Policy:</span>
-                  <span className="text-[#164E2D] font-bold">Zero-Fee Guaranteed • Lodging & Food</span>
+                  <span className="text-[#2575fc] font-bold">Zero-Fee Guaranteed • Lodging & Food</span>
                 </div>
               </div>
 
               <button
                 onClick={onClose}
                 type="button"
-                className="mt-6 inline-flex items-center gap-2 bg-[#0B2516] hover:bg-[#164E2D] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
+                className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
               >
                 <span>Done & View Mountain Jobs</span>
               </button>
@@ -239,7 +241,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. Homestay Operations Lead / Trek Naturalist / Farm Manager"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -253,7 +255,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={employer}
                     onChange={(e) => setEmployer(e.target.value)}
                     placeholder="e.g. Cedar Ridge Sanctuary / High Valley Permaculture"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
@@ -267,7 +269,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value as Job['category'])}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   >
                     <option value="Hospitality & Estates">Hospitality & Estates</option>
                     <option value="Guiding & Conservation">Guiding & Conservation</option>
@@ -283,7 +285,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   <select
                     value={jobType}
                     onChange={(e) => setJobType(e.target.value as Job['type'])}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   >
                     <option value="Full-time">Full-time (Year-Round)</option>
                     <option value="Seasonal">Seasonal (Summer / Winter Peak)</option>
@@ -294,9 +296,9 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
               </div>
 
               {/* 3. Detailed Work Address (Pan-India) */}
-              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#D96B27]" />
+              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#f96933]" />
                   <span>Exact Work Location & Mountain Region (Pan-India)</span>
                 </div>
 
@@ -308,7 +310,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -327,7 +329,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={mountainRange}
                       onChange={(e) => setMountainRange(e.target.value)}
                       placeholder="e.g. Tirthan Valley / Kumaon / Zanskar / Nilgiris"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -343,7 +345,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={workVillageTown}
                       onChange={(e) => setWorkVillageTown(e.target.value)}
                       placeholder="e.g. Gushaini / Mukteshwar / Leh / Yuksom / Kotagiri"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -356,7 +358,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={nearestHighwayHub}
                       onChange={(e) => setNearestHighwayHub(e.target.value)}
                       placeholder="e.g. Aut Tunnel Bus Stand / Kathgodam Railhead"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -371,15 +373,15 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={fullWorkAddress}
                     onChange={(e) => setFullWorkAddress(e.target.value)}
                     placeholder="e.g. Riverbank Estate, Near Forest Rest House, Gushaini Road"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
 
               {/* 4. Compensation & Housing Perks */}
-              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
                   <span>Dignified Wages & Mountain Living Provisions</span>
                 </div>
 
@@ -394,7 +396,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={salary}
                       onChange={(e) => setSalary(e.target.value)}
                       placeholder="e.g. ₹40,000 – ₹55,000 / month"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -404,7 +406,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                         type="checkbox"
                         checked={housingIncluded}
                         onChange={(e) => setHousingIncluded(e.target.checked)}
-                        className="rounded text-[#164E2D] focus:ring-[#164E2D] w-4 h-4"
+                        className="rounded text-[#2575fc] focus:ring-[#2575fc] w-4 h-4"
                       />
                       <span>Accommodation Provided (Free)</span>
                     </label>
@@ -416,7 +418,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                         type="checkbox"
                         checked={mealsIncluded}
                         onChange={(e) => setMealsIncluded(e.target.checked)}
-                        className="rounded text-[#164E2D] focus:ring-[#164E2D] w-4 h-4"
+                        className="rounded text-[#2575fc] focus:ring-[#2575fc] w-4 h-4"
                       />
                       <span>Mountain Meals Provided (Free)</span>
                     </label>
@@ -433,7 +435,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={housingDetails}
                       onChange={(e) => setHousingDetails(e.target.value)}
                       placeholder="e.g. Independent wooden cabin with heated wood stove & WiFi"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 )}
@@ -449,7 +451,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the high-altitude setting, daily rhythm, mountain property culture, and community environment..."
-                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-3 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
@@ -464,7 +466,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={responsibilitiesText}
                     onChange={(e) => setResponsibilitiesText(e.target.value)}
                     placeholder="Lead day-to-day guest hospitality rituals&#10;Coordinate organic kitchen garden harvest&#10;Supervise winter heating & firewood"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg p-3 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -477,15 +479,15 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     value={requirementsText}
                     onChange={(e) => setRequirementsText(e.target.value)}
                     placeholder="Comfortable with high-altitude mountain living&#10;Fluency in Hindi and English&#10;Minimum 1 year hospitality or wilderness experience"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg p-3 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
 
               {/* 6. Hiring Contact Details */}
-              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                  <Compass className="w-3.5 h-3.5 text-[#164E2D]" />
+              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                  <Compass className="w-3.5 h-3.5 text-[#2575fc]" />
                   <span>Application & Employer Contact</span>
                 </div>
 
@@ -499,7 +501,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={contactPerson}
                       onChange={(e) => setContactPerson(e.target.value)}
                       placeholder="e.g. General Manager / Estate Owner"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -513,7 +515,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="hiring@mountainestate.com"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -526,7 +528,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                       value={phoneWhatsApp}
                       onChange={(e) => setPhoneWhatsApp(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -546,21 +548,21 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
               </div>
 
               {/* Privacy Policy & Zero-Fee Compliance Agreement */}
-              <div className="p-3.5 bg-[#FAF7EE] border border-[#CBDAC4] rounded-xl mb-3">
+              <div className="p-3.5 bg-[#F8FAFC] border border-slate-200 rounded-xl mb-3">
                 <label className="flex items-start gap-2.5 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={agreedToPrivacy}
                     onChange={(e) => setAgreedToPrivacy(e.target.checked)}
                     required
-                    className="mt-0.5 w-4 h-4 rounded border-[#164E2D] text-[#164E2D] focus:ring-[#164E2D] cursor-pointer"
+                    className="mt-0.5 w-4 h-4 rounded border-[#2575fc] text-[#2575fc] focus:ring-[#2575fc] cursor-pointer"
                   />
                   <span className="text-xs text-stone-700 leading-relaxed font-sans">
                     I agree to the{' '}
                     <button
                       type="button"
                       onClick={onOpenPrivacy}
-                      className="text-[#164E2D] font-bold underline hover:text-[#0B2516]"
+                      className="text-[#2575fc] font-bold underline hover:text-[#0F172A]"
                     >
                       Privacy Policy & Community Charter
                     </button>
@@ -570,18 +572,18 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
               </div>
 
               {/* Submit Buttons */}
-              <div className="pt-3 border-t border-[#CBDAC4] flex items-center justify-end gap-3">
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-full border border-[#CBDAC4] text-xs font-bold text-stone-600 hover:bg-[#E8EFE3] transition"
+                  className="px-5 py-2.5 rounded-full border border-slate-200 text-xs font-bold text-stone-600 hover:bg-slate-100 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -590,7 +592,7 @@ export const CreateJobModal: FC<CreateJobModalProps> = ({
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 text-[#A5C896]" />
+                      <Sparkles className="w-4 h-4 text-[#7DD3FC]" />
                       <span>Post Mountain Job</span>
                     </>
                   )}

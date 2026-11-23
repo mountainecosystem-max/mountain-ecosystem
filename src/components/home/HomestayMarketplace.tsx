@@ -68,16 +68,16 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
   })
 
   return (
-    <section id="stays" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
+    <section id="stays" className="py-16 sm:py-20 bg-[#F8FAFC] border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Properties for Lease & Sale */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-[#CBDAC4] gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200 gap-6">
           <div className="max-w-3xl">
-            <span className="text-[#164E2D] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
-              <Building2 className="w-4 h-4 text-[#D96B27]" />
+            <span className="text-[#2575fc] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
+              <Building2 className="w-4 h-4 text-[#f96933]" />
               <span>PAN-INDIA PROPERTY EXCHANGE • LEASE & SALE</span>
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A2316] uppercase leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] uppercase leading-tight">
               MOUNTAIN PROPERTIES FOR LEASE & SALE
             </h2>
             <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
@@ -89,24 +89,24 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
             <button
               onClick={onListHomestayClick}
               type="button"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200"
             >
-              <PlusCircle className="w-4 h-4 text-[#34D399]" />
+              <PlusCircle className="w-4 h-4 text-[#7DD3FC]" />
               <span>Post a Property (Lease / Sale)</span>
             </button>
           </div>
         </div>
 
         {/* Lease vs Sale Mode Selector + Territory Filters */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-8 gap-4 border-b border-[#CBDAC4]/70">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between pb-6 mb-8 gap-4 border-b border-slate-200/80">
           {/* Lease / Sale Segmented Tabs */}
-          <div className="inline-flex items-center bg-stone-100/90 p-1 rounded-full border border-[#CBDAC4] shadow-inner max-w-full overflow-x-auto scrollbar-none touch-momentum">
+          <div className="inline-flex items-center bg-slate-100/90 p-1 rounded-full border border-slate-200 shadow-inner max-w-full overflow-x-auto scrollbar-none touch-momentum">
             <button
               onClick={() => setFilterType('all')}
               type="button"
               className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'all'
-                  ? 'bg-gradient-to-r from-[#0A2316] to-[#164E2D] text-white font-semibold shadow-sm border border-emerald-500/30'
+                  ? 'bg-gradient-to-r from-[#0B1B3D] to-[#1E3A8A] text-white font-semibold shadow-sm border border-blue-500/30'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -117,7 +117,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
               type="button"
               className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'lease'
-                  ? 'bg-gradient-to-r from-[#123E24] to-[#184F2E] text-white font-semibold shadow-sm border border-emerald-500/40 ring-1 ring-emerald-400/20'
+                  ? 'bg-gradient-to-r from-[#1E3A8A] to-[#2575fc] text-white font-semibold shadow-sm border border-sky-400/40 ring-1 ring-sky-400/20'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -128,7 +128,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
               type="button"
               className={`px-4 py-2 min-h-[38px] text-xs font-sans font-medium tracking-wide rounded-full transition-all flex items-center justify-center ${
                 filterType === 'sale'
-                  ? 'bg-gradient-to-r from-[#B85419] to-[#D96B27] text-white font-semibold shadow-sm border border-amber-500/40'
+                  ? 'bg-gradient-to-r from-[#f96933] to-[#fe8f75] text-white font-semibold shadow-sm border border-orange-400/40'
                   : 'text-stone-600 hover:text-stone-900'
               }`}
             >
@@ -145,8 +145,8 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                 type="button"
                 className={`px-3.5 py-2 min-h-[38px] text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
-                    ? 'bg-[#0B2516] text-white font-semibold shadow-sm border border-emerald-500/30'
-                    : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                    ? 'bg-[#0B1B3D] text-white font-semibold shadow-sm border border-blue-500/30'
+                    : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-[#0B1B3D]'
                 }`}
               >
                 {reg.label}
@@ -156,15 +156,15 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
         </div>
 
         {/* Verification & Title Disclaimer */}
-        <div className="mb-8 p-3.5 sm:p-4 rounded-xl bg-emerald-50/90 border border-emerald-300 flex items-start sm:items-center gap-3 text-xs text-emerald-900 shadow-xs">
-          <div className="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700">
+        <div className="mb-8 p-3.5 sm:p-4 rounded-xl bg-sky-50/90 border border-sky-200 flex items-start sm:items-center gap-3 text-xs text-sky-950 shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-sky-100 border border-sky-300 flex items-center justify-center shrink-0 text-sky-700">
             <ShieldCheck className="w-4 h-4" />
           </div>
           <div className="flex-1 font-sans leading-relaxed">
-            <strong className="font-semibold text-emerald-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
+            <strong className="font-semibold text-sky-950 uppercase tracking-wide font-mono text-[11px] block sm:inline sm:mr-2">
               🛡️ Two-Tier Trust Protocol & Verification Advisory:
             </strong>
-            <span className="font-semibold text-emerald-950">Steward Verified ✓</span> listings have completed live video inspection or land registry verification. <span className="font-medium text-emerald-800">Community Listed</span> entries are self-declared host submissions. Always independently verify municipal records, water rights, and premises before executing lease agreements or transferring advance deposits.
+            <span className="font-semibold text-sky-950">Steward Verified ✓</span> listings have completed live video inspection or land registry verification. <span className="font-medium text-sky-800">Community Listed</span> entries are self-declared host submissions. Always independently verify municipal records, water rights, and premises before executing lease agreements or transferring advance deposits.
           </div>
         </div>
 
@@ -207,7 +207,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                 >
                   <div>
                     {/* Visual Photo Card with Lease/Sale Pill */}
-                    <div className="relative h-60 sm:h-64 overflow-hidden bg-[#0A2316]">
+                    <div className="relative h-60 sm:h-64 overflow-hidden bg-[#0B1B3D]">
                       <img
                         src={stay.images[0]}
                         alt={stay.name}
@@ -220,13 +220,13 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                       {/* Prominent FOR LEASE vs FOR SALE Badge + Verification Badge */}
                       <div className="absolute top-4 left-4 flex flex-col gap-1.5 items-start">
                         {isSale ? (
-                          <span className="bg-[#D96B27] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                          <span className="bg-gradient-to-r from-[#f96933] to-[#fe8f75] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                             <Tag className="w-3 h-3" />
                             <span>FOR SALE</span>
                           </span>
                         ) : (
-                          <span className="bg-[#164E2D] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
-                            <Sparkles className="w-3 h-3 text-[#A5C896]" />
+                          <span className="bg-[#2575fc] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-sky-100" />
                             <span>FOR LEASE (1–12 MOS)</span>
                           </span>
                         )}
@@ -236,8 +236,8 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                             <span>Community Listed</span>
                           </span>
                         ) : (
-                          <span className="bg-emerald-950/90 backdrop-blur-md text-emerald-300 border border-emerald-500/40 text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                            <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                          <span className="bg-blue-950/90 backdrop-blur-md text-sky-300 border border-sky-500/40 text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+                            <ShieldCheck className="w-3 h-3 text-sky-400" />
                             <span>Steward Verified ✓</span>
                           </span>
                         )}
@@ -254,11 +254,11 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                       {/* Location & Elevation Stamp */}
                       <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
                         <span className="flex items-center gap-1 bg-stone-950/80 backdrop-blur-sm px-2.5 py-1 rounded-md">
-                          <MapPin className="w-3 h-3 text-[#A5C896]" />
+                          <MapPin className="w-3 h-3 text-[#38BDF8]" />
                           <span>{stay.region}</span>
                         </span>
 
-                        <span className="bg-stone-950/80 backdrop-blur-sm px-2.5 py-1 rounded-md text-[#A5C896]">
+                        <span className="bg-stone-950/80 backdrop-blur-sm px-2.5 py-1 rounded-md text-[#38BDF8]">
                           {stay.elevation}
                         </span>
                       </div>
@@ -266,7 +266,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
 
                     {/* Content Details */}
                     <div className="p-4 sm:p-6">
-                      <h3 className="font-display text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#164E2D] transition-colors leading-tight">
+                      <h3 className="font-display text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#2575fc] transition-colors leading-tight">
                         {stay.name}
                       </h3>
                       <p className="text-xs text-stone-500 font-mono mt-1">
@@ -284,11 +284,11 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                           <span className="truncate">{stay.furnishing.split('&')[0].trim()}</span>
                         </div>
                         <div className="flex items-center gap-1.5 truncate">
-                          <Wifi className="w-3.5 h-3.5 text-[#164E2D] shrink-0" />
+                          <Wifi className="w-3.5 h-3.5 text-[#2575fc] shrink-0" />
                           <span className="truncate">{stay.wifi.split('Dedicated')[0].trim()}</span>
                         </div>
                         <div className="flex items-center gap-1.5 truncate">
-                          <Check className="w-3.5 h-3.5 text-[#164E2D] shrink-0" />
+                          <Check className="w-3.5 h-3.5 text-[#2575fc] shrink-0" />
                           <span className="truncate">Direct Village Pact</span>
                         </div>
                         <div className="flex items-center gap-1.5 truncate">
@@ -307,7 +307,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                           <div className="text-[10px] font-mono text-stone-500 uppercase font-semibold">
                             Outright Sale Price
                           </div>
-                          <div className="font-display text-2xl font-bold text-[#D96B27]">
+                          <div className="font-display text-2xl font-bold text-[#f96933]">
                             {salePrice}
                           </div>
                         </div>
@@ -316,7 +316,7 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                           <div className="text-[10px] font-mono text-stone-500 uppercase font-semibold">
                             Monthly Sabbatical Lease
                           </div>
-                          <div className="font-display text-2xl font-bold text-[#0A2316]">
+                          <div className="font-display text-2xl font-bold text-[#0F172A]">
                             {stay.monthlyRate.startsWith('₹') ? stay.monthlyRate : `₹${stay.monthlyRate}`}
                             <span className="text-xs text-stone-500 font-normal"> / mo</span>
                           </div>
@@ -330,10 +330,10 @@ export const HomestayMarketplace: FC<HomestayMarketplaceProps> = ({
                         e.stopPropagation()
                         onSelectHomestay(stay)
                       }}
-                      className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
+                      className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-blue-900/30 border border-sky-400/40 active:scale-95 transition-all duration-200"
                     >
                       <span>{isSale ? 'Buy / Inquire' : 'Lease Space'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#34D399] group-hover/btn:translate-x-0.5 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 text-[#7DD3FC] group-hover/btn:translate-x-0.5 transition-transform" />
                     </button>
                   </div>
                 </article>

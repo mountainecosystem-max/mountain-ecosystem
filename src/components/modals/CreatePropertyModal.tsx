@@ -207,21 +207,23 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-[70] overflow-y-auto bg-[#071F13]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
+      className="fixed inset-0 z-[70] overflow-y-auto bg-[#0B1B3D]/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-[#FAF7EE] border border-[#CBDAC4] rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
+        className="bg-[#F8FAFC] border border-slate-200 rounded-t-3xl sm:rounded-2xl max-w-3xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Mobile Pull Handle */}
+        <div className="w-12 h-1 bg-slate-300 rounded-full mx-auto mt-2.5 -mb-1 sm:hidden shrink-0" />
         {/* Header */}
-        <div className="sticky top-0 bg-[#FAF7EE]/95 backdrop-blur-md border-b border-[#CBDAC4] px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
+        <div className="sticky top-0 bg-[#F8FAFC]/95 backdrop-blur-md border-b border-slate-200 px-5 sm:px-8 py-4 sm:py-5 flex items-center justify-between z-20">
           <div>
-            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#164E2D] font-bold">
-              <Building2 className="w-4 h-4 text-[#D96B27]" />
+            <div className="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[#2575fc] font-bold">
+              <Building2 className="w-4 h-4 text-[#f96933]" />
               <span>PAN-INDIA PROPERTY EXCHANGE</span>
             </div>
-            <h2 className="font-display text-xl sm:text-2xl text-[#0B2516] font-bold uppercase mt-0.5">
+            <h2 className="font-display text-xl sm:text-2xl text-[#0F172A] font-bold uppercase mt-0.5">
               List Mountain Property (Lease or Sale)
             </h2>
           </div>
@@ -229,7 +231,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
           <button
             onClick={onClose}
             type="button"
-            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-[#E8EFE3] active:bg-[#CBDAC4] rounded-full transition-colors shrink-0"
+            className="w-9 h-9 flex items-center justify-center p-1.5 text-stone-500 hover:text-stone-900 hover:bg-slate-100 active:bg-slate-200 rounded-full transition-colors shrink-0"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -239,25 +241,25 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
         {/* Content Body */}
         <div className="p-5 sm:p-8">
           {isSubmitted ? (
-            <div className="bg-[#E8EFE3] border border-[#164E2D]/40 p-6 sm:p-8 rounded-xl text-center">
-              <div className="w-12 h-12 rounded-full bg-[#164E2D] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
-                <ShieldCheck className="w-6 h-6 text-[#A5C896]" />
+            <div className="bg-sky-50/70 border border-sky-200 p-6 sm:p-8 rounded-xl text-center">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#2575fc] to-[#1e40af] text-white flex items-center justify-center mx-auto mb-3 shadow-md">
+                <ShieldCheck className="w-6 h-6 text-sky-300" />
               </div>
-              <h3 className="font-display text-2xl text-[#0B2516] font-bold uppercase">
+              <h3 className="font-display text-2xl text-[#0F172A] font-bold uppercase">
                 Submitted to Verification Queue!
               </h3>
               <p className="text-xs sm:text-sm text-stone-700 font-sans mt-2 max-w-lg mx-auto leading-relaxed">
                 Your listing for <strong>{villageTown || state}</strong> has been received by the Mountain Steward Moderation Ledger. To protect travellers and buyers against fraud, unvetted listings, and scams, our stewards verify ownership/title records before making it live (usually within 12–24 hours).
               </p>
 
-              <div className="mt-5 p-3.5 bg-white/80 border border-[#CBDAC4] rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
+              <div className="mt-5 p-3.5 bg-white/80 border border-slate-200 rounded-xl max-w-md mx-auto text-left text-xs font-mono space-y-1.5 shadow-xs">
                 <div className="flex items-center justify-between">
                   <span className="text-stone-500">Moderation Status:</span>
-                  <span className="text-[#D96B27] font-bold">Under Steward Review (Queue)</span>
+                  <span className="text-[#f96933] font-bold">Under Steward Review (Queue)</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-stone-500">Verification Tier:</span>
-                  <span className="text-[#164E2D] font-bold">Community Listed (Pending Audit)</span>
+                  <span className="text-[#2575fc] font-bold">Community Listed (Pending Audit)</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-stone-500">Contact Privacy:</span>
@@ -272,7 +274,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
               <button
                 onClick={onClose}
                 type="button"
-                className="mt-6 inline-flex items-center gap-2 bg-[#0B2516] hover:bg-[#164E2D] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
+                className="mt-6 inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition shadow-md"
               >
                 <span>Done & Return to Exchange</span>
               </button>
@@ -291,14 +293,14 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                 <label className="block text-xs font-mono uppercase tracking-wider text-stone-700 font-bold mb-2">
                   Select Listing Intent *
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                   <button
                     type="button"
                     onClick={() => setListingType('lease')}
                     className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl border text-xs sm:text-sm font-sans font-bold transition ${
                       listingType === 'lease'
-                        ? 'bg-[#0B2516] text-[#FAF7EE] border-[#0B2516] shadow-sm'
-                        : 'bg-white hover:bg-[#E8EFE3] text-stone-700 border-[#CBDAC4]'
+                        ? 'bg-gradient-to-r from-[#2575fc] to-[#1d63d8] text-white border-blue-600 shadow-sm'
+                        : 'bg-white hover:bg-slate-100 text-stone-700 border-slate-200'
                     }`}
                   >
                     <Home className="w-4 h-4" />
@@ -310,8 +312,8 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     onClick={() => setListingType('sale')}
                     className={`flex items-center justify-center gap-2 py-3 px-4 rounded-xl border text-xs sm:text-sm font-sans font-bold transition ${
                       listingType === 'sale'
-                        ? 'bg-[#0B2516] text-[#FAF7EE] border-[#0B2516] shadow-sm'
-                        : 'bg-white hover:bg-[#E8EFE3] text-stone-700 border-[#CBDAC4]'
+                        ? 'bg-gradient-to-r from-[#2575fc] to-[#1d63d8] text-white border-blue-600 shadow-sm'
+                        : 'bg-white hover:bg-slate-100 text-stone-700 border-slate-200'
                     }`}
                   >
                     <Tag className="w-4 h-4" />
@@ -332,7 +334,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="e.g. Pine Ridge Cedar Stone Cottage with Snow Views"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3.5 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -343,7 +345,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   >
                     <option value="Stone Cottage">Stone Cottage</option>
                     <option value="Kath-Kuni Timber Chalet">Kath-Kuni Timber Chalet</option>
@@ -356,9 +358,9 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
               </div>
 
               {/* 3. Comprehensive Pan-India Address Section */}
-              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#D96B27]" />
+              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#f96933]" />
                   <span>Proper Mountain Address Details (All-India)</span>
                 </div>
 
@@ -370,7 +372,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     <select
                       value={state}
                       onChange={(e) => setState(e.target.value)}
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     >
                       {INDIAN_MOUNTAIN_STATES.map((st) => (
                         <option key={st} value={st}>
@@ -389,7 +391,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={mountainRange}
                       onChange={(e) => setMountainRange(e.target.value)}
                       placeholder="e.g. Parvati Valley / Kumaon / Zanskar / Nilgiris"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -405,7 +407,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={villageTown}
                       onChange={(e) => setVillageTown(e.target.value)}
                       placeholder="e.g. Old Manali / Mukteshwar / Yuksom / Kotagiri"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -418,7 +420,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={elevation}
                       onChange={(e) => setElevation(e.target.value)}
                       placeholder="e.g. 2,050 m / 6,700 ft"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -434,7 +436,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={fullAddress}
                       onChange={(e) => setFullAddress(e.target.value)}
                       placeholder="e.g. House No. 14, Upper Temple Road, Near Deodar Pine Grove"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -447,7 +449,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={districtPin}
                       onChange={(e) => setDistrictPin(e.target.value)}
                       placeholder="e.g. Kullu District - 175131"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -455,9 +457,9 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
               {/* 4. Financial & Pricing Terms */}
               {listingType === 'lease' ? (
-                <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                    <Home className="w-3.5 h-3.5 text-[#34D399]" />
+                <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                    <Home className="w-3.5 h-3.5 text-[#38BDF8]" />
                     <span>Monthly Lease & Sabbatical Terms</span>
                   </div>
 
@@ -472,7 +474,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={monthlyRate}
                         onChange={(e) => setMonthlyRate(e.target.value)}
                         placeholder="e.g. ₹32,000 / month"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       />
                     </div>
 
@@ -485,7 +487,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={securityDeposit}
                         onChange={(e) => setSecurityDeposit(e.target.value)}
                         placeholder="e.g. ₹32,000 (Refundable)"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       />
                     </div>
 
@@ -496,7 +498,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       <select
                         value={minLeaseTerm}
                         onChange={(e) => setMinLeaseTerm(e.target.value)}
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       >
                         <option value="1 Month">1 Month</option>
                         <option value="1–3 Months">1–3 Months</option>
@@ -508,9 +510,9 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                   </div>
                 </div>
               ) : (
-                <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                    <FileCheck2 className="w-3.5 h-3.5 text-[#D96B27]" />
+                <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                  <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                    <FileCheck2 className="w-3.5 h-3.5 text-[#f96933]" />
                     <span>Outright Sale & Land Title Terms</span>
                   </div>
 
@@ -525,7 +527,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={salePrice}
                         onChange={(e) => setSalePrice(e.target.value)}
                         placeholder="e.g. ₹1.45 Cr or ₹85 Lakh"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       />
                     </div>
 
@@ -538,7 +540,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                         value={landArea}
                         onChange={(e) => setLandArea(e.target.value)}
                         placeholder="e.g. 10 Nali / 1.5 Acres / 3,200 sq ft"
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       />
                     </div>
 
@@ -549,7 +551,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       <select
                         value={landTitleType}
                         onChange={(e) => setLandTitleType(e.target.value)}
-                        className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                        className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                       >
                         <option value="Freehold Clear Title">Freehold Clear Title</option>
                         <option value="Registry / Khatoni Verified">Registry / Khatoni Verified</option>
@@ -572,7 +574,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={bedrooms}
                     onChange={(e) => setBedrooms(e.target.value)}
                     placeholder="e.g. 2 Bedrooms • Solarium Study"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -585,7 +587,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={wifiSpeed}
                     onChange={(e) => setWifiSpeed(e.target.value)}
                     placeholder="e.g. 100 Mbps Dedicated Fiber"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -598,7 +600,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={heatingType}
                     onChange={(e) => setHeatingType(e.target.value)}
                     placeholder="e.g. Bukhari Wood Stove / Cast Iron Fireplace"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
@@ -614,7 +616,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={roadAccess}
                     onChange={(e) => setRoadAccess(e.target.value)}
                     placeholder="e.g. Direct Car Drive-in to Gate / 5-min foot trail"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -627,7 +629,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={waterSource}
                     onChange={(e) => setWaterSource(e.target.value)}
                     placeholder="e.g. Natural Himalayan Spring / Gravity Feed"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
 
@@ -640,15 +642,15 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     value={powerBackup}
                     onChange={(e) => setPowerBackup(e.target.value)}
                     placeholder="e.g. Inverter & Solar Battery / Grid Only"
-                    className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                    className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                   />
                 </div>
               </div>
 
               {/* 6. Contact Details */}
-              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-[#CBDAC4] space-y-4">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#164E2D] font-bold border-b border-[#CBDAC4]/70 pb-2">
-                  <Compass className="w-3.5 h-3.5 text-[#164E2D]" />
+              <div className="bg-white/80 p-4 sm:p-5 rounded-xl border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[#2575fc] font-bold border-b border-slate-200 pb-2">
+                  <Compass className="w-3.5 h-3.5 text-[#2575fc]" />
                   <span>Host / Property Owner Contact</span>
                 </div>
 
@@ -663,7 +665,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={hostName}
                       onChange={(e) => setHostName(e.target.value)}
                       placeholder="e.g. Virender Singh"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -677,7 +679,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="your.email@domain.com"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
@@ -690,21 +692,21 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={phoneWhatsApp}
                       onChange={(e) => setPhoneWhatsApp(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
 
                   {/* DPDP Section 6 Contact Privacy Selector */}
-                  <div className="sm:col-span-3 mt-2 p-3 bg-white border border-[#CBDAC4] rounded-xl space-y-2">
-                    <div className="text-xs font-mono uppercase tracking-wider font-bold text-[#164E2D] flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+                  <div className="sm:col-span-3 mt-2 p-3 bg-white border border-slate-200 rounded-xl space-y-2">
+                    <div className="text-xs font-mono uppercase tracking-wider font-bold text-[#2575fc] flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
                       <span>DPDP Act 2023 • Contact Privacy & Telemarketing Shield</span>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                       <label
                         className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition ${
                           phoneVisibility === 'relay'
-                            ? 'bg-[#E8EFE3] border-[#164E2D] text-[#0B2516]'
+                            ? 'bg-sky-50/70 border-[#2575fc] text-[#0F172A]'
                             : 'bg-stone-50 border-stone-200 text-stone-600'
                         }`}
                       >
@@ -714,7 +716,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                           value="relay"
                           checked={phoneVisibility === 'relay'}
                           onChange={() => setPhoneVisibility('relay')}
-                          className="mt-0.5 text-[#164E2D]"
+                          className="mt-0.5 text-[#2575fc]"
                         />
                         <div>
                           <strong className="block font-semibold">Hide My Phone (Recommended)</strong>
@@ -727,7 +729,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       <label
                         className={`flex items-start gap-2.5 p-2.5 rounded-lg border cursor-pointer transition ${
                           phoneVisibility === 'public'
-                            ? 'bg-[#E8EFE3] border-[#164E2D] text-[#0B2516]'
+                            ? 'bg-sky-50/70 border-[#2575fc] text-[#0F172A]'
                             : 'bg-stone-50 border-stone-200 text-stone-600'
                         }`}
                       >
@@ -737,7 +739,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                           value="public"
                           checked={phoneVisibility === 'public'}
                           onChange={() => setPhoneVisibility('public')}
-                          className="mt-0.5 text-[#164E2D]"
+                          className="mt-0.5 text-[#2575fc]"
                         />
                         <div>
                           <strong className="block font-semibold">Public WhatsApp Button</strong>
@@ -761,7 +763,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the natural light, view of snow ranges, serenity, heating, nearby village trail, and water supply..."
-                  className="w-full bg-white border border-[#CBDAC4] rounded-lg p-3 text-base sm:text-sm text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                  className="w-full bg-white border border-slate-200 rounded-lg p-3 text-base sm:text-sm text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                 />
               </div>
 
@@ -773,9 +775,9 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
                   {/* Direct File Upload with EXIF GPS Purge */}
-                  <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-[#164E2D]/40 hover:border-[#164E2D] rounded-xl bg-white/80 cursor-pointer transition hover:bg-[#E8EFE3]/50 text-center">
-                    <Upload className="w-6 h-6 text-[#164E2D] mb-1" />
-                    <span className="text-xs font-bold text-[#0B2516]">Upload from Device</span>
+                  <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-sky-200 hover:border-[#2575fc] rounded-xl bg-white/80 cursor-pointer transition hover:bg-slate-100/50 text-center">
+                    <Upload className="w-6 h-6 text-[#2575fc] mb-1" />
+                    <span className="text-xs font-bold text-[#0F172A]">Upload from Device</span>
                     <span className="text-[10px] text-stone-500 font-mono mt-0.5">
                       Auto-purges camera GPS & compresses to WebP
                     </span>
@@ -798,7 +800,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                       value={imageUrl}
                       onChange={(e) => setImageUrl(e.target.value)}
                       placeholder="https://images.unsplash.com/..."
-                      className="w-full bg-white border border-[#CBDAC4] rounded-lg px-3.5 py-2 text-base sm:text-xs text-[#0B2516] focus:outline-none focus:border-[#164E2D]"
+                      className="w-full bg-white border border-slate-200 rounded-lg px-3.5 py-2 text-base sm:text-xs text-[#0F172A] focus:outline-none focus:border-[#2575fc]"
                     />
                   </div>
                 </div>
@@ -817,7 +819,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                 )}
 
                 {imageUrl && (
-                  <div className="mt-2 w-full h-32 rounded-xl overflow-hidden border border-[#CBDAC4] shadow-xs">
+                  <div className="mt-2 w-full h-32 rounded-xl overflow-hidden border border-slate-200 shadow-xs">
                     <img
                       src={imageUrl}
                       alt="Property preview"
@@ -846,21 +848,21 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
               </div>
 
               {/* Privacy Policy Agreement */}
-              <div className="p-3.5 bg-[#FAF7EE] border border-[#CBDAC4] rounded-xl">
+              <div className="p-3.5 bg-[#F8FAFC] border border-slate-200 rounded-xl">
                 <label className="flex items-start gap-2.5 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={agreedToPrivacy}
                     onChange={(e) => setAgreedToPrivacy(e.target.checked)}
                     required
-                    className="mt-0.5 w-4 h-4 rounded border-[#164E2D] text-[#164E2D] focus:ring-[#164E2D] cursor-pointer"
+                    className="mt-0.5 w-4 h-4 rounded border-[#2575fc] text-[#2575fc] focus:ring-[#2575fc] cursor-pointer"
                   />
                   <span className="text-xs text-stone-700 leading-relaxed font-sans">
                     I agree to the{' '}
                     <button
                       type="button"
                       onClick={onOpenPrivacy}
-                      className="text-[#164E2D] font-bold underline hover:text-[#0B2516]"
+                      className="text-[#2575fc] font-bold underline hover:text-[#0F172A]"
                     >
                       Privacy Policy & Community Charter
                     </button>
@@ -870,18 +872,18 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
               </div>
 
               {/* Submit Button */}
-              <div className="pt-3 border-t border-[#CBDAC4] flex items-center justify-end gap-3">
+              <div className="pt-3 border-t border-slate-200 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-full border border-[#CBDAC4] text-xs font-bold text-stone-600 hover:bg-[#E8EFE3] transition"
+                  className="px-5 py-2.5 rounded-full border border-slate-200 text-xs font-bold text-stone-600 hover:bg-slate-100 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-7 py-3 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200 disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -890,7 +892,7 @@ export const CreatePropertyModal: FC<CreatePropertyModalProps> = ({
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 text-[#A5C896]" />
+                      <Sparkles className="w-4 h-4 text-[#7DD3FC]" />
                       <span>Publish Property Listing</span>
                     </>
                   )}

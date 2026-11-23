@@ -55,18 +55,18 @@ export const AdminLoginPage: FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#06180E] text-[#F8F6F0] flex flex-col justify-between selection:bg-[#8FA777]/30 selection:text-white">
+    <div className="min-h-screen bg-[#0B1B3D] text-[#F8F6F0] flex flex-col justify-between selection:bg-[#2575fc]/30 selection:text-white">
       {/* Top Header */}
       <header className="p-4 sm:p-8 flex flex-wrap items-center justify-between gap-3 border-b border-white/10">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-xs font-mono text-white/70 hover:text-white transition-colors"
         >
-          <ArrowLeft className="w-3.5 h-3.5 text-[#8FA777]" />
+          <ArrowLeft className="w-3.5 h-3.5 text-[#38BDF8]" />
           <span>RETURN TO PUBLIC WEBSITE</span>
         </Link>
 
-        <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-[#8FA777]">
+        <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest uppercase text-[#38BDF8]">
           <ShieldCheck className="w-3.5 h-3.5" />
           <span>PORTAL PROTOCOL • 256-BIT ENCRYPTION</span>
         </div>
@@ -74,7 +74,7 @@ export const AdminLoginPage: FC = () => {
 
       {/* Main Form Centerpiece */}
       <main className="flex-1 flex items-center justify-center p-4 sm:p-8">
-        <div className="w-full max-w-md bg-[#0B2516] border border-[#1F4E34] p-8 sm:p-10 shadow-2xl rounded-sm">
+        <div className="w-full max-w-md bg-[#0B1B3D] border border-[#1E3A8A] p-8 sm:p-10 shadow-2xl rounded-sm">
           {/* Official Brand Logo & Headline */}
           <div className="text-center mb-8">
             <img
@@ -82,7 +82,7 @@ export const AdminLoginPage: FC = () => {
               alt={BRAND_CONFIG.logo.alt}
               className="h-16 w-auto mx-auto mb-4 object-contain brightness-105 filter drop-shadow-sm"
             />
-            <div className="inline-flex items-center gap-1.5 text-[10px] uppercase font-mono tracking-[0.24em] text-[#8FA777] mb-2 font-semibold">
+            <div className="inline-flex items-center gap-1.5 text-[10px] uppercase font-mono tracking-[0.24em] text-[#38BDF8] mb-2 font-semibold">
               <KeyRound className="w-3 h-3" />
               <span>STAFF & MANAGEMENT PORTAL</span>
             </div>
@@ -131,7 +131,7 @@ export const AdminLoginPage: FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={`admin@${BRAND_CONFIG.name.toLowerCase().replace(/\s+/g, '-')}.org`}
-                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
+                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#38BDF8]"
                 />
               </div>
             </div>
@@ -148,7 +148,7 @@ export const AdminLoginPage: FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#8FA777]"
+                  className="w-full bg-black/30 border border-white/20 pl-9 pr-3 py-2.5 text-base sm:text-xs text-white placeholder:text-white/30 rounded-sm focus:outline-none focus:border-[#38BDF8]"
                 />
               </div>
             </div>
@@ -156,17 +156,17 @@ export const AdminLoginPage: FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-[#F8F6F0] hover:bg-white text-[#0B2516] py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all shadow-md disabled:opacity-50"
+              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white py-3 text-xs uppercase tracking-wider font-semibold rounded-sm transition-all shadow-md disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin text-[#0B2516]" />
+                  <Loader2 className="w-4 h-4 animate-spin text-[#0F172A]" />
                   <span>Verifying Credentials...</span>
                 </>
               ) : (
                 <>
                   <span>Authorize Staff Session</span>
-                  <ArrowRight className="w-4 h-4 text-[#0B2516]" />
+                  <ArrowRight className="w-4 h-4 text-[#0F172A]" />
                 </>
               )}
             </button>
@@ -175,7 +175,7 @@ export const AdminLoginPage: FC = () => {
           {/* Secure Staff Governance Notice */}
           <div className="mt-6 pt-6 border-t border-white/10 text-[11px] font-mono text-white/50 leading-relaxed space-y-2">
             <p className="text-white/70 font-semibold flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#8FA777]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>Administrative Staff Access Only</span>
             </p>
             <p>

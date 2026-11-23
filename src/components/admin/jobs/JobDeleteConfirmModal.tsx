@@ -21,8 +21,8 @@ export const JobDeleteConfirmModal: FC<JobDeleteConfirmModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in">
-      <div className="bg-[#FAF8F5] border border-red-300 text-[#123D2D] w-full max-w-md rounded-sm shadow-2xl overflow-hidden p-6">
-        <div className="flex items-center justify-between pb-4 border-b border-[#CBDAC4]">
+      <div className="bg-[#FAF8F5] border border-red-300 text-[#0F172A] w-full max-w-md rounded-sm shadow-2xl overflow-hidden p-6">
+        <div className="flex items-center justify-between pb-4 border-b border-slate-200">
           <div className="flex items-center gap-2 text-red-700">
             <AlertTriangle className="w-5 h-5 text-red-600" />
             <span className="font-serif text-lg font-normal">Confirm Deletion</span>
@@ -31,16 +31,16 @@ export const JobDeleteConfirmModal: FC<JobDeleteConfirmModalProps> = ({
             type="button"
             onClick={onClose}
             disabled={isDeleting}
-            className="text-[#576159] hover:text-[#123D2D]"
+            className="text-slate-600 hover:text-[#0F172A]"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         <div className="py-4 space-y-3">
-          <p className="text-xs text-[#576159] leading-relaxed">
+          <p className="text-xs text-slate-600 leading-relaxed">
             Are you sure you want to permanently delete the residency listing{' '}
-            <strong className="text-[#123D2D] font-semibold font-mono">
+            <strong className="text-[#0F172A] font-semibold font-mono">
               "{job.title}"
             </strong>{' '}
             posted by <span className="font-semibold">{job.employer}</span>?
@@ -50,12 +50,12 @@ export const JobDeleteConfirmModal: FC<JobDeleteConfirmModalProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#CBDAC4]">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
           <button
             type="button"
             onClick={onClose}
             disabled={isDeleting}
-            className="px-4 py-2 border border-[#CBDAC4] text-xs font-mono text-[#576159] hover:bg-white rounded-sm transition-colors"
+            className="px-4 py-2 border border-slate-200 text-xs font-mono text-slate-600 hover:bg-white rounded-sm transition-colors"
           >
             Cancel
           </button>

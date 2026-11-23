@@ -20,13 +20,13 @@ export const DataLoadingSkeleton: FC<DataLoadingSkeletonProps> = ({
         {Array.from({ length: count }).map((_, i) => (
           <div
             key={i}
-            className="p-5 bg-[#F8F6F0] border border-[#CBDAC4] animate-pulse rounded-sm flex items-center justify-between"
+            className="p-5 bg-white border border-slate-200 animate-pulse rounded-xl flex items-center justify-between"
           >
             <div className="space-y-2 w-2/3">
-              <div className="h-4 bg-[#CBDAC4] w-1/3 rounded" />
-              <div className="h-3 bg-[#CBDAC4]/60 w-1/2 rounded" />
+              <div className="h-4 bg-slate-200 w-1/3 rounded" />
+              <div className="h-3 bg-slate-100 w-1/2 rounded" />
             </div>
-            <div className="h-8 bg-[#CBDAC4]/50 w-24 rounded" />
+            <div className="h-8 bg-slate-200 w-24 rounded-lg" />
           </div>
         ))}
       </div>
@@ -35,14 +35,14 @@ export const DataLoadingSkeleton: FC<DataLoadingSkeletonProps> = ({
 
   if (variant === 'specimen') {
     return (
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#0B2516] border border-[#1F4E34] p-6 sm:p-10 animate-pulse">
-        <div className="lg:col-span-6 aspect-[4/3] bg-white/5 rounded-none" />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-[#0B1B3D] border border-[#1E3A8A] p-6 sm:p-10 rounded-2xl animate-pulse">
+        <div className="lg:col-span-6 aspect-[4/3] bg-white/5 rounded-xl" />
         <div className="lg:col-span-6 space-y-4">
           <div className="h-4 bg-white/10 w-1/4 rounded" />
           <div className="h-8 bg-white/15 w-3/4 rounded" />
           <div className="h-4 bg-white/10 w-full rounded" />
           <div className="h-4 bg-white/10 w-2/3 rounded" />
-          <div className="h-32 bg-white/5 w-full rounded" />
+          <div className="h-32 bg-white/5 w-full rounded-xl" />
         </div>
       </div>
     )
@@ -53,14 +53,14 @@ export const DataLoadingSkeleton: FC<DataLoadingSkeletonProps> = ({
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className="bg-[#F8F6F0] border border-[#CBDAC4] p-6 animate-pulse rounded-sm space-y-4"
+          className="bg-white border border-slate-200 p-6 animate-pulse rounded-2xl space-y-4 shadow-xs"
         >
-          <div className="aspect-[16/10] bg-[#CBDAC4]/60 rounded-none w-full" />
+          <div className="aspect-[16/10] bg-slate-100 rounded-xl w-full" />
           <div className="space-y-2">
-            <div className="h-5 bg-[#CBDAC4] w-3/4 rounded" />
-            <div className="h-3 bg-[#CBDAC4]/60 w-1/2 rounded" />
+            <div className="h-5 bg-slate-200 w-3/4 rounded" />
+            <div className="h-3 bg-slate-100 w-1/2 rounded" />
           </div>
-          <div className="h-10 bg-[#CBDAC4]/40 w-full rounded-sm" />
+          <div className="h-10 bg-slate-100 w-full rounded-xl" />
         </div>
       ))}
     </div>
@@ -93,27 +93,27 @@ export const DataEmptyState: FC<DataEmptyStateProps> = ({
     <div
       className={`w-full py-14 sm:py-20 px-6 sm:px-12 text-center border ${
         isDark
-          ? 'bg-[#0B2516]/60 border-white/10 text-[#F8F6F0]'
-          : 'bg-[#F8F6F0] border-[#CBDAC4] text-[#202622]'
-      } rounded-sm flex flex-col items-center justify-center max-w-2xl mx-auto shadow-sm`}
+          ? 'bg-[#0B1B3D]/80 border-[#1E3A8A] text-white'
+          : 'bg-white border-slate-200 text-[#0F172A]'
+      } rounded-2xl flex flex-col items-center justify-center max-w-2xl mx-auto shadow-sm`}
     >
       <div
         className={`w-12 h-12 rounded-full border flex items-center justify-center mb-4 ${
           isDark
-            ? 'border-white/20 bg-white/5 text-[#8FA777]'
-            : 'border-[#285A40]/30 bg-[#E8EFE3] text-[#285A40]'
+            ? 'border-sky-500/30 bg-sky-500/10 text-[#38BDF8]'
+            : 'border-blue-200 bg-blue-50 text-[#2575fc]'
         }`}
       >
         {icon || <Compass className="w-5 h-5" />}
       </div>
 
-      <div className="text-[10px] font-mono tracking-[0.24em] uppercase text-[#8FA777] mb-2 font-semibold">
+      <div className="text-[10px] font-mono tracking-[0.24em] uppercase text-[#2575fc] mb-2 font-semibold">
         AWAITING CLIENT ENTRIES
       </div>
 
       <h3
-        className={`font-serif text-2xl sm:text-3xl font-normal leading-tight ${
-          isDark ? 'text-white' : 'text-[#123D2D]'
+        className={`font-serif text-2xl sm:text-3xl font-normal leading-tight tracking-tight ${
+          isDark ? 'text-white' : 'text-[#0F172A]'
         }`}
       >
         {title}
@@ -121,7 +121,7 @@ export const DataEmptyState: FC<DataEmptyStateProps> = ({
 
       <p
         className={`mt-2 text-xs sm:text-sm font-sans font-light max-w-md leading-relaxed ${
-          isDark ? 'text-[#E7EFE3]/80' : 'text-[#576159]'
+          isDark ? 'text-slate-300' : 'text-slate-600'
         }`}
       >
         {description}
@@ -132,11 +132,7 @@ export const DataEmptyState: FC<DataEmptyStateProps> = ({
           <button
             onClick={onAction}
             type="button"
-            className={`inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase tracking-wider font-sans font-semibold rounded-none transition-all shadow-sm active:scale-[0.98] ${
-              isDark
-                ? 'bg-[#FDFBF7] text-[#0B2516] hover:bg-white'
-                : 'bg-[#123D2D] text-[#F8F6F0] hover:bg-[#06180E]'
-            }`}
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-xs uppercase tracking-wider font-sans font-semibold rounded-xl bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#1e3a8a] text-white shadow-md shadow-blue-500/20 active:scale-[0.98] transition-all"
           >
             <span>{actionLabel}</span>
           </button>
@@ -166,13 +162,13 @@ export const DataErrorState: FC<DataErrorStateProps> = ({
     <div
       className={`w-full p-6 sm:p-8 text-center border ${
         isDark
-          ? 'bg-[#180A0A]/80 border-red-900/40 text-[#F8F6F0]'
-          : 'bg-[#FFF8F6] border-red-200 text-[#202622]'
-      } rounded-sm flex flex-col items-center justify-center max-w-xl mx-auto space-y-3`}
+          ? 'bg-[#180A0A]/80 border-red-900/40 text-[#F8FAFC]'
+          : 'bg-[#FFF8F6] border-red-200 text-[#0F172A]'
+      } rounded-2xl flex flex-col items-center justify-center max-w-xl mx-auto space-y-3`}
     >
       <AlertCircle className="w-6 h-6 text-red-500" />
-      <h4 className="font-serif text-xl font-normal text-red-400">Database Connection Notice</h4>
-      <p className="text-xs text-[#576159] max-w-md font-sans leading-relaxed">
+      <h4 className="font-serif text-xl font-normal text-red-500">Database Connection Notice</h4>
+      <p className="text-xs text-slate-600 max-w-md font-sans leading-relaxed">
         {message}
       </p>
 
@@ -180,7 +176,7 @@ export const DataErrorState: FC<DataErrorStateProps> = ({
         <button
           onClick={onRetry}
           type="button"
-          className="inline-flex items-center gap-2 px-4 py-2 mt-2 bg-[#123D2D] text-white text-xs font-mono uppercase tracking-wider hover:bg-[#06180E] transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 mt-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] text-white text-xs font-mono uppercase tracking-wider rounded-xl shadow-md shadow-blue-500/20 transition-all active:scale-[0.98]"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Retry Query</span>
@@ -205,7 +201,7 @@ export const DataModeBanner: FC<DataModeBannerProps> = ({
   isSupabaseConnected
 }) => {
   return (
-    <div className="w-full bg-[#06180E] border-b border-white/10 text-[#E7EFE3] text-[11px] font-mono py-2 px-4 sm:px-8 flex flex-wrap items-center justify-between gap-3">
+    <div className="w-full bg-[#0B1B3D] border-b border-[#1E3A8A]/60 text-slate-200 text-[11px] font-mono py-2 px-4 sm:px-8 flex flex-wrap items-center justify-between gap-3">
       <div className="flex items-center gap-2.5">
         <span
           className={`w-2 h-2 rounded-full ${
@@ -213,7 +209,7 @@ export const DataModeBanner: FC<DataModeBannerProps> = ({
               ? isSupabaseConnected
                 ? 'bg-emerald-400 animate-pulse'
                 : 'bg-amber-400'
-              : 'bg-[#8FA777]'
+              : 'bg-[#38BDF8]'
           }`}
         />
         <span className="uppercase tracking-[0.18em]">
@@ -223,7 +219,7 @@ export const DataModeBanner: FC<DataModeBannerProps> = ({
           </strong>
         </span>
         <span className="text-white/30">•</span>
-        <span className="text-white/60 hidden md:inline">
+        <span className="text-slate-400 hidden md:inline">
           {mode === 'production'
             ? isSupabaseConnected
               ? 'Supabase backend connected'
@@ -236,16 +232,16 @@ export const DataModeBanner: FC<DataModeBannerProps> = ({
         <button
           onClick={() => onToggleMode(mode === 'production' ? 'preview' : 'production')}
           type="button"
-          className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 text-[#FDFBF7] uppercase tracking-wider text-[10px] font-semibold border border-white/15 rounded-sm transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 text-white uppercase tracking-wider text-[10px] font-semibold border border-white/15 rounded-lg transition-colors cursor-pointer"
         >
           {mode === 'production' ? (
             <>
-              <Eye className="w-3 h-3 text-[#8FA777]" />
+              <Eye className="w-3 h-3 text-[#38BDF8]" />
               <span>Switch to Preview Data</span>
             </>
           ) : (
             <>
-              <Database className="w-3 h-3 text-[#8FA777]" />
+              <Database className="w-3 h-3 text-[#38BDF8]" />
               <span>Switch to Live Production Mode</span>
             </>
           )}

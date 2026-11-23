@@ -782,10 +782,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
     <>
       {/* 1. Proactive Greeting Bubble */}
       {showGreetingBubble && !isOpen && (
-        <div className="fixed bottom-20 right-3 sm:right-6 z-40 max-w-[290px] sm:max-w-xs bg-[#0B2516] text-[#F8F6F0] border border-[#1F4E34] p-3 sm:p-3.5 rounded-xl shadow-2xl animate-fade-in-scale font-sans">
+        <div className="fixed bottom-20 right-3 sm:right-6 z-40 max-w-[290px] sm:max-w-xs bg-[#0B1B3D] text-[#F8FAFC] border border-[#1E3A8A] p-3 sm:p-3.5 rounded-xl shadow-2xl shadow-blue-900/40 animate-fade-in-scale font-sans">
           <div className="flex items-start justify-between gap-2 mb-1">
-            <span className="text-[10px] font-mono text-[#8FA777] uppercase tracking-wider font-semibold flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#8FA777]" />
+            <span className="text-[10px] font-mono text-[#7DD3FC] uppercase tracking-wider font-semibold flex items-center gap-1">
+              <Sparkles className="w-3 h-3 text-[#38BDF8]" />
               <span>Anaya AI Concierge</span>
             </span>
             <button
@@ -807,7 +807,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                 anayaAudio.playOpenChime()
               }
             }}
-            className="mt-2 text-[11px] font-mono text-[#8FA777] hover:text-white underline underline-offset-4 flex items-center gap-1"
+            className="mt-2 text-[11px] font-mono text-[#38BDF8] hover:text-white underline underline-offset-4 flex items-center gap-1"
           >
             <span>Talk with Anaya</span>
             <ArrowRight className="w-3 h-3" />
@@ -828,10 +828,10 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
               anayaAudio.playOpenChime()
             }
           }}
-          className={`group flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-emerald-950/40 hover:shadow-2xl hover:shadow-emerald-950/60 active:scale-95 border border-emerald-400/40 ${
+          className={`group flex items-center gap-2 sm:gap-2.5 px-3.5 sm:px-5 py-2.5 sm:py-3 min-h-[44px] rounded-full text-xs sm:text-sm font-sans font-semibold tracking-wide transition-all duration-300 shadow-xl shadow-blue-950/40 hover:shadow-2xl hover:shadow-blue-600/30 active:scale-95 border border-sky-400/40 ${
             isOpen
-              ? 'bg-gradient-to-r from-[#0E2F1D] to-[#164E2D] text-white ring-2 ring-emerald-400/20'
-              : 'bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white animate-pulse-glow'
+              ? 'bg-gradient-to-r from-[#1E3A8A] to-[#2575fc] text-white ring-2 ring-sky-400/20'
+              : 'bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white animate-pulse-glow'
           }`}
           aria-expanded={isOpen}
           aria-label="Toggle Anaya AI Concierge"
@@ -843,12 +843,12 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             </>
           ) : (
             <>
-              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-[#8FA777]">
+              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-sky-200">
                 <Compass className="w-3.5 h-3.5 animate-spin-slow group-hover:rotate-45 transition-transform" />
               </div>
               <span className="hidden sm:inline">Ask Anaya AI</span>
               <span className="sm:hidden">Anaya AI</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-[#38BDF8] animate-ping" />
             </>
           )}
         </button>
@@ -859,28 +859,28 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
         <div
           role="dialog"
           aria-label="Anaya AI Mountain Concierge Chat"
-          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[440px] max-h-[min(82dvh,640px)] bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
+          className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:bottom-24 right-2 sm:right-6 z-50 w-[calc(100vw-1rem)] sm:w-[440px] max-h-[min(82dvh,640px)] bg-[#0B1B3D] border border-[#1E3A8A] text-[#F8FAFC] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-scale font-sans"
         >
           {/* Header */}
-          <div className="bg-[#0B2516] border-b border-[#1F4E34] p-3.5 sm:p-4 flex items-center justify-between">
+          <div className="bg-[#0B1B3D] border-b border-[#1E3A8A] p-3.5 sm:p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-9 h-9 rounded-full bg-[#123D2D] border border-[#8FA777]/50 flex items-center justify-center text-[#8FA777]">
+                <div className="w-9 h-9 rounded-full bg-[#152A56] border border-[#38BDF8]/50 flex items-center justify-center text-[#38BDF8]">
                   <Bot className="w-5 h-5" />
                 </div>
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#0B2516] rounded-full" />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#38BDF8] border-2 border-[#0B1B3D] rounded-full" />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-serif text-base text-white font-medium">Anaya AI</h3>
-                  <span className="px-1.5 py-0.2 bg-[#8FA777]/20 border border-[#8FA777]/40 rounded-full text-[9px] font-mono text-[#8FA777] uppercase">
+                  <span className="px-1.5 py-0.2 bg-[#38BDF8]/20 border border-[#38BDF8]/40 rounded-full text-[9px] font-mono text-[#7DD3FC] uppercase">
                     Live
                   </span>
-                  <span className="px-1.5 py-0.2 bg-emerald-500/20 border border-emerald-400/30 rounded-full text-[9px] font-mono text-emerald-300">
+                  <span className="px-1.5 py-0.2 bg-blue-500/20 border border-blue-400/30 rounded-full text-[9px] font-mono text-sky-200">
                     No Sign-in
                   </span>
                 </div>
-                <p className="text-[11px] font-mono text-[#8FA777]/80 truncate">
+                <p className="text-[11px] font-mono text-[#7DD3FC]/80 truncate">
                   Mountain Companion • {BRAND_CONFIG.name}
                 </p>
               </div>
@@ -895,7 +895,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                 aria-label={soundEnabled ? 'Mute sound effects' : 'Enable sound effects'}
               >
                 {soundEnabled ? (
-                  <Volume2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <Volume2 className="w-3.5 h-3.5 text-[#38BDF8]" />
                 ) : (
                   <VolumeX className="w-3.5 h-3.5 text-white/40" />
                 )}
@@ -921,7 +921,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
           </div>
 
           {/* Quick Suggestion Chips */}
-          <div className="px-3 py-2 bg-black/25 border-b border-[#1F4E34]/60 overflow-x-auto scrollbar-none flex items-center gap-1.5 text-nowrap">
+          <div className="px-3 py-2 bg-black/25 border-b border-[#1E3A8A]/60 overflow-x-auto scrollbar-none flex items-center gap-1.5 text-nowrap">
             {suggestionChips.map((chip, idx) => (
               <button
                 key={idx}
@@ -944,7 +944,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                   className={`flex gap-2.5 ${isSteward ? 'items-start' : 'items-end justify-end'}`}
                 >
                   {isSteward && (
-                    <div className="w-7 h-7 rounded-full bg-[#123D2D] border border-[#8FA777]/40 flex items-center justify-center text-[#8FA777] shrink-0 mt-0.5">
+                    <div className="w-7 h-7 rounded-full bg-[#152A56] border border-[#38BDF8]/40 flex items-center justify-center text-[#38BDF8] shrink-0 mt-0.5">
                       <Leaf className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -953,8 +953,8 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                     <div
                       className={`p-3.5 rounded-md whitespace-pre-line leading-relaxed ${
                         isSteward
-                          ? 'bg-[#123D2D]/85 border border-[#1F4E34] text-[#E8EFE3] text-left'
-                          : 'bg-[#FDFBF7] text-[#0B2516] font-medium text-left shadow-md'
+                          ? 'bg-[#13284F] border border-[#1E3A8A] text-slate-100 text-left'
+                          : 'bg-gradient-to-r from-[#2575fc] to-[#1d63d8] text-white font-medium text-left shadow-md'
                       }`}
                     >
                       <p className="font-light">{msg.text}</p>
@@ -1017,7 +1017,7 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
                   </div>
 
                   {!isSteward && (
-                    <div className="w-7 h-7 rounded-full bg-[#FDFBF7] text-[#0B2516] flex items-center justify-center shrink-0 mb-0.5">
+                    <div className="w-7 h-7 rounded-full bg-slate-100 text-[#0F172A] flex items-center justify-center shrink-0 mb-0.5">
                       <User className="w-3.5 h-3.5" />
                     </div>
                   )}
@@ -1028,13 +1028,13 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
             {/* Typing Indicator */}
             {isTyping && (
               <div className="flex items-center gap-2 text-white/60 text-xs font-mono">
-                <div className="w-7 h-7 rounded-full bg-[#123D2D] border border-[#8FA777]/40 flex items-center justify-center text-[#8FA777]">
+                <div className="w-7 h-7 rounded-full bg-[#152A56] border border-[#38BDF8]/40 flex items-center justify-center text-[#38BDF8]">
                   <Leaf className="w-3.5 h-3.5" />
                 </div>
-                <div className="bg-[#123D2D]/60 border border-[#1F4E34] px-3.5 py-2 rounded-sm flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-1" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-2" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8FA777] typing-dot-3" />
+                <div className="bg-[#13284F]/60 border border-[#1E3A8A] px-3.5 py-2 rounded-sm flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] typing-dot-1" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] typing-dot-2" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] typing-dot-3" />
                   <span className="text-[10px] text-white/50 ml-1">Anaya consulting Himalayan ledger...</span>
                 </div>
               </div>
@@ -1046,20 +1046,20 @@ export const RidgeConciergeChatbot: FC<RidgeConciergeChatbotProps> = ({
           {/* Input Form */}
           <form
             onSubmit={handleSubmit}
-            className="p-3 bg-black/40 border-t border-[#1F4E34] flex items-center gap-2"
+            className="p-3 bg-black/40 border-t border-[#1E3A8A] flex items-center gap-2"
           >
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask Anaya about stays, taxi fares, jobs, or weather..."
-              className="flex-1 bg-black/30 border border-white/20 px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/40 rounded-sm focus:outline-none focus:border-[#8FA777]"
+              className="flex-1 bg-black/30 border border-white/20 px-3.5 py-2.5 text-base sm:text-xs text-white placeholder:text-white/40 rounded-sm focus:outline-none focus:border-[#38BDF8]"
               maxLength={300}
             />
             <button
               type="submit"
               disabled={!input.trim()}
-              className="p-2.5 min-w-[42px] min-h-[42px] flex items-center justify-center bg-[#FDFBF7] hover:bg-white text-[#0B2516] rounded-sm disabled:opacity-40 transition-all shrink-0 font-semibold"
+              className="p-2.5 min-w-[42px] min-h-[42px] flex items-center justify-center bg-[#2575fc] hover:bg-[#1d63d8] text-white rounded-sm disabled:opacity-40 transition-all shrink-0 font-semibold"
               aria-label="Send inquiry"
             >
               <Send className="w-4 h-4" />

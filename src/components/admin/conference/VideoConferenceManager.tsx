@@ -135,11 +135,11 @@ export const VideoConferenceManager: FC = () => {
   return (
     <div className="space-y-6">
       {/* 1. Top Header Banner */}
-      <div className="bg-[#0B2516] border border-[#1F4E34] text-[#F8F6F0] p-6 sm:p-8 rounded-sm shadow-md">
+      <div className="bg-[#0B1B3D] border border-[#1E3A8A] text-[#F8F6F0] p-6 sm:p-8 rounded-sm shadow-md">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] text-[#8FA777] uppercase font-semibold">
-              <ShieldCheck className="w-4 h-4 text-[#8FA777]" />
+            <div className="flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] text-[#38BDF8] uppercase font-semibold">
+              <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
               <span>MODULE 04 • UNLIMITED VIRTUAL VERIFICATION SUITE</span>
             </div>
             <h1 className="font-serif text-2xl sm:text-3xl text-white font-normal">
@@ -151,7 +151,7 @@ export const VideoConferenceManager: FC = () => {
           </div>
 
           <div className="flex items-center gap-2 self-start md:self-auto shrink-0">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-[#8FA777]/30 text-[#8FA777] rounded-full text-xs font-mono">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-[#38BDF8]/30 text-[#38BDF8] rounded-full text-xs font-mono">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Unlimited Call Line Ready</span>
             </span>
@@ -166,8 +166,8 @@ export const VideoConferenceManager: FC = () => {
           onClick={() => setPlatform('google_meet')}
           className={`p-4 rounded-sm border cursor-pointer transition-all ${
             platform === 'google_meet'
-              ? 'bg-[#0B2516] border-[#8FA777] text-white shadow-md'
-              : 'bg-[#F8F6F0] border-[#CBDAC4] text-[#0B2516] hover:bg-[#E8EFE3]'
+              ? 'bg-[#0B1B3D] border-[#8FA777] text-white shadow-md'
+              : 'bg-[#F8FAFC] border-slate-200 text-[#0F172A] hover:bg-sky-50'
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -175,13 +175,13 @@ export const VideoConferenceManager: FC = () => {
               M
             </div>
             {platform === 'google_meet' && (
-              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0B2516] font-bold px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0F172A] font-bold px-2 py-0.5 rounded-full">
                 Active
               </span>
             )}
           </div>
           <div className="font-serif text-base font-semibold">Google Meet (1-Click)</div>
-          <div className={`text-xs mt-1 leading-normal ${platform === 'google_meet' ? 'text-white/80' : 'text-[#576159]'}`}>
+          <div className={`text-xs mt-1 leading-normal ${platform === 'google_meet' ? 'text-white/80' : 'text-slate-600'}`}>
             Unlimited HD call with screen sharing. Works in any browser without 5-min limits.
           </div>
         </div>
@@ -191,8 +191,8 @@ export const VideoConferenceManager: FC = () => {
           onClick={() => setPlatform('whatsapp')}
           className={`p-4 rounded-sm border cursor-pointer transition-all ${
             platform === 'whatsapp'
-              ? 'bg-[#0B2516] border-[#8FA777] text-white shadow-md'
-              : 'bg-[#F8F6F0] border-[#CBDAC4] text-[#0B2516] hover:bg-[#E8EFE3]'
+              ? 'bg-[#0B1B3D] border-[#8FA777] text-white shadow-md'
+              : 'bg-[#F8FAFC] border-slate-200 text-[#0F172A] hover:bg-sky-50'
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -200,13 +200,13 @@ export const VideoConferenceManager: FC = () => {
               <MessageCircle className="w-4 h-4" />
             </div>
             {platform === 'whatsapp' && (
-              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0B2516] font-bold px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0F172A] font-bold px-2 py-0.5 rounded-full">
                 Active
               </span>
             )}
           </div>
           <div className="font-serif text-base font-semibold">WhatsApp Video Call</div>
-          <div className={`text-xs mt-1 leading-normal ${platform === 'whatsapp' ? 'text-white/80' : 'text-[#576159]'}`}>
+          <div className={`text-xs mt-1 leading-normal ${platform === 'whatsapp' ? 'text-white/80' : 'text-slate-600'}`}>
             Best for mountain homestay hosts. Direct mobile video call on their phone number.
           </div>
         </div>
@@ -216,8 +216,8 @@ export const VideoConferenceManager: FC = () => {
           onClick={() => setPlatform('jitsi_popout')}
           className={`p-4 rounded-sm border cursor-pointer transition-all ${
             platform === 'jitsi_popout'
-              ? 'bg-[#0B2516] border-[#8FA777] text-white shadow-md'
-              : 'bg-[#F8F6F0] border-[#CBDAC4] text-[#0B2516] hover:bg-[#E8EFE3]'
+              ? 'bg-[#0B1B3D] border-[#8FA777] text-white shadow-md'
+              : 'bg-[#F8FAFC] border-slate-200 text-[#0F172A] hover:bg-sky-50'
           }`}
         >
           <div className="flex items-center justify-between mb-2">
@@ -225,13 +225,13 @@ export const VideoConferenceManager: FC = () => {
               <Video className="w-4 h-4" />
             </div>
             {platform === 'jitsi_popout' && (
-              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0B2516] font-bold px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-mono uppercase bg-[#8FA777] text-[#0F172A] font-bold px-2 py-0.5 rounded-full">
                 Active
               </span>
             )}
           </div>
           <div className="font-serif text-base font-semibold">Full-Tab WebRTC Room</div>
-          <div className={`text-xs mt-1 leading-normal ${platform === 'jitsi_popout' ? 'text-white/80' : 'text-[#576159]'}`}>
+          <div className={`text-xs mt-1 leading-normal ${platform === 'jitsi_popout' ? 'text-white/80' : 'text-slate-600'}`}>
             Runs in standalone window (bypassing the 5-min iframe embedding cutoff).
           </div>
         </div>
@@ -241,20 +241,20 @@ export const VideoConferenceManager: FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left Column: Meeting Parameters & Action Launcher */}
         <div className="lg:col-span-6 space-y-6">
-          <div className="bg-[#F8F6F0] border border-[#CBDAC4] p-5 sm:p-6 rounded-sm space-y-4 shadow-xs">
-            <div className="flex items-center justify-between border-b border-[#CBDAC4] pb-3">
-              <h2 className="font-serif text-base text-[#0B2516] font-semibold flex items-center gap-2">
-                <Video className="w-4 h-4 text-[#285A40]" />
+          <div className="bg-[#F8FAFC] border border-slate-200 p-5 sm:p-6 rounded-sm space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <h2 className="font-serif text-base text-[#0F172A] font-semibold flex items-center gap-2">
+                <Video className="w-4 h-4 text-[#2575fc]" />
                 <span>Call Dispatch Parameters</span>
               </h2>
-              <span className="text-xs font-mono text-[#285A40] uppercase font-semibold">
+              <span className="text-xs font-mono text-[#2575fc] uppercase font-semibold">
                 {platform === 'google_meet' ? 'Google Meet Mode' : platform === 'whatsapp' ? 'WhatsApp Mode' : 'WebRTC Mode'}
               </span>
             </div>
 
             {/* Purpose Selector */}
             <div className="space-y-1.5">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-semibold">
+              <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-semibold">
                 Meeting Purpose
               </label>
               <div className="grid grid-cols-3 gap-2 text-xs font-mono">
@@ -263,8 +263,8 @@ export const VideoConferenceManager: FC = () => {
                   onClick={() => handlePurposeChange('property_verification')}
                   className={`p-2.5 rounded-sm border text-center transition-all ${
                     purpose === 'property_verification'
-                      ? 'bg-[#0B2516] text-white border-[#0B2516] font-semibold shadow-xs'
-                      : 'bg-white text-[#285A40] border-[#CBDAC4] hover:bg-[#E8EFE3]'
+                      ? 'bg-[#0B1B3D] text-white border-[#0B2516] font-semibold shadow-xs'
+                      : 'bg-white text-[#2575fc] border-slate-200 hover:bg-sky-50'
                   }`}
                 >
                   Host Verify
@@ -274,8 +274,8 @@ export const VideoConferenceManager: FC = () => {
                   onClick={() => handlePurposeChange('job_interview')}
                   className={`p-2.5 rounded-sm border text-center transition-all ${
                     purpose === 'job_interview'
-                      ? 'bg-[#0B2516] text-white border-[#0B2516] font-semibold shadow-xs'
-                      : 'bg-white text-[#285A40] border-[#CBDAC4] hover:bg-[#E8EFE3]'
+                      ? 'bg-[#0B1B3D] text-white border-[#0B2516] font-semibold shadow-xs'
+                      : 'bg-white text-[#2575fc] border-slate-200 hover:bg-sky-50'
                   }`}
                 >
                   Job Interview
@@ -285,8 +285,8 @@ export const VideoConferenceManager: FC = () => {
                   onClick={() => handlePurposeChange('steward_sync')}
                   className={`p-2.5 rounded-sm border text-center transition-all ${
                     purpose === 'steward_sync'
-                      ? 'bg-[#0B2516] text-white border-[#0B2516] font-semibold shadow-xs'
-                      : 'bg-white text-[#285A40] border-[#CBDAC4] hover:bg-[#E8EFE3]'
+                      ? 'bg-[#0B1B3D] text-white border-[#0B2516] font-semibold shadow-xs'
+                      : 'bg-white text-[#2575fc] border-slate-200 hover:bg-sky-50'
                   }`}
                 >
                   Steward Sync
@@ -296,7 +296,7 @@ export const VideoConferenceManager: FC = () => {
 
             {/* Participant Name */}
             <div className="space-y-1.5">
-              <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-semibold">
+              <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-semibold">
                 Guest / Host / Applicant Name
               </label>
               <input
@@ -304,14 +304,14 @@ export const VideoConferenceManager: FC = () => {
                 value={participantName}
                 onChange={(e) => setParticipantName(e.target.value)}
                 placeholder="e.g. Pemba Sherpa (Lebong Homestay)"
-                className="w-full px-3.5 py-2 text-xs bg-white border border-[#CBDAC4] rounded-sm text-[#0B2516] focus:outline-none focus:border-[#0B2516]"
+                className="w-full px-3.5 py-2 text-xs bg-white border border-slate-200 rounded-sm text-[#0F172A] focus:outline-none focus:border-[#0B2516]"
               />
             </div>
 
             {/* Phone Number (For WhatsApp Mode) */}
             {platform === 'whatsapp' && (
               <div className="space-y-1.5">
-                <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-semibold">
+                <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-semibold">
                   Host / Candidate WhatsApp Number (with country code)
                 </label>
                 <input
@@ -319,7 +319,7 @@ export const VideoConferenceManager: FC = () => {
                   value={participantPhone}
                   onChange={(e) => setParticipantPhone(e.target.value)}
                   placeholder="e.g. 919876543210"
-                  className="w-full px-3.5 py-2 text-xs bg-white border border-[#CBDAC4] rounded-sm text-[#0B2516] font-mono focus:outline-none focus:border-[#0B2516]"
+                  className="w-full px-3.5 py-2 text-xs bg-white border border-slate-200 rounded-sm text-[#0F172A] font-mono focus:outline-none focus:border-[#0B2516]"
                 />
               </div>
             )}
@@ -328,17 +328,17 @@ export const VideoConferenceManager: FC = () => {
             {platform === 'google_meet' && (
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-semibold">
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-semibold">
                     Google Meet Room Link
                   </label>
-                  <span className="text-[10px] text-[#576159] font-mono">Optional Custom Link</span>
+                  <span className="text-[10px] text-slate-600 font-mono">Optional Custom Link</span>
                 </div>
                 <input
                   type="text"
                   value={customMeetUrl}
                   onChange={(e) => setCustomMeetUrl(e.target.value)}
                   placeholder="e.g. https://meet.google.com/abc-defg-hij (Leave blank to generate fresh)"
-                  className="w-full px-3.5 py-2 text-xs bg-white border border-[#CBDAC4] rounded-sm text-[#0B2516] font-mono focus:outline-none focus:border-[#0B2516]"
+                  className="w-full px-3.5 py-2 text-xs bg-white border border-slate-200 rounded-sm text-[#0F172A] font-mono focus:outline-none focus:border-[#0B2516]"
                 />
               </div>
             )}
@@ -347,19 +347,19 @@ export const VideoConferenceManager: FC = () => {
             {platform === 'jitsi_popout' && (
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-mono uppercase tracking-wider text-[#285A40] font-semibold">
+                  <label className="text-xs font-mono uppercase tracking-wider text-[#2575fc] font-semibold">
                     Encrypted Room ID
                   </label>
                   <button
                     type="button"
                     onClick={() => setRoomSlug(generateRoomSlug(purpose))}
-                    className="text-[11px] font-mono text-[#285A40] hover:text-[#0B2516] flex items-center gap-1"
+                    className="text-[11px] font-mono text-[#2575fc] hover:text-[#0F172A] flex items-center gap-1"
                   >
                     <RefreshCw className="w-3 h-3" />
                     <span>New ID</span>
                   </button>
                 </div>
-                <div className="px-3 py-2 bg-[#E8EFE3]/80 border border-[#CBDAC4] rounded-sm font-mono text-xs text-[#0B2516] truncate">
+                <div className="px-3 py-2 bg-sky-50/80 border border-slate-200 rounded-sm font-mono text-xs text-[#0F172A] truncate">
                   {roomSlug}
                 </div>
               </div>
@@ -376,7 +376,7 @@ export const VideoConferenceManager: FC = () => {
                     ? 'bg-emerald-700 hover:bg-emerald-800'
                     : platform === 'google_meet'
                     ? 'bg-blue-700 hover:bg-blue-800'
-                    : 'bg-[#0B2516] hover:bg-[#123D2D]'
+                    : 'bg-[#0B1B3D] hover:bg-[#0F224A]'
                 }`}
               >
                 {platform === 'whatsapp' ? (
@@ -400,7 +400,7 @@ export const VideoConferenceManager: FC = () => {
               <button
                 type="button"
                 onClick={copyInvite}
-                className="w-full py-2.5 px-3 bg-white hover:bg-[#E8EFE3] text-[#0B2516] border border-[#CBDAC4] rounded-sm text-xs font-mono flex items-center justify-center gap-1.5 transition-colors"
+                className="w-full py-2.5 px-3 bg-white hover:bg-sky-50 text-[#0F172A] border border-slate-200 rounded-sm text-xs font-mono flex items-center justify-center gap-1.5 transition-colors"
               >
                 {copied ? (
                   <>
@@ -409,7 +409,7 @@ export const VideoConferenceManager: FC = () => {
                   </>
                 ) : (
                   <>
-                    <Copy className="w-3.5 h-3.5 text-[#285A40]" />
+                    <Copy className="w-3.5 h-3.5 text-[#2575fc]" />
                     <span>Copy WhatsApp / Email Invitation Link</span>
                   </>
                 )}
@@ -434,20 +434,20 @@ export const VideoConferenceManager: FC = () => {
 
         {/* Right Column: 5-Point Host Verification Protocol & Live Audit */}
         <div className="lg:col-span-6 space-y-4">
-          <div className="bg-[#F8F6F0] border border-[#CBDAC4] p-5 sm:p-6 rounded-sm space-y-4 shadow-xs">
-            <div className="flex items-center justify-between border-b border-[#CBDAC4] pb-2">
+          <div className="bg-[#F8FAFC] border border-slate-200 p-5 sm:p-6 rounded-sm space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
               <div className="flex items-center gap-2">
-                <FileCheck2 className="w-4 h-4 text-[#285A40]" />
-                <span className="font-serif text-base font-semibold text-[#0B2516]">
+                <FileCheck2 className="w-4 h-4 text-[#2575fc]" />
+                <span className="font-serif text-base font-semibold text-[#0F172A]">
                   Live Video Verification Checklist
                 </span>
               </div>
-              <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-[#E8EFE3] text-[#285A40]">
+              <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 text-[#2575fc]">
                 {completedCount}/{checklist.length} Completed
               </span>
             </div>
 
-            <p className="text-xs text-[#576159] leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               While on the live video call with the host or job candidate, audit these 5 points to prevent fraud and protect mountain travellers:
             </p>
 
@@ -457,21 +457,21 @@ export const VideoConferenceManager: FC = () => {
                   key={item.id}
                   className={`flex items-start gap-3 p-3 rounded-xs border transition-colors cursor-pointer text-xs ${
                     item.checked
-                      ? 'bg-[#E8EFE3] border-[#A5C896] text-[#0B2516]'
-                      : 'bg-white border-[#CBDAC4] text-[#48534C] hover:bg-[#F2EFE8]'
+                      ? 'bg-sky-50 border-[#A5C896] text-[#0F172A]'
+                      : 'bg-white border-slate-200 text-[#48534C] hover:bg-[#F2EFE8]'
                   }`}
                 >
                   <input
                     type="checkbox"
                     checked={item.checked}
                     onChange={() => toggleChecklistItem(item.id)}
-                    className="mt-0.5 rounded text-[#285A40] focus:ring-[#285A40]"
+                    className="mt-0.5 rounded text-[#2575fc] focus:ring-[#285A40]"
                   />
                   <div className="flex-1 space-y-0.5">
-                    <div className={`font-medium text-xs ${item.checked ? 'line-through text-[#285A40]' : 'text-[#0B2516]'}`}>
+                    <div className={`font-medium text-xs ${item.checked ? 'line-through text-[#2575fc]' : 'text-[#0F172A]'}`}>
                       {item.label}
                     </div>
-                    <div className="text-[11px] text-[#576159] leading-normal font-light">
+                    <div className="text-[11px] text-slate-600 leading-normal font-light">
                       {item.description}
                     </div>
                   </div>
@@ -480,8 +480,8 @@ export const VideoConferenceManager: FC = () => {
             </div>
 
             {/* Final Action on Verification */}
-            <div className="p-3.5 bg-white border border-[#CBDAC4] rounded-sm flex items-center justify-between text-xs font-mono">
-              <div className="text-[#285A40]">
+            <div className="p-3.5 bg-white border border-slate-200 rounded-sm flex items-center justify-between text-xs font-mono">
+              <div className="text-[#2575fc]">
                 {completedCount === checklist.length ? (
                   <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-emerald-600" />
@@ -491,7 +491,7 @@ export const VideoConferenceManager: FC = () => {
                   <span>Check off all 5 items to verify listing</span>
                 )}
               </div>
-              <span className="text-[10px] text-[#576159]">
+              <span className="text-[10px] text-slate-600">
                 Anti-Fraud Protocol Active
               </span>
             </div>
@@ -499,22 +499,22 @@ export const VideoConferenceManager: FC = () => {
 
           {/* Quick Advantage Badges */}
           <div className="grid grid-cols-3 gap-3 text-center">
-            <div className="p-3 bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm space-y-1">
-              <Clock className="w-4 h-4 text-[#285A40] mx-auto" />
-              <div className="text-xs font-serif font-semibold text-[#0B2516]">Unlimited Time</div>
-              <div className="text-[10px] text-[#576159]">Zero 5-min disconnects</div>
+            <div className="p-3 bg-[#F8FAFC] border border-slate-200 rounded-sm space-y-1">
+              <Clock className="w-4 h-4 text-[#2575fc] mx-auto" />
+              <div className="text-xs font-serif font-semibold text-[#0F172A]">Unlimited Time</div>
+              <div className="text-[10px] text-slate-600">Zero 5-min disconnects</div>
             </div>
 
-            <div className="p-3 bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm space-y-1">
-              <PhoneCall className="w-4 h-4 text-[#285A40] mx-auto" />
-              <div className="text-xs font-serif font-semibold text-[#0B2516]">WhatsApp Ready</div>
-              <div className="text-[10px] text-[#576159]">Direct mobile call</div>
+            <div className="p-3 bg-[#F8FAFC] border border-slate-200 rounded-sm space-y-1">
+              <PhoneCall className="w-4 h-4 text-[#2575fc] mx-auto" />
+              <div className="text-xs font-serif font-semibold text-[#0F172A]">WhatsApp Ready</div>
+              <div className="text-[10px] text-slate-600">Direct mobile call</div>
             </div>
 
-            <div className="p-3 bg-[#F8F6F0] border border-[#CBDAC4] rounded-sm space-y-1">
-              <Sparkles className="w-4 h-4 text-[#285A40] mx-auto" />
-              <div className="text-xs font-serif font-semibold text-[#0B2516]">100% Free</div>
-              <div className="text-[10px] text-[#576159]">Zero subscriptions</div>
+            <div className="p-3 bg-[#F8FAFC] border border-slate-200 rounded-sm space-y-1">
+              <Sparkles className="w-4 h-4 text-[#2575fc] mx-auto" />
+              <div className="text-xs font-serif font-semibold text-[#0F172A]">100% Free</div>
+              <div className="text-[10px] text-slate-600">Zero subscriptions</div>
             </div>
           </div>
         </div>

@@ -62,16 +62,16 @@ export const MountainJobs: FC<MountainJobsProps> = ({
   })
 
   return (
-    <section id="jobs" className="py-16 sm:py-20 bg-[#FAF7EE] border-t border-[#CBDAC4]">
+    <section id="jobs" className="py-16 sm:py-20 bg-[#F8FAFC] border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header: Jobs Exchange */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-[#CBDAC4] gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200 gap-6">
           <div className="max-w-3xl">
-            <span className="text-[#164E2D] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
-              <Briefcase className="w-4 h-4 text-[#D96B27]" />
+            <span className="text-[#2575fc] text-xs font-mono font-bold uppercase tracking-widest flex items-center gap-1.5 mb-2">
+              <Briefcase className="w-4 h-4 text-[#f96933]" />
               <span>EMPLOYMENT EXCHANGE • HIRE & WORK</span>
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0A2316] uppercase leading-tight">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0F172A] uppercase leading-tight">
               MOUNTAIN JOBS & RECRUITMENT
             </h2>
             <p className="text-stone-700 text-sm sm:text-base mt-2 font-light leading-relaxed">
@@ -83,19 +83,19 @@ export const MountainJobs: FC<MountainJobsProps> = ({
             <button
               onClick={onPostJobClick}
               type="button"
-              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs sm:text-sm font-sans font-semibold tracking-wide px-6 py-2.5 rounded-full shadow-md shadow-blue-900/20 hover:shadow-xl hover:shadow-blue-600/30 border border-sky-400/30 active:scale-95 transition-all duration-200"
             >
-              <PlusCircle className="w-4 h-4 text-[#34D399]" />
+              <PlusCircle className="w-4 h-4 text-[#7DD3FC]" />
               <span>Post a Mountain Job</span>
             </button>
           </div>
         </div>
 
         {/* Region & Category Dual Filter Bar */}
-        <div className="space-y-3 pb-6 mb-8 border-b border-[#CBDAC4]/70">
+        <div className="space-y-3 pb-6 mb-8 border-b border-slate-200/80">
           {/* Pan-India Region Pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
-            <span className="text-[11px] font-sans uppercase tracking-wider text-[#164E2D] font-bold shrink-0 mr-1">
+            <span className="text-[11px] font-sans uppercase tracking-wider text-[#2575fc] font-bold shrink-0 mr-1">
               Region:
             </span>
             {regions.map((reg) => (
@@ -105,8 +105,8 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                 type="button"
                 className={`px-3.5 py-2 min-h-[38px] text-xs font-sans rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                   selectedRegion === reg.id
-                    ? 'bg-gradient-to-r from-[#0A2316] to-[#164E2D] text-white font-semibold shadow-xs border border-emerald-500/30'
-                    : 'bg-white/90 border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                    ? 'bg-gradient-to-r from-[#0B1B3D] to-[#1E3A8A] text-white font-semibold shadow-xs border border-blue-500/30'
+                    : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-[#0B1B3D]'
                 }`}
               >
                 {reg.label}
@@ -117,7 +117,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
           {/* Role Category Pills */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-1">
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none touch-momentum overscroll-x-contain">
-              <Filter className="w-3.5 h-3.5 text-[#164E2D] mr-1 flex-shrink-0 hidden sm:inline" />
+              <Filter className="w-3.5 h-3.5 text-[#2575fc] mr-1 flex-shrink-0 hidden sm:inline" />
               {categories.map((cat) => (
                 <button
                   key={cat.value}
@@ -125,8 +125,8 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                   type="button"
                   className={`px-4 py-2 min-h-[38px] text-xs font-sans tracking-wide rounded-full transition-all whitespace-nowrap flex items-center justify-center ${
                     activeCategory === cat.value
-                      ? 'bg-[#0B2516] text-white font-semibold shadow-xs border border-emerald-500/30'
-                      : 'bg-white border border-[#CBDAC4] text-stone-600 hover:bg-[#E8EFE3] hover:text-[#0A2316]'
+                      ? 'bg-[#0B1B3D] text-white font-semibold shadow-xs border border-blue-500/30'
+                      : 'bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-[#0B1B3D]'
                   }`}
                 >
                   {cat.label}
@@ -134,8 +134,8 @@ export const MountainJobs: FC<MountainJobsProps> = ({
               ))}
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-mono text-[#164E2D]">
-              <ShieldCheck className="w-4 h-4 text-[#164E2D]" />
+            <div className="flex items-center gap-2 text-xs font-mono text-[#2575fc]">
+              <ShieldCheck className="w-4 h-4 text-[#2575fc]" />
               <span>Two-Tier Audited Opportunities • Lodging & Food Transparency</span>
             </div>
           </div>
@@ -187,7 +187,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                 {/* Role Details */}
                 <div className="max-w-2xl">
                   <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#164E2D] font-mono">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2575fc] font-mono">
                       <Building2 className="w-3.5 h-3.5" />
                       {job.employer}
                     </span>
@@ -197,7 +197,7 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                       {job.location}
                     </span>
                     <span className="text-stone-300 hidden sm:inline">•</span>
-                    <span className="bg-[#FAF7EE] text-[#0A2316] text-[10px] font-mono px-2 py-0.5 rounded border border-[#CBDAC4]">
+                    <span className="bg-slate-100 text-[#0F172A] text-[10px] font-mono px-2 py-0.5 rounded border border-slate-200">
                       {job.category}
                     </span>
                     <span className="text-stone-300 hidden sm:inline">•</span>
@@ -206,14 +206,14 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                         Community Listed
                       </span>
                     ) : (
-                      <span className="bg-emerald-50 text-emerald-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-emerald-300 flex items-center gap-1">
-                        <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                      <span className="bg-sky-50 text-sky-800 text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-sky-300 flex items-center gap-1">
+                        <ShieldCheck className="w-3 h-3 text-sky-600" />
                         <span>Steward Verified ✓</span>
                       </span>
                     )}
                   </div>
 
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#164E2D] transition-colors leading-snug">
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-stone-950 uppercase tracking-tight group-hover:text-[#2575fc] transition-colors leading-snug">
                     {job.title}
                   </h3>
 
@@ -234,10 +234,10 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                 {/* Right Action: Compensation & Apply CTA */}
                 <div className="flex md:flex-col items-center md:items-end justify-between md:justify-center gap-3 pt-3 md:pt-0 border-t md:border-t-0 border-stone-100 shrink-0">
                   <div className="text-left md:text-right">
-                    <div className="font-display text-xl sm:text-2xl font-bold text-[#0A2316]">
+                    <div className="font-display text-xl sm:text-2xl font-bold text-[#0F172A]">
                       {job.salary}
                     </div>
-                    <div className="text-[10px] font-mono text-[#164E2D] font-semibold">
+                    <div className="text-[10px] font-mono text-[#2575fc] font-semibold">
                       Dignified Compensation
                     </div>
                   </div>
@@ -248,10 +248,10 @@ export const MountainJobs: FC<MountainJobsProps> = ({
                       e.stopPropagation()
                       onSelectJob(job)
                     }}
-                    className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#0A2316] via-[#123E24] to-[#184F2E] hover:from-[#0E2F1D] hover:to-[#1F633B] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-emerald-950/30 border border-emerald-500/30 active:scale-95 transition-all duration-200"
+                    className="group/btn inline-flex items-center gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-xs font-sans font-semibold tracking-wide px-4 py-2.5 rounded-full shadow-sm hover:shadow-md hover:shadow-blue-900/30 border border-sky-400/40 active:scale-95 transition-all duration-200"
                   >
                     <span>Apply / Details</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#34D399] group-hover/btn:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[#7DD3FC] group-hover/btn:translate-x-0.5 transition-transform" />
                   </button>
                 </div>
               </div>

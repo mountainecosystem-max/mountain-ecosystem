@@ -40,9 +40,9 @@ const UsersManager = lazy(() =>
 )
 
 const RouteSuspenseFallback = () => (
-  <div className="min-h-screen bg-[#06180E] text-[#F8F6F0] flex flex-col items-center justify-center p-6">
-    <div className="w-10 h-10 rounded-full border-2 border-[#164E2D] border-t-[#34D399] animate-spin mb-4" />
-    <p className="font-mono text-xs uppercase tracking-widest text-[#8FA777]">
+  <div className="min-h-screen bg-[#0B1B3D] text-[#F8FAFC] flex flex-col items-center justify-center p-6">
+    <div className="w-10 h-10 rounded-full border-2 border-[#1E3A8A] border-t-[#38BDF8] animate-spin mb-4" />
+    <p className="font-mono text-xs uppercase tracking-widest text-[#7DD3FC]">
       Loading Mountain Console...
     </p>
   </div>

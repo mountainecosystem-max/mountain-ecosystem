@@ -17,7 +17,7 @@ export const PriceSparkline: FC<PriceSparklineProps> = ({
   data,
   stabilityScore,
   unit = '',
-  color = '#285A40'
+  color = '#2575fc'
 }) => {
   const [activePoint, setActivePoint] = useState<PricePoint | null>(null)
 
@@ -58,15 +58,15 @@ export const PriceSparkline: FC<PriceSparklineProps> = ({
       {/* Stability Badge & Current Hovered Metric */}
       <div className="flex items-center justify-between text-[10px] font-mono">
         <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#285A40] animate-pulse" />
-          <span className="text-[#123D2D] font-semibold tracking-wider">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2575fc] animate-pulse" />
+          <span className="text-[#0F172A] font-semibold tracking-wider">
             {stabilityScore}% STABLE
           </span>
         </div>
 
-        <div className="text-[10px] text-[#576159] font-mono">
+        <div className="text-[10px] text-slate-500 font-mono">
           {activePoint ? (
-            <span className="font-semibold text-[#123D2D]">
+            <span className="font-semibold text-[#0F172A]">
               {activePoint.month}: ₹{activePoint.rate}{unit ? ` ${unit}` : ''}
             </span>
           ) : (
@@ -76,7 +76,7 @@ export const PriceSparkline: FC<PriceSparklineProps> = ({
       </div>
 
       {/* SVG Sparkline Container */}
-      <div className="relative w-full h-[36px] bg-[#E8EFE3]/50 border border-[#CBDAC4]/60 rounded-sm overflow-hidden px-1">
+      <div className="relative w-full h-[36px] bg-sky-50/50 border border-slate-200 rounded-md overflow-hidden px-1">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full h-full overflow-visible"
@@ -102,40 +102,22 @@ export const PriceSparkline: FC<PriceSparklineProps> = ({
             strokeLinejoin="round"
           />
 
-          {/* Data point dots */}
-          {points.map((pt, i) => {
-            const isHovered = activePoint?.month === pt.data.month
-            const isLatest = i === points.length - 1
-            return (
-              <circle
-                key={pt.data.month}
-                cx={pt.x}
-                cy={pt.y}
-                r={isHovered ? 3.5 : isLatest ? 2.5 : 1.75}
-                fill={isHovered ? '#123D2D' : color}
-                stroke="#FFFFFF"
-                strokeWidth={isHovered ? 1.5 : 1}
-                className="transition-all duration-150 cursor-pointer"
-                onMouseEnter={() => setActivePoint(pt.data)}
-                onMouseLeave={() => setActivePoint(null)}
-              />
-            )
-          })}
+          {/* Interactive touch/hover points */}
+          {points.map((pt, idx) => (
+            <circle
+              key={idx}
+              cx={pt.x}
+              cy={pt.y}
+              r={activePoint?.month === pt.data.month ? 3.5 : 2}
+              fill={activePoint?.month === pt.data.month ? '#2575fc' : '#FFFFFF'}
+              stroke="#2575fc"
+              strokeWidth="1.5"
+              className="cursor-pointer transition-all duration-150"
+              onMouseEnter={() => setActivePoint(pt.data)}
+              onMouseLeave={() => setActivePoint(null)}
+            />
+          ))}
         </svg>
-      </div>
-
-      {/* Month Markers Row */}
-      <div className="flex items-center justify-between text-[8px] font-mono uppercase tracking-wider text-[#576159] px-0.5">
-        {data.map((d) => (
-          <span
-            key={d.month}
-            className={`transition-colors ${
-              activePoint?.month === d.month ? 'text-[#123D2D] font-bold' : ''
-            }`}
-          >
-            {d.month}
-          </span>
-        ))}
       </div>
     </div>
   )

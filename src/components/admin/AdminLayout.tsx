@@ -13,7 +13,7 @@ export const AdminLayout: FC = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-[#F8F6F0] text-[#202622] flex flex-col font-sans selection:bg-[#8FA777]/30 selection:text-[#0B2516]">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col font-sans selection:bg-[#8FA777]/30 selection:text-[#0F172A]">
       {/* Top Admin Navbar */}
       <AdminNavbar onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)} />
 

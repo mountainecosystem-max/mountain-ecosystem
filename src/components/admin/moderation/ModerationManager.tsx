@@ -431,23 +431,23 @@ export const ModerationManager: FC = () => {
     <div className="space-y-6 max-w-7xl mx-auto">
       {/* Toast Feedback */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#123D2D] text-[#F8F6F0] border border-[#8FA777]/50 px-4 py-3 rounded-sm shadow-2xl flex items-center gap-2.5 text-xs font-mono animate-fade-in">
-          <CheckCircle2 className="w-4 h-4 text-[#8FA777]" />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0F224A] text-[#F8F6F0] border border-[#38BDF8]/50 px-4 py-3 rounded-sm shadow-2xl flex items-center gap-2.5 text-xs font-mono animate-fade-in">
+          <CheckCircle2 className="w-4 h-4 text-[#38BDF8]" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#CBDAC4]">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-slate-200">
         <div>
-          <div className="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.24em] text-[#285A40] font-bold mb-1">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#285A40]" />
+          <div className="inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.24em] text-[#2575fc] font-bold mb-1">
+            <ShieldCheck className="w-3.5 h-3.5 text-[#2575fc]" />
             <span>COMMUNITY MODERATION & VERIFICATION PORTAL</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#123D2D] font-normal tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#0F172A] font-normal tracking-tight">
             Community Experiences & Moderation
           </h1>
-          <p className="mt-1 text-xs sm:text-sm text-[#576159] font-light">
+          <p className="mt-1 text-xs sm:text-sm text-slate-600 font-light">
             Verify genuine community stories, delete or publish member experiences, review residential lease inquiries, and manage job applicants.
           </p>
         </div>
@@ -456,7 +456,7 @@ export const ModerationManager: FC = () => {
           type="button"
           onClick={loadSubmissions}
           disabled={isLoading}
-          className="p-2.5 border border-[#CBDAC4] text-[#123D2D] hover:bg-white rounded-sm transition-colors text-xs font-mono flex items-center gap-1.5"
+          className="p-2.5 border border-slate-200 text-[#0F172A] hover:bg-white rounded-sm transition-colors text-xs font-mono flex items-center gap-1.5"
           title="Refresh submissions"
         >
           <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
@@ -466,27 +466,27 @@ export const ModerationManager: FC = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 font-mono">
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#576159] tracking-wider">Community Experiences</div>
-          <div className="text-2xl font-serif text-[#123D2D] font-normal mt-1 flex items-baseline gap-2">
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-slate-600 tracking-wider">Community Experiences</div>
+          <div className="text-2xl font-serif text-[#0F172A] font-normal mt-1 flex items-baseline gap-2">
             <span>{dispatches.length}</span>
             {unverifiedExperiences > 0 && (
               <span className="text-xs text-amber-600 font-sans font-medium">({unverifiedExperiences} unverified)</span>
             )}
           </div>
         </div>
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#576159] tracking-wider">Lease Inquiries</div>
-          <div className="text-2xl font-serif text-[#123D2D] font-normal mt-1 flex items-baseline gap-2">
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-slate-600 tracking-wider">Lease Inquiries</div>
+          <div className="text-2xl font-serif text-[#0F172A] font-normal mt-1 flex items-baseline gap-2">
             <span>{leases.length}</span>
             {pendingLeases > 0 && (
               <span className="text-xs text-amber-600 font-sans font-medium">({pendingLeases} new)</span>
             )}
           </div>
         </div>
-        <div className="bg-white border border-[#CBDAC4] p-4 rounded-sm">
-          <div className="text-[10px] uppercase text-[#576159] tracking-wider">Job Applications</div>
-          <div className="text-2xl font-serif text-[#123D2D] font-normal mt-1 flex items-baseline gap-2">
+        <div className="bg-white border border-slate-200 p-4 rounded-sm">
+          <div className="text-[10px] uppercase text-slate-600 tracking-wider">Job Applications</div>
+          <div className="text-2xl font-serif text-[#0F172A] font-normal mt-1 flex items-baseline gap-2">
             <span>{jobApps.length}</span>
             {pendingJobs > 0 && (
               <span className="text-xs text-amber-600 font-sans font-medium">({pendingJobs} new)</span>
@@ -496,14 +496,14 @@ export const ModerationManager: FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#CBDAC4] text-xs font-mono overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-slate-200 text-xs font-mono overflow-x-auto">
         <button
           type="button"
           onClick={() => setActiveTab('experiences')}
           className={`pb-3 px-4 uppercase tracking-wider font-semibold border-b-2 transition-colors whitespace-nowrap flex items-center gap-2 ${
             activeTab === 'experiences'
-              ? 'border-[#123D2D] text-[#123D2D]'
-              : 'border-transparent text-[#576159] hover:text-[#123D2D]'
+              ? 'border-[#123D2D] text-[#0F172A]'
+              : 'border-transparent text-slate-600 hover:text-[#0F172A]'
           }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
@@ -515,8 +515,8 @@ export const ModerationManager: FC = () => {
           onClick={() => setActiveTab('leases')}
           className={`pb-3 px-4 uppercase tracking-wider font-semibold border-b-2 transition-colors whitespace-nowrap flex items-center gap-2 ${
             activeTab === 'leases'
-              ? 'border-[#123D2D] text-[#123D2D]'
-              : 'border-transparent text-[#576159] hover:text-[#123D2D]'
+              ? 'border-[#123D2D] text-[#0F172A]'
+              : 'border-transparent text-slate-600 hover:text-[#0F172A]'
           }`}
         >
           <Home className="w-3.5 h-3.5" />
@@ -533,8 +533,8 @@ export const ModerationManager: FC = () => {
           onClick={() => setActiveTab('jobs')}
           className={`pb-3 px-4 uppercase tracking-wider font-semibold border-b-2 transition-colors whitespace-nowrap flex items-center gap-2 ${
             activeTab === 'jobs'
-              ? 'border-[#123D2D] text-[#123D2D]'
-              : 'border-transparent text-[#576159] hover:text-[#123D2D]'
+              ? 'border-[#123D2D] text-[#0F172A]'
+              : 'border-transparent text-slate-600 hover:text-[#0F172A]'
           }`}
         >
           <Briefcase className="w-3.5 h-3.5" />
@@ -551,8 +551,8 @@ export const ModerationManager: FC = () => {
           onClick={() => setActiveTab('fellowship')}
           className={`pb-3 px-4 uppercase tracking-wider font-semibold border-b-2 transition-colors whitespace-nowrap flex items-center gap-2 ${
             activeTab === 'fellowship'
-              ? 'border-[#123D2D] text-[#123D2D]'
-              : 'border-transparent text-[#576159] hover:text-[#123D2D]'
+              ? 'border-[#123D2D] text-[#0F172A]'
+              : 'border-transparent text-slate-600 hover:text-[#0F172A]'
           }`}
         >
           <ShieldCheck className="w-3.5 h-3.5" />
@@ -562,9 +562,9 @@ export const ModerationManager: FC = () => {
 
       {/* Content */}
       {isLoading ? (
-        <div className="bg-white border border-[#CBDAC4] p-12 text-center rounded-sm">
-          <RefreshCw className="w-6 h-6 text-[#285A40] animate-spin mx-auto mb-2" />
-          <p className="text-xs font-mono text-[#576159]">Querying moderation data...</p>
+        <div className="bg-white border border-slate-200 p-12 text-center rounded-sm">
+          <RefreshCw className="w-6 h-6 text-[#2575fc] animate-spin mx-auto mb-2" />
+          <p className="text-xs font-mono text-slate-600">Querying moderation data...</p>
         </div>
       ) : error ? (
         <div className="bg-red-50 border border-red-300 p-6 rounded-sm text-center text-xs text-red-800 font-mono">
@@ -574,21 +574,21 @@ export const ModerationManager: FC = () => {
       ) : activeTab === 'experiences' ? (
         /* Community Experiences Moderation */
         dispatches.length === 0 ? (
-          <div className="bg-white border border-[#CBDAC4] p-12 text-center rounded-sm">
-            <MessageSquare className="w-10 h-10 text-[#285A40] mx-auto mb-3" />
-            <h3 className="font-serif text-xl text-[#123D2D]">No Community Experiences Found</h3>
-            <p className="text-xs text-[#576159] mt-1 max-w-md mx-auto leading-relaxed">
+          <div className="bg-white border border-slate-200 p-12 text-center rounded-sm">
+            <MessageSquare className="w-10 h-10 text-[#2575fc] mx-auto mb-3" />
+            <h3 className="font-serif text-xl text-[#0F172A]">No Community Experiences Found</h3>
+            <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto leading-relaxed">
               When members post field stories or price notes, they will appear here for verification and moderation.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
             {dispatches.map((d) => (
-              <div key={d.id} className="bg-white border border-[#CBDAC4] p-5 rounded-sm shadow-xs space-y-3">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#CBDAC4]/50 pb-2">
+              <div key={d.id} className="bg-white border border-slate-200 p-5 rounded-sm shadow-xs space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/50 pb-2">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="font-serif text-base text-[#123D2D] font-medium">{d.title}</span>
-                    <span className="px-2 py-0.5 bg-[#285A40]/10 text-[#285A40] text-[10px] font-mono rounded uppercase">
+                    <span className="font-serif text-base text-[#0F172A] font-medium">{d.title}</span>
+                    <span className="px-2 py-0.5 bg-[#285A40]/10 text-[#2575fc] text-[10px] font-mono rounded uppercase">
                       {d.type.replace('_', ' ')}
                     </span>
 
@@ -617,24 +617,24 @@ export const ModerationManager: FC = () => {
                     </span>
                   </div>
 
-                  <div className="text-[10px] font-mono text-[#576159]">
+                  <div className="text-[10px] font-mono text-slate-600">
                     {d.date || new Date(d.created_at).toLocaleDateString()}
                   </div>
                 </div>
 
-                <div className="text-xs font-mono text-[#576159] flex flex-wrap gap-4 items-center">
-                  <span>Author: <strong className="text-[#123D2D]">{d.author_name}</strong> ({d.author_role})</span>
-                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#285A40]" /> {d.location}</span>
+                <div className="text-xs font-mono text-slate-600 flex flex-wrap gap-4 items-center">
+                  <span>Author: <strong className="text-[#0F172A]">{d.author_name}</strong> ({d.author_role})</span>
+                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-[#2575fc]" /> {d.location}</span>
                 </div>
 
-                <p className="text-xs text-[#202622] leading-relaxed bg-[#F8F6F0] p-3 rounded border border-[#CBDAC4]/40 font-light">
+                <p className="text-xs text-[#0F172A] leading-relaxed bg-[#F8FAFC] p-3 rounded border border-slate-200/40 font-light">
                   {d.excerpt}
                 </p>
 
                 {/* Moderation Controls */}
-                <div className="pt-2 border-t border-[#CBDAC4]/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[10px] text-[#576159] uppercase font-semibold">Moderation:</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-semibold">Moderation:</span>
                     
                     {/* Toggle Verify Button */}
                     <button
@@ -683,20 +683,20 @@ export const ModerationManager: FC = () => {
       ) : activeTab === 'leases' ? (
         /* Lease Inquiries Tab */
         leases.length === 0 ? (
-          <div className="bg-white border border-[#CBDAC4] p-12 text-center rounded-sm">
-            <Home className="w-10 h-10 text-[#285A40] mx-auto mb-3" />
-            <h3 className="font-serif text-xl text-[#123D2D]">No Lease Inquiries Pending</h3>
-            <p className="text-xs text-[#576159] mt-1 max-w-md mx-auto leading-relaxed">
+          <div className="bg-white border border-slate-200 p-12 text-center rounded-sm">
+            <Home className="w-10 h-10 text-[#2575fc] mx-auto mb-3" />
+            <h3 className="font-serif text-xl text-[#0F172A]">No Lease Inquiries Pending</h3>
+            <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto leading-relaxed">
               When guests submit an inquiry on a residential property, their residency proposal and dates will stream here.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
             {leases.map((inq) => (
-              <div key={inq.id} className="bg-white border border-[#CBDAC4] p-5 rounded-sm shadow-xs space-y-3">
-                <div className="flex items-center justify-between border-b border-[#CBDAC4]/50 pb-2">
+              <div key={inq.id} className="bg-white border border-slate-200 p-5 rounded-sm shadow-xs space-y-3">
+                <div className="flex items-center justify-between border-b border-slate-200/50 pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-serif text-base text-[#123D2D] font-medium">{inq.guest_name}</span>
+                    <span className="font-serif text-base text-[#0F172A] font-medium">{inq.guest_name}</span>
                     <span
                       className={`px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded-full ${
                         inq.status === 'lease_signed'
@@ -711,26 +711,26 @@ export const ModerationManager: FC = () => {
                       {inq.status}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#576159]">
+                  <span className="text-[10px] font-mono text-slate-600">
                     {new Date(inq.created_at).toLocaleDateString()}
                   </span>
                 </div>
 
-                <div className="text-xs font-mono text-[#576159] grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <div>Email: <strong className="text-[#123D2D] block truncate">{inq.email}</strong></div>
-                  <div>Phone: <strong className="text-[#123D2D] block">{inq.phone}</strong></div>
-                  <div>Term: <strong className="text-[#123D2D] block">{inq.intended_term}</strong></div>
-                  <div>Start: <strong className="text-[#123D2D] block">{inq.start_date || 'Flexible'}</strong></div>
+                <div className="text-xs font-mono text-slate-600 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div>Email: <strong className="text-[#0F172A] block truncate">{inq.email}</strong></div>
+                  <div>Phone: <strong className="text-[#0F172A] block">{inq.phone}</strong></div>
+                  <div>Term: <strong className="text-[#0F172A] block">{inq.intended_term}</strong></div>
+                  <div>Start: <strong className="text-[#0F172A] block">{inq.start_date || 'Flexible'}</strong></div>
                 </div>
 
-                <p className="text-xs text-[#202622] italic bg-[#F8F6F0] p-3 rounded border border-[#CBDAC4]/40">
+                <p className="text-xs text-[#0F172A] italic bg-[#F8FAFC] p-3 rounded border border-slate-200/40">
                   "{inq.message}"
                 </p>
 
                 {/* Moderation Controls */}
-                <div className="pt-2 border-t border-[#CBDAC4]/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#576159] uppercase">Status:</span>
+                    <span className="text-[10px] text-slate-600 uppercase">Status:</span>
                     <button
                       type="button"
                       onClick={() => updateLeaseStatus(inq.id, 'host_contacted')}
@@ -773,20 +773,20 @@ export const ModerationManager: FC = () => {
       ) : activeTab === 'jobs' ? (
         /* Jobs Applications Tab */
         jobApps.length === 0 ? (
-          <div className="bg-white border border-[#CBDAC4] p-12 text-center rounded-sm">
-            <Briefcase className="w-10 h-10 text-[#285A40] mx-auto mb-3" />
-            <h3 className="font-serif text-xl text-[#123D2D]">No Job Applications Received Yet</h3>
-            <p className="text-xs text-[#576159] mt-1 max-w-md mx-auto leading-relaxed">
+          <div className="bg-white border border-slate-200 p-12 text-center rounded-sm">
+            <Briefcase className="w-10 h-10 text-[#2575fc] mx-auto mb-3" />
+            <h3 className="font-serif text-xl text-[#0F172A]">No Job Applications Received Yet</h3>
+            <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto leading-relaxed">
               When applicants submit the "Apply for Residency" modal on mountain job listings, their details and qualifications will stream here.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
             {jobApps.map((j) => (
-              <div key={j.id} className="bg-white border border-[#CBDAC4] p-5 rounded-sm shadow-xs space-y-3">
-                <div className="flex items-center justify-between border-b border-[#CBDAC4]/50 pb-2">
+              <div key={j.id} className="bg-white border border-slate-200 p-5 rounded-sm shadow-xs space-y-3">
+                <div className="flex items-center justify-between border-b border-slate-200/50 pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-serif text-base text-[#123D2D] font-medium">{j.full_name}</span>
+                    <span className="font-serif text-base text-[#0F172A] font-medium">{j.full_name}</span>
                     <span
                       className={`px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider rounded-full ${
                         j.status === 'placed'
@@ -801,14 +801,14 @@ export const ModerationManager: FC = () => {
                       {j.status}
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-[#576159]">
+                  <span className="text-[10px] font-mono text-slate-600">
                     {new Date(j.created_at).toLocaleDateString()}
                   </span>
                 </div>
 
-                <div className="text-xs font-mono text-[#576159] flex flex-wrap items-center gap-4">
-                  <span>Email: <strong className="text-[#123D2D]">{j.email}</strong></span>
-                  <span>Phone: <strong className="text-[#123D2D]">{j.phone}</strong></span>
+                <div className="text-xs font-mono text-slate-600 flex flex-wrap items-center gap-4">
+                  <span>Email: <strong className="text-[#0F172A]">{j.email}</strong></span>
+                  <span>Phone: <strong className="text-[#0F172A]">{j.phone}</strong></span>
                   {j.resume_storage_path && (
                     <button
                       type="button"
@@ -824,14 +824,14 @@ export const ModerationManager: FC = () => {
                   )}
                 </div>
 
-                <p className="text-xs text-[#202622] italic bg-[#F8F6F0] p-3 rounded border border-[#CBDAC4]/40">
+                <p className="text-xs text-[#0F172A] italic bg-[#F8FAFC] p-3 rounded border border-slate-200/40">
                   "{j.note}"
                 </p>
 
                 {/* Moderation Controls */}
-                <div className="pt-2 border-t border-[#CBDAC4]/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#576159] uppercase">Status:</span>
+                    <span className="text-[10px] text-slate-600 uppercase">Status:</span>
                     <button
                       type="button"
                       onClick={() => updateJobAppStatus(j.id, 'interviewing')}
@@ -874,21 +874,21 @@ export const ModerationManager: FC = () => {
       ) : (
         /* Fellowship Applications Tab */
         fellowships.length === 0 ? (
-          <div className="bg-white border border-[#CBDAC4] p-12 text-center rounded-sm">
-            <ShieldCheck className="w-10 h-10 text-[#285A40] mx-auto mb-3" />
-            <h3 className="font-serif text-xl text-[#123D2D]">No Fellowship Applications Pending</h3>
-            <p className="text-xs text-[#576159] mt-1 max-w-md mx-auto leading-relaxed">
+          <div className="bg-white border border-slate-200 p-12 text-center rounded-sm">
+            <ShieldCheck className="w-10 h-10 text-[#2575fc] mx-auto mb-3" />
+            <h3 className="font-serif text-xl text-[#0F172A]">No Fellowship Applications Pending</h3>
+            <p className="text-xs text-slate-600 mt-1 max-w-md mx-auto leading-relaxed">
               When travellers, hosts, or job seekers submit the "Join Fellowship" modal on the public homepage, their contact details and intentions will stream here.
             </p>
           </div>
         ) : (
           <div className="space-y-4">
             {fellowships.map((app) => (
-              <div key={app.id} className="bg-white border border-[#CBDAC4] p-5 rounded-sm shadow-xs space-y-3">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#CBDAC4]/50 pb-2">
+              <div key={app.id} className="bg-white border border-slate-200 p-5 rounded-sm shadow-xs space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200/50 pb-2">
                   <div className="flex items-center gap-2">
-                    <span className="font-serif text-base text-[#123D2D] font-medium">{app.full_name}</span>
-                    <span className="px-2 py-0.5 bg-[#285A40]/10 text-[#285A40] text-[10px] font-mono rounded uppercase">
+                    <span className="font-serif text-base text-[#0F172A] font-medium">{app.full_name}</span>
+                    <span className="px-2 py-0.5 bg-[#285A40]/10 text-[#2575fc] text-[10px] font-mono rounded uppercase">
                       {app.role}
                     </span>
                     <span
@@ -905,25 +905,25 @@ export const ModerationManager: FC = () => {
                       {app.status}
                     </span>
                   </div>
-                  <div className="text-[10px] font-mono text-[#576159]">
+                  <div className="text-[10px] font-mono text-slate-600">
                     {new Date(app.created_at).toLocaleDateString()}
                   </div>
                 </div>
 
-                <div className="text-xs font-mono text-[#576159] flex flex-wrap gap-4">
-                  <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-[#285A40]" /> {app.email}</span>
-                  <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-[#285A40]" /> {app.phone}</span>
-                  <span>Territory: <strong className="text-[#123D2D]">{app.region}</strong></span>
+                <div className="text-xs font-mono text-slate-600 flex flex-wrap gap-4">
+                  <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-[#2575fc]" /> {app.email}</span>
+                  <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-[#2575fc]" /> {app.phone}</span>
+                  <span>Territory: <strong className="text-[#0F172A]">{app.region}</strong></span>
                 </div>
 
-                <p className="text-xs text-[#202622] italic bg-[#F8F6F0] p-3 rounded border border-[#CBDAC4]/40 font-light">
+                <p className="text-xs text-[#0F172A] italic bg-[#F8FAFC] p-3 rounded border border-slate-200/40 font-light">
                   "{app.intent}"
                 </p>
 
                 {/* Moderation Controls */}
-                <div className="pt-2 border-t border-[#CBDAC4]/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/50 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[#576159] uppercase">Status:</span>
+                    <span className="text-[10px] text-slate-600 uppercase">Status:</span>
                     <button
                       type="button"
                       onClick={() => updateFellowshipStatus(app.id, 'approved')}

@@ -72,11 +72,11 @@ export const Navbar: FC<NavbarProps> = ({
   return (
     <div className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* 1. Top Announcement Bar (Single Compact Row on Mobile, Zero Stacking) */}
-      <div className="bg-[#05170D] text-[#D8E8D5] text-[11px] sm:text-xs py-1 px-3 sm:px-6 border-b border-[#143D24]">
+      <div className="bg-[#060E1E] text-[#CBD5E1] text-[11px] sm:text-xs py-1 px-3 sm:px-6 border-b border-[#0F224A]">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 sm:gap-3 truncate">
-            <span className="hidden md:flex items-center gap-1.5 text-[#A5C896] font-medium font-mono text-[11px]">
-              <MountainSnow className="w-3.5 h-3.5 text-[#A5C896]" />
+            <span className="hidden md:flex items-center gap-1.5 text-[#38BDF8] font-medium font-mono text-[11px]">
+              <MountainSnow className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>Pan-India Mountain Digital Infrastructure • Elevation 800m – 4,500m</span>
             </span>
             <span className="hidden md:inline text-white/20">|</span>
@@ -84,14 +84,14 @@ export const Navbar: FC<NavbarProps> = ({
               href={`mailto:${BRAND_CONFIG.supportEmail}`}
               className="hover:text-white flex items-center gap-1.5 transition text-[#D8E8D5] font-mono text-[10px] sm:text-[11px]"
             >
-              <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#34D399]" />
+              <Mail className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#38BDF8]" />
               <span>{BRAND_CONFIG.supportEmail}</span>
             </a>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            <span className="bg-[#0D301B] text-[#7FD69E] border border-[#1E5733] text-[9px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-xs font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#34D399] animate-pulse" />
+            <span className="bg-[#0C1E3D] text-[#60A5FA] border border-[#1E40AF]/40 text-[9px] sm:text-[11px] font-semibold px-2 sm:px-2.5 py-0.5 rounded-full flex items-center gap-1 sm:gap-1.5 shadow-xs font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8] animate-pulse" />
               <span className="hidden sm:inline">Curated Mountain Exchange • Two-Tier Verification</span>
               <span className="sm:hidden">Two-Tier Verified</span>
             </span>
@@ -103,8 +103,8 @@ export const Navbar: FC<NavbarProps> = ({
       <header
         className={`w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#0A2316]/98 backdrop-blur-md shadow-xl border-b border-[#1C4E33] py-2'
-            : 'bg-[#0A2316]/95 backdrop-blur-sm border-b border-[#1A452D] py-2 sm:py-2.5'
+            ? 'bg-[#0B1B3D]/98 backdrop-blur-md shadow-xl border-b border-[#1E3A8A]/50 py-2'
+            : 'bg-[#0B1B3D]/95 backdrop-blur-sm border-b border-[#1E3A8A]/40 py-2 sm:py-2.5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-between">
@@ -122,15 +122,15 @@ export const Navbar: FC<NavbarProps> = ({
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold text-[#E7EFE3]" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs font-semibold text-[#E2E8F0]" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="hover:text-[#C6E8A3] transition-colors py-1 relative group tracking-wider uppercase font-mono text-[11px]"
+                className="hover:text-[#38BDF8] transition-colors py-1 relative group tracking-wider uppercase font-mono text-[11px]"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#8FA777] transition-all duration-200 group-hover:w-full" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2575fc] transition-all duration-200 group-hover:w-full" />
               </a>
             ))}
           </nav>
@@ -144,13 +144,13 @@ export const Navbar: FC<NavbarProps> = ({
                   {profile ? (
                     <Link
                       to="/admin/properties"
-                      className="text-xs font-mono text-[#8FA777] hover:text-white px-2 py-1 rounded bg-[#123D26] border border-[#1F4E34]"
+                      className="text-xs font-mono text-[#7DD3FC] hover:text-white px-2.5 py-1 rounded-full bg-[#0F224A] border border-[#38BDF8]/40"
                     >
                       Admin Staff
                     </Link>
                   ) : (
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#123D26] border border-[#1F4E34] text-xs font-mono text-[#A5C896]">
-                      <span className="w-2 h-2 rounded-full bg-[#34D399]" />
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0F224A] border border-[#38BDF8]/40 text-xs font-mono text-[#7DD3FC]">
+                      <span className="w-2 h-2 rounded-full bg-[#38BDF8]" />
                       <span className="max-w-[100px] truncate">
                         {currentUser.user_metadata?.full_name?.split(' ')[0] || currentUser.email?.split('@')[0]}
                       </span>
@@ -170,7 +170,7 @@ export const Navbar: FC<NavbarProps> = ({
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs text-[#E7EFE3] hover:text-white bg-white/10 hover:bg-white/15 rounded-full border border-white/20 transition-all active:scale-95 font-sans font-medium shadow-xs"
                   title="Staff Portal (Restricted to Administrators)"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
                   <span>Admin Staff</span>
                 </Link>
               )}
@@ -180,9 +180,9 @@ export const Navbar: FC<NavbarProps> = ({
             <button
               onClick={() => onOpenJoinModal?.('host')}
               type="button"
-              className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[#123E24] via-[#164E2D] to-[#1F633B] hover:from-[#164E2D] hover:to-[#267F4B] text-white text-[11px] sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-emerald-950/40 hover:shadow-lg hover:shadow-emerald-950/60 transition-all transform active:scale-95 border border-emerald-400/40 shrink-0"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-[#2575fc] via-[#1d63d8] to-[#1e40af] hover:from-[#1d63d8] hover:to-[#2575fc] text-white text-[11px] sm:text-xs md:text-sm font-sans font-semibold tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-md shadow-blue-900/30 hover:shadow-lg hover:shadow-blue-600/30 transition-all transform active:scale-95 border border-sky-400/30 shrink-0"
             >
-              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#34D399]" />
+              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7DD3FC]" />
               <span>Post Listing</span>
             </button>
 
@@ -196,22 +196,22 @@ export const Navbar: FC<NavbarProps> = ({
                 }}
                 className={`min-w-[42px] min-h-[42px] flex items-center justify-center p-2 rounded-lg border transition-all ${
                   staffMenuOpen
-                    ? 'bg-[#164E2D] text-white border-[#34D399]'
+                    ? 'bg-[#1E3A8A] text-white border-[#38BDF8]'
                     : 'text-white/80 hover:text-white bg-white/5 hover:bg-white/10 border-white/10'
                 }`}
                 aria-label="Admin and staff portal options"
                 aria-expanded={staffMenuOpen}
               >
-                <MoreVertical className="w-5 h-5 text-[#A5C896]" />
+                <MoreVertical className="w-5 h-5 text-[#38BDF8]" />
               </button>
 
               {/* Three-Dot Dropdown Menu */}
               {staffMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#071F13] border border-[#1C4E33] rounded-2xl shadow-2xl p-2 z-50 text-white animate-fade-in-scale backdrop-blur-xl">
+                <div className="absolute right-0 top-full mt-2 w-64 bg-[#081226] border border-[#1E3A8A] rounded-2xl shadow-2xl p-2 z-50 text-white animate-fade-in-scale backdrop-blur-xl">
                   {currentUser ? (
                     <div className="space-y-1">
-                      <div className="px-3 py-2 border-b border-[#1C4E33]/80">
-                        <p className="text-[10px] font-mono uppercase text-[#A5C896] tracking-wider font-semibold">
+                      <div className="px-3 py-2 border-b border-[#1E3A8A]/80">
+                        <p className="text-[10px] font-mono uppercase text-[#38BDF8] tracking-wider font-semibold">
                           Logged In
                         </p>
                         <p className="text-xs text-white truncate font-medium mt-0.5">
@@ -223,10 +223,10 @@ export const Navbar: FC<NavbarProps> = ({
                         <Link
                           to="/admin/properties"
                           onClick={() => setStaffMenuOpen(false)}
-                          className="flex items-center justify-between px-3 py-2.5 text-xs font-mono text-white hover:bg-[#123D26] rounded-xl transition group"
+                          className="flex items-center justify-between px-3 py-2.5 text-xs font-mono text-white hover:bg-[#152A56] rounded-xl transition group"
                         >
                           <span className="flex items-center gap-2.5">
-                            <ShieldCheck className="w-4 h-4 text-[#34D399]" />
+                            <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
                             <span>Admin Dashboard</span>
                           </span>
                           <ChevronRight className="w-3.5 h-3.5 text-white/40 group-hover:text-white" />
@@ -247,8 +247,8 @@ export const Navbar: FC<NavbarProps> = ({
                     </div>
                   ) : (
                     <div className="space-y-1">
-                      <div className="px-3 py-1.5 border-b border-[#1C4E33]/80 mb-1">
-                        <p className="text-[10px] font-mono uppercase text-[#A5C896] tracking-wider font-semibold">
+                      <div className="px-3 py-1.5 border-b border-[#1E3A8A]/80 mb-1">
+                        <p className="text-[10px] font-mono uppercase text-[#38BDF8] tracking-wider font-semibold">
                           Staff & Account Access
                         </p>
                       </div>
@@ -257,21 +257,21 @@ export const Navbar: FC<NavbarProps> = ({
                       <Link
                         to="/admin/login"
                         onClick={() => setStaffMenuOpen(false)}
-                        className="flex items-center justify-between px-3 py-2.5 text-xs font-mono text-white bg-[#123D26]/70 hover:bg-[#164E2D] border border-[#2D6B48]/60 rounded-xl transition group"
+                        className="flex items-center justify-between px-3 py-2.5 text-xs font-mono text-white bg-[#152A56]/70 hover:bg-[#1E3A8A] border border-[#2575fc]/40 rounded-xl transition group"
                       >
                         <div className="flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-lg bg-[#0B2516] border border-[#34D399]/40 flex items-center justify-center shrink-0">
-                            <ShieldCheck className="w-4 h-4 text-[#34D399]" />
+                          <div className="w-7 h-7 rounded-lg bg-[#0B1B3D] border border-[#38BDF8]/40 flex items-center justify-center shrink-0">
+                            <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
                           </div>
                           <div>
                             <div className="font-semibold text-white flex items-center gap-1.5">
                               <span>Admin / Staff Login</span>
-                              <span className="bg-[#05170D] text-[#34D399] text-[9px] px-1.5 py-0.2 rounded font-mono border border-[#34D399]/30">Staff</span>
+                              <span className="bg-[#060E1E] text-[#38BDF8] text-[9px] px-1.5 py-0.2 rounded font-mono border border-[#38BDF8]/30">Staff</span>
                             </div>
                             <div className="text-[10px] text-white/60">Restricted portal</div>
                           </div>
                         </div>
-                        <ChevronRight className="w-3.5 h-3.5 text-[#34D399] group-hover:translate-x-0.5 transition" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#38BDF8] group-hover:translate-x-0.5 transition" />
                       </Link>
                     </div>
                   )}
@@ -286,7 +286,7 @@ export const Navbar: FC<NavbarProps> = ({
                 if (staffMenuOpen) setStaffMenuOpen(false)
               }}
               type="button"
-              className="min-w-[42px] min-h-[42px] flex items-center justify-center p-2 text-white hover:text-[#C6E8A3] focus:outline-none lg:hidden rounded-lg hover:bg-white/10"
+              className="min-w-[42px] min-h-[42px] flex items-center justify-center p-2 text-white hover:text-[#38BDF8] focus:outline-none lg:hidden rounded-lg hover:bg-white/10"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -296,7 +296,7 @@ export const Navbar: FC<NavbarProps> = ({
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#071F13] text-white border-t border-[#1C4E33] px-5 py-5 space-y-3 shadow-2xl animate-fade-in-scale">
+          <div className="lg:hidden bg-[#081226] text-white border-t border-[#1E3A8A] px-5 py-5 space-y-3 shadow-2xl animate-fade-in-scale">
             {/* Mobile Navigation Links */}
             <nav className="space-y-1.5">
               {navLinks.map((link) => (
@@ -304,7 +304,7 @@ export const Navbar: FC<NavbarProps> = ({
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 px-3 text-sm font-mono tracking-wider text-[#E7EFE3] hover:text-[#C6E8A3] hover:bg-white/5 rounded-lg transition"
+                  className="block py-2 px-3 text-sm font-mono tracking-wider text-[#E2E8F0] hover:text-[#38BDF8] hover:bg-white/5 rounded-lg transition"
                 >
                   {link.name}
                 </a>
@@ -312,29 +312,29 @@ export const Navbar: FC<NavbarProps> = ({
             </nav>
 
             {/* Admin / Staff Portal link inside drawer as well */}
-            <div className="pt-2 border-t border-[#1F4E34]/80 space-y-2">
+            <div className="pt-2 border-t border-[#1E3A8A]/80 space-y-2">
               <Link
                 to="/admin/login"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between py-2 px-3 text-xs font-mono text-[#A5C896] hover:text-white hover:bg-white/5 rounded-lg transition"
+                className="flex items-center justify-between py-2 px-3 text-xs font-mono text-[#38BDF8] hover:text-white hover:bg-white/5 rounded-lg transition"
               >
                 <span className="flex items-center gap-2">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#34D399]" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#38BDF8]" />
                   <span>Admin / Staff Portal</span>
                 </span>
-                <span className="text-[10px] font-mono bg-[#05170D] text-[#34D399] px-1.5 py-0.5 rounded border border-[#34D399]/30">Staff Only</span>
+                <span className="text-[10px] font-mono bg-[#060E1E] text-[#38BDF8] px-1.5 py-0.5 rounded border border-[#38BDF8]/30">Staff Only</span>
               </Link>
             </div>
 
-            <div className="pt-2 border-t border-[#1F4E34] space-y-2">
+            <div className="pt-2 border-t border-[#1E3A8A] space-y-2">
               <button
                 onClick={() => {
                   setMobileMenuOpen(false)
                   onOpenJoinModal?.('host')
                 }}
-                className="w-full text-center flex items-center justify-center gap-2 bg-[#164E2D] hover:bg-[#0E331F] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
+                className="w-full text-center flex items-center justify-center gap-2 bg-gradient-to-r from-[#2575fc] to-[#1E3A8A] hover:from-[#1d63d8] hover:to-[#2575fc] text-white font-bold py-2.5 rounded-xl text-sm uppercase tracking-wider shadow-md"
               >
-                <PlusCircle className="w-4 h-4 text-[#A5C896]" />
+                <PlusCircle className="w-4 h-4 text-[#7DD3FC]" />
                 <span>Post Listing (Property / Job)</span>
               </button>
             </div>

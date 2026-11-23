@@ -119,7 +119,7 @@ export const PublicHomePage: FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7EE] text-[#1E2621] font-sans selection:bg-[#164E2D]/20 selection:text-[#0A2316] overflow-x-hidden w-full relative">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#0F172A] font-sans selection:bg-[#2575fc]/20 selection:text-[#0B1B3D] overflow-x-hidden w-full relative">
       {/* 0. Cinematic Launch Startup Animation */}
       <StartupAnimation />
 
@@ -304,11 +304,11 @@ export const PublicHomePage: FC = () => {
 
       {/* Welcome Toast Notification */}
       {welcomeToast?.show && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#0A2316] text-[#F8F6F0] border border-[#164E2D] p-4 rounded-xl shadow-2xl flex items-center gap-3 animate-fade-in-scale max-w-sm">
-          <CheckCircle2 className="w-5 h-5 text-[#34D399] flex-shrink-0" />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#0B1B3D] text-[#F8FAFC] border border-[#1E3A8A] p-4 rounded-xl shadow-2xl shadow-blue-900/40 flex items-center gap-3 animate-fade-in-scale max-w-sm">
+          <CheckCircle2 className="w-5 h-5 text-[#38BDF8] flex-shrink-0" />
           <div className="flex-1">
             <p className="text-xs font-semibold">Welcome to the Mountain Fellowship</p>
-            <p className="text-[11px] text-[#D8E8D5]/80 truncate">
+            <p className="text-[11px] text-slate-300 truncate">
               {welcomeToast.email || 'You are signed in to the fellowship.'}
             </p>
           </div>

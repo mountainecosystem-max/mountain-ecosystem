@@ -13,10 +13,10 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
   }
 
   return (
-    <footer className="bg-gradient-to-b from-[#0F3520] to-[#0A2214] border-t border-[#2B6140] text-[#EAF2E6] pt-16 pb-12">
+    <footer className="bg-gradient-to-b from-[#0B1B3D] via-[#091530] to-[#060D1E] border-t border-[#1E3A8A]/50 text-[#E2E8F0] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-[#285A40]/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-[#1E3A8A]/60">
           {/* Brand & Manifesto Column (4 cols) */}
           <div className="lg:col-span-4">
             <div className="mb-4">
@@ -27,22 +27,22 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
               />
             </div>
 
-            <p className="text-xs sm:text-sm text-[#E8EFE3]/75 leading-relaxed font-light mb-6">
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light mb-6">
               {BRAND_CONFIG.missionStatement}
             </p>
 
-            <div className="flex items-center gap-2 text-xs font-mono text-[#91A77B]">
-              <Compass className="w-4 h-4 text-[#91A77B]" />
+            <div className="flex items-center gap-2 text-xs font-mono text-[#38BDF8]">
+              <Compass className="w-4 h-4 text-[#38BDF8]" />
               <span>{BRAND_CONFIG.headquarters}</span>
             </div>
           </div>
 
           {/* Links Column 1: Explore Regions (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#91A77B] mb-4">
+            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#38BDF8] mb-4">
               MOUNTAIN REGIONS
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#E8EFE3]/80 font-mono">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-mono">
               <li>
                 <a href="#stays" className="hover:text-white hover:underline transition-colors">
                   Himachal Pradesh
@@ -73,10 +73,10 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
 
           {/* Links Column 2: Community & Dispatches (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#91A77B] mb-4">
+            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#38BDF8] mb-4">
               COMMUNITY
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#E8EFE3]/80 font-mono">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-mono">
               <li>
                 <a href="#community" className="hover:text-white hover:underline transition-colors">
                   Ground Price Index
@@ -107,10 +107,10 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
 
           {/* Links Column 3: Work & Leases (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#91A77B] mb-4">
+            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#38BDF8] mb-4">
               WORK & LEASES
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#E8EFE3]/80 font-mono">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-mono">
               <li>
                 <a href="#jobs" className="hover:text-white hover:underline transition-colors">
                   Mountain Job Exchange
@@ -132,7 +132,7 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
                 </a>
               </li>
               <li>
-                <a href="#community" className="hover:text-white hover:underline transition-colors text-[#91A77B]">
+                <a href="#community" className="hover:text-white hover:underline transition-colors text-[#38BDF8]">
                   Ground Price Index
                 </a>
               </li>
@@ -146,10 +146,10 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
 
           {/* Links Column 4: Trust & Legal (2 cols) */}
           <div className="lg:col-span-2">
-            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#91A77B] mb-4">
+            <h4 className="text-[11px] font-mono uppercase tracking-[0.2em] font-semibold text-[#38BDF8] mb-4">
               STANDARDS & TRUST
             </h4>
-            <ul className="space-y-2.5 text-xs text-[#E8EFE3]/80 font-mono">
+            <ul className="space-y-2.5 text-xs text-slate-300 font-mono">
               <li>
                 <button
                   type="button"
@@ -185,7 +185,7 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
               <li>
                 <a
                   href={`mailto:${BRAND_CONFIG.supportEmail}`}
-                  className="hover:text-white hover:underline transition-colors flex items-center gap-1.5 text-[#34D399]"
+                  className="hover:text-white hover:underline transition-colors flex items-center gap-1.5 text-[#38BDF8]"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>{BRAND_CONFIG.supportEmail}</span>
@@ -196,10 +196,10 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
         </div>
 
         {/* Professional Trust & Verification Standards Strip */}
-        <div className="py-6 border-b border-[#285A40]/40 my-2">
+        <div className="py-6 border-b border-[#1E3A8A]/40 my-2">
           <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#164E2D] border border-[#34D399]/40 flex items-center justify-center shrink-0 text-[#34D399]">
+              <div className="w-8 h-8 rounded-lg bg-[#1E3A8A] border border-[#38BDF8]/40 flex items-center justify-center shrink-0 text-[#38BDF8]">
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <div>
@@ -213,7 +213,7 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
             </div>
             <a
               href={`mailto:${BRAND_CONFIG.supportEmail}?subject=Trust%20and%20Safety%20Inquiry`}
-              className="shrink-0 text-[11px] font-mono text-[#34D399] hover:text-white px-3 py-1.5 rounded-lg border border-[#34D399]/40 hover:bg-[#34D399]/10 transition"
+              className="shrink-0 text-[11px] font-mono text-[#38BDF8] hover:text-white px-3 py-1.5 rounded-lg border border-[#38BDF8]/40 hover:bg-[#38BDF8]/10 transition"
             >
               Report Fraud / Discrepancy →
             </a>
@@ -221,7 +221,7 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
         </div>
 
         {/* Bottom Bar: Copyright & Tessimo Watermark */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#E8EFE3]/70">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-200/70">
           <div>
             © {BRAND_CONFIG.copyrightYear} {BRAND_CONFIG.name}. Pan-India Mountain Digital Exchange.
           </div>
@@ -233,26 +233,26 @@ export const Footer: FC<FooterProps> = ({ onOpenPrivacy, onOpenCookies }) => {
               href="https://tessimo.in"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#34D399] font-bold hover:text-white hover:underline transition-colors"
+              className="text-[#38BDF8] font-bold hover:text-white hover:underline transition-colors"
             >
               Tessimo (tessimo.in)
             </a>
           </div>
 
           <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-[#91A77B]">
-              <Leaf className="w-3.5 h-3.5 text-[#91A77B]" />
+            <span className="flex items-center gap-1.5 text-[#38BDF8]">
+              <Leaf className="w-3.5 h-3.5 text-[#38BDF8]" />
               <span>100% Community Supported</span>
             </span>
 
             <button
               onClick={scrollToTop}
               type="button"
-              className="inline-flex items-center gap-1 text-[#E8EFE3] hover:text-white transition-colors focus:outline-none"
+              className="inline-flex items-center gap-1 text-slate-200 hover:text-white transition-colors focus:outline-none"
               title="Return to top of page"
             >
               <span>Top of Ridge</span>
-              <ArrowUp className="w-3.5 h-3.5 text-[#91A77B]" />
+              <ArrowUp className="w-3.5 h-3.5 text-[#38BDF8]" />
             </button>
           </div>
         </div>
